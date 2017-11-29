@@ -24,6 +24,9 @@ Use "doctl [command] --help" for more information about a command.
 ## Getting help for a sub-command (for example: Here's how you get help for "account" sub-command)
 doctl account help
 
+## Login
+doctl auth init
+
 ## Show my current configuration
 doctl account get
 
@@ -32,9 +35,6 @@ doctl version
 
 # doctl auth sub-command
 (auth is used to access auth commands)
-
-## Login
-doctl auth init
 
 # doctl compute sub-command
 (compute commands are for controlling and managing infrastructure)
