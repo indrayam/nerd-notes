@@ -15,6 +15,11 @@ DESCRIPTION
 ...
 ...
 
+# To get authenticated
+gloud init
+OR
+gcloud init --console-only
+
 ## Getting help for a sub-command (for example: Here's how you get help for "config" sub-command)
 gcloud config --help
 

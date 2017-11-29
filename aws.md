@@ -25,6 +25,12 @@ For example: Here's how you get help for "configure" sub-command
 aws configure help
 ```
 
+### Setup your configuration
+
+```bash
+aws configure
+```
+
 ### Show my current configuration
 
 ```bash

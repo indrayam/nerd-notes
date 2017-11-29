@@ -315,6 +315,7 @@ aws --version
 # To get authenticated, you will need AWS Key ID and Secret Key:
 aws configure
 sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+echo "$(curl -s https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest.md5) /usr/local/bin/ecs-cli" | md5sum -c -
 sudo chmod 755 /usr/local/bin/ecs-cli
 ecs-cli --version
 ecs-cli configure profile --profile-name sez --access-key <enter-key> --secret-key <enter-description>

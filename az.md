@@ -22,6 +22,12 @@ For example: Here's how you get help for "configure" sub-command
 az configure --help
 ```
 
+### Log in to Azure
+
+```bash
+az login
+```
+
 ### Show my current configuration
 
 ```bash
@@ -34,8 +40,4 @@ az configure
 az --version
 ```
 
-### Log in to Azure
 
-```bash
-az login
-```
