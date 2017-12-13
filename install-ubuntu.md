@@ -417,5 +417,8 @@ sudo systemctl status networking.service
 ```bash
 SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="06:8a:13:ad:46:00", NAME="eth0"
 ```
-
 - Reboot and Log in to the console. Run the steps above to make sure that the `eth0` networking interface is up and running!
+
+**References:**
+- [Failed to bring up eth0](https://www.digitalocean.com/community/questions/failed-to-bring-up-eth0)
+- [Problem with updating Kernel (eth0 now missing)](https://www.digitalocean.com/community/questions/problem-with-updating-kernel-eth0-now-missing)
