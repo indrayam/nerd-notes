@@ -67,10 +67,10 @@ doctl compute droplet create snowy-machine --size 1gb --image 28487138 --region 
 (droplet-action is used to access droplet action commands)
 
 ## Create Snapshot
-doctl compute droplet-action snapshot 65972442  --snapshot-name ubuntu-16-04-x64-ez
+doctl compute droplet-action snapshot 65972442 --snapshot-name ubuntu-16-04-x64-ez
 
 ## Check the status of the snapshot creation droplet action
-doctl compute droplet-action get 65972442 --action-id 331141167
+doctl compute droplet-action get 65972442 --action-id 338213522
 
 # doctl compute snapshot sub-command
 (snapshot is used to access snapshot commands)
@@ -79,14 +79,14 @@ doctl compute droplet-action get 65972442 --action-id 331141167
 doctl compute snapshot list
 
 ## Delete Snapshot
-doctl compute snapshot delete 29545046 
+doctl compute snapshot delete 29727973 
 
 # doctl compute image-action sub-command
 (image-action is used to access image-action commands)
 
 ## Add a Snapshot to another region
-doctl compute image-action transfer 29727973 --region nyc2
-doctl compute image-action transfer 29727973 --region nyc3
+doctl compute image-action transfer 30071103 --region nyc2
+doctl compute image-action transfer 30071103 --region nyc3
 
 ## Check the status of the snapshot transfer
 doctl compute image-action get 65972442 --action-id <action-id>
