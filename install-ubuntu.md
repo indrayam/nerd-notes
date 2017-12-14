@@ -1,16 +1,16 @@
 # Setting up Ubuntu 16.04 on Digital Ocean
 
-###Automatically spin up an Ubuntu droplet (using doctl)
+### Automatically spin up an Ubuntu droplet (using doctl)
 `doctl compute droplet create <play-machine> --image ubuntu-16-04-x64 --size 512mb --region nyc3 --ssh-keys ...`
 
-###Create a temporary SSH config
+### Create a temporary SSH config
 ```bash
 Host x
     Hostname <IP address> OR <x.indrayam.com>
     Port 22
     User root
 ```
-###Update, upgrade and get basic software for compiling from source
+### Update, upgrade and get basic software for compiling from source
 ```bash
 sudo apt update
 sudo apt upgrade
@@ -19,13 +19,13 @@ sudo unattended-upgrades (to install upgrades that might have been held back)
 OPTIONAL: sudo apt list --upgradable
 sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev zsh curl wget vim
 ```
-###Add a user
+### Add a user
 ```bash
 adduser anand (It will prompt for all the entries in /etc/passwd) 
 OR
 useradd -c "Anand Sharma" -d "/home/anand" -s /bin/zsh anand
 ```
-###Make sure "anand" is added to /etc/sudoers file and change defaults in sudoers file to add "/usr/local/bin" to the PATH for sudo commands! (If necessary)
+### Make sure "anand" is added to /etc/sudoers file and change defaults in sudoers file to add "/usr/local/bin" to the PATH for sudo commands! (If necessary)
 ```bash
 su (if not already)
 cd /etc
@@ -34,7 +34,7 @@ Open sudoers and add the following entry:
 <userid>    ALL=(ALL:ALL) NOPASSWD:ALL
 chmod 440 sudoers
 ```
-###Add your local Mac public key to the anand@ubuntu-host-name account so that we can log in 
+### Add your local Mac public key to the anand@ubuntu-host-name account so that we can log in 
 ```bash
 Update ~/.ssh/config with the following changes:
 Host x
@@ -61,7 +61,7 @@ ps aux|grep -i sshd
 sudo service sshd restart
 ps aux|grep -i sshd
 ```
-###Install oh-my-zsh and dotfiles.git repo from GitHub
+### Install oh-my-zsh and dotfiles.git repo from GitHub
 
 ```bash
 ssh-keygen -t rsa -C “anand on x”
@@ -79,14 +79,14 @@ vim
 :PluginInstall
 ```
 
-###Get /usr/local/src ready to install a few softwares
+### Get /usr/local/src ready to install a few softwares
 
 ```bash
 chown -R anand.anand /usr/local/src
 ln -s /usr/local/src src
 ```
 
-###Install latest Git
+### Install latest Git
 
 ```bash
 curl -L -O https://github.com/git/git/archive/v2.14.2.tar.gz
@@ -97,7 +97,7 @@ make configure
 sudo make all doc info
 ```
 
-###Install latest Vim
+### Install latest Vim
 
 ```bash
 sudo add-apt-repository ppa:jonathonf/vim
@@ -105,7 +105,7 @@ sudo apt update
 sudo apt install vim
 ```
 
-###Install latest tmux
+### Install latest tmux
 
 ```bash
 # Source: https://gist.github.com/indrayam/ebf53ba970241694865e1dd2b1313945
@@ -125,7 +125,7 @@ sudo rm -rf /usr/local/src/tmux-*
 tmux -V
 ```
 
-###Install GPG2
+### Install GPG2
 
 ```bash
 sudo apt install gnupg2
@@ -138,7 +138,7 @@ mv ~/.gnupg ~/.gnupg.bk
 mv dotgnupg ~/.gnupg
 ```
 
-###Install Java
+### Install Java
 [Source](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04)
 
 ```bash
@@ -150,7 +150,7 @@ sudo apt-get install oracle-java9-installer
 sudo update-alternatives --config java
 ```
 
-### Install Maven
+###  Install Maven
 
 ```bash
 cd /usr/local/src
@@ -160,7 +160,7 @@ mv <folder-name> /usr/local/maven
 mvn --version
 ```
 
-### Install Gradle
+###  Install Gradle
 
 ```bash
 cd /usr/local/src
@@ -170,7 +170,7 @@ mv gradle-4.2.1 /usr/local/gradle
 gradle --version
 ```
 
-### Install Groovy
+###  Install Groovy
 
 ```bash
 cd /usr/local/src
@@ -188,7 +188,7 @@ unzip <file-name>.zip
 mv <folder-name> /usr/local/kotlinc
 ```
 
-###Install Go
+### Install Go
 [Source:](https://github.com/udhos/update-golang)
 
 ```bash
@@ -198,7 +198,7 @@ sudo RELEASE=1.9.1 ./update-golang.sh
 Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
 ```
 
-###Install Python
+### Install Python
 
 ```bash
 curl -O https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
@@ -212,7 +212,7 @@ ln -s ./python3.6 python3
 sudo pip3 install Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
 ```
 
-###Install Node
+### Install Node
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
@@ -277,7 +277,7 @@ npm ls -g --depth=0
 npm ls --depth=0
 ```
 
-###Install Ruby
+### Install Ruby
 
 ```bash
 cd /usr/local/src
@@ -293,7 +293,7 @@ sudo gem install bundler
 sudo gem install rails sinatra
 ```
 
-###Install Silver Searcher (Ag)
+### Install Silver Searcher (Ag)
 
 ```bash
 sudo apt-get install pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format
@@ -304,19 +304,19 @@ make
 sudo make install
 ```
 
-###Install jq
+### Install jq
 
 ```bash
 sudo apt-get install jq
 ```
 
-###Install httpie
+### Install httpie
 
 ```bash
 sudo apt-get install httpie
 ```
 
-###Install diff-so-fancy
+### Install diff-so-fancy
 
 ```bash
 cd /usr/local/bin
@@ -326,7 +326,7 @@ sudo chmod 755 diff-so-fancy
 
 # Cloud Native Apps on Public Clouds
 
-###Install Docker
+### Install Docker
 [Source](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
 
 ```bash
@@ -356,7 +356,7 @@ sudo docker run hello-world
 sudo usermod -aG docker <userid>
 ```
 
-###Install Digital Ocean CLI (doctl)
+### Install Digital Ocean CLI (doctl)
 
 ```bash
 cd ~/src
@@ -366,7 +366,7 @@ doctl auth init
 doctl account get
 ```
 
-###Install AWS and ECS CLI
+### Install AWS and ECS CLI
 
 ```bash
 sudo pip3 install awscli —upgrade
@@ -381,7 +381,7 @@ ecs-cli configure profile --profile-name sez --access-key <enter-key> --secret-k
 ecs-cli configure profile default --profile-name sez
 ```
 
-###Install Google Cloud CLI
+### Install Google Cloud CLI
 
 **Approach 1 (Preferred)**
 
@@ -422,7 +422,7 @@ sudo swapon /var/swap
 sudo apt upgrade
 ```
 
-###Install Microsoft Azure CLI
+### Install Microsoft Azure CLI
 
 ```bash
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
@@ -451,7 +451,7 @@ It responded by spitting this on the terminal
 ]
 ```
 
-###Install Helm
+### Install Helm
 [Source 1](https://github.com/kubernetes/helm/releases)
 [Source 2](https://docs.helm.sh/using_helm/#installing-helm)
 
@@ -464,7 +464,7 @@ sudo mv helm /usr/local/bin
 helm version
 ```
 
-###Install Ansible
+### Install Ansible
 
 ```bash
 sudo apt-add-repository ppa:ansible/ansible
@@ -472,7 +472,7 @@ sudo apt-get update
 sudo apt-get install ansible
 ```
 
-###Install terraform
+### Install terraform
 
 ```bash
 sudo apt-get install zip
