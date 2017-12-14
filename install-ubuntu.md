@@ -25,7 +25,7 @@ adduser anand (It will prompt for all the entries in /etc/passwd)
 OR
 useradd -c "Anand Sharma" -d "/home/anand" -s /bin/zsh anand
 ```
-### Make sure "anand" is added to /etc/sudoers file and change defaults in sudoers file to add "/usr/local/bin" to the PATH for sudo commands! (If necessary)
+### Add user to sudo
 ```bash
 su (if not already)
 cd /etc
