@@ -80,24 +80,34 @@ vim
 ```
 
 ###Get /usr/local/src ready to install a few softwares
+
+```bash
 chown -R anand.anand /usr/local/src
 ln -s /usr/local/src src
+```
 
 ###Install latest Git
+
+```bash
 curl -L -O https://github.com/git/git/archive/v2.14.2.tar.gz
 tar -xvzf git*tar.gz
 cd <git-foler>
 make configure
 ./configure --prefix=/usr/local
 sudo make all doc info
+```
 
 ###Install latest Vim
-# Source 
+
+```bash
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 sudo apt install vim
+```
 
 ###Install latest tmux
+
+```bash
 # Source: https://gist.github.com/indrayam/ebf53ba970241694865e1dd2b1313945
 # Steps to build and install tmux from source on Ubuntu.
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
@@ -111,11 +121,13 @@ cd tmux-${VERSION}
 make
 sudo make install
 sudo rm -rf /usr/local/src/tmux-*
-
-## Logout and login to the shell again and run.
-## tmux -V
+# Logout and login to the shell again and run.
+tmux -V
+```
 
 ###Install GPG2
+
+```bash
 sudo apt install gnupg2
 Make S3 object public using AWS Console
 Copy dotgnupg.tar.gz from backup to ~/.gnupg:
@@ -124,76 +136,71 @@ curl -v https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.g
 tar -xvzf dotgnupg.tar.gz
 mv ~/.gnupg ~/.gnupg.bk
 mv dotgnupg ~/.gnupg
-
-###Install Docker
-# Source: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository 
-sudo apt update
-# Install these to make sure apt can install packages over HTTPS
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-# Add Docker’s official GPG key:
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# Verify
-sudo apt-key fingerprint 0EBFCD88
-# Setup stable Docker APT repository
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable”
-apt-cache madison docker-ce
-# Source: What is apt-cache madison? Source: https://askubuntu.com/questions/447/how-can-i-see-all-versions-of-a-package-that-are-available-in-the-archive
-
-# Install a specific version
-sudo apt-get install docker-ce=17.09.0~ce-0~ubuntu
-OR
-# Install the latest
-sudo apt-get install docker-ce
-# Test version
- sudo docker version
-# Hello World
-sudo docker run hello-world
-# If you want to remove use of “sudo” to run docker commands, just add your Unix user to the group “docker”, assuming it exists
-sudo usermod -aG docker <userid>
+```
 
 ###Install Java
-# Source: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
+[Source](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04)
+
+```bash
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java9-installer
-Run the following command to get a sense of where JDK 8 (or 9) got installed. Create a symlink from /usr/local/java to wherever JDK 8 (or 9) was installed
+# Run the following command to get a sense of where JDK 8 (or 9) got installed. Create a symlink from /usr/local/java to wherever JDK 8 (or 9) was installed
 sudo update-alternatives --config java
+```
 
-# Install Maven
+### Install Maven
+
+```bash
 cd /usr/local/src
 curl -O http://www-us.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
 tar -xvzf <file-name>.tar.gz
 mv <folder-name> /usr/local/maven
 mvn --version
+```
 
-# Install Gradle
+### Install Gradle
+
+```bash
 cd /usr/local/src
-curl -O -L "https://services.gradle.org/distributions/gradle-4.2.1-bin.zip”;
+curl -O -L "https://services.gradle.org/distributions/gradle-4.2.1-bin.zip"
 unzip <file-name>.zip
 mv gradle-4.2.1 /usr/local/gradle
 gradle --version
+```
 
-# Install Groovy
+### Install Groovy
+
+```bash
 cd /usr/local/src
 curl -O -L "https://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.12.zip";
 unzip <file-name>.zip
 mv <folder-name> /usr/local/groovy
+```
 
 # Install Kotlinc
+
+```bash
 cd /usr/local/src
 curl -O -L "https://github.com/JetBrains/kotlin/releases/download/v1.1.51/kotlin-compiler-1.1.51.zip"
 unzip <file-name>.zip
 mv <folder-name> /usr/local/kotlinc
+```
 
 ###Install Go
-# Source: https://github.com/udhos/update-golang
+[Source:](https://github.com/udhos/update-golang)
+
+```bash
 git clone https://github.com/udhos/update-golang
 cd update-golang
 sudo RELEASE=1.9.1 ./update-golang.sh
 Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
+```
 
 ###Install Python
+
+```bash
 curl -O https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
 tar -xvzf Python-3.6.3.tgz
 cd Python-3.6.3
@@ -203,10 +210,14 @@ sudo make install
 cd /usr/local/bin
 ln -s ./python3.6 python3
 sudo pip3 install Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
+```
 
 ###Install Node
+
+```bash
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
+
 # Building Practical Node Apps
 #!/bin/bash
 mkdir -p ~/workspace/node-apps/helloapp
@@ -264,8 +275,11 @@ npm install --save-dev babel-cli babel-preset-env
 echo "Done!"
 npm ls -g --depth=0
 npm ls --depth=0
+```
 
 ###Install Ruby
+
+```bash
 cd /usr/local/src
 wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.2.tar.gz
 tar -xzvf ruby-2.4.2.tar.gz
@@ -277,55 +291,84 @@ ruby -v
 gem -v
 sudo gem install bundler
 sudo gem install rails sinatra
+```
 
 ###Install Silver Searcher (Ag)
+
+```bash
 sudo apt-get install pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format
 curl -O https://geoff.greer.fm/ag/releases/the_silver_searcher-2.1.0.tar.gz
 cd the_silver_searcher-2.1.0
 ./configure --prefix=/usr
 make
 sudo make install
+```
 
 ###Install jq
+
+```bash
 sudo apt-get install jq
+```
 
 ###Install httpie
-sudo apt-get install httpie
 
-###Install Ansible
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
+```bash
+sudo apt-get install httpie
+```
 
 ###Install diff-so-fancy
+
+```bash
 cd /usr/local/bin
 sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
 sudo chmod 755 diff-so-fancy
+```
 
-###Install terraform
-sudo apt-get install zip
-cd /usr/local/src
-curl -O -L https://releases.hashicorp.com/terraform/0.10.7/terraform_0.10.7_linux_amd64.zip
-unzip terraform_0.10.7_linux_amd64.zip
-sudo mv terraform /usr/local/bin
-terraform —version
+# Cloud Native Apps on Public Clouds
 
-###Install Let’s Encrypt certbot
-sudo apt-get update
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install python-certbot-nginx
+###Install Docker
+[Source](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
 
+```bash
+sudo apt update
+# Install these to make sure apt can install packages over HTTPS
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+# Add Docker’s official GPG key:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# Verify
+sudo apt-key fingerprint 0EBFCD88
+# Setup stable Docker APT repository
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-cache madison docker-ce
+# Source: What is apt-cache madison? Source: https://askubuntu.com/questions/447/how-can-i-see-all-versions-of-a-package-that-are-available-in-the-archive
+
+# Install a specific version
+sudo apt-get install docker-ce=17.09.0~ce-0~ubuntu
+OR
+# Install the latest
+sudo apt-get install docker-ce
+sudo apt-get install docker-compose
+# Test version
+ sudo docker version
+# Hello World
+sudo docker run hello-world
+# If you want to remove use of “sudo” to run docker commands, just add your Unix user to the group “docker”, assuming it exists
+sudo usermod -aG docker <userid>
+```
 
 ###Install Digital Ocean CLI (doctl)
+
+```bash
 cd ~/src
 curl -L https://github.com/digitalocean/doctl/releases/download/v1.7.1/doctl-1.7.1-linux-amd64.tar.gz  | tar xz
 sudo mv doctl /usr/local/bin
 doctl auth init
 doctl account get
+```
 
 ###Install AWS and ECS CLI
+
+```bash
 sudo pip3 install awscli —upgrade
 aws --version
 # To get authenticated, you will need AWS Key ID and Secret Key:
@@ -336,13 +379,21 @@ sudo chmod 755 /usr/local/bin/ecs-cli
 ecs-cli --version
 ecs-cli configure profile --profile-name sez --access-key <enter-key> --secret-key <enter-description>
 ecs-cli configure profile default --profile-name sez
+```
 
 ###Install Google Cloud CLI
-# Approach 1
+
+**Approach 1 (Preferred)**
+
+```bash
 cd src/
 curl https://sdk.cloud.google.com | sudo bash
+```
 
-# Approach 2 (Had issues when I ran sudo apt-get update)
+**Approach 2**
+Note: Experienced issues when I ran sudo apt-get update
+
+```bash
 # Create an environment variable for the correct distribution
 export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 
@@ -358,19 +409,6 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 # Check version
 gcloud --version
 
-To install or remove components at your current SDK version [174.0.0], run:
-  $ gcloud components install COMPONENT_ID
-  $ gcloud components remove COMPONENT_ID
-
-To update your SDK installation to the latest version [174.0.0], run:
-  $ gcloud components update
-
-==> Source [/Users/anasharm/Downloads/google-cloud-sdk/completion.zsh.inc] in your profile to enable shell command completion for gcloud.
-==> Source [/Users/anasharm/Downloads/google-cloud-sdk/path.zsh.inc] in your profile to add the Google Cloud SDK command line tools to your $PATH.
-
-For more information on how to get started, please visit:
-https://cloud.google.com/sdk/docs/quickstarts
-
 # To get authenticated
 gloud init
 OR
@@ -382,14 +420,21 @@ sudo chmod 600 /var/swap
 sudo mkswap /var/swap
 sudo swapon /var/swap
 sudo apt upgrade
+```
 
 ###Install Microsoft Azure CLI
+
+```bash
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
 sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
 sudo apt-get install apt-transport-https
 sudo apt-get update && sudo apt-get install azure-cli
 az login
+```
+
 It responded by spitting this on the terminal
+
+```json
 [
   {
     "cloudName": "AzureCloud",
@@ -404,18 +449,42 @@ It responded by spitting this on the terminal
     }
   }
 ]
+```
 
 ###Install Helm
-Source: https://github.com/kubernetes/helm/releases | https://docs.helm.sh/using_helm/#installing-helm
+[Source 1](https://github.com/kubernetes/helm/releases)
+[Source 2](https://docs.helm.sh/using_helm/#installing-helm)
+
+```bash
 cd /usr/local/src
 curl -O https://storage.googleapis.com/kubernetes-helm/helm-v2.7.0-linux-amd64.tar.gz
 tar -xvzf helm-v2.7.0-linux-amd64.tar.gz
 cd linux-amd64
 sudo mv helm /usr/local/bin
 helm version
+```
 
-### How to create a new Droplet from a snapshot on Digital Ocean (Ubuntu 16.04)
-- Create a new Droplet using the pre-existing snapshot
+###Install Ansible
+
+```bash
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+```
+
+###Install terraform
+
+```bash
+sudo apt-get install zip
+cd /usr/local/src
+curl -O -L https://releases.hashicorp.com/terraform/0.10.7/terraform_0.10.7_linux_amd64.zip
+unzip terraform_0.10.7_linux_amd64.zip
+sudo mv terraform /usr/local/bin
+terraform —version
+```
+
+# Configure a new DO Droplet created from a snapshot (Ubuntu)
+- Create a new [DigitalOcean](http://digitalocean.com) Droplet using the pre-existing snapshot
 - After the Droplet has launched, access it using the "Console"
 - Confirm that eth0 did not come up by running the following command. It should show an error message
 
@@ -434,7 +503,9 @@ sudo systemctl status networking.service
 SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="06:8a:13:ad:46:00", NAME="eth0"
 ```
 - Reboot and Log in to the console. Run the steps above to make sure that the `eth0` networking interface is up and running!
+- Run `ip a show eth0` to confirm that the ip address is mapped correctly to the eth0 interface
 
 **References:**
 - [Failed to bring up eth0](https://www.digitalocean.com/community/questions/failed-to-bring-up-eth0)
 - [Problem with updating Kernel (eth0 now missing)](https://www.digitalocean.com/community/questions/problem-with-updating-kernel-eth0-now-missing)
+- [Ubuntu Network Configuration](https://help.ubuntu.com/lts/serverguide/network-configuration.html)
