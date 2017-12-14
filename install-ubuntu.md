@@ -106,9 +106,9 @@ sudo apt install vim
 ```
 
 ### Install latest tmux
+[Source](https://gist.github.com/indrayam/ebf53ba970241694865e1dd2b1313945)
 
 ```bash
-# Source: https://gist.github.com/indrayam/ebf53ba970241694865e1dd2b1313945
 # Steps to build and install tmux from source on Ubuntu.
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
 VERSION=2.6
@@ -179,7 +179,7 @@ unzip <file-name>.zip
 mv <folder-name> /usr/local/groovy
 ```
 
-# Install Kotlinc
+### Install Kotlinc
 
 ```bash
 cd /usr/local/src
@@ -189,7 +189,7 @@ mv <folder-name> /usr/local/kotlinc
 ```
 
 ### Install Go
-[Source:](https://github.com/udhos/update-golang)
+[Source](https://github.com/udhos/update-golang)
 
 ```bash
 git clone https://github.com/udhos/update-golang
