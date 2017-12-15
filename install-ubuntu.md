@@ -62,40 +62,28 @@ ps aux|grep -i sshd
 sudo service sshd restart
 ps aux|grep -i sshd
 ```
-### Install oh-my-zsh and dotfiles.git repo from GitHub
 
-```bash
-ssh-keygen -t rsa -C “anand on x”
-Add the id_rsa.pub to indrayam’s GitHub
-ssh -T git@github.com
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-git clone git@github.com:indrayam/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-./setup-symlinks-linux.sh
-exit
-ssh x
-Install Vundle by running the following command:
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim
-:PluginInstall
-```
+Copy the SSH keys from Digital Ocean accounts (or Dropbox) to the new server.
 
 ### Get /usr/local/src ready to install a few softwares
 
+Login as `anand`
+
 ```bash
-chown -R anand.anand /usr/local/src
+sudo chown -R anand.anand /usr/local/src
 ln -s /usr/local/src src
 ```
 
 ### Install latest Git
 
 ```bash
-curl -L -O https://github.com/git/git/archive/v2.14.2.tar.gz
+curl -L -O https://github.com/git/git/archive/v2.15.1.tar.gz
 tar -xvzf git*tar.gz
 cd <git-foler>
 make configure
 ./configure --prefix=/usr/local
-sudo make all doc info
+make all
+sudo make install
 ```
 
 ### Install latest Vim
@@ -104,6 +92,22 @@ sudo make all doc info
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 sudo apt install vim
+```
+
+### Install oh-my-zsh and dotfiles.git repo from GitHub
+
+```bash
+ssh -T git@github.com #Check to make sure you can clone repos from Git
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+git clone git@github.com:indrayam/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./setup-symlinks-linux.sh
+exit
+ssh x
+# Install Vundle by running the following command:
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim
+:PluginInstall
 ```
 
 ### Install latest tmux
