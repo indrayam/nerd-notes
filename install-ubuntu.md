@@ -34,7 +34,7 @@ Open sudoers and add the following entry:
 <userid>    ALL=(ALL:ALL) NOPASSWD:ALL
 chmod 440 sudoers
 ```
-### Add your local Mac public key to the anand@ubuntu-host-name account so that we can log in 
+### SSH login using RSA authentication
 ```bash
 Update ~/.ssh/config with the following changes:
 Host x
@@ -42,8 +42,9 @@ Host x
     Port 22
     User anand
     IdentityFile ~/.ssh/id_rsa
-cat .ssh/id_rsa.pub | ssh d "cat >> ~/.ssh/authorized_keys"
+cat .ssh/id_rsa.pub | ssh x "cat >> ~/.ssh/authorized_keys"
 ```
+
 In client SSH `~/.ssh/config`:
 
 ```bash
