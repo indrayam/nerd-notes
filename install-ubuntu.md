@@ -125,7 +125,6 @@ cd tmux-${VERSION}
 ./configure
 make
 sudo make install
-sudo rm -rf /usr/local/src/tmux-*
 # Logout and login to the shell again and run.
 tmux -V
 ```
@@ -133,7 +132,7 @@ tmux -V
 ### Install GPG2
 
 ```bash
-sudo apt install gnupg2
+sudo apt install gnupg2 
 Make S3 object public using AWS Console
 Copy dotgnupg.tar.gz from backup to ~/.gnupg:
 cd ~/src
