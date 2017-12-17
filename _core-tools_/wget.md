@@ -1,3 +1,3 @@
-# my notes on wget
+# wget
 
 Coming soon...

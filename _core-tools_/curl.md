@@ -1,3 +1,3 @@
-# my notes on curl
+# curl
 
 Coming soon...

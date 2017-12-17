@@ -1,1 +1,1 @@
-# my notes on httpie
+# httpie

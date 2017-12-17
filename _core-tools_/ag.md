@@ -1,3 +1,3 @@
-# my notes on ag
+# ag
 
 Coming soon...

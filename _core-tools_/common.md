@@ -1,1 +1,1 @@
-# my notes on common unix commands
+# common unix commands
