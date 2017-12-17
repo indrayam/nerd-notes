@@ -18,6 +18,8 @@ Host c
 ```
 
 ### Update, upgrade and get basic software for compiling from source
+[Source](https://wiki.centos.org/AdditionalResources/Repositories)
+
 ```bash
 yum update
 yum upgrade
@@ -443,6 +445,57 @@ http --version
 cd /usr/local/bin
 sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
 sudo chmod 755 diff-so-fancy
+# Check version
+/usr/local/bin/diff-so-fancy
 ```
+
+# Cloud Native Apps on Public Clouds
+
+### Install Docker
+[Source](https://docs.docker.com/engine/installation/linux/docker-ce/centos/)
+
+```bash
+# Remove older versions of Docker
+sudo yum remove docker docker-common docker-selinux docker-engine
+# Setup the repository
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+# Setting up stable repository. You need this regardless of whether you decide to run the edge or test repositories
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# Optional: Enable edge and test repositories. They are included in docker.repo file above but are disabled by default. You can enable them alongside the stable repository
+# sudo yum-config-manager --enable docker-ce-edge
+#sudo yum-config-manager --enable docker-ce-test
+# Disable edge or test by running this command
+# sudo yum-config-manager --disable docker-ce-edge
+
+# Install Docker-CE
+# On Production systems, you should always install a specific version instead of always using the latest. List the available versions. This example uses the sort -r command to sort the results by version number, highest to lowest. The second column is the version string. To install a specific version, append the version string to the package name and separate them by a hyphen (-).
+yum list docker-ce --showduplicates | sort -r
+# Install a specific version
+sudo yum install docker-ce-17.09.1.ce-1.el7.centos
+OR
+sudo yum install docker-ce # To download the latest
+
+# Start Docker
+sudo systemctl start docker
+# Verify installation
+sudo docker run hello-world
+
+# Install a specific version
+sudo apt-get install docker-ce=17.09.0~ce-0~ubuntu
+OR
+# Install the latest
+sudo apt-get install docker-ce
+sudo apt-get install docker-compose
+# Test version
+sudo docker version
+# Hello World
+sudo docker run hello-world
+# If you want to remove use of “sudo” to run docker commands, just add your Unix user to the group “docker”, assuming it exists
+sudo usermod -aG docker <userid>
+# Log off and log back in
+d version
+```
+
+
 
 

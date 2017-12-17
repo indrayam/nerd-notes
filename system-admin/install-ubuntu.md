@@ -350,6 +350,8 @@ sudo apt-get install httpie
 cd /usr/local/bin
 sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
 sudo chmod 755 diff-so-fancy
+# Check version
+/usr/local/bin/diff-so-fancy
 ```
 
 # Cloud Native Apps on Public Clouds
