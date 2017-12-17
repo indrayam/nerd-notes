@@ -158,9 +158,10 @@ sudo update-alternatives --config java
 
 ```bash
 cd /usr/local/src
-curl -O http://www-us.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
-tar -xvzf <file-name>.tar.gz
-mv <folder-name> /usr/local/maven
+curl -O http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+tar -xvzf apache-maven-3.5.2-bin.tar.gz
+mv apache-maven-3.5.2 /usr/local/maven
+# Check the version
 mvn --version
 ```
 
@@ -168,9 +169,10 @@ mvn --version
 
 ```bash
 cd /usr/local/src
-curl -O -L "https://services.gradle.org/distributions/gradle-4.2.1-bin.zip"
-unzip <file-name>.zip
-mv gradle-4.2.1 /usr/local/gradle
+curl -O -L "https://services.gradle.org/distributions/gradle-4.4-bin.zip"
+unzip gradle-4.4-bin.zip
+sudo mv gradle-4.4 /usr/local/gradle
+# Check the version
 gradle --version
 ```
 
@@ -178,18 +180,28 @@ gradle --version
 
 ```bash
 cd /usr/local/src
-curl -O -L "https://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.12.zip";
-unzip <file-name>.zip
-mv <folder-name> /usr/local/groovy
+curl -O -L "https://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.12.zip"
+unzip apache-groovy-binary-2.4.12.zip
+sudo mv groovy-2.4.12 /usr/local/groovy
+# Check the version
+groovyc -version
+# Start Groovy REPL
+groovysh <Hit Return>
+# Type "1 + 1" or print "Hello, World". Type ":quit" to quit, ":help" for Helo
 ```
 
 ### Install Kotlinc
 
 ```bash
 cd /usr/local/src
-curl -O -L "https://github.com/JetBrains/kotlin/releases/download/v1.1.51/kotlin-compiler-1.1.51.zip"
-unzip <file-name>.zip
-mv <folder-name> /usr/local/kotlinc
+curl -O -L "https://github.com/JetBrains/kotlin/releases/download/v1.2.10/kotlin-compiler-1.2.10.zip"
+unzip kotlin-compiler-1.2.10.zip
+sudo mv kotlinc /usr/local/kotlinc
+# Check the version
+kotlinc -version
+# Start Kotlin REPL
+kotlinc-jvm <Hit Return>
+# Type "1 + 1" or println("Hello, World"). Type ":quit" to quit, ":help" for Helo
 ```
 
 ### Install Go
@@ -198,7 +210,7 @@ mv <folder-name> /usr/local/kotlinc
 ```bash
 git clone https://github.com/udhos/update-golang
 cd update-golang
-sudo RELEASE=1.9.1 ./update-golang.sh
+sudo RELEASE=1.9.2 ./update-golang.sh
 Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
 ```
 
@@ -208,20 +220,28 @@ Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
 curl -O https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
 tar -xvzf Python-3.6.3.tgz
 cd Python-3.6.3
-./configure --prefix=/usr/local
+./configure --prefix=/usr/local --enable-optimizations
 make
 sudo make install
 cd /usr/local/bin
-ln -s ./python3.6 python3
-sudo pip3 install Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
+ln -s ./python3.6 python3 # If necessary
+# Check version
+p -V
+sudo pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
 ```
 
 ### Install Node
+[Source](https://nodesource.com/blog/installing-node-js-8-tutorial-linux-via-package-manager/)
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
+# Check version
+node -v
+```
+Save the following content into `~/src/node-install.sh` file. Save the file. Run `chmod +x ~/src/node-install.sh`. Execute the script by typing `~/src/node-install.sh`
 
+```bash
 # Building Practical Node Apps
 #!/bin/bash
 mkdir -p ~/workspace/node-apps/helloapp
@@ -285,10 +305,10 @@ npm ls --depth=0
 
 ```bash
 cd /usr/local/src
-wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.2.tar.gz
-tar -xzvf ruby-2.4.2.tar.gz
-cd ruby-2.4.2/
-./configure --prefix=/usr
+wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.3.tar.gz
+tar -xzvf ruby-2.4.3.tar.gz
+cd ruby-2.4.3/
+./configure --prefix=/usr/local
 make
 sudo make install
 ruby -v
@@ -306,12 +326,16 @@ cd the_silver_searcher-2.1.0
 ./configure --prefix=/usr
 make
 sudo make install
+# Check version
+ag --version
 ```
 
 ### Install jq
 
 ```bash
 sudo apt-get install jq
+# Check version
+jq --version
 ```
 
 ### Install httpie
