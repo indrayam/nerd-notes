@@ -24,9 +24,15 @@ Host c
 yum update
 yum upgrade
 yum install wget
+# Approach 1
 wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -ivh epel-release-latest-7.noarch.rpm
+OR
+# Approach 2
+sudo yum install epel-release
+# Check Repo Listing
 yum repolist
+
 # To get info or install a repo specifically from EPEL repo, use commands like the following
 # yum --enablerepo=epel info curl
 # yum --enablerepo=epel install curl
@@ -494,6 +500,112 @@ sudo docker run hello-world
 sudo usermod -aG docker <userid>
 # Log off and log back in
 d version
+```
+
+### Install Digital Ocean CLI (doctl)
+
+```bash
+cd ~/src
+curl -L -O https://github.com/digitalocean/doctl/releases/download/v1.7.1/doctl-1.7.1-linux-amd64.tar.gz
+sudo mv doctl /usr/local/bin
+
+# Check version
+doctl version
+
+# Set it up
+doctl auth init
+doctl account get
+```
+
+### Install AWS and ECS CLI
+
+```bash
+sudo pip3 install awscli --upgrade
+aws --version
+# To get authenticated, you will need AWS Key ID and Secret Key:
+aws configure
+sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+sudo chmod +x /usr/local/bin/ecs-cli
+echo "$(curl -s https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest.md5) /usr/local/bin/ecs-cli" | md5sum -c -
+
+# Check version
+ecs-cli --version
+```
+
+### Install Google Cloud CLI
+
+```bash
+cd src/
+curl https://sdk.cloud.google.com | sudo bash
+
+# Setup the link
+cd /usr/local/bin
+sudo ln -s /usr/local/google-cloud-sdk/bin/gcloud gcloud
+
+# Add additional items
+sudo gcloud components install kubectl alpha beta
+
+# Check version
+gcloud version
+# Log out and log back in for shell completion to work
+
+# Initialize the gcloud setup. Select 35 as Google Compute Engine zone
+gcloud init
+gcloud config list
+```
+
+### Install Microsoft Azure CLI
+
+```bash
+# Import the Microsoft Key
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+# Create local azure-cli repository information:
+sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+# Update the yum package index and install:
+yum check-update
+sudo yum install azure-cli
+# Check version
+az --version
+
+# Initialize the az setup. 
+az login
+```
+
+### Install Kubernetes Helm
+[Source 1](https://docs.helm.sh/using_helm/#installing-helm)
+
+```bash
+cd ~/src
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
+chmod +x ./get_helm.sh
+./get_helm.sh
+cd /usr/local/bin
+
+# Initialize helm
+helm init
+helm version
+```
+
+### Install Ansible
+
+```bash
+# sudo yum install epel-release
+sudo yum install ansible
+
+# Check version
+ansible --version
+```
+
+### Install terraform
+
+```bash
+cd ~/src
+curl -L "https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_linux_amd64.zip?_ga=2.8138800.36957763.1513534115-1088737539.1513534115" -o terraform_linux_amd64.zip
+unzip terraform_linux_amd64.zip
+sudo mv terraform /usr/local/bin
+
+# Check version
+terraform version
 ```
 
 
