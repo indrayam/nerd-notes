@@ -25,4 +25,12 @@ TODO: Need to understand this better...
 curl https://sdk.cloud.google.com | sudo bash
 ```
 
+### Usage 5
+
+```bash
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+```
+
+
+
 

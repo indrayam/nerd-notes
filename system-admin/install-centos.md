@@ -1,4 +1,4 @@
-# Setting up Ubuntu 16.04 on Digital Ocean
+# Setting up Ubuntu 16.04
 
 ### Automatically spin up an Ubuntu droplet (using doctl)
 ```bash
@@ -247,6 +247,7 @@ sudo yum localinstall jdk-9.0.1_linux-x64_bin.rpm
 sudo update-alternatives --config java
 # Setup a symlink in /usr/local so that JAVA_HOME environment variable picks the right version too
 sudo ln -s /usr/java/latest /usr/local/java
+
 # Check version
 java -version
 ```
@@ -257,7 +258,8 @@ java -version
 cd /usr/local/src
 curl -O http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
 tar -xvzf apache-maven-3.5.2-bin.tar.gz
-mv apache-maven-3.5.2 /usr/local/maven
+sudo mv apache-maven-3.5.2 /usr/local/maven
+
 # Check the version
 mvn --version
 ```
@@ -269,6 +271,7 @@ cd /usr/local/src
 curl -O -L "https://services.gradle.org/distributions/gradle-4.4-bin.zip"
 unzip gradle-4.4-bin.zip
 sudo mv gradle-4.4 /usr/local/gradle
+
 # Check the version
 gradle --version
 ```
@@ -280,6 +283,7 @@ cd /usr/local/src
 curl -O -L "https://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.12.zip"
 unzip apache-groovy-binary-2.4.12.zip
 sudo mv groovy-2.4.12 /usr/local/groovy
+
 # Check the version
 groovyc -version
 # Start Groovy REPL
@@ -294,6 +298,7 @@ cd /usr/local/src
 curl -O -L "https://github.com/JetBrains/kotlin/releases/download/v1.2.10/kotlin-compiler-1.2.10.zip"
 unzip kotlin-compiler-1.2.10.zip
 sudo mv kotlinc /usr/local/kotlinc
+
 # Check the version
 kotlinc -version
 # Start Kotlin REPL
@@ -309,6 +314,9 @@ git clone https://github.com/udhos/update-golang
 cd update-golang
 sudo RELEASE=1.9.2 ./update-golang.sh
 Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
+
+# Check version
+go version
 ```
 
 ### Install Python
@@ -322,6 +330,7 @@ make
 sudo make install
 cd /usr/local/bin
 ln -s ./python3.6 python3 # If necessary
+
 # Check version
 p -V
 sudo pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
@@ -333,6 +342,7 @@ sudo pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimoniou
 ```bash
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo bash -
 sudo yum install -y nodejs
+
 # Check version
 node -v
 ```
@@ -393,7 +403,7 @@ npm install minimist --save
 # Integrate with MongoDB
 npm install mongodb --save
 npm install mongoskin --save
-npm install --save-dev babel-cli babel-preset-env
+#npm install --save-dev babel-cli babel-preset-env
 echo "Done!"
 npm ls -g --depth=0
 npm ls --depth=0
@@ -409,6 +419,8 @@ cd ruby-2.4.3/
 ./configure --prefix=/usr/local
 make
 sudo make install
+
+# Check version
 ruby -v
 gem -v
 sudo gem install bundler rails sinatra
@@ -423,6 +435,7 @@ cd the_silver_searcher-2.1.0
 ./configure --prefix=/usr
 make
 sudo make install
+
 # Check version
 ag --version
 ```
@@ -437,6 +450,7 @@ autoreconf -i
 ./configure --disable-maintainer-mode --prefix=/usr/local
 make
 sudo make install
+
 # Check version
 jq --version
 ```
@@ -448,6 +462,7 @@ curl -L -O https://github.com/jakubroztocil/httpie/archive/0.9.8.tar.gz
 tar -xvzf 0.9.8.tar.gz
 cd httpie-0.9.8
 sudo pip3 setup.py install --prefix=/usr/local
+
 # Check version
 http --version
 ```
@@ -458,6 +473,7 @@ http --version
 cd /usr/local/bin
 sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
 sudo chmod 755 diff-so-fancy
+
 # Check version
 /usr/local/bin/diff-so-fancy
 ```
@@ -505,7 +521,8 @@ sudo docker version
 sudo docker run hello-world
 # If you want to remove use of “sudo” to run docker commands, just add your Unix user to the group “docker”, assuming it exists
 sudo usermod -aG docker <userid>
-# Log off and log back in
+
+# Log off and log back in. Check version
 d version
 ```
 

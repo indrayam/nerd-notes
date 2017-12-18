@@ -17,7 +17,7 @@ sudo add-apt-repository universe
 sudo unattended-upgrades
 # This is a command to check if which softwares that are ready for an upgrade
 # sudo apt list --upgradable
-sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh curl wget vim tar libevent-dev libncurses5-dev
+sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh curl wget vim tar libevent-dev libncurses5-dev zip
 ```
 ### Add a user
 ```bash
@@ -160,8 +160,14 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java9-installer
-# Run the following command to get a sense of where JDK 8 (or 9) got installed. Create a symlink from /usr/local/java to wherever JDK 8 (or 9) was installed
+# Run the following command to get a sense of where JDK 8 (or 9) got installed
 sudo update-alternatives --config java
+# OR Create a symlink from /usr/local/java to wherever JDK 8 (or 9) was installed 
+# cd /usr/local/bin
+# sudo ln -s /usr/lib/jvm/java-8-oracle java
+
+# Check version
+java -version
 ```
 
 ###  Install Maven
@@ -170,7 +176,8 @@ sudo update-alternatives --config java
 cd /usr/local/src
 curl -O http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
 tar -xvzf apache-maven-3.5.2-bin.tar.gz
-mv apache-maven-3.5.2 /usr/local/maven
+sudo mv apache-maven-3.5.2 /usr/local/maven
+
 # Check the version
 mvn --version
 ```
@@ -182,6 +189,7 @@ cd /usr/local/src
 curl -O -L "https://services.gradle.org/distributions/gradle-4.4-bin.zip"
 unzip gradle-4.4-bin.zip
 sudo mv gradle-4.4 /usr/local/gradle
+
 # Check the version
 gradle --version
 ```
@@ -193,6 +201,7 @@ cd /usr/local/src
 curl -O -L "https://dl.bintray.com/groovy/maven/apache-groovy-binary-2.4.12.zip"
 unzip apache-groovy-binary-2.4.12.zip
 sudo mv groovy-2.4.12 /usr/local/groovy
+
 # Check the version
 groovyc -version
 # Start Groovy REPL
@@ -207,11 +216,12 @@ cd /usr/local/src
 curl -O -L "https://github.com/JetBrains/kotlin/releases/download/v1.2.10/kotlin-compiler-1.2.10.zip"
 unzip kotlin-compiler-1.2.10.zip
 sudo mv kotlinc /usr/local/kotlinc
+
 # Check the version
 kotlinc -version
 # Start Kotlin REPL
 kotlinc-jvm <Hit Return>
-# Type "1 + 1" or println("Hello, World"). Type ":quit" to quit, ":help" for Helo
+# Type "1 + 1" or "Hello, World". Type ":quit" to quit, ":help" for Helo
 ```
 
 ### Install Go
@@ -246,6 +256,7 @@ sudo pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimoniou
 ```bash
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt install -y nodejs
+
 # Check version
 node -v
 ```
@@ -262,7 +273,7 @@ sudo npm install -g yarn
 sudo npm install -g npm
 # Compiler
 sudo npm install -g typescript
-npm install babel-cli --save-dev
+# npm install babel-cli --save-dev (Installed but had a lot of Errors when npm list command was run after the install)
 # Static Analysis
 sudo npm install -g jshint
 # Testing frameworks
@@ -303,7 +314,7 @@ npm install luxon --save
 npm install commander --save 
 npm install minimist --save
 # Integrate with MongoDB
-npm install mongodb --save
+npm install mongodb@^2.0 --save
 npm install mongoskin --save
 npm install --save-dev babel-cli babel-preset-env
 echo "Done!"
