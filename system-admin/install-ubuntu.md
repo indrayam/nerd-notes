@@ -443,24 +443,33 @@ doctl account get
 
 ```bash
 sudo pip3 install awscli --upgrade
+
+# Check version
 aws --version
+
 # To get authenticated, you will need AWS Key ID and Secret Key:
 aws configure
+
+# Install ECS CLI
 sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+sudo chmod +x /usr/local/bin/ecs-cli
 echo "$(curl -s https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest.md5) /usr/local/bin/ecs-cli" | md5sum -c -
-sudo chmod 755 /usr/local/bin/ecs-cli
+
+# Check version
 ecs-cli --version
+
+# Set it up
 ecs-cli configure profile --profile-name sez --access-key <enter-key> --secret-key <enter-description>
 ecs-cli configure profile default --profile-name sez
 ```
 
 ### Install Google Cloud CLI
 
-**Approach 1 (Preferred)**
-
 ```bash
 cd src/
 curl https://sdk.cloud.google.com | sudo bash
+# On GCP, there is already a default version. Remove it
+# cd /usr/lib; sudo rm -rf google-cloud-sdk
 
 # Setup the link
 cd /usr/local/bin
@@ -483,13 +492,14 @@ gcloud config list
 ```bash
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
 sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
-sudo apt-get install apt-transport-https
-sudo apt-get update && sudo apt-get install azure-cli
+sudo apt install apt-transport-https
+sudo apt update && sudo apt install azure-cli
 # Check version
 az --version
 
 # Initialize the az setup.
 az login
+az configure
 ```
 
 ### Install Helm
@@ -511,8 +521,8 @@ helm version
 
 ```bash
 sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install ansible
+sudo apt update
+sudo apt install ansible
 
 # Check version
 ansible --version
@@ -522,9 +532,8 @@ ansible --version
 
 ```bash
 sudo apt-get install zip
-cd /usr/local/src
-curl -O -L https://releases.hashicorp.com/terraform/0.10.7/terraform_0.10.7_linux_amd64.zip
-unzip terraform_0.10.7_linux_amd64.zip
+curl -L "https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_linux_amd64.zip?_ga=2.8138800.36957763.1513534115-1088737539.1513534115" -o terraform_linux_amd64.zip
+unzip terraform_linux_amd64.zip
 sudo mv terraform /usr/local/bin
 
 # Check version

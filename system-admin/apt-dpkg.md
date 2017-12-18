@@ -12,6 +12,7 @@ sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
 ```bash
 sudo add-apt-repository ppa:jonathonf/vim
 sudo add-apt-repository ppa:webupd8team/java
+sudo apt-add-repository ppa:ansible/ansible
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 

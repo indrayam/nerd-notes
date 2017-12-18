@@ -539,15 +539,24 @@ doctl account get
 
 ```bash
 sudo pip3 install awscli --upgrade
+
+# Check version
 aws --version
+
 # To get authenticated, you will need AWS Key ID and Secret Key:
 aws configure
+
+# Install ECS CLI
 sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
 sudo chmod +x /usr/local/bin/ecs-cli
 echo "$(curl -s https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest.md5) /usr/local/bin/ecs-cli" | md5sum -c -
 
 # Check version
 ecs-cli --version
+
+# Set it up
+ecs-cli configure profile --profile-name sez --access-key <enter-key> --secret-key <enter-description>
+ecs-cli configure profile default --profile-name sez
 ```
 
 ### Install Google Cloud CLI
@@ -587,6 +596,7 @@ az --version
 
 # Initialize the az setup. 
 az login
+az configure
 ```
 
 ### Install Kubernetes Helm
