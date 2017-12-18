@@ -1,11 +1,4 @@
-# Setting up Ubuntu 16.04
-
-### Automatically spin up an Ubuntu droplet (using doctl)
-```bash
-# Get the SSH key stored with DO
-doctl compute ssh-key list
-doctl compute droplet create shannon-machine --image centos-7-x64 --size 1gb --region nyc3 --ssh-keys <ssh-key>
-```
+# Setting up CentOS 7.4
 
 ### Create a temporary SSH config
 
@@ -36,8 +29,8 @@ yum repolist
 # To get info or install a repo specifically from EPEL repo, use commands like the following
 # yum --enablerepo=epel info curl
 # yum --enablerepo=epel install curl
-yum groupinstall "Development tools"
-yum install vim patch zsh curl-devel expat-devel openssl-devel zlib-devel readline-devel sqlite-devel libxml2-devel libxslt libxslt-devel libtool-ltdl-devel bzip2-devel pcre-devel httpd-devel tree jq ncurses-devel perl-CPAN bind-utils libffi-devel
+sudo yum groupinstall "Development tools"
+sudo yum install vim patch zsh curl-devel expat-devel openssl-devel zlib-devel readline-devel sqlite-devel libxml2-devel libxslt libxslt-devel libtool-ltdl-devel bzip2-devel pcre-devel httpd-devel tree jq ncurses-devel libevent-devel perl-CPAN bind-utils libffi-devel curl wget
 ```
 ### Add a user
 ```bash
@@ -48,6 +41,7 @@ useradd -c "Anand Sharma" -d "/home/anand" -s /bin/zsh anand
 
 ### Add user to sudo
 ```bash
+# These steps are not required for a VM on GCP
 cd /etc
 chmod 640 sudoers
 Open sudoers and add the following entry:
@@ -107,17 +101,24 @@ make configure
 ./configure --prefix=/usr/local
 make all
 sudo make install
+
+# Check version
+git --version
 ```
 
 ### Install latest Vim
 
 ```bash
+cd ~/src
 curl -L -O https://github.com/vim/vim/archive/v8.0.1391.tar.gz
-tar -xvzf v8.0.<tab>
-cd vim-<tab>
-./configure
+tar -xvzf v8.0.1391.tar.gz
+cd vim-8.0.1391
+./configure --prefix=/usr/local
 make
 sudo make install
+
+#Check version
+vim --version
 ```
 
 ### Install oh-my-zsh and dotfiles.git repo from GitHub
@@ -125,6 +126,7 @@ sudo make install
 ```bash
 ssh -T git@github.com #Check to make sure you can clone repos from Git
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+cd
 git clone git@github.com:indrayam/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ./setup-symlinks-linux.sh
@@ -132,8 +134,7 @@ exit
 ssh x
 # Install Vundle by running the following command:
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim
-:PluginInstall
+vim +PluginInstall +qall
 ```
 
 ### Install latest tmux
@@ -143,11 +144,11 @@ vim
 # Steps to build and install tmux from source on Ubuntu.
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
 VERSION=2.6
-sudo apt -y remove tmux
+sudo yum -y remove tmux
 # If installing tmux in sequence, the next step is OPTIONAL
-# sudo apt -y install wget tar libevent-dev libncurses5-dev
+# sudo yum -y install libevent-devel ncurses-devel
 cd ~/src
-wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+wget "https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
 tar -xvzf tmux-${VERSION}.tar.gz
 cd tmux-${VERSION}
 ./configure --prefix=/usr/local
@@ -161,8 +162,8 @@ tmux -V
 ### Install GPG2
 
 ```bash
-sudo yum install gnupg2 # However, the version was already installed and it was 2.0.22 
-# Installing gnupg depencies first from source
+# GPG2 was already installed and it was 2.0.22. 
+# Installing GPG2 from source. First, installing dependencies..
 curl -L -O https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.27.tar.bz2
 tar -xvjf libgpg-error-1.27.tar.gz2
 cd libgpg-error-1.27
@@ -256,7 +257,7 @@ java -version
 
 ```bash
 cd /usr/local/src
-curl -O http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+curl -O -L http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
 tar -xvzf apache-maven-3.5.2-bin.tar.gz
 sudo mv apache-maven-3.5.2 /usr/local/maven
 
@@ -310,6 +311,7 @@ kotlinc-jvm <Hit Return>
 [Source](https://github.com/udhos/update-golang)
 
 ```bash
+cd ~/src
 git clone https://github.com/udhos/update-golang
 cd update-golang
 sudo RELEASE=1.9.2 ./update-golang.sh
@@ -322,6 +324,7 @@ go version
 ### Install Python
 
 ```bash
+cd ~/
 curl -O https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
 tar -xvzf Python-3.6.3.tgz
 cd Python-3.6.3
@@ -333,7 +336,7 @@ ln -s ./python3.6 python3 # If necessary
 
 # Check version
 p -V
-sudo pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
+sudo /usr/local/bin/pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
 ```
 
 ### Install Node
@@ -430,9 +433,10 @@ sudo gem install bundler rails sinatra
 
 ```bash
 sudo yum install -y pcre-devel xz-devel
+cd ~/src
 curl -L -O https://geoff.greer.fm/ag/releases/the_silver_searcher-2.1.0.tar.gz
 cd the_silver_searcher-2.1.0
-./configure --prefix=/usr
+./configure --prefix=/usr/local
 make
 sudo make install
 
@@ -474,7 +478,7 @@ http --version
 ```bash
 cd /usr/local/bin
 sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
-sudo chmod 755 diff-so-fancy
+sudo chmod +x diff-so-fancy
 
 # Check version
 diff-so-fancy -v

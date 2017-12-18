@@ -83,6 +83,9 @@ make configure
 ./configure --prefix=/usr/local
 make all
 sudo make install
+
+# Check version
+git --version
 ```
 
 ### Install latest Vim
@@ -98,6 +101,7 @@ sudo apt install vim
 ```bash
 ssh -T git@github.com #Check to make sure you can clone repos from Git
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+cd
 git clone git@github.com:indrayam/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ./setup-symlinks-linux.sh
@@ -122,7 +126,7 @@ sudo apt -y remove tmux
 # If installing tmux in sequence, the next step is OPTIONAL
 # sudo apt -y install wget tar libevent-dev libncurses5-dev
 cd ~/src
-wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+wget "https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
 tar -xvzf tmux-${VERSION}.tar.gz
 cd tmux-${VERSION}
 ./configure --prefix=/usr/local
