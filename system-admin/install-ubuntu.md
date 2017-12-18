@@ -1,9 +1,6 @@
-# Setting up Ubuntu 16.04 on Digital Ocean
+# Setting up Ubuntu 16.04
 
-### Automatically spin up an Ubuntu droplet (using doctl)
-`doctl compute droplet create <play-machine> --image ubuntu-16-04-x64 --size 512mb --region nyc3 --ssh-keys ...`
-
-### Create a temporary SSH config
+### Create a temporary SSH config in ~/.ssh/config
 ```bash
 Host x
     Hostname <IP address> OR <x.indrayam.com>
@@ -14,10 +11,13 @@ Host x
 ```bash
 sudo apt update
 sudo apt upgrade
-sudo add-apt-repository universe (Most likely the command will come back with...'universe' distribution component is already enabled for all sources.)
-sudo unattended-upgrades (to install upgrades that might have been held back)
-OPTIONAL: sudo apt list --upgradable
-sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev zsh curl wget vim
+# Most likely the command will come back with...'universe' distribution component is already enabled for all sources.
+sudo add-apt-repository universe 
+# Install upgrades that might have been held back
+sudo unattended-upgrades
+# This is a command to check if which softwares that are ready for an upgrade
+# sudo apt list --upgradable
+sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh curl wget vim tar libevent-dev libncurses5-dev
 ```
 ### Add a user
 ```bash
@@ -27,7 +27,6 @@ useradd -c "Anand Sharma" -d "/home/anand" -s /bin/zsh anand
 ```
 ### Add user to sudo
 ```bash
-su (if not already)
 cd /etc
 chmod 640 sudoers
 Open sudoers and add the following entry:
@@ -78,8 +77,8 @@ ln -s /usr/local/src src
 
 ```bash
 curl -L -O https://github.com/git/git/archive/v2.15.1.tar.gz
-tar -xvzf git*tar.gz
-cd <git-foler>
+tar -xvzf v2.15.1.tar.gz
+cd git-2.15.1
 make configure
 ./configure --prefix=/usr/local
 make all
@@ -106,8 +105,10 @@ exit
 ssh x
 # Install Vundle by running the following command:
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+# Check installation
 vim
-:PluginInstall
 ```
 
 ### Install latest tmux
@@ -118,14 +119,17 @@ vim
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
 VERSION=2.6
 sudo apt -y remove tmux
-sudo apt -y install wget tar libevent-dev libncurses-dev
+# If installing tmux in sequence, the next step is OPTIONAL
+# sudo apt -y install wget tar libevent-dev libncurses5-dev
+cd ~/src
 wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
-tar xf tmux-${VERSION}.tar.gz
+tar -xvzf tmux-${VERSION}.tar.gz
 cd tmux-${VERSION}
-./configure
+./configure --prefix=/usr/local
 make
 sudo make install
-# Logout and login to the shell again and run.
+
+# Check version
 tmux -V
 ```
 
@@ -136,10 +140,16 @@ sudo apt install gnupg2
 Make S3 object public using AWS Console
 Copy dotgnupg.tar.gz from backup to ~/.gnupg:
 cd ~/src
-curl -v https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.gz
+curl -L -O https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.gz
 tar -xvzf dotgnupg.tar.gz
 mv ~/.gnupg ~/.gnupg.bk
 mv dotgnupg ~/.gnupg
+
+# Check version
+gpg --version
+
+# Check if the key got setup correctly
+gpg --list-keys --keyid-format LONG
 ```
 
 ### Install Java

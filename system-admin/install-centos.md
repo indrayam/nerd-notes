@@ -142,16 +142,19 @@ vim
 ```bash
 # Steps to build and install tmux from source on Ubuntu.
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
-cd ~/src
-sudo yum install libevent-devel ncurses-devel
 VERSION=2.6
-wget "https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
-tar xf tmux-${VERSION}.tar.gz
+sudo apt -y remove tmux
+# If installing tmux in sequence, the next step is OPTIONAL
+# sudo apt -y install wget tar libevent-dev libncurses5-dev
+cd ~/src
+wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+tar -xvzf tmux-${VERSION}.tar.gz
 cd tmux-${VERSION}
-./configure
+./configure --prefix=/usr/local
 make
 sudo make install
-# Logout and login to the shell again and run.
+
+# Check version
 tmux -V
 ```
 
@@ -221,6 +224,10 @@ curl -O https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.g
 tar -xvzf dotgnupg.tar.gz
 mv ~/.gnupg ~/.gnupg.bk
 mv dotgnupg ~/.gnupg
+
+# Check version
+gpg --version
+
 # Check if the key got setup correctly
 gpg --list-keys --keyid-format LONG
 ```

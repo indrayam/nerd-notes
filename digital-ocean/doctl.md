@@ -68,6 +68,7 @@ doctl compute droplet create snowy-machine --size 1gb --image 28487138 --region 
 
 ## Create Snapshot
 doctl compute droplet-action snapshot 65972442 --snapshot-name ubuntu-16-04-x64-ez
+doctl compute droplet-action snapshot 75223551 --snapshot-name centos-7-4-x64-ez
 
 ## Check the status of the snapshot creation droplet action
 doctl compute droplet-action get 65972442 --action-id 338213522
