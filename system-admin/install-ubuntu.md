@@ -17,7 +17,7 @@ sudo add-apt-repository universe
 sudo unattended-upgrades
 # This is a command to check if which softwares that are ready for an upgrade
 # sudo apt list --upgradable
-sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh curl wget vim tar libevent-dev libncurses5-dev zip
+sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh curl wget vim tar libevent-dev libncurses5-dev zip pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format
 ```
 ### Add a user
 ```bash
@@ -316,7 +316,7 @@ npm install minimist --save
 # Integrate with MongoDB
 npm install mongodb@^2.0 --save
 npm install mongoskin --save
-npm install --save-dev babel-cli babel-preset-env
+#npm install --save-dev babel-cli babel-preset-env
 echo "Done!"
 npm ls -g --depth=0
 npm ls --depth=0
@@ -332,21 +332,23 @@ cd ruby-2.4.3/
 ./configure --prefix=/usr/local
 make
 sudo make install
+
+# Check version
 ruby -v
 gem -v
-sudo gem install bundler
-sudo gem install rails sinatra
+sudo gem install bundler rails sinatra
 ```
 
 ### Install Silver Searcher (Ag)
 
 ```bash
-sudo apt-get install pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format
+sudo apt install pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format
 curl -O https://geoff.greer.fm/ag/releases/the_silver_searcher-2.1.0.tar.gz
 cd the_silver_searcher-2.1.0
-./configure --prefix=/usr
+./configure --prefix=/usr/local
 make
 sudo make install
+
 # Check version
 ag --version
 ```
@@ -354,7 +356,8 @@ ag --version
 ### Install jq
 
 ```bash
-sudo apt-get install jq
+sudo apt install jq
+
 # Check version
 jq --version
 ```
@@ -362,7 +365,15 @@ jq --version
 ### Install httpie
 
 ```bash
-sudo apt-get install httpie
+curl -L -O https://github.com/jakubroztocil/httpie/archive/0.9.8.tar.gz
+tar -xvzf 0.9.8.tar.gz
+cd httpie-0.9.8
+vim Makefile
+# Run a global substitution: %s/pip/pip3/g
+sudo make
+
+# Check version
+http --version
 ```
 
 ### Install diff-so-fancy
@@ -371,8 +382,9 @@ sudo apt-get install httpie
 cd /usr/local/bin
 sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
 sudo chmod 755 diff-so-fancy
+
 # Check version
-/usr/local/bin/diff-so-fancy
+diff-so-fancy -v
 ```
 
 # Cloud Native Apps on Public Clouds
@@ -383,7 +395,7 @@ sudo chmod 755 diff-so-fancy
 ```bash
 sudo apt update
 # Install these to make sure apt can install packages over HTTPS
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
 # Add Docker’s official GPG key:
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 # Verify
@@ -394,17 +406,22 @@ apt-cache madison docker-ce
 # Source: What is apt-cache madison? Source: https://askubuntu.com/questions/447/how-can-i-see-all-versions-of-a-package-that-are-available-in-the-archive
 
 # Install a specific version
-sudo apt-get install docker-ce=17.09.0~ce-0~ubuntu
+sudo apt install docker-ce=17.09.0~ce-0~ubuntu
 OR
 # Install the latest
-sudo apt-get install docker-ce
-sudo apt-get install docker-compose
-# Test version
- sudo docker version
-# Hello World
-sudo docker run hello-world
+sudo apt update
+sudo apt install docker-ce
+sudo apt install docker-compose
+
 # If you want to remove use of “sudo” to run docker commands, just add your Unix user to the group “docker”, assuming it exists
 sudo usermod -aG docker <userid>
+# Log off and log back in again for the group membership to take effect (Or try, exec su -l $USER)
+
+# Test version
+docker version
+docker-compose version
+# Verify installation
+docker run hello-world
 ```
 
 ### Install Digital Ocean CLI (doctl)
@@ -413,6 +430,11 @@ sudo usermod -aG docker <userid>
 cd ~/src
 curl -L https://github.com/digitalocean/doctl/releases/download/v1.7.1/doctl-1.7.1-linux-amd64.tar.gz  | tar xz
 sudo mv doctl /usr/local/bin
+
+# Check version
+doctl version
+
+# Set it up
 doctl auth init
 doctl account get
 ```

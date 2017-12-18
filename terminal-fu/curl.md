@@ -31,6 +31,12 @@ curl https://sdk.cloud.google.com | sudo bash
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+### Usage 6
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+
 
 
 

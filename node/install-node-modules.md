@@ -11,7 +11,7 @@ sudo npm install -g yarn
 sudo npm install -g npm
 # Compiler
 sudo npm install -g typescript
-npm install babel-cli --save-dev
+#npm install babel-cli --save-dev (Installed but had a lot of Errors when npm list command was run after the install)
 # Static Analysis
 sudo npm install -g jshint
 # Testing frameworks
@@ -52,9 +52,9 @@ npm install luxon --save
 npm install commander --save 
 npm install minimist --save
 # Integrate with MongoDB
-npm install mongodb --save
+npm install mongodb@^2.0 --save
 npm install mongoskin --save
-npm install --save-dev babel-cli babel-preset-env
+#npm install --save-dev babel-cli babel-preset-env
 
 echo "Done!"
 npm ls -g --depth=0

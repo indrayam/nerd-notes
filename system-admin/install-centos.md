@@ -401,7 +401,7 @@ npm install luxon --save
 npm install commander --save 
 npm install minimist --save
 # Integrate with MongoDB
-npm install mongodb --save
+npm install mongodb@^2.0 --save
 npm install mongoskin --save
 #npm install --save-dev babel-cli babel-preset-env
 echo "Done!"
@@ -461,7 +461,9 @@ jq --version
 curl -L -O https://github.com/jakubroztocil/httpie/archive/0.9.8.tar.gz
 tar -xvzf 0.9.8.tar.gz
 cd httpie-0.9.8
-sudo pip3 setup.py install --prefix=/usr/local
+vim Makefile
+# Run a global substitution: %s/pip/pip3/g
+sudo make
 
 # Check version
 http --version
@@ -475,7 +477,7 @@ sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/thi
 sudo chmod 755 diff-so-fancy
 
 # Check version
-/usr/local/bin/diff-so-fancy
+diff-so-fancy -v
 ```
 
 # Cloud Native Apps on Public Clouds
@@ -503,27 +505,19 @@ yum list docker-ce --showduplicates | sort -r
 sudo yum install docker-ce-17.09.1.ce-1.el7.centos
 OR
 sudo yum install docker-ce # To download the latest
+sudo yum install docker-compose
 
 # Start Docker
 sudo systemctl start docker
-# Verify installation
-sudo docker run hello-world
 
-# Install a specific version
-sudo apt-get install docker-ce=17.09.0~ce-0~ubuntu
-OR
-# Install the latest
-sudo apt-get install docker-ce
-sudo apt-get install docker-compose
-# Test version
-sudo docker version
-# Hello World
-sudo docker run hello-world
 # If you want to remove use of “sudo” to run docker commands, just add your Unix user to the group “docker”, assuming it exists
 sudo usermod -aG docker <userid>
 
-# Log off and log back in. Check version
-d version
+# Test version
+docker version
+docker-compose version
+# Verify installation
+sudo docker run hello-world
 ```
 
 ### Install Digital Ocean CLI (doctl)
