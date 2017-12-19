@@ -1,8 +1,11 @@
 # Create JWT Token using Unix Command line alone
 
 #### Pseudocode
+
+```python
 Y = Base64URLEncode(Header) + ‘.’ + Base64URLEncode(Payload)
 JWT = Y + ‘.’ + Base64URLEncode(HMACSHA256(Y))
+```
 
 Use data from this tutorial:
 [https://scotch.io/tutorials/the-anatomy-of-a-json-web-token](https://scotch.io/tutorials/the-anatomy-of-a-json-web-token)
