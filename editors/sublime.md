@@ -78,14 +78,6 @@ Plugin [Increment Selection](https://github.com/yulanggong/IncrementSelection)
 `Cmd + Ctrl + a`
 Plugin Alignment (Aligns nicely for = and :)
 
-`Plugin AlignTab (Alignment on Steroids)`
-`Shift + Cmd + P` Search for AlignTab, Select Live Preview or Table Mode
-
-OR
-
-Select text, right-click, select `Align By`..
-this should handle most of the use cases
-
 `Ctrl + Cmd + P`
 List All Projects
 
@@ -95,3 +87,10 @@ Integrated (or External) Terminal
 `Cmd K, Cmd B`
 Toggle “Explore” View
 
+#### Plugin AlignTab (Alignment on Steroids)
+`Shift + Cmd + P` Search for AlignTab, Select Live Preview or Table Mode
+
+OR
+
+Select text, right-click, select `Align By`..
+this should handle most of the use cases
