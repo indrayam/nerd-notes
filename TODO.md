@@ -1,12 +1,5 @@
 # TODO
-This file contains a list of the following things:
-- Things I have not figure out yet
-- Things I would like to dwell more on if and when time permits
-- Things I would like to get to soon(ish)
-
-### Tmux/SSH
-- If I remotely log into an Ubuntu machine over SSH from my MacOS directly into a tmux session, I cannot seem to figure out a way to copy my selections into the Mac's system clipboard. It copies into Tmux "clipboard"
-- Play with tmux.conf that is simpler than "Oh-my-Tmux"
+This file contains a list of the following things I would like to work on. Things that I have figured out will be marked with a ~~strikethough~~
 
 ### Infrastructure-as-a-Service
 
@@ -62,3 +55,8 @@ Coming soon...
 2. Continuous Integration
 3. Continuous Deployment
 4. Configuration Management
+
+### Miscellaneous Items
+**Tmux/SSH**
+1. If I remotely log into an Ubuntu machine over SSH from my MacOS directly into a tmux session, I cannot seem to figure out a way to copy my selections into the Mac's system clipboard. It copies into Tmux "clipboard"
+2. Play with tmux.conf that is simpler than "Oh-my-Tmux"
