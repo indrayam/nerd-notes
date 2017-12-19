@@ -1,7 +1,7 @@
 # java
 
 #### Find out the heap details of the Java Unix process
-jmap -heap <process_id>
+`jmap -heap <process_id>`
 
 #### How to add deal with self-signed certs?
 [Source](https://confluence.atlassian.com/display/STASHKB/SSLHandshakeException+-+unable+to+find+valid+certification+path+to+requested+target)
@@ -36,6 +36,7 @@ followed by
 Default Password: `changeit`
 
 [Source](http://stackoverflow.com/questions/875467/java-client-certificates-over-https-ssl)
+
 If for any reason you cannot import to the default "JKS" type keystore provided by Sun, you can always run the above command and instead of passing `-keystore $JAVA_HOME/jre/lib/security/cacerts`, you can pass `-keystore <localfile>.keystore`
 
 For example:
