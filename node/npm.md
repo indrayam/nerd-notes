@@ -1,7 +1,7 @@
 # npm
 
-[Node Package Manager: Beginner's Guide](https://www.sitepoint.com/beginners-guide-node-package-manager/)
-[npm Cheatsheet](http://blog.nodejitsu.com/npm-cheatsheet)
+[Node Package Manager: Beginner's Guide](https://www.sitepoint.com/beginners-guide-node-package-manager/)<br/>
+[npm Cheatsheet](http://blog.nodejitsu.com/npm-cheatsheet)<br/>
 [Reference: Node Apps](https://github.com/nodeapps/http-server)
 
 `npm update -g` 
