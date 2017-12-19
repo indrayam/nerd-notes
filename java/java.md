@@ -45,5 +45,5 @@ For example:
 And then, when running the Java App from the command line, pass this to the JVM:
 `java -Djavax.net.ssl.keyStore=pathToKeystore -Djavax.net.ssl.keyStorePassword=123456 ...`
 
-New [Source](http://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/) from Vivek
+More[references](http://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/)
 
