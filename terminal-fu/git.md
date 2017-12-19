@@ -37,13 +37,15 @@ git branch --no-merged <branch name>
 
 If <branch name> left blank, it will show the result for the current local branch. By default this applies to only the local branches. The `-a` flag will show both local and remote branches, and the `-r` flag shows only the remote branches.
 
-#### Delete all local branches that have been merged (this assumes that master and develop branches will NOT be deleted)
+#### Delete all local branches that have been merged
+This assumes that master and develop branches will NOT be deleted
 
 ```bash
 git branch --merged | egrep -v "(^\*|master$|develop$)" | xargs git branch -d
 ```
 
-#### Delete all remote branches that have been merged (this assumes that master and develop branches will NOT be deleted)
+#### Delete all remote branches that have been merged
+This assumes that master and develop branches will NOT be deleted
 
 ```bash
 git branch -r --merged | egrep -v "(\*|master$|develop$)" | sed 's/origin\///' | xargs -n 1 git push --delete origin
