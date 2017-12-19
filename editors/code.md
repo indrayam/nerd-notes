@@ -1,9 +1,9 @@
 # code
 
-#### Cmd + P 
+`Cmd + P`
 Search files in the current project
 
-#### Cmd + C
+`Cmd + C`
 Copy
 
 #### Cmd + V
