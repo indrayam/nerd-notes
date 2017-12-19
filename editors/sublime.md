@@ -1,84 +1,84 @@
 # sublime text
 
-#### Cmd + P 
+`Cmd + P``
 Search files in the current project
 
-#### Cmd + C
+`Cmd + C``
 Copy
 
-#### Cmd + V
+`Cmd + V``
 Paste
 
-#### Cmd + Shift + V
+`Cmd + Shift + V``
 Paste and indent correctly
 
-#### Cmd + X
+`Cmd + X``
 Cut line
 
-#### Cmd + K, Cmd + K
+`Cmd + K, Cmd + K``
 Delete to the end of the line
 
-#### Cmd + K, Cmd + Backspace
+`Cmd + K, Cmd + Backspace`
 Delete to the start of the line
 
-#### Cmd + Enter
+`Cmd + Enter`
 Insert line after
 
-#### Shift + Cmd + Enter
+`Shift + Cmd + Enter`
 Insert line before
 
-#### Cmd + L
+`Cmd + L`
 Select line
 
-#### Cmd + Shift + D
+`Cmd + Shift + D`
 Duplicate a line
 
-#### Cmd + Ctrl + Down Arrow
+`Cmd + Ctrl + Down Arrow`
 Move line/selection down
 
-#### Cmd + Ctrl + Up Arrow
+`Cmd + Ctrl + Up Arrow`
 Move line/selection up
 
-#### Cmd + J
+`Cmd + J`
 Join Selected Lines
 
-#### Cmd + ]
+`Cmd + ]`
 Indent current line(s)
 
-#### Cmd + [
+`Cmd + [`
 Un-indent current line(s)
 
-#### Cmd + D
+`Cmd + D`
 Select word
 
-#### Cmd + Shift + [
+`Cmd + Shift + [`
 Cycle through Tabs (Going left)
 
-#### Cmd + Shift + ]
+`Cmd + Shift + ]`
 Cycle through Tabs (Going right)
 
-#### Cmd + /
+`Cmd + /`
 Comment/Uncomment line(s)
 
-#### Option + Mouse Left Click
+`Option + Mouse Left Click`
 Column Selection
 
-#### Ctrl + Shift + M
+`Ctrl + Shift + M`
 Select inside the Bracket
 
-#### Cmd + Shift + H
+`Cmd + Shift + H`
 Format Code in the Buffer
 
-#### Ctrl + M
+`Ctrl + M`
 Jump between matching brackets
 
-#### Cmd + Ctrl + i
+`Cmd + Ctrl + i`
 Plugin [Increment Selection](https://github.com/yulanggong/IncrementSelection)
 
-#### Cmd + Ctrl + a
+`Cmd + Ctrl + a`
 Plugin Alignment (Aligns nicely for = and :)
 
-#### Plugin AlignTab (Alignment on Steroids)
+`Plugin AlignTab (Alignment on Steroids)`
 `Shift + Cmd + P` Search for AlignTab, Select Live Preview or Table Mode
 
 OR
@@ -86,12 +86,12 @@ OR
 Select text, right-click, select `Align By`..
 this should handle most of the use cases
 
-#### Ctrl + Cmd + P
+`Ctrl + Cmd + P`
 List All Projects
 
-#### Ctrl + `
+`Ctrl + ``
 Integrated (or External) Terminal
 
-#### Cmd K, Cmd B
+`Cmd K, Cmd B`
 Toggle “Explore” View
 
