@@ -164,53 +164,47 @@ tmux -V
 ```bash
 # GPG2 was already installed and it was 2.0.22. 
 # Installing GPG2 from source. First, installing dependencies..
+curl -L -O https://www.gnupg.org/ftp/gcrypt/npth/npth-1.5.tar.bz2
+tar -xvjf npth-1.5.tar.bz2
+cd npth-1.5
+./configure
+make
+sudo make install
+
 curl -L -O https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.27.tar.bz2
 tar -xvjf libgpg-error-1.27.tar.gz2
 cd libgpg-error-1.27
-./configure --prefix=/usr/local
+./configure
 make
 sudo make install
 
 curl -L -O https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.8.2.tar.bz2
 tar -xvjf libgcrypt-1.8.2.tar.bz2
 cd libgcrypt-1.8.2
-./configure --prefix=/usr/local
+./configure
 make
 sudo make install
 
 curl -L -O https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.3.5.tar.bz2
 tar -xvjf libksba-1.3.5.tar.bz2
 cd libksba-1.3.5
-./configure --prefix=/usr/local
+./configure
 make
 sudo make install
-
 
 curl -L -O https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-2.5.1.tar.bz2
 tar -xvjf libassuan-2.5.1.tar.bz2
 cd libassuan-2.5.1
-./configure --prefix=/usr/local
+./configure
 make
 sudo make install
 
 curl -L -O https://www.gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.1.2.tar.bz2
 tar -xvjf ntbtls-0.1.2.tar.bz
 cd ntbtls-0.1.2
-./configure --prefix=/usr/local
+./configure
 make
 sudo make install
-
-curl -L -O https://www.gnupg.org/ftp/gcrypt/npth/npth-1.5.tar.bz2
-tar -xvjf npth-1.5.tar.bz2
-cd npth-1.5
-./configure --prefix=/usr/local
-make
-sudo make install
-
-# Make sure that /usr/local/lib is added to /etc/ld.so.conf.d/ folder
-sudo echo "/usr/local/lib" > /etc/ld.so.conf.d/gnupg2-x86_64.conf
-sudo rm /etc/ld.so.cache
-sudo ldconfig
 
 # Installing gnupg depencies first from source
 curl -L -O https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-2.2.3.tar.bz2
@@ -219,6 +213,11 @@ cd gnupg-2.2.3
 ./configure --prefix=/usr/local
 make
 sudo make install
+
+# Clear the ld.so.cache and regenrate it
+sudo rm /etc/ld.so.cache
+sudo ldconfig
+
 # Make S3 object (https://s3.console.aws.amazon.com/s3/object/us-east-1-anand-files/misc-files/dotgnupg.tar.gz?region=us-east-1&tab=overview) public using AWS Console
 cd ~/src
 curl -O https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.gz
