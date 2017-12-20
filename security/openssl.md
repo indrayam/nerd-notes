@@ -23,7 +23,7 @@ echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | openssl base64 -e -A | sed s
 echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | base64 | sed s/\+/-/ | sed -E s/=+$//
 ```
 
-![Stackoverflow Snippet 1](https://s3.amazonaws.com/us-east-1-anand-files/media-files/base64-encoding.png)
+![Stackoverflow Snippet 1](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/base64-encoding.png)
 
 #### Create SHA256 digest in a hexadecimal format
 
@@ -91,4 +91,4 @@ date +%Z
 timedatectl | gawk -F': ' ' $1 ~ /Time zone/ {print $2}'
 ```
 
-![Stackoverflow Snippet 2](https://s3.amazonaws.com/us-east-1-anand-files/media-files/openssl-footer.png)
+![Stackoverflow Snippet 2](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/openssl-footer.png)

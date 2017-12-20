@@ -102,4 +102,4 @@ JWT:
 
 Go to [jwt.io](jwt.io) and verify the JWT token, including the signature
 
-![jwt.io](https://s3.amazonaws.com/us-east-1-anand-files/media-files/jwt.png)
+![jwt.io](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/jwt.png)
