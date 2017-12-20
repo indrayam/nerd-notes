@@ -1,4 +1,4 @@
-# cmdline fu
+# terminal-fu scratchpad
 
 #### Numer of files in any folder
 
