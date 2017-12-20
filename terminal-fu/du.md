@@ -1,13 +1,9 @@
 # du
 
-#### Get the size of a file
+`du -sh <filepath>` Get the size of a file
 
-```bash
-du -sh <filepath> 
-```
+`du -ch --max-depth=1 .` Get the size of all files inside a folder
 
-#### Get the size of all files inside a folder
+`du -d 1 -h` Nicely display folder sizes
 
-```bash
-du -ch --max-depth=1 .
-```
+

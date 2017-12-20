@@ -33,3 +33,22 @@ yum check-update
 ```
 
 
+### Usage 6
+
+```bash
+http://www.centos.org/docs/5/html/5.1/Deployment_Guide/s1-yum-useful-commands.html
+yum list updates
+yum update
+yum groupinstall 'Development Tools' (install softwares related to development)
+```
+
+### Usage 7
+
+```bash
+http://www.cyberciti.biz/howto/question/linux/linux-rpm-cheat-sheet.php 
+rpm -qa (all installed softwares) | grep -i <particular package name>
+rpm -qil <installed-package-name>
+```
+
+
+

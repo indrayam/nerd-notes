@@ -30,6 +30,14 @@ sudo apt-key fingerprint 0EBFCD88
 apt-cache madison docker-ce
 ```
 
+### Usage 5 (dpkg)
+
+```bash
+dpkg -i <deb-file-name>
+dpkg -L <deb-package-name> (to list the contents)
+http://www.cyberciti.biz/tips/linux-debian-package-management-cheat-sheet.html 
+```
+
 
 
 
