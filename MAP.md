@@ -1,4 +1,4 @@
-# Mapping the "Cloud"
+# Map to guide me through the "Clouds"
 I would like to think of this file as a "map" for me to navigate through. What is this map of? This is a map that helps me understand that if I was a rookie starting off today in the IT industry as a Software Engineer, I would need a map that helps me understand the services that the "Big 3" (AWS, GCP and Azure) offered! My plan is not to go through every single one of these *points-of-interest* on the map, just like you don't visit every single destination called out on a travel map :wink:
 
 Things that I have spent time on will be marked with a ~~strikethough~~
