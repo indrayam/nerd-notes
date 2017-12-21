@@ -1,4 +1,4 @@
-# Technology Roadmap
+# 2020 Technology Roadmap
 I would like to think of this file as a map that will hopefully help me guide through the sometimes maddening lanes-and-bylanes of technologies sloshing along the IT shores demanding attention! I created this to help me better understand the services that the **Big 3** ([AWS](https://aws.amazon.com), [GCP](https://cloud.google.com) and [Azure](https://azure.microsoft.com)) offer! There is a good chance I will not be able to go through every single one of these *points-of-interest* on the map any time soon. And that's ok. I just want to know I am not getting lost :wink:
 
 Things that I have spent time on will be marked with a ~~strikethough~~
@@ -69,7 +69,7 @@ Things that I have spent time on will be marked with a ~~strikethough~~
 2. Python
 3. Go
 4. Java
-    
+
 ### Service Category: Developer & Management Tools
 1. **Development Tools**
     - Amazon Tools & SDK, Cloud9, CodeStar, CodeCommit, CodeBuild, CodeDeploy, CodePipeline
