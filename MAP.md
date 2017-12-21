@@ -64,6 +64,12 @@ Things that I have spent time on will be marked with a ~~strikethough~~
     - Google Cloud Storage Nearline/Coldline
     - Azure Archive Storage
 
+### Writing Software
+1. Data Structures & Algorithms
+2. Python
+3. Go
+4. Java
+    
 ### Service Category: Developer & Management Tools
 1. **Development Tools**
     - Amazon Tools & SDK, Cloud9, CodeStar, CodeCommit, CodeBuild, CodeDeploy, CodePipeline
@@ -81,12 +87,6 @@ Things that I have spent time on will be marked with a ~~strikethough~~
     - Amazon CloudFormation, Amazon OpsWorks, AWS Config
     - Google Cloud Deployment Manager
     - Azure Resource Manager, Azure Automation
-
-### Writing Software
-1. Data Structures & Algorithms
-2. Python
-3. Go
-4. Java
 
 ### Service Category: Application Services
 1. **RDBMS**
