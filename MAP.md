@@ -1,5 +1,5 @@
-# Map to guide me through the "Clouds"
-I would like to think of this file as a map that will hopefully help me guide through the sometimes maddening lanes-and-bylanes of the Public Clouds! If I was a rookie starting off in the IT industry as a Software Engineer today, I would need a map like this to help me better understand the services that the "Big 3" (AWS, GCP and Azure) offer! There is a good chance I will not be able to go through every single one of these *points-of-interest* on the map in detail. And that's ok. I just want to know when I get lost :wink:
+# Technology Roadmap
+I would like to think of this file as a map that will hopefully help me guide through the sometimes maddening lanes-and-bylanes of technologies sloshing along the IT shores demanding attention! I created this to help me better understand the services that the **Big 3** ([AWS](https://aws.amazon.com), [GCP](https://cloud.google.com) and [Azure](https://azure.microsoft.com)) offer! There is a good chance I will not be able to go through every single one of these *points-of-interest* on the map any time soon. And that's ok. I just want to know I am not getting lost :wink:
 
 Things that I have spent time on will be marked with a ~~strikethough~~
 
@@ -82,6 +82,12 @@ Things that I have spent time on will be marked with a ~~strikethough~~
     - Google Cloud Deployment Manager
     - Azure Resource Manager, Azure Automation
 
+### Writing Software
+1. Data Structures & Algorithms
+2. Python
+3. Go
+4. Java
+
 ### Service Category: Application Services
 1. **RDBMS**
     - Amazon RDS, Amazon Aurora
@@ -150,4 +156,8 @@ Things that I have spent time on will be marked with a ~~strikethough~~
     - Google Cloud Security Scanner, Google Data Loss Prevention API, Google Cloud Identity-Aware Proxy
     - Azure WAF, Azure App Service Certificates, Azure DDoS Protection Service
 
+### Blockchain
+1. Blockchain
+2. Bitcoim
+3. Ethereum
 
