@@ -5,8 +5,7 @@ Things that I have spent time on will be marked with a ~~strikethough~~
 - ~~Create VMs using Ubuntu, CentOS images~~ (~~DO~~, ~~GCP~~, AWS, AZ)
 - ~~Set it up as “Dev” machine~~ (~~DO~~, ~~GCP~~, AWS, AZ)
 - ~~Create Snapshot~~ (~~DO~~, GCP, AWS, AZ)
-- Recreate VMs using Snapshot
-- Delete the VMs
+- Recreate VMs using Snapshot 
 - Assign DNS CNAME entries to created VMs
 - Load Balancer with Let’s Encrypt certificate for the LB
 - Private IP/Network
