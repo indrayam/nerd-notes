@@ -1,4 +1,4 @@
-# compute scratchpad
+# operating system scratchpad
 
 ### Issues on MacOS X
 
