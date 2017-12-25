@@ -41,3 +41,4 @@ With most desktop-oriented distributions, double-clicking each font file in the 
     ```
 4. `bash download.sh`
 5. `fc-cache -f`
+6. One catch: Since "ligatures" are not supported in Gnome Terminal, `=` sign does not work if you select **Fira Code Regular** as your Terminal font. Decided to revert back to **DejaVu Sans Mono Book** font.
