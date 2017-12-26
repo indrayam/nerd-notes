@@ -215,6 +215,9 @@ make
 sudo make install
 
 # Clear the ld.so.cache and regenrate it
+cd /etc/ld.so.conf.d/
+sudo vim gnupg.conf
+# Add /usr/local/lib and save the file
 sudo rm /etc/ld.so.cache
 sudo ldconfig
 
@@ -314,7 +317,7 @@ cd ~/src
 git clone https://github.com/udhos/update-golang
 cd update-golang
 sudo RELEASE=1.9.2 ./update-golang.sh
-Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
+#Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
 
 # Check version
 go version
@@ -331,7 +334,7 @@ cd Python-3.6.3
 make
 sudo make install
 cd /usr/local/bin
-ln -s ./python3.6 python3 # If necessary
+sudo ln -s ./python3.6 python3 # If necessary
 
 # Check version
 p -V
@@ -415,9 +418,9 @@ npm ls --depth=0
 
 ```bash
 cd /usr/local/src
-wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.3.tar.gz
-tar -xzvf ruby-2.4.3.tar.gz
-cd ruby-2.4.3/
+wget http://ftp.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.gz
+tar -xzvf ruby-2.5.0.tar.gz
+cd ruby-2.5.0/
 ./configure --prefix=/usr/local
 make
 sudo make install

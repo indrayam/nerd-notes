@@ -140,11 +140,68 @@ tmux -V
 ### Install GPG2
 
 ```bash
-sudo apt install gnupg2 
-Make S3 object public using AWS Console
-Copy dotgnupg.tar.gz from backup to ~/.gnupg:
+# GPG2 was already installed and it was 2.0.22. 
+# Installing GPG2 from source. First, installing dependencies..
+curl -L -O https://www.gnupg.org/ftp/gcrypt/npth/npth-1.5.tar.bz2
+tar -xvjf npth-1.5.tar.bz2
+cd npth-1.5
+./configure
+make
+sudo make install
+
+curl -L -O https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.27.tar.bz2
+tar -xvjf libgpg-error-1.27.tar.gz2
+cd libgpg-error-1.27
+./configure
+make
+sudo make install
+
+curl -L -O https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.8.2.tar.bz2
+tar -xvjf libgcrypt-1.8.2.tar.bz2
+cd libgcrypt-1.8.2
+./configure
+make
+sudo make install
+
+curl -L -O https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.3.5.tar.bz2
+tar -xvjf libksba-1.3.5.tar.bz2
+cd libksba-1.3.5
+./configure
+make
+sudo make install
+
+curl -L -O https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-2.5.1.tar.bz2
+tar -xvjf libassuan-2.5.1.tar.bz2
+cd libassuan-2.5.1
+./configure
+make
+sudo make install
+
+curl -L -O https://www.gnupg.org/ftp/gcrypt/ntbtls/ntbtls-0.1.2.tar.bz2
+tar -xvjf ntbtls-0.1.2.tar.bz
+cd ntbtls-0.1.2
+./configure
+make
+sudo make install
+
+# Installing gnupg depencies first from source
+curl -L -O https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-2.2.3.tar.bz2
+tar -xvjf gnupg-2.2.3.tar.bz2
+cd gnupg-2.2.3
+./configure --prefix=/usr/local
+make
+sudo make install
+
+# Clear the ld.so.cache and regenrate it
+cd /etc/ld.so.conf.d/
+sudo vim gnupg.conf
+# Add /usr/local/lib and save the file
+sudo rm /etc/ld.so.cache
+sudo ldconfig
+
+# Make S3 object (https://s3.console.aws.amazon.com/s3/object/us-east-1-anand-files/misc-files/dotgnupg.tar.gz?region=us-east-1&tab=overview) public using AWS Console
 cd ~/src
-curl -L -O https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.gz
+curl -O https://s3.amazonaws.com/us-east-1-anand-files/misc-files/dotgnupg.tar.gz
 tar -xvzf dotgnupg.tar.gz
 mv ~/.gnupg ~/.gnupg.bk
 mv dotgnupg ~/.gnupg
@@ -166,9 +223,8 @@ sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java9-installer
 # Run the following command to get a sense of where JDK 8 (or 9) got installed
 sudo update-alternatives --config java
-# OR Create a symlink from /usr/local/java to wherever JDK 8 (or 9) was installed 
-# cd /usr/local/bin
-# sudo ln -s /usr/lib/jvm/java-8-oracle java
+# Setup a symlink in /usr/local so that JAVA_HOME environment variable picks the right version too
+sudo ln -s /usr/lib/jvm/java-8-oracle /usr/local/java
 
 # Check version
 java -version
@@ -235,7 +291,7 @@ kotlinc-jvm <Hit Return>
 git clone https://github.com/udhos/update-golang
 cd update-golang
 sudo RELEASE=1.9.2 ./update-golang.sh
-Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
+#Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
 ```
 
 ### Install Python
@@ -248,10 +304,10 @@ cd Python-3.6.3
 make
 sudo make install
 cd /usr/local/bin
-ln -s ./python3.6 python3 # If necessary
+sudo ln -s ./python3.6 python3 # If necessary
 # Check version
 p -V
-sudo pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
+sudo /usr/local/bin/pip3 install awscli boto3 Flask colorama paramiko parsedatetime parsimonious psutil pylint pytest prompt-toolkit requests numpy scipy pymongo
 ```
 
 ### Install Node
@@ -330,9 +386,9 @@ npm ls --depth=0
 
 ```bash
 cd /usr/local/src
-wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.3.tar.gz
-tar -xzvf ruby-2.4.3.tar.gz
-cd ruby-2.4.3/
+wget http://ftp.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.gz
+tar -xzvf ruby-2.5.0.tar.gz
+cd ruby-2.5.0/
 ./configure --prefix=/usr/local
 make
 sudo make install

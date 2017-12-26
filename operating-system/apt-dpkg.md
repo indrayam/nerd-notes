@@ -38,6 +38,14 @@ dpkg -L <deb-package-name> (to list the contents)
 http://www.cyberciti.biz/tips/linux-debian-package-management-cheat-sheet.html 
 ```
 
+### Usage 6
+
+Remove from terminal if you know the ppa:
+
+`sudo add-apt-repository -r ppa:<ppa to remove>`
+
+Or, edit the `/etc/apt/sources.list` to find your ppa there, and remove from there manually (or automatically). Or, remove the ppa file from `/etc/apt/sources.list.d` in newer versions of Ubuntu.
+```
 
 
 
