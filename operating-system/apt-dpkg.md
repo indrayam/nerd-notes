@@ -7,6 +7,8 @@ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy ma
 sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
 ```
 
+Fix apt-get update "..the following signatures couldn’t be verified because the public key is not available.." [Source](https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/)
+
 ### Usage 2
 
 ```bash

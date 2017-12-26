@@ -431,6 +431,7 @@ cd httpie-0.9.8
 vim Makefile
 # Run a global substitution: %s/pip/pip3/g
 sudo make
+sudo chown -R anand.anand ~/.httpie
 
 # Check version
 http --version
@@ -507,7 +508,7 @@ sudo pip3 install awscli --upgrade
 # Check version
 aws --version
 
-# To get authenticated, you will need AWS Key ID and Secret Key:
+# To get authenticated, you will need AWS Key ID and Secret Key. Use "us-east-1" as the default region:
 aws configure
 
 # Install ECS CLI
@@ -543,7 +544,7 @@ gcloud version
 # Log out and log back in for shell completion to work
 
 # Initialize the gcloud setup. Select 35 as Google Compute Engine zone
-gcloud init
+gcloud init --console-only
 gcloud config list
 ```
 
