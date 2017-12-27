@@ -28,4 +28,4 @@ Things that I have spent time on will be marked with a ~~strikethough~~
 - If I remotely log into an Ubuntu machine over SSH from my MacOS directly into a tmux session, I cannot seem to figure out a way to copy my selections into the Mac's system clipboard. It copies into Tmux "clipboard"
 - Play with tmux.conf that is simpler than "Oh-my-Tmux"
 - Why does this command not work in any Linux distribution: `sudo echo "hello" > /etc/test.txt`
-
+- How do I perform a case-insensitive search inside man page? I ran `man lvcreate` and used `/Example` to search for the "EXAMPLES" section in the Manual page. But the search did not work. However, case-sensitive search (`/EXAMPLE`) did work!
