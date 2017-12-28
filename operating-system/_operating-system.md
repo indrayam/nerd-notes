@@ -1,8 +1,8 @@
 # operating system scratchpad
 
-### Issues on MacOS X
+## Issues on MacOS X
 
-**Upgrading to Ruby 2.4.1_1 breaks gem command**
+### Upgrading to Ruby 2.4.1_1 breaks gem command
 
 ```
 /usr/local/Cellar/ruby/2.4.1_1/lib/ruby/2.4.0/yaml.rb:5:in `<top (required)>':
@@ -21,9 +21,9 @@ brew install ruby
 ```
 
 
-### Issues on Linux
+## Issues on Linux
 
-**Install Fira Code Font**
+### Install Fira Code Font
 
 Solution:
 
@@ -42,3 +42,33 @@ With most desktop-oriented distributions, double-clicking each font file in the 
 4. `bash download.sh`
 5. `fc-cache -f`
 6. One catch: Since "ligatures" are not supported in Gnome Terminal, `=` sign does not work if you select **Fira Code Regular** as your Terminal font. Decided to revert back to **DejaVu Sans Mono Book** font.
+
+### Install Powerline Fonts
+
+Solution: ([Source](https://gist.github.com/petercossey/69ff13fe366beec4b1df7f42f5fb4faf))
+
+```bash
+cd ~
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+mkdir -p ~/.config/fontconfig/conf.d #if directory doesn't exists
+mkdir -p ~/.fonts/
+mv PowerlineSymbols.otf ~/.fonts/
+```
+
+Clear fonts cache
+
+```bash
+fc-cache -vf ~/.fonts/
+```
+
+Move configuration file
+
+```bash
+mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+```
+
+Restart your terminal. Powerline fonts should be ready to be used.
+
+
+
