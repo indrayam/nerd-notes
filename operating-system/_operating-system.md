@@ -1,6 +1,6 @@
 # operating system scratchpad
 
-## Issues on MacOS X
+## MacOS X
 
 ### Upgrading to Ruby 2.4.1_1 breaks gem command
 
@@ -21,7 +21,7 @@ brew install ruby
 ```
 
 
-## Issues on Linux
+## Linux (Ubuntu/CentOS)
 
 ### Install Fira Code Font
 
@@ -70,5 +70,40 @@ mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 Restart your terminal. Powerline fonts should be ready to be used.
 
+
+### Install ip command
+
+**CentOS:**
+
+```bash
+sudo yum install iproute
+```
+
+**Ubuntu:**
+
+```bash
+sudo yum install iproute2
+```
+
+### What's the version of Linux?
+
+To get the version of Debian/Ubuntu that is running
+
+```bash
+lsb_release -a
+```
+
+OR
+
+```bash
+cat /etc/issue.net
+```
+To get the version of CentOS/RedHat that is running
+
+```bash
+cat /etc/centos-release
+# OR
+cat /etc/redhat-release
+```
 
 

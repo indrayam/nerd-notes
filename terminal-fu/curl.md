@@ -37,6 +37,14 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
+### Usage 7
+
+```bash
+curl -s http://releases.ubuntu.com/17.10/SHA256SUMS
+```
+
+
+
 
 
 
