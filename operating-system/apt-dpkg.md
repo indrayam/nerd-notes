@@ -33,11 +33,12 @@ apt-cache madison docker-ce
 ```
 
 ### Usage 5 (dpkg)
+Source: [http://www.cyberciti.biz/tips/linux-debian-package-management-cheat-sheet.html](http://www.cyberciti.biz/tips/linux-debian-package-management-cheat-sheet.html)
 
 ```bash
 dpkg -i <deb-file-name>
 dpkg -L <deb-package-name> (to list the contents)
-http://www.cyberciti.biz/tips/linux-debian-package-management-cheat-sheet.html 
+dpkg -s <package-name>
 ```
 
 ### Usage 6
