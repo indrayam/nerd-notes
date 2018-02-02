@@ -15,10 +15,23 @@ DESCRIPTION
 ...
 ...
 
-# To get authenticated
+## To get authenticated
 gloud init
 OR
 gcloud init --console-only
+
+## To switch accounts
+gcloud auth list
+gcloud config set account 'anand.sharma@gmail.com'
+gcloud config set project 'evident-wind-163400'
+gcloud config set compute/zone 'us-east4-b'
+gcloud container clusters list
+gcloud container clusters get-credentials '<cluster-name>'
+OR
+gcloud config set account 'cisco.code.team@gmail.com'
+gcloud config set project 'premium-episode-193818'
+gcloud config set compute/zone 'us-east4-b'
+gcloud container clusters get-credentials '<cluster-name>'
 
 ## Getting help for a sub-command (for example: Here's how you get help for "config" sub-command)
 gcloud config --help
@@ -29,7 +42,7 @@ gcloud config list
 ## Get version
 gcloud --version
 
-# gcloud components sub-command
+## gcloud components sub-command
 (List, install, update, or remove Google SDK components)
 gcloud components --help
 
@@ -62,16 +75,11 @@ gcloud config set compute/region us-east4
 ## Set Compute/Zone
 gcloud config set compute/zone us-east4-a
 
-# gcloud project sub-command
-
 ## Get all projects
 gcloud projects list
 
 ## Describe the project
 gcloud projects describe <project-id>
-
-# gcloud compute sub-command
-(gcloud compute - create and manipulate Google Compute Engine resources)
 
 ## Get full list of public images with their image IDs, image families, and image projects
 gcloud compute images list
@@ -91,8 +99,6 @@ anand here is the userid that I want gcloud to create for me on this remote VM
 ## Obtain the existing metadata for the project
 gcloud compute project-info describe
 
-# gcloud dns sub-command
-
 ## List all your zones within a project
 gcloud dns managed-zones list
 
@@ -102,19 +108,7 @@ gcloud beta dns managed-zones update --description="Run ezplay.io compute nodes"
 ## List Managed Zone's name servers
 gcloud dns managed-zones describe sez
 
-
-
-
-
-
-
-
-
-
-
-
-
-# gcloud container sub-command
+## gcloud container sub-command
 (deploy and manage clusters of machines for running containers)
 The gcloud container command group lets you create and manage Google Container Engine containers and clusters.
 
