@@ -16,15 +16,21 @@ docker run -i -t alpine /bin/sh
 docker run --name cda-web-app -i -t alpine /bin/sh
 
 ## Get status of images
-docker image ls
-docker image ls -a
+docker images ls
+docker images ls -a
 
 ## Get status of containers
 docker container ls 
-docker container ls -a
+OR
 docker ps
+docker container ls -a
+OR
 docker ps -a
+docker container ls -l (Show the last container that was run)
+OR
 docker ps -l (Show the last container that was run)
+docker container ls -n 10 (Shows the last 10 containers, running or stopped)
+OR
 docker ps -n 10 (Shows the last 10 containers, running or stopped)
 
 ## Start(up) an exited container
@@ -54,13 +60,40 @@ d inspect --format='{{ .NetworkSettings.IPAddress }}' anand-ubuntu-d
 OR
 d inspect anand-ubuntu-d1 | jq '.[0].NetworkSettings.IPAddress'
 d inspect --format '{{ .Name }} {{ .State.Running }}' anand-ubuntu-d anand-ubuntu-d1 anand-ubuntu modest_lovelace
+OR
+d inspect --format '{{ .Name }} {{ .State.Running }}' $(docker container ls -q -a)
 
 ## Remove docker containers
 d rm <container name or uuid>
 
 ## Remove all containers
-d rm -f `sudo docker ps -a -q`
+d rm -f $(docker ps -a -q)
+OR
+d rm -f $(docker container ls -a -q)
 
+## Build Images using commit
+d stop <container name or uuid>
+d commit <container name or uuid> <repository[:tag]>
+d images
 
+## Tagging Images
+d tag <source-image> indrayam/<target-image>
 
+## docker login
+docker login
+OR
+docker login -u="<userid>" -p="..." containers.cisco.com
+OR
+docker login -u _json_key -p "$(cat gcloud_docker_key.json)" https://us.gcr.io
 
+## docker push/pull
+docker push indrayam/<image-name>:<tag>
+docker pull indrayam/<image-name>:<tag>
+gcloud docker -- push us.gcr.io/evident-wind-163400/<image-name>:<tag>
+gcloud docker -- pull us.gcr.io/evident-wind-163400/<image-name>:<tag>
+docker push containers.cisco.com/anasharm/<image-name>:<tag>
+docker pull containers.cisco.com/anasharm/<image-name>:<tag>
+
+## docker build
+docker build . -t <tag-name>
+docker build . -t indrayam/helloworld

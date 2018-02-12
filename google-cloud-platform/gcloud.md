@@ -71,6 +71,9 @@ gcloud config set compute/region us-east4
 ## Set Compute/Zone
 gcloud config set compute/zone us-east4-a
 
+## Switch between multiple projects using configurations
+[Source](https://www.the-swamp.info/blog/configuring-gcloud-multiple-projects/)
+
 ## Get all projects
 gcloud projects list
 
