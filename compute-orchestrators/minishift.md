@@ -21,7 +21,7 @@ Image pull complete
 OpenShift server started.
 
 The server is accessible via web console at:
-    https://192.168.99.105:8443
+    https://192.168.99.100:8443
 
 You are logged in as:
     User:     developer
@@ -30,7 +30,7 @@ You are logged in as:
 To login as administrator:
     oc login -u system:admin
 
-Error during post cluster up configuration: Error reading config file /Users/anasharm/.minishift/machines/minishift_kubeconfig
+-- Exporting of OpenShift images is occuring in background process with pid 11338.
 ```
 
 ## Version

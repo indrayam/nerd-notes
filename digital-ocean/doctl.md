@@ -54,6 +54,9 @@ doctl compute ssh-key list
 ## Get a list of all the regions where DO has a presence
 doctl compute region list
 
+## Command to get the size related slugs
+doctl compute size list
+
 # doctl compute droplet sub-command
 (droplet is used to access droplet commands)
 
@@ -115,3 +118,12 @@ doctl compute domain records update indrayam.com --record-id 29030591 --record-t
 doctl compute domain records create indrayam.com --record-name e --record-type A --record-data 192.241.159.40 --record-ttl 3600
 doctl compute domain records create indrayam.com --record-name f --record-type A --record-data 35.194.71.129 --record-ttl 3600
 doctl compute domain records create indrayam.com --record-name g --record-type A --record-data 35.199.45.255 --record-ttl 3600
+
+## Command to get the size related slugs
+doctl compute size list
+
+## Commands to setup master and worker k8s nodes
+export REGION="nyc1"
+export SSH_KEY="..."
+doctl compute droplet create k8s-master --region $REGION --image ubuntu-16-04-x64 --size 4gb --tag-name k8s-master --ssh-keys $SSH_KEY --user-data-file ~/.do/bootstrap.sh --wait
+doctl compute droplet create k8s-node1 k8s-node2 --region $REGION --image ubuntu-16-04-x64 --size 2gb --tag-name k8s-node --ssh-keys $SSH_KEY --user-data-file ~/.do/bootstrap.sh --wait

@@ -97,3 +97,6 @@ docker pull containers.cisco.com/anasharm/<image-name>:<tag>
 ## docker build
 docker build . -t <tag-name>
 docker build . -t indrayam/helloworld
+
+## docker network
+docker network create --driver bridge <network-name>

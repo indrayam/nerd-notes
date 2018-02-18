@@ -40,4 +40,8 @@ az configure
 az --version
 ```
 
+### Get regions
 
+```bash
+az account list-locations | jq '.[] | "\(.displayName) \(.id)"'
+```

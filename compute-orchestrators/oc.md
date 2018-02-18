@@ -1,5 +1,8 @@
 # oc
 
+## install oc
+brew install openshift-cli
+
 ## help
 oc help
 

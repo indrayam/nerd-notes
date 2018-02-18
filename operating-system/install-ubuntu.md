@@ -1,13 +1,16 @@
 # Setting up Ubuntu 16.04
 
 ### Create a temporary SSH config in ~/.ssh/config
-```bash
+
+```
 Host x
     Hostname <IP address> OR <x.indrayam.com>
     Port 22
     User root
 ```
+
 ### Update, upgrade and get basic software for compiling from source
+
 ```bash
 sudo apt update
 sudo apt upgrade
@@ -20,12 +23,14 @@ sudo unattended-upgrades
 sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh curl wget vim tar libevent-dev libncurses5-dev zip pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format
 ```
 ### Add a user
+
 ```bash
 adduser anand (It will prompt for all the entries in /etc/passwd) 
 OR
 useradd -c "Anand Sharma" -d "/home/anand" -s /bin/zsh anand
 ```
 ### Add user to sudo
+
 ```bash
 cd /etc
 chmod 640 sudoers
@@ -34,6 +39,7 @@ Open sudoers and add the following entry:
 chmod 440 sudoers
 ```
 ### SSH login using RSA authentication
+
 ```bash
 Update ~/.ssh/config with the following changes:
 Host x
@@ -43,7 +49,6 @@ Host x
     IdentityFile ~/.ssh/id_rsa
 cat .ssh/id_rsa.pub | ssh x "cat >> ~/.ssh/authorized_keys"
 ```
-
 In client SSH `~/.ssh/config`:
 
 ```bash

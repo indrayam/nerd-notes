@@ -22,11 +22,9 @@ gcloud init --console-only
 
 ## To switch accounts
 gcloud config set account 'anand.sharma@gmail.com'
-gcloud container clusters get-credentials hello-cloud --zone us-east4-b --project evident-wind-163400
+gcloud container clusters get-credentials anand-cluster --zone us-east4-b --project evident-wind-163400
 OR
 gcloud config set account 'cisco.code.team@gmail.com'
-gcloud container clusters get-credentials 'us-east' --zone us-east4-b --project premium-episode-193818
-gcloud container clusters get-credentials 'us-west' --zone us-west1-a --project premium-episode-193818
 gcloud container clusters get-credentials 'asia-south' --zone asia-south1-a --project premium-episode-193818
 
 ## Getting help for a sub-command (for example: Here's how you get help for "config" sub-command)
