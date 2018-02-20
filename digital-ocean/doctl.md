@@ -21,16 +21,16 @@ Flags:
 
 Use "doctl [command] --help" for more information about a command.
 
-## Getting help for a sub-command (for example: Here's how you get help for "account" sub-command)
+### Getting help for a sub-command (for example: Here's how you get help for "account" sub-command)
 doctl account help
 
-## Login
+### Login
 doctl auth init
 
-## Show my current configuration
+### Show my current configuration
 doctl account get
 
-## Get version
+### Get version
 doctl version
 
 # doctl auth sub-command
@@ -39,91 +39,97 @@ doctl version
 # doctl compute sub-command
 (compute commands are for controlling and managing infrastructure)
 
-## Get help for doctl compute sub-command
+### Get help for doctl compute sub-command
 doctl compute --help
 
 # doctl compute ssh-key sub-command
 (sshkey is used to access ssh key commands)
 
-## Get the public key stored with DO
+### Get the public key stored with DO
 doctl compute ssh-key list
 
 # doctl compute region sub-command
 (region is used to access region commands)
 
-## Get a list of all the regions where DO has a presence
+### Get a list of all the regions where DO has a presence
 doctl compute region list
 
-## Command to get the size related slugs
+### Command to get the size related slugs
 doctl compute size list
 
 # doctl compute droplet sub-command
 (droplet is used to access droplet commands)
 
-## List Droplets
+### List Droplets
 doctl compute droplet list
 
-## Create a Droplet using an existing snapshot
+### Create a Droplet using an existing snapshot
 doctl compute droplet create snowy-machine --size 1gb --image 28487138 --region nyc1 --ssh-keys 52:a4:4d:f6:49:e4:6a:49:89:b5:b0:e3:69:7a:d2:08
 
 # doctl compute droplet-action sub-command
 (droplet-action is used to access droplet action commands)
 
-## Create Snapshot
+### Create Snapshot
 doctl compute droplet-action snapshot 65972442 --snapshot-name ubuntu-16-04-x64-ez
 doctl compute droplet-action snapshot 75223551 --snapshot-name centos-7-4-x64-ez
 
-## Check the status of the snapshot creation droplet action
+### Check the status of the snapshot creation droplet action
 doctl compute droplet-action get 65972442 --action-id 338213522
 
 # doctl compute snapshot sub-command
 (snapshot is used to access snapshot commands)
 
-## List Snapshots
+### List Snapshots
 doctl compute snapshot list
 
-## Delete Snapshot
+### Delete Snapshot
 doctl compute snapshot delete 29727973 
 
 # doctl compute image-action sub-command
 (image-action is used to access image-action commands)
 
-## Add a Snapshot to another region
+### Add a Snapshot to another region
 doctl compute image-action transfer 30071103 --region nyc2
 doctl compute image-action transfer 30071103 --region nyc3
 
-## Check the status of the snapshot transfer
+### Check the status of the snapshot transfer
 doctl compute image-action get 65972442 --action-id <action-id>
 
 # doctl compute image sub-command
 (image commands)
 
-## List images
+### List images
 doctl compute image list
 
 # doctl compute domain sub-command
 (domain is used to access domain commands)
 
-## Get list of all domain records for a particular domain
+### Get list of all domain records for a particular domain
 doctl compute domain records list indrayam.com
 
-## Update domain record for a particular domain
+### Update domain record for a particular domain
 doctl compute domain records update indrayam.com --record-id 29030573 --record-type A --record-data 138.197.10.134 --record-ttl 3600
 doctl compute domain records update indrayam.com --record-id 29030578 --record-type A --record-data 138.197.102.0 --record-ttl 3600
 doctl compute domain records update indrayam.com --record-id 29030583 --record-type A --record-data 138.197.102.8 --record-ttl 3600
 doctl compute domain records update indrayam.com --record-id 29030528 --record-type A --record-data 67.205.140.125 --record-ttl 3600
 doctl compute domain records update indrayam.com --record-id 29030591 --record-type A --record-data 67.205.140.125 --record-ttl 3600
 
-## Create domain record for a particular domain
+### Create domain record for a particular domain
 doctl compute domain records create indrayam.com --record-name e --record-type A --record-data 192.241.159.40 --record-ttl 3600
 doctl compute domain records create indrayam.com --record-name f --record-type A --record-data 35.194.71.129 --record-ttl 3600
 doctl compute domain records create indrayam.com --record-name g --record-type A --record-data 35.199.45.255 --record-ttl 3600
 
-## Command to get the size related slugs
+### Command to get the size related slugs
 doctl compute size list
 
-## Commands to setup master and worker k8s nodes
+### Commands to setup master and worker k8s nodes
 export REGION="nyc1"
 export SSH_KEY="..."
 doctl compute droplet create k8s-master --region $REGION --image ubuntu-16-04-x64 --size 4gb --tag-name k8s-master --ssh-keys $SSH_KEY --user-data-file ~/.do/bootstrap.sh --wait
 doctl compute droplet create k8s-node1 k8s-node2 --region $REGION --image ubuntu-16-04-x64 --size 2gb --tag-name k8s-node --ssh-keys $SSH_KEY --user-data-file ~/.do/bootstrap.sh --wait
+
+### Commands to get simple DO droplet
+export REGION="nyc1"
+SSH_ID=`doctl compute ssh-key list | grep "anand" | cut -d' ' -f1`
+SSH_KEY=`doctl compute ssh-key get $SSH_ID --format FingerPrint --no-header`
+doctl compute droplet create indrayam-com --region $REGION --image ubuntu-16-04-x64 --size s-1vcpu-1gb --ssh-keys $SSH_KEY --user-data-file ~/.do/bootstrap.sh --wait

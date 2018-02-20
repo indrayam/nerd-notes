@@ -45,3 +45,11 @@ az --version
 ```bash
 az account list-locations | jq '.[] | "\(.displayName) \(.id)"'
 ```
+
+### Work with VMs
+
+```bash
+az vm list
+az vm list-ip-addresses
+ssh azureuser@52.224.179.98
+```

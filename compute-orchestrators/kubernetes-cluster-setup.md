@@ -14,14 +14,13 @@ az aks get-credentials --resource-group SEAZ --name az-anand-cluster — f "="
 
 ### Setting up your own Kubernetes Cluster 
 
+#### Setup Digital Ocean Droplets
+
 ```
 export REGION="nyc1"
-export SSH_KEY="..."
-```
+SSH_ID=`doctl compute ssh-key list | grep "anand" | cut -d' ' -f1`
+SSH_KEY=`doctl compute ssh-key get $SSH_ID --format FingerPrint --no-header`
 
-#### VMs
-
-```
 doctl compute tag create k8s-master
 doctl compute tag create k8s-node
 
