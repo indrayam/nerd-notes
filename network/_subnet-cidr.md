@@ -39,12 +39,15 @@ What are these subnets (Subnet ID)?
 ```
 
 **Note:**
-1. For a given CIDR (/29), I calculate the number of subnets by raising 2 to the power of the number of host bits in the IP octet that are reserved for the subnet. So, **/29** means 5 host bits are reserved for subnetting. **2^5 = 32!**
-2. For a given CIDR(/29), I calculate the number of subnets by raising 2 to the power of the number of bits in the IP octet that are NOT reserved for the subnet. In **/29**, **8 - 5 (3)** bits are reserved for IP hosts. That makes it **2^3** IP hosts. But since 2 IPs need to be reserved for the subnet and the broadcast address, it means 6 IP hosts can be assigned per subnet
+1. For a given CIDR (/29), I calculate the number of subnets by raising 2 to the power of the number of host bits in an IP octet that are reserved for the subnet. So, **/29** means 5 host bits are reserved for subnetting. **2^5 = 32!**
+2. For a given CIDR(/29), I calculate the number of IP Hosts by raising 2 to the power of the **32 - CIDR number**. In **/29**, **32 - 29 (3)** bits are reserved for IP hosts. That makes it **2^3** IP hosts. But since 2 IPs need to be reserved for the subnet and the broadcast address, it means 6 IP hosts can be assigned per subnet
 
 ### CIDR (Classless Internet Domain Routing)
 
 CIDR (Classless Inter-Domain Routing, sometimes called supernetting) is a way to allow more flexible allocation of Internet Protocol (IP) addresses than was possible with the original system of IP address classes.
 
 So, subnet mask 255.255.255.224 will be represented using the CIDR prefix of **/27**
+
+For more, read [Understanding CIDR Subnet Mask Notation](https://doc.m0n0.ch/quickstartpc/intro-CIDR.html)
+
 
