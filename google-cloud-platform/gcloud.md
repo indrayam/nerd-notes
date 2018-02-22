@@ -30,6 +30,9 @@ gcloud container clusters get-credentials 'asia-south' --zone asia-south1-a --pr
 ## Getting help for a sub-command (for example: Here's how you get help for "config" sub-command)
 gcloud config --help
 
+## Show my list of configurations
+gcloud config configurations list
+
 ## Show my current configuration
 gcloud config list
 
