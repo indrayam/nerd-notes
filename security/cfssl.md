@@ -8,6 +8,17 @@
 
 **DER:** The parent format of PEM. It's useful to think of it as a binary version of the base64-encoded PEM file. Not routinely used by much outside of Windows.
 
+In Kubernetes kubeconfig file, for a cluster, you will see "certificate-authority" or "certificate-authority-data". For user credentials, you might see "client-certificate" or "client-certificate-data" and "client-key" or "client-key-data". 
+
+First question: What's the difference between "x" and "x-data" versions?
+Well, when you use the "non-data" version, it is expected that the value will be a reference to the actual certificate or key file on the filesystem. When you use the "*-data" version, the value is base64 encoded version of the certificate or key PEM formatted file. 
+
+Let's assume you have ca.pem certificate for the Certificate Authority. If you would like to generate the certificate-authority-data value, simple run the following command:
+
+```bash
+cat ca.pem | openssl base64 -e -A # -e to encode and -A to ensure that the output does not have line feeds (new lines)
+``` 
+
 ### Generate Root Certificate and Private Key
 
 Two files are pre-requisites:

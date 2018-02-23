@@ -23,16 +23,6 @@ OR
 gcloud init --console-only
 ```
 
-### To switch accounts
-
-```bash
-gcloud config set account 'anand.sharma@gmail.com'
-gcloud container clusters get-credentials anand-cluster --zone us-east4-b --project evident-wind-163400
-OR
-gcloud config set account 'cisco.code.team@gmail.com'
-gcloud container clusters get-credentials 'asia-south' --zone asia-south1-a --project premium-episode-193818
-```
-
 ### Getting help for a sub-command (for example: Here's how you get help for "config" sub-command)
 
 ```bash
@@ -45,10 +35,35 @@ gcloud config --help
 gcloud config configurations list
 ```
 
-### Show my current configuration
+### list the current properties
 
 ```bash
 gcloud config list
+```
+
+### To switch accounts
+
+```bash
+gcloud config set account 'anand.sharma@gmail.com'
+gcloud container clusters get-credentials anand-cluster --zone us-east4-b --project evident-wind-163400
+OR
+gcloud config set account 'cisco.code.team@gmail.com'
+gcloud container clusters get-credentials 'asia-south' --zone asia-south1-a --project premium-episode-193818
+```
+
+### Interact with configuration properties
+
+```bash
+gcloud config get-value compute/region
+gcloud config set compute/region us-east4
+gcloud config get-value compute/zone
+gcloud config set compute/zone us-east4-a
+gcloud config get-value core/project
+gcloud config set project evident-wind-163400
+gcloud config get-value core/account
+gcloud config set core/account anand.sharma@gmail.com
+gcloud config get core/disable_usage_reporting
+gcloud config set disable_usage_reporting True
 ```
 
 ### Get version
@@ -81,42 +96,6 @@ gcloud components list
 gcloud components install kubectl
 ```
 
-### Get Help
-
-```bash
-gcloud config --help
-```
-
-### list the current properties
-
-```bash
-gcloud config list
-```
-
-### Set Core/Project. Notice how you set config properties for Core/ configurations. You do not pass "core/" to the name
-
-```bash
-gcloud config set project evident-wind-163400
-```
-
-### Set Core/disable_usage_reporting
-
-```bash
-gcloud config set disable_usage_reporting True
-```
-
-### Set Compute/Region
-
-```bash
-gcloud config set compute/region us-east4
-```
-
-### Set Compute/Zone
-
-```bash
-gcloud config set compute/zone us-east4-a
-```
-
 ### Switch between multiple projects using configurations
 [Source](https://www.the-swamp.info/blog/configuring-gcloud-multiple-projects/)
 
@@ -138,6 +117,11 @@ gcloud projects describe <project-id>
 gcloud compute images list
 ```
 
+### Get full list of Google Compute Engine Machine List types
+
+```bash
+gcloud compute machine-types list
+```
 ### Create an instance using one of the public images
 
 ```bash
@@ -245,5 +229,13 @@ gcloud compute firewall-rules hello-world --network mynetwork --allow tcp:22,tcp
 ```bash
 gcloud compute addresses list
 gcloud compute addresses create hello-world --region us-east4
+OR
+gcloud compute addresses describe hello-world --region $(gcloud config get-value compute/region) --format "value(address)"
 ```
 
+### Interact with Instances using SSH/SCP
+
+```bash
+gcloud compute ssh instance-name
+gcloud compute scp file1.txt instance-name:~/ 
+```
