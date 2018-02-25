@@ -239,3 +239,15 @@ gcloud compute addresses describe hello-world --region $(gcloud config get-value
 gcloud compute ssh instance-name
 gcloud compute scp file1.txt instance-name:~/ 
 ```
+
+### Interact with Network Load Balancing
+
+```bash
+gcloud compute target-pools --help
+gcloud compute target-pools list
+gcloud compute target-pools create kubernetes-target-pool
+gcloud compute target-pools add-instances kubernetes-target-pool --instances controller-0,controller-1,controller-2
+gcloud compute target-pools describe kubernetes-target-pool
+gcloud compute forwarding-rules --help
+gcloud compute forwarding-rules create kubernetes-forwarding-rule --address 35.199.30.156 --ports 6443 --region $(gcloud config get-value compute/region) --target-pool kubernetes-target-pool
+```
