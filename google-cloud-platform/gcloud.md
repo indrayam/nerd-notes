@@ -138,6 +138,12 @@ gcloud compute instances list
 gcloud compute project-info describe
 ```
 
+### Track progress of an async compute instance creation
+
+```bash
+gcloud compute operations describe URI
+```
+
 ### List all your zones within a project
 
 ```bash
@@ -250,4 +256,10 @@ gcloud compute target-pools add-instances kubernetes-target-pool --instances con
 gcloud compute target-pools describe kubernetes-target-pool
 gcloud compute forwarding-rules --help
 gcloud compute forwarding-rules create kubernetes-forwarding-rule --address 35.199.30.156 --ports 6443 --region $(gcloud config get-value compute/region) --target-pool kubernetes-target-pool
+```
+
+### Interact with routes
+
+```bash
+gcloud compute routes myroute --network mynetwork --next-hop-address --destination-range N.N.N.N/N
 ```
