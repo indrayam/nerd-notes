@@ -39,3 +39,18 @@ kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --por
 kubectl expose deployment hello-web --type=LoadBalancer
 kubectl expose deployment hello-minikube --type=NodePort
 ```
+
+### Interact with scale sub-command
+
+```bash
+kubectl scale rs/hello-web --replicas=2
+```
+
+### Interact with application manifests
+
+```bash
+kubectl create -f <filename>.yml [-f <filename>.yml]
+kubectl apply -f <filename>.yml [-f <filename>.yml]
+kubectl delete -f <filename.yml> [-f <filename>.yml]
+```
+
