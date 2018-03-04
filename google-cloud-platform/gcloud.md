@@ -18,9 +18,29 @@ DESCRIPTION
 ### To get authenticated
 
 ```bash
+gcloud auth login
 gloud init
-OR
 gcloud init --console-only
+```
+
+### Manage your active Application Default Credentials (ADC)
+
+Application Default Credentials (ADC) provide a method to get credentials used in calling Google APIs. The `gcloud auth application-default` command group allows you to manage active credentials on your machine that are used for local application development.
+
+```bash
+gcloud auth application-default login # acquire new user credentials to use for ADC
+gcloud auth application-default print-access-token # print an access token for your current ADC
+```
+
+Creating a Service Account and have your application use it for API access
+
+```bash
+gcloud iam service-accounts list 
+gcloud iam service-accounts create my-service-account
+gcloud projects add-iam-policy-binding evident-wind-163400 --member "serviceAccount:my-service-account@evident-wind-163400.iam.gserviceaccount.com" --role "roles/owner"
+gcloud iam service-accounts keys create ~/.config/gcloud/my-service-account-key.json --iam-account=my-service-account@evident-wind-163400.iam.gserviceaccount.com
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/my-service-account-key.json"
+<invoke your shell script>
 ```
 
 ### Getting help for a sub-command (for example: Here's how you get help for "config" sub-command)
@@ -57,7 +77,7 @@ gcloud container clusters get-credentials 'asia-south' --zone asia-south1-a --pr
 gcloud config get-value compute/region
 gcloud config set compute/region us-east4
 gcloud config get-value compute/zone
-gcloud config set compute/zone us-east4-a
+gcloud config set compute/zone us-east4-b
 gcloud config get-value core/project
 gcloud config set project evident-wind-163400
 gcloud config get-value core/account

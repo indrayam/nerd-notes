@@ -54,3 +54,10 @@ kubectl apply -f <filename>.yml [-f <filename>.yml]
 kubectl delete -f <filename.yml> [-f <filename>.yml]
 ```
 
+### Interact with describe sub-command
+
+```bash
+kubectl describe pod <pod-name>
+kubectl describe po/<pod-name>
+```
+

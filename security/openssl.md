@@ -66,29 +66,16 @@ Why do we need the digest to be dumped in binary format? Because if you do not, 
 Use this online converter until you figure out how to do it on the command line...
 [Text Converter](http://www.percederberg.net/tools/text_converter.html)
 
-#### Create Epoch time in Unix
+#### Encrypt a file 
 
 ```bash
-date +%s
+openssl enc -aes-256-cbc -e -in linux-bootstrap.tar.gz -out linux-bootstrap.tar.gz.enc
 ```
 
-#### Convert Epoch time to Human Readable date
+#### Decrypt an encrypted file
 
 ```bash
-date -r <epoch time in seconds>
-```
-
-#### Give me the Epoch time from a Human Readable date
-
-```bash
-gdate -d "Oct 1 09:00:00 EDT 2020" +"%s"
-```
-
-#### Getting the timezone on a Unix machine
-
-```bash
-date +%Z
-timedatectl | gawk -F': ' ' $1 ~ /Time zone/ {print $2}'
+openssl aes-256-cbc -d -in linux-bootstrap.tar.gz.enc -out linux-bootstrap.tar.gz
 ```
 
 ![Stackoverflow Snippet 2](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/openssl-footer.png)

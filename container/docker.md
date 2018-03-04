@@ -84,13 +84,13 @@ docker login
 OR
 docker login -u="<userid>" -p="..." containers.cisco.com
 OR
-docker login -u _json_key -p "$(cat gcloud_docker_key.json)" https://us.gcr.io
+docker login -u oauth2accesstoken -p "$(gcloud auth application-default print-access-token)" https://us.gcr.io
 
 ## docker push/pull
 docker push indrayam/<image-name>:<tag>
 docker pull indrayam/<image-name>:<tag>
-gcloud docker -- push us.gcr.io/evident-wind-163400/<image-name>:<tag>
-gcloud docker -- pull us.gcr.io/evident-wind-163400/<image-name>:<tag>
+gcloud docker -- push us.gcr.io/evident-wind-163400/myhttpd:latest
+gcloud docker -- pull us.gcr.io/evident-wind-163400/myhttpd:latest
 docker push containers.cisco.com/anasharm/<image-name>:<tag>
 docker pull containers.cisco.com/anasharm/<image-name>:<tag>
 
