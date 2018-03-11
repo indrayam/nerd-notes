@@ -37,8 +37,9 @@ Source: [http://www.cyberciti.biz/tips/linux-debian-package-management-cheat-she
 
 ```bash
 dpkg -i <deb-file-name>
-dpkg -L <deb-package-name> (to list the contents)
+dpkg -L <deb-package-name> #to list the contents
 dpkg -s <package-name>
+dpkg -S <file-name> # to list the name of the package from which this file came
 ```
 
 ### Usage 6
