@@ -1,6 +1,43 @@
 # kubectl help
 kubectl controls the Kubernetes cluster manager
 
+### Kubectl Resource Type
+* componentstatuses (cs)
+* nodes
+* pods (po)
+  - podsecuritypolicies
+  - podpreset
+  - podtemplates
+  - poddisruptionbudget
+* namespaces (ns)
+* deployments (deploy)
+* replicasets (rs)
+* replicacontrollers (rc)
+* services (svc)
+* endpoints (ep)
+* ingresses (ing)
+* configmaps (cm)
+* secrets
+* persistentvolumes (pv)
+* persistentvolumeclaims (pvc)
+* statefulsets (sts)
+* daemonsets (ds)
+* jobs
+* cronjobs
+* serviceaccount (sa)
+* roles
+* rolebindings
+* clusterroles
+* clusterrolebindings 
+* certificatesigningrequests (csr)
+* customresourcedefinition (crd)
+* events (ev)
+* horizontalpodautoscalers (hpa)
+* resourcequotas (quota)
+* limitranges (limits)
+
+
+
 ### Interact with help...
 
 ```bash

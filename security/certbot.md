@@ -12,7 +12,7 @@ sudo apt install python-certbot-nginx
 ### Obtaining an SSL certificate
 
 ```bash
-sudo certbot --nginx -d example.com -d www.example.com
+sudo certbot --nginx -d indrayam.com -d www.indrayam.com
 ```
 
 ### Certificate Auto-Renewal
