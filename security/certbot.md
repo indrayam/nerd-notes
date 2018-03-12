@@ -1,6 +1,6 @@
 # certbot
 
-### installing certbot
+### installing certbot on ubuntu
 
 ```bash
 
