@@ -100,3 +100,7 @@ docker build . -t indrayam/helloworld
 
 ## docker network
 docker network create --driver bridge <network-name>
+
+## sprucing up debian stretch based nginx image 
+apt-get update
+apt-get install vim net-tools procps
