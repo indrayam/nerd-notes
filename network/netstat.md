@@ -1,3 +1,7 @@
 # netstat
 
-`netstat -tulpn | grep :11211` 
+### Finding if a particular port is in use on a host
+
+```bash
+netstat -tulpn | grep :8080
+```

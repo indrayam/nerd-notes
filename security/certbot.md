@@ -61,7 +61,7 @@ Run certbot for generation of the certificates:
 
 ```bash
 
-certbot certonly --manual -d demo.indrayam.com
+sudo certbot certonly --manual -d demo.indrayam.com
 ```
 
 When prompted like the following:
