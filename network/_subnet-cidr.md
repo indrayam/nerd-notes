@@ -74,6 +74,7 @@ So, total number of subnets = **2^5** = **32** (since s = 5) and total IP host a
 The key to getting the total number of subnets are those "s" bits.
 
 ### References
+- [Understanding IP Addresses, Subnets, and CIDR Notation for Networking](https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking)
 - [Understanding CIDR Subnet Mask Notation](https://doc.m0n0.ch/quickstartpc/intro-CIDR.html)
 - [How to find the total number of subnets available for one subnet mask](https://learningnetwork.cisco.com/thread/21527)
 
