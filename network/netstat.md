@@ -4,4 +4,5 @@
 
 ```bash
 netstat -tulpn | grep :8080
+netstat -anv | grep .1024 # On Mac
 ```

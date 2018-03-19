@@ -251,9 +251,9 @@ mvn --version
 
 ```bash
 cd /usr/local/src
-curl -O -L "https://services.gradle.org/distributions/gradle-4.4-bin.zip"
-unzip gradle-4.4-bin.zip
-sudo mv gradle-4.4 /usr/local/gradle
+curl -O -L "https://services.gradle.org/distributions/gradle-4.6-bin.zip"
+unzip gradle-4.6-bin.zip
+sudo mv gradle-4.6 /usr/local/gradle
 
 # Check the version
 gradle --version
