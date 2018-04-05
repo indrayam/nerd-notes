@@ -37,4 +37,20 @@ Use the values after running the above commands (as shown below):
 
 ```bash
 openstack server create --flavor 1vCPUx2GB --image CentOS-7-Generic --nic net-id=aebcebae-06a3-4796-8713-4375b03ae0fb --security-group default --key-name "anand on macbook" k8s-control-plane
+
+openstack server create --flavor 1vCPUx2GB --image ubuntu-16-04 --nic net-id=aebcebae-06a3-4796-8713-4375b03ae0fb --security-group default --key-name "anand on macbook" anand-playground
+
+openstack server create --flavor 1vCPUx2GB --image CentOS-7-Generic --nic net-id=aebcebae-06a3-4796-8713-4375b03ae0fb --security-group default --key-name "anand on macbook" madhava-playground
+```
+
+### Create image using Glance
+
+```bash
+glance image-create --name "ubuntu" --file xenial-server-cloudimg-amd64-disk1.raw --progress --container-format bare --disk-format raw --visibility private
+```
+
+Or
+
+```bash
+o image create --private --file xenial-server-cloudimg-amd64-disk1.raw --disk-format raw "ubuntu-16.04"
 ```
