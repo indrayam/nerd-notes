@@ -1,110 +1,158 @@
 # docker help
-Usage:  docker COMMAND
-
-A self-sufficient runtime for containers
 
 ### Get version
+
+```bash
 docker version
+```
 
 ### Get info
-docker info
 
-### Run Docker container with an interactive shell
-docker run -i -t ubuntu /bin/bash
-docker run --name cda-web-app -i -t /bin/bash
-docker run -i -t alpine /bin/sh
-docker run --name cda-web-app -i -t alpine /bin/sh
+```bash
+docker info
+```
+
+### docker login
+
+```bash
+docker login
+docker login -u="<userid>" -p="..." containers.cisco.com
+gcloud auth docker-configure # one time only
+```
+
+### docker pull
+
+```bash
+docker pull indrayam/<image-name>:<tag>
+gcloud docker -- pull us.gcr.io/evident-wind-163400/myhttpd:latest
+docker pull containers.cisco.com/anasharm/<image-name>:<tag>
+```
 
 ### Get status of images
+
+```bash
+docker images
 docker images ls
+docker images -a
 docker images ls -a
+```
+
+### docker build
+
+```bash
+docker build -t kubia .
+docker build -t indrayam/kubia .
+```
+
+### Tagging Images
+
+```bash
+d tag <source-image> indrayam/<target-image>
+```
+
+### Run Docker container with an interactive shell
+
+```bash
+docker run --name kubia -p 8080:8080 -d indrayam/kubia
+docker exec -it kubia /bin/bash
+```
+
+### docker push
+
+```bash
+docker push indrayam/<image-name>:<tag>
+gcloud docker -- push us.gcr.io/evident-wind-163400/myhttpd:latest
+docker push containers.cisco.com/anasharm/<image-name>:<tag>
+```
 
 ### Get status of containers
+
+```bash
 docker container ls 
-OR
 docker ps
 docker container ls -a
-OR
 docker ps -a
 docker container ls -l (Show the last container that was run)
-OR
 docker ps -l (Show the last container that was run)
 docker container ls -n 10 (Shows the last 10 containers, running or stopped)
-OR
 docker ps -n 10 (Shows the last 10 containers, running or stopped)
+```
 
 ### Start(up) an exited container
+
+```bash
 docker start <container name or uuid>
+```
 
 ### Stop a running container
+
+```bash
 docker stop <container name or uuid>
+```
+
+### Finding out more about our container
+
+```bash
+docker inspect <container name or uuid>
+d inspect --format='{{ .State.Running }}' anand-ubuntu-d
+d inspect anand-ubuntu-d | jq '.[0].State.Running'
+d inspect --format='{{ .NetworkSettings.IPAddress }}' anand-ubuntu-d
+d inspect anand-ubuntu-d1 | jq '.[0].NetworkSettings.IPAddress'
+d inspect --format '{{ .Name }} {{ .State.Running }}' anand-ubuntu-d anand-ubuntu-d1
+d inspect --format '{{ .Name }} {{ .State.Running }}' $(docker container ls -q -a)
+```
+
+### Remove all containers
+
+```bash
+d rm <container name or uuid> #Remove a container
+d rm -f $(docker ps -a -q) #Remove all
+```
+
+### Remove all images
+
+```bash
+d rmi -f $(docker image -a -q)
+```
 
 ### Attach to a container that has been started up. ***Hit Enter twice to get the prompt***
+
+```bash
 docker attach <container name or uuid> 
+```
 
 ### Logs
+
+```bash
 docker logs <container name or uuid>
 docker logs --tail 10 -f <container name or uuid>
 docker logs -f -t <container name or uuid>
-
-### top results. It was not very impressive though
-docker top <container name or uuid>
-docker stats <container name or uuid> <container name or uuid>...
-
-### finding out more about our container
-docker inspect <container name or uuid>
-d inspect --format='{{ .State.Running }}' anand-ubuntu-d
-OR
-d inspect anand-ubuntu-d | jq '.[0].State.Running'
-d inspect --format='{{ .NetworkSettings.IPAddress }}' anand-ubuntu-d
-OR
-d inspect anand-ubuntu-d1 | jq '.[0].NetworkSettings.IPAddress'
-d inspect --format '{{ .Name }} {{ .State.Running }}' anand-ubuntu-d anand-ubuntu-d1 anand-ubuntu modest_lovelace
-OR
-d inspect --format '{{ .Name }} {{ .State.Running }}' $(docker container ls -q -a)
-
-### Remove docker containers
-d rm <container name or uuid>
-
-### Remove all images
-d rmi -f $(docker image ls -a -q)
-
-### Remove all containers
-d rm <container name or uuid> #Remove a container
-d rm -f $(docker ps -a -q) #Remove all
-OR
-d rm -f $(docker container ls -a -q) #Remove all
+```
 
 ### Build Images using commit
+
+```bash
 d stop <container name or uuid>
 d commit <container name or uuid> <repository[:tag]>
 d images
+```
 
-### Tagging Images
-d tag <source-image> indrayam/<target-image>
+### Top results. It was not very impressive though
 
-### docker login
-docker login
-OR
-docker login -u="<userid>" -p="..." containers.cisco.com
-OR
-docker login -u oauth2accesstoken -p "$(gcloud auth application-default print-access-token)" https://us.gcr.io
+```bash
+docker top <container name or uuid>
+docker stats <container name or uuid> <container name or uuid>...
+```
 
-### docker push/pull
-docker push indrayam/<image-name>:<tag>
-docker pull indrayam/<image-name>:<tag>
-gcloud docker -- push us.gcr.io/evident-wind-163400/myhttpd:latest
-gcloud docker -- pull us.gcr.io/evident-wind-163400/myhttpd:latest
-docker push containers.cisco.com/anasharm/<image-name>:<tag>
-docker pull containers.cisco.com/anasharm/<image-name>:<tag>
+### Docker network
 
-### docker build
-docker build . -t <tag-name>
-docker build . -t indrayam/helloworld
-
-### docker network
+```bash
 docker network create --driver bridge <network-name>
+```
 
-### sprucing up debian stretch based nginx image 
+### Sprucing up debian stretch based nginx image 
+
+```bash
 apt-get update
 apt-get install vim net-tools procps
+```
