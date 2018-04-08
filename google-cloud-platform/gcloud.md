@@ -283,3 +283,15 @@ gcloud compute forwarding-rules create kubernetes-forwarding-rule --address 35.1
 ```bash
 gcloud compute routes myroute --network mynetwork --next-hop-address --destination-range N.N.N.N/N
 ```
+
+### Configure Docker client to work with us.gcr.io
+
+```bash
+gcloud auth configure-docker
+```
+
+### List Docker images hosted on us.gcr.io
+
+```bash
+gcloud container images list --repository=us.gcr.io/evident-wind-163400
+```
