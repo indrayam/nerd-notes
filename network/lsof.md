@@ -3,8 +3,8 @@
 ### Find processes that are listening on a specific port
 
 ```bash
-lsof -i:8080
-lsof -t -i:8080
+sudo lsof -i:8080
+sudo lsof -t -i:8080
 ```
 
 ### Kill processes that are listening on a specific port
