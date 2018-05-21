@@ -9,16 +9,11 @@ sudo apt update
 sudo apt install python-certbot-nginx
 ```
 
-### Obtaining an SSL certificate
+### Get SSL certificate (Manual)
 
 ```bash
-sudo certbot --nginx -d indrayam.com -d www.indrayam.com
-```
-
-### Certificate Auto-Renewal
-
-```bash
-certbot renew --dry-run
+sudo certbot certonly --manual -d indrayam.com
+sudo certbot certonly --manual -d demo.indrayam.com
 ```
 
 ### Process to obtaining SSL and manually configure Nginx
@@ -30,18 +25,6 @@ location ^~ /.well-known/acme-challenge/ {
       default_type "text/plain";
       root /var/www/letsencrypt;
 }
-```
-Here's a simple HTML file for `/www-root`:
-
-```html
-<html>
-  <head>
-    <title>Nginx Demo 1</title>
-  </head>
-  <body>
-    <h3>Nginx Demo 1</h3>
-  </body>
-</html>
 ```
 
 Then, setup the folder as follows:
@@ -57,11 +40,11 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-Run certbot for generation of the certificates:
+Open two terminal windows to the server. On the first one, run certbot for generation of the certificates:
 
 ```bash
 
-sudo certbot certonly --manual -d demo.indrayam.com
+sudo certbot certonly --manual -d indrayam.com
 ```
 
 When prompted like the following:
@@ -76,9 +59,9 @@ And make it available on your web server at this URL:
 http://demo.indrayam.com/.well-known/acme-challenge/abc
 ```
 
-Create a file `abc` and add the following content:
+Use the second terminal window to create a file `abc` and add the following content:
 
-```
+```bash
 abc.def
 ```
 
