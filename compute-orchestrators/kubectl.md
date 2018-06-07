@@ -67,39 +67,3 @@ kubectl create -f filename.yml # -f filename1.yml
 kubectl apply -f filename.yml # -f filename1.yml
 kubectl delete -f filename.yml # -f filename1.yml
 ```
-
-### Kubectl Resource Type
-
-* componentstatuses (cs)
-* nodes
-* pods (po)
-  - podsecuritypolicies
-  - podpreset
-  - podtemplates
-  - poddisruptionbudget
-* namespaces (ns)
-* deployments (deploy)
-* replicasets (rs)
-* replicacontrollers (rc)
-* services (svc)
-* endpoints (ep)
-* ingresses (ing)
-* configmaps (cm)
-* secrets
-* persistentvolumes (pv)
-* persistentvolumeclaims (pvc)
-* statefulsets (sts)
-* daemonsets (ds)
-* jobs
-* cronjobs
-* serviceaccount (sa)
-* roles
-* rolebindings
-* clusterroles
-* clusterrolebindings 
-* certificatesigningrequests (csr)
-* customresourcedefinition (crd)
-* events (ev)
-* horizontalpodautoscalers (hpa)
-* resourcequotas (quota)
-* limitranges (limits)
