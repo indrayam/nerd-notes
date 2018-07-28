@@ -1,5 +1,11 @@
 ## GCP
 
+### Management
+-
+
+### Identity, Security
+- 
+
 ### Compute
 -
 
@@ -12,15 +18,8 @@
 ### Data Persistence
 -
 
-### Development/Deployment
--
-
 ### Application Services
 -
 
-### Big Data & Analytics
+### Development/Deployment
 -
-
-### Machine Learning
--
-

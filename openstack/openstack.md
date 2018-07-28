@@ -39,6 +39,8 @@ Use the values after running the above commands (as shown below):
 openstack server create --flavor 1vCPUx2GB --image CentOS-7-Generic --nic net-id=aebcebae-06a3-4796-8713-4375b03ae0fb --security-group default --key-name "anand on macbook" k8s-control-plane
 
 openstack server create --flavor 1vCPUx2GB --image ubuntu-16-04 --nic net-id=aebcebae-06a3-4796-8713-4375b03ae0fb --security-group default --key-name "anand on macbook" anand-playground
+
+openstack server create --flavor 8vCPUx16GB --image ubuntu-16-04 --nic net-id=aebcebae-06a3-4796-8713-4375b03ae0fb --security-group default --key-name "phwhitin-laptop" phwhitin-spinnaker
 ```
 
 ### Create image using Glance

@@ -1,10 +1,14 @@
 ## AWS
 
+### Identity, Security
+- IAM
+
 ### Compute
 - EC2
-- Lambda
 - EC2 Container Service (ECS)
-- EKS
+- Elastic Container Service for Kubernetes (EKS)
+- Fargate
+- Lambda
 
 ### Networking
 - Virtual Private Cloud (VPC)
@@ -12,6 +16,9 @@
 - Routing
 - Network Access Control Lists (NACL)
 - Security Groups
+- CloudFront
+- Route53
+- Elastic Load Balancing
 
 ### Storage
 - Elastic Block Store (EBS)
@@ -19,29 +26,29 @@
 - Glacier
 
 ### Data Persistence
+- Aurora
 - Relational Database Service (RDS)
 - DynamoDB
-- ElasticSearch
-- Cassandra/Mongo (on EC2)
-
-### Development/Deployment
-- CodeCommit
-- CodeDeploy
-- CodeBuild
-- CodePipeline
-- OpsWorks
-- Elastic Beanstalk
+- ElastiCache
+- Neptune 
 
 ### Application Services
 - Simple Notification Services (SNS)
 - Simple EMail Service (SMS)
 - Simple Queue Service (SQS)
 
-### Big Data & Analytics
-- Kinesis
-- Redshift
-- Elastic Mao Reduce (EMR)
-- Athena
+### Development/Deployment
+- Service Catalog
+- CloudFormation
+- CodePipeline
+    - CodeCommit
+    - CodeBuild
+    - CodeDeploy
+- Elastic Container Registry (ECR)
 
-### Machine Learning
--
+### Management 
+- CloudWatch
+- X-Ray
+- OpsWorks
+- CloudTrail
+- Config
