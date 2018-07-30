@@ -1,4 +1,4 @@
-# cisco switch (ios)
+# Cisco IOS Switch
 
 List of Modes in Cisco IOS Switch:
 - User Mode
@@ -66,77 +66,4 @@ Switch(config-line)#end
 Switch#
 ```
 
-### User Commands
-
-```bash
-Switch>?
-
-Switch>show ver
-Switch>show line
-Switch>show line con 0
-
-Switch>show mem
-
-Switch>show history
-
-Switch>show ip interface brief
-Switch>show int FastEthernet 0/1
-OR
-Switch>show int Fa 0/1
-OR
-Switch>show int Fa0/1
-
-```
-
-### Privileged Commands
-All User Commands listed above can be invoked in Privileged mode.
-
-```bash
-Switch#?
-
-Switch#show running-config
-OR
-Switch#show run
-
-Switch#show 
-
-```
-
-### Global Terminal Configuration Commands
-
-```bash
-Switch(config)#?
-
-Switch(config)#ip default-gateway 192.168.1.1 255.255.255.0
-```
-
-### Interface Configuration Commands
-
-```bash
-Switch(config-if)#?
-
-Switch(config-if)#ip address 192.168.1.11 255.255.255.0
-Switch(config-if)#no shutdown
-
-```
-
-### Line Configuration Commands
-
-```bash
-Switch(config-line)#?
-
-Switch(config-line)#password cisco
-Switch(config-line)#login
-
-Switch(config-line)#transport input all 
-OR
-Switch(config-line)#transport input telnet
-OR
-Switch(config-line)#transport input ssh
-OR
-Switch(config-line)#transport input none
-
-Switch(config-line)#history size 100
-
-```
 
