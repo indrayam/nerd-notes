@@ -1,7 +1,7 @@
 # Cisco IOS Privileged Mode
 
 ### Privileged Commands
-All User Commands listed above can be invoked in Privileged mode.
+All User Commands listed can be invoked in Privileged mode as well
 
 ```bash
 Switch#?

@@ -20,7 +20,7 @@ After entering the Privileged command, use `Exit` to go back one configuration l
 `Ctrl+N` or `Down arrow` - Go forward in your history of commands
 `Ctrl+P` or `Up arrow` - Go backward in your history of commands
 
-### User Mode to Privileged Mode and back
+### User Mode to Privileged Mode
 
 ```bash
 Switch>enable OR 

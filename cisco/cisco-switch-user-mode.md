@@ -6,12 +6,11 @@
 Switch>?
 
 Switch>show ver
-Switch>show line
-Switch>show line con 0
-
+Switch>show history
 Switch>show mem
 
-Switch>show history
+Switch>show line
+Switch>show line con 0
 
 Switch>show ip interface brief
 Switch>show int FastEthernet 0/1
