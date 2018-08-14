@@ -4,7 +4,7 @@
 
 This is a high-level overview of the basic types of resources provide by the Kubernetes API and their primary functions.
 
-- **Workloads (8)** are objects you use to manage and run your containers on the cluster
+- **Workload Resources (8)** are objects you use to manage and run your containers on the cluster
     + Pod
     + ReplicationController
     + ReplicaSet
@@ -13,16 +13,16 @@ This is a high-level overview of the basic types of resources provide by the Kub
     + CronJob
     + DaemonSet
     + StatefulSet
-- **Discovery & LB (3)** resources are objects you use to "stitch" your workloads together into an externally accessible, load-balanced Service
+- **Discovery & LB Resources (3)** are objects you use to "stitch" your workloads together into an externally accessible, load-balanced Service
     + Service
     + Endpoints
     + Ingress
-- **Config & Storage (4)** resources are objects you use to inject initialization data into your applications, and to persist data that is external to your container
+- **Config & Storage Resources (4)** are objects you use to inject initialization data into your applications, and to persist data that is external to your container
     + ConfigMap
     + Secrets
     + PersistentVolumeClaim
     + StorageClass
-- **Cluster (12)** resources objects define how the cluster itself is configured; these are typically used only by cluster operators
+- **Cluster Resources (12)** are objects that define how the cluster itself is configured; these are typically used only by cluster operators
     + Namespace
     + Node
     + ComponentStatus
@@ -35,14 +35,13 @@ This is a high-level overview of the basic types of resources provide by the Kub
     + NetworkPolicy
     + ResourceQuota
     + CertificateSigningRequest
-- **Metadata (6)** resources are objects you use to configure the behavior of other resources within the cluster, such as HorizontalPodAutoscaler for scaling workloads
+- **Metadata Resources (6)** are objects you use to configure the behavior of other resources within the cluster, such as HorizontalPodAutoscaler for scaling workloads
     + Event
     + CustomResourceDefinition
     + LimitRange
     + HorizontalPodAutoscaler
     + PodSecurityPolicy
     + PodDisruptionBudget
-
 
 ### Resource Objects
 

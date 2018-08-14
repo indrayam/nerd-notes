@@ -19,7 +19,7 @@ k get ep
 __Delete Kubernetes Resources (using kubectl):__
 
 ```bash
-k delete svc/kubia-svc
+k delete deploy/kubia svc/kubia-svc
 ```
 
 __Port forward into a Pod (using kubectl):__
