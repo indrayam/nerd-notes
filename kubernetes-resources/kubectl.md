@@ -46,3 +46,7 @@ __Port forward Setup to Access k8s dashboard:__
 kubectl proxy --port 8011
 open http://localhost:8011/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 ```
+
+```bash
+k get secret spinnaker-gate-tls -o jsonpath='{.data.tls\.crt}' | base64 --decode > ca.crt
+```

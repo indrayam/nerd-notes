@@ -1,4 +1,5 @@
-# zsh
+## zsh
+
 [Zsh Lovers](http://grml.org/zsh/zsh-lovers.html)
 
 - Drop-in replacement for Bash
@@ -37,3 +38,19 @@
 - **STDERR** redirection: Use `2>`. For example: `find /proc -name "cpu*" 2> /dev/null`
 - **STDIN** redirection: Use `<`. For example: `wc -l < /etc/group`
 - **STDOUT** redirection: Use `>, >>`. For example: `echo "Hello, World!" > hello.txt`
+
+### Auto Completion
+
+```bash
+echo $fpath
+# This should show you all the folders where you can put Zsh auto-completion scripts. On a MacOSX, brew does a lot of the magic during the installation. It puts everything in /usr/local/share/zsh/site-functions
+ls -al /usr/local/share/zsh/site-functions
+# If you're not using Brew on MacOSX, here are the steps I followed. Taking kubectx as an example
+cd $HOME/.oh-my-zsh/functions
+cp $KUBECTX_INSTALL_FOLDER/completion/kubectx.zsh $HOME/.oh-my-zsh/functions/_kubectx
+cp $KUBECTX_INSTALL_FOLDER/completion/kubens.zsh $HOME/.oh-my-zsh/functions/_kubens
+source ~/.zshrc
+compinit _kubectx # Not sure if this will be necessary after sourcing ~/.zshrc
+compinit _kubens # Not sure if this will be necessary after sourcing ~/.zshrc
+which _kubectx 
+which _kubens

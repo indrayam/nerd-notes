@@ -1,5 +1,8 @@
 # openssl
 
+#### Reference
+Refer to cfssl document for more details on certificate creation
+
 #### Create Base64 encoding (The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string)
 
 ```bash
