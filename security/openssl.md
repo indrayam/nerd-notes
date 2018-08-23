@@ -3,6 +3,60 @@
 #### Reference
 Refer to cfssl document for more details on certificate creation
 
+### Generate Certificate and Key
+
+```bash
+{
+USER=philip
+openssl genrsa -out ${USER}.key 2048 # Get Key
+openssl req -new -key ${USER}.key -out ${USER}.csr -subj "/CN=${USER}/O=CoDE" # Create a CSR
+openssl x509 -req -in ${USER}.csr -CA ./kubernetes.crt -CAkey ./kubernetes.key -CAcreateserial -out ${USER}.crt # Generate Certificate
+}
+```
+
+### Interact with Certificates
+
+```bash
+cfssl certinfo -cert ca.pem # print the certificate in JSON format
+
+openssl x509 -text -in ca.pem # print the certificate in text form (-text)
+openssl x509 -text -noout -in ca.pem # print the certificate in text form (-text), minus the certificate (-noout)
+openssl x509 -noout -subject -in ca.pem # print the Subject field from the certificate
+openssl x509 -noout -issuer -in ca.pem # print the Issuer field from the certificate
+openssl x509 -noout -email -in ca.pem # print the Email field from the certificate
+openssl x509 -noout -dates -in ca.pem # print the Start and End dates field from the certificate
+openssl x509 -noout -startdate -in ca.pem # print the Start Date field from the certificate
+openssl x509 -noout -enddate -in ca.pem # print the End Date field from the certificate
+openssl x509 -noout -pubkey -in ca.pem # print the Public Key
+```
+
+### Interact with Certificate Signing Request
+
+```bash
+cfssl certinfo -csr ca.pem # print the certificate signing request in JSON format
+
+openssl req -in ca.csr #print the certificate request
+openssl req -text -in ca.csr #print the certificate request in text form
+openssl req -text -noout -in ca.csr #print the certificate request in text form without the certificate
+```
+
+### Interact with Private key
+
+```bash
+openssl rsa -in ca-key.pem #print the (RSA) private key
+openssl rsa -text -in ca-key.pem #print the private key in text format
+openssl rsa -text -noout -in ca-key.pem #print the private key in text format, but do not print the private key out
+openssl rsa -outform DES -in ca-key.pem #print the private key in DES 
+```
+
+```bash
+openssl req -in ca.csr #print the certificate request
+openssl req -text -in ca.csr #print the certificate request in text form
+openssl req -text -noout -in ca.csr #print the certificate request in text form without the certificate
+```
+
+
+
 #### Create Base64 encoding (The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string)
 
 ```bash

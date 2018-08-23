@@ -67,3 +67,19 @@ kubectl create -f filename.yml # -f filename1.yml
 kubectl apply -f filename.yml # -f filename1.yml
 kubectl delete -f filename.yml # -f filename1.yml
 ```
+
+### Create User
+
+```bash
+{
+USER="philip"
+GROUP="CoDE"
+openssl genrsa -out ${USER}.key 2048 # Get Key
+openssl req -new -key ${USER}.key -out ${USER}.csr -subj "/CN=${USER}/O=${GROUP}" # Create a CSR
+openssl x509 -req -in ${USER}.csr -CA ./kubernetes.crt -CAkey ./kubernetes.key -CAcreateserial -out ${USER}.crt # Generate Certificate
+}
+kubectl config set-credentials ${USER} --client-certificate ./${USER}.crt --client-key ./${USER}.key --embed-certs=true
+kubectl config set-context ${USER}@k8s-on-p3-rtp --cluster=k8s-on-p3-rtp --user=${USER}
+kubectl create namespace ${USER}
+kubectl create rolebinding ${USER}-admin --clusterrole admin --group ${GROUP} --namespace ${USER}
+```
