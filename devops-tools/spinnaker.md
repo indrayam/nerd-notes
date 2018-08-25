@@ -205,6 +205,12 @@ hal config security api edit \
 hal config security api edit \
     --override-base-url https://spinnakerapi-code.cisco.com
 
+### Enable Security
+
+hal config security authn ldap edit --user-dn-pattern="cn={0},OU=Employees,OU=Cisco Users" --url=ldap://ds.cisco.com:3268/DC=cisco,DC=com
+# Note, I had to remove the space betweeen Cisco and Users when running this command and later edit the ~/.hal/config file 
+# by adding the space
+hal deploy apply
 ```
 
 ### Halyard CLI
