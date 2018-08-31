@@ -9,6 +9,9 @@
 ### Get Nginx updated
 ```bash
 sudo vim /etc/nginx/tcppassthrough.conf (Update the Upstream Port numbers for 80 and 443)
+
+sudo wget https://nginx.org/keys/nginx_signing.key
+sudo apt-key add nginx_signing.key
 sudo vim /etc/apt/sources.list.d/nginx.list 
 #Add the following lines to nginx.list:
 #    deb https://nginx.org/packages/mainline/ubuntu/ <CODENAME> nginx
@@ -36,6 +39,10 @@ include /etc/nginx/tcppassthrough.conf;
 
 # This is what /etc/nginx/tcppassthrough.conf looks like
 stream {
+    log_format combined '$remote_addr - - [$time_local] $protocol $status $bytes_sent $bytes_received $session_time "$upstream_addr"';
+
+    access_log /var/log/nginx/stream-access.log combined;
+
     upstream httpenvoy {
         server 64.102.179.84:31913 max_fails=3 fail_timeout=10s;
         server 64.102.178.218:31913 max_fails=3 fail_timeout=10s;

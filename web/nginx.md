@@ -2,8 +2,20 @@
 
 ### TCP Proxy
 
+Update /etc/nginx/nginx.conf with these changes to the http block...
+
+```bash
+    #include /etc/nginx/conf.d/*.conf;
+    #include /etc/nginx/sites-enabled/*;
+}
+
+include /etc/nginx/tcppassthrough.conf;
+```
+
 ```bash
 stream {
+    log_format combined '$remote_addr - - [$time_local] $protocol $status $bytes_sent $bytes_received $session_time "$upstream_addr"';
+    access_log /var/log/nginx/stream-access.log combined;
     upstream httpproxy {
       server 64.102.179.238:8080 max_fails=3 fail_timeout=10s;
     }
@@ -40,3 +52,21 @@ EOF
 chown ${USER_ID}.${USER_ID} $WEBROOT/index.html
 
 ```
+
+### Update the default Nginx version on Ubuntu 16.04
+
+### Get Nginx updated
+```bash
+sudo wget https://nginx.org/keys/nginx_signing.key
+sudo apt-key add nginx_signing.key
+sudo vim /etc/apt/sources.list.d/nginx.list 
+#Add the following lines to nginx.list:
+deb https://nginx.org/packages/mainline/ubuntu/ xenial nginx
+deb-src https://nginx.org/packages/mainline/ubuntu/ xenial nginx
+sudo apt-get remove nginx #Remove existing Nginx install (if any)
+sudo apt-get install nginx
+sudo vim /etc/nginx/tcppassthrough.conf (Update the Upstream Port numbers for 80 and/or 443) # See above
+sudo nginx -t # to check if the configuration is ok
+```
+
+

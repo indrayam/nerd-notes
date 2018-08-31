@@ -81,9 +81,9 @@ ln -s /usr/local/src src
 ### Install latest Git
 
 ```bash
-curl -L -O https://github.com/git/git/archive/v2.15.1.tar.gz
-tar -xvzf v2.15.1.tar.gz
-cd git-2.15.1
+curl -L -O https://github.com/git/git/archive/v2.18.0.tar.gz
+tar -xvzf v2.18.0.tar.gz
+cd git-2.18.0
 make configure
 ./configure --prefix=/usr/local
 make all
