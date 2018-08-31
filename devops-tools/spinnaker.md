@@ -33,6 +33,8 @@ include /etc/nginx/tcppassthrough.conf;
 ### TCP LB  and SSL passthrough for backend ##
 
 ```bash
+
+# This is what /etc/nginx/tcppassthrough.conf looks like
 stream {
     upstream httpenvoy {
         server 64.102.179.84:31913 max_fails=3 fail_timeout=10s;
