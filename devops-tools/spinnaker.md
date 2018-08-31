@@ -86,7 +86,7 @@ sudo vim /etc/exports
 sudo systemctl restart nfs-kernel-server
 ```
 
-## [Run on all k8s nodes]
+## [Run on all Kubernetes Nodes]
 
 ### Setup NFS Client
 
@@ -105,7 +105,7 @@ sudo vim /etc/fstab
 sudo umount /nfs/minio (if you need to)
 ```
 
-## [Run on VM that will run halyard]
+## [Run on Halyard VM]
 
 ### Install kubectl
 
