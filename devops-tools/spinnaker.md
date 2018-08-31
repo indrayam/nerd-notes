@@ -19,7 +19,7 @@ sudo apt-get remove nginx #Remove existing Nginx install (if any)
 sudo apt-get install nginx
 ```
 
-## Update /etc/nginx/nginx.conf with these changes to the http block...
+### Update /etc/nginx/nginx.conf with these changes to the http block...
 
 ```bash
     #include /etc/nginx/conf.d/*.conf;
@@ -29,7 +29,7 @@ sudo apt-get install nginx
 include /etc/nginx/tcppassthrough.conf;
 ```
 
-## tcp LB  and SSL passthrough for backend ##
+### TCP LB  and SSL passthrough for backend ##
 
 ```bash
 stream {
@@ -71,6 +71,9 @@ sudo systemctl start nginx
 
 ## [Run on VM that will be the NFS Server]
 
+### Setup NFS Server
+
+
 ```bash
 sudo apt-get install -y nfs-kernel-server
 sudo mkdir /var/nfs/minio -p
@@ -83,6 +86,8 @@ sudo systemctl restart nfs-kernel-server
 ```
 
 ## [Run on all k8s nodes]
+
+### Setup NFS Client
 
 ```bash
 sudo apt-get install nfs-common
@@ -99,7 +104,7 @@ sudo vim /etc/fstab
 sudo umount /nfs/minio (if you need to)
 ```
 
-**[Run on VM that will run halyard]**
+## [Run on VM that will run halyard]
 
 ### Install kubectl
 
