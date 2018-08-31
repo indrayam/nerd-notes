@@ -1,6 +1,3 @@
-### How I installed Spinnaker on OpenStack and DigitalOcean
-
-
 ## Spinnaker Install Notes
 
 ## [Run on VM running Nginx L4 TCP Proxy] 
@@ -251,7 +248,7 @@ k create secret tls ca-key-pair --cert=ca.crt --key=ca.key --namespace=cert-mana
 k apply -f ./ca-clusterissuer.yml
 ```
 
-# Switch Namespace to Spinnaker
+### Switch Namespace to Spinnaker
 
 ```bash
 k apply -f ./spinnaker-code-ingress-https.yml -n spinnaker
