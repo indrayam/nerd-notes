@@ -1,4 +1,4 @@
-## Spinnaker Install Notes
+# Spinnaker Install Notes on Kubernetes
 
 ## [Run on VM running Nginx L4 TCP Proxy] 
 
