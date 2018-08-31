@@ -1,19 +1,18 @@
 ### How I installed Spinnaker on OpenStack and DigitalOcean
 
 
-#### Spinnaker Install Notes
+## Spinnaker Install Notes
 
-**[Run on VM running Nginx L4 TCP Proxy]**
+## [Run on VM running Nginx L4 TCP Proxy] 
 
-# Get Nginx updated
+### Get Nginx updated
 ```bash
 sudo vim /etc/nginx/tcppassthrough.conf (Update the Upstream Port numbers for 80 and 443)
 sudo vim /etc/apt/sources.list.d/nginx.list 
-```
-
 #Add the following lines to nginx.list:
 #    deb https://nginx.org/packages/mainline/ubuntu/ <CODENAME> nginx
 #    deb-src https://nginx.org/packages/mainline/ubuntu/ <CODENAME> nginx
+```
 
 ```bash
 sudo apt-get remove nginx #Remove existing Nginx install (if any)
@@ -70,7 +69,7 @@ sudo systemctl stop nginx
 sudo systemctl start nginx
 ```
 
-**[Run on VM that will be the NFS Server]**
+## [Run on VM that will be the NFS Server]
 
 ```bash
 sudo apt-get install -y nfs-kernel-server
@@ -83,7 +82,7 @@ sudo vim /etc/exports
 sudo systemctl restart nfs-kernel-server
 ```
 
-**[Run on all k8s nodes]**
+## [Run on all k8s nodes]
 
 ```bash
 sudo apt-get install nfs-common
@@ -153,7 +152,7 @@ sudo ln -s /opt/openshift/oc /usr/local/bin/oc
 
 Make sure .kube/config contains information about the Kubernetes cluster you would be installing stuff into
 
-**[Run on Halyard VM]**
+## [Run on Halyard VM]
 
 ```bash
 {
