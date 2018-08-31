@@ -1,5 +1,9 @@
 # Spinnaker Install Notes on Kubernetes
 
+### Pre-requisites
+- Installed a 1 Master, 5 Node (Ubuntu 16.04) Kubernetes Cluster running the latest 1.11.2 version
+- Create a standalone VM (Ubuntu 16.04) to use for two purposes: Running Halyard and Running TCP Proxy for my Kubernetes Cluster. So when I refer to VM running Nginx or TCP Proxy or Halyard, I am talking about this 6th Node
+
 ## [Run on VM running Nginx L4 TCP Proxy] 
 
 ### Get Nginx updated
