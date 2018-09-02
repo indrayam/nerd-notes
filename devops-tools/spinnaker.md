@@ -200,10 +200,19 @@ kubectl config set-credentials ${CONTEXT}-token-user --token $TOKEN
 ### Add Kubernetes Account
 
 ```bash
-hal config provider kubernetes enable
-hal config provider kubernetes account add spinnaker-code \
+{
+hal config provider kubernetes account add cae-np-alln-hcn \
     --provider-version v2 \
-    --context $(kubectl config current-context)
+    --context cae-np-alln-hcn
+
+hal config provider kubernetes account add cae-prd-rcdn-hcn \
+    --provider-version v2 \
+    --context cae-np-alln-hcn
+
+hal config provider kubernetes account add cae-np-rtp-udeploy \
+    --provider-version v2 \
+    --context cae-np-rtp-udeploy   
+}
 hal config features edit --artifacts true
 ```
 

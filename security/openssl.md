@@ -1,7 +1,91 @@
 # openssl
 
-#### Reference
-Refer to cfssl document for more details on certificate creation
+### Reference
+Refer to cfssl document for more examples on certificate creation
+
+### Create SSL Cert for Web Server
+[Reference Gist on GitHub](https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309)
+
+**Create Root CA (Done Once)**
+
+```bash
+openssl genrsa -des3 -out ca.key 4096
+```
+If you want a non password protected key just remove the -des3 option
+
+**Create and self-sign the Root Certificate**
+
+```bash
+openssl req -x509 -new -nodes -key ca.key -sha256 -days 1024 -out ca.crt
+```
+
+**Create a certificate (Done for each server)**
+
+1. Create the certificate key
+
+```bash
+openssl genrsa -out jenkins-code.cisco.com.key 2048
+```
+
+2. Create the signing request (Certificate Signing Request - CSR)
+
+Interactive
+
+```bash
+openssl req -new \
+    -key jenkins-code.cisco.com.key \
+    -out jenkins-code.cisco.com.csr
+```
+
+OR
+
+Non-Interactive
+
+```bash
+openssl req -new -sha256 \
+    -key jenkins-code.cisco.com.key \
+    -subj "/C=US/ST=NC/O=CoDE, Inc./CN=jenkins-code.cisco.com" \
+    -out jenkins-code.cisco.com.csr
+```
+
+If you need to pass additional config you can use the -config parameter, here for example I want to add alternative names to my certificate.
+
+```bash
+openssl req -new -sha256 \
+    -key jenkins-code.cisco.com.key \
+    -subj "/C=US/ST=NC/O=CoDE, Inc./CN=jenkins-code.cisco.com" \
+    -reqexts SAN \
+    -config <(cat /etc/ssl/openssl.cnf \
+        <(printf "\n[SAN]\nsubjectAltName=DNS:jenkins-code.cisco.com")) \
+    -out jenkins-code.cisco.com.csr
+```
+
+3. Verify the CSR's content
+
+```bash
+openssl req -in jenkins-code.cisco.com.csr -noout -text
+```
+
+4. Generate Certificate using the CSR and Key along with the CA Root key
+
+```bash
+openssl x509 -req -sha256 \
+    -in jenkins-code.cisco.com.csr \
+    -CA ca.crt \
+    -CAkey ca.key \
+    -CAcreateserial \
+    -out jenkins-code.cisco.com.crt \
+    -extensions SAN \
+    -extfile <(cat /etc/ssl/openssl.cnf \
+        <(printf "\n[SAN]\nsubjectAltName=DNS:jenkins-code.cisco.com")) \
+    -days 500
+```
+
+5. Verify the Certificate
+
+```bash
+openssl x509 -in jenkins-code.cisco.com.crt -text -noout
+```
 
 ### Generate Certificate and Key
 
