@@ -6,10 +6,11 @@
 sudo wget https://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
 sudo vim /etc/apt/sources.list.d/nginx.list 
-#Add the following lines to nginx.list:
-deb https://nginx.org/packages/mainline/ubuntu/ xenial nginx
-deb-src https://nginx.org/packages/mainline/ubuntu/ xenial nginx
+  #Add the following lines to nginx.list:
+  deb https://nginx.org/packages/mainline/ubuntu/ xenial nginx
+  deb-src https://nginx.org/packages/mainline/ubuntu/ xenial nginx
 sudo apt-get remove nginx #Remove existing Nginx install (if any)
+sudo apt-get update
 sudo apt-get install nginx
 sudo vim /etc/nginx/tcppassthrough.conf (Update the Upstream Port numbers for 80 and/or 443) # See above
 sudo nginx -t # to check if the configuration is ok
