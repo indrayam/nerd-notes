@@ -7,7 +7,7 @@ Make sure you have Virtualbox installed
 `minishift help`
 
 ## Install
-[Source](https://docs.openshift.org/latest/minishift/getting-started/installing.html)
+[Download](https://github.com/minishift/minishift/releases/download/v1.23.0/minishift-1.23.0-darwin-amd64.tgz)
 
 `minishift start --vm-driver=virtualbox`
 
@@ -33,16 +33,23 @@ To login as administrator:
 -- Exporting of OpenShift images is occuring in background process with pid 11338.
 ```
 
-## Version
+### Version
 `minishift version`
 
-## Stop
+### Stop
 `minishift stop`
 
-## Status
+### Status
 `minishift status`
 
-## Update
+### Update
 `minishift update`
+
+### Logging in as Admin 
+
+```bash
+eval $(minishift oc-env)
+oc login $(minishift ip):8443 -u admin -p admin
+```
 
 

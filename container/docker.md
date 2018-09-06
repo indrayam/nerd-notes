@@ -153,6 +153,13 @@ docker network create --driver bridge <network-name>
 ### Sprucing up debian stretch based nginx image 
 
 ```bash
+# - dnsutils (nslookup)
+# - net-tools (netstat, ifconfig, etc.)
+# - iproute2 (ip)
+# - iputils-ping (ping)
+# - iputils-tracepath (traceroute6)
+# - proccps (ps)
 apt-get update
-apt-get install vim net-tools procps
+apt-get install vim net-tools procps iputils-ping dnsutils iproute2 iputils-tracepath
+
 ```

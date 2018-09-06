@@ -445,5 +445,24 @@ spring:
 2. Copy the file into ~/.hal/default/profiles/ folder
 3. Run: `hal deploy apply --service-names echo`
 
+### Install Fiat LDAP Authorization
+
+```bash
+hal config security authz ldap edit \
+    --url ldaps://ds.cisco.com:636/dc=cisco,dc=com \
+    --manager-dn 'dft-ds.gen@cisco.com' \
+    --manager-password \
+    --user-dn-pattern cn={0},ou=CiscoUsers \
+    --group-search-base OU=Standard,OU=CiscoGroups,dc=cisco,dc=com \
+    --group-search-filter "(member{0})" \
+    --group-role-attributes cn
+```
+
+Once the command is run, open up ~/.hal/config file, edit `CiscoUsers` to `Cisco Users` and `CiscoGroups` to `Cisco Groups`. Why not add it in the command? Because hal command did not like the spaces. This might change later. Also, add the following additional LDAP criterias:
+
+```bash
+userSearchFilter: (&(objectClass=user)(|(distinguishedName=CN={0}, OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN={0}, OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))
+userSearchBase: dc=cisco,dc=com
+```
 
 
