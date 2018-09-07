@@ -23,6 +23,8 @@ If you had a handful of Applications (with Microservices) to manage in a single 
 
 ### Spinnaker Microservices
 
+![Spinnaker Microservices](https://s3.amazonaws.com/us-east-1-anand-files/spinnaker-architecture.jpg)
+
 **Deck**
 
   Browser-based UI
