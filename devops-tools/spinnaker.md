@@ -1,5 +1,134 @@
 # Spinnaker Install Notes on Kubernetes
 
+As the documentation states:
+
+  Spinnaker is an open-source, multi-cloud continuous delivery platform that helps you release software changes with high velocity and confidence. Spinnaker provides two core sets of features:
+
+- Application Management
+- Application deployment
+
+Ok, so what does it all mean?
+
+Well, when you think of the infrastructure that goes into running a Cloud Native Application consisting of a few or many Microservices in a Public (or Private) Cloud, you are looking at some (or all) of the following:
+
+- DNS Service
+- Load Balancers (with Certificates)
+- Compute (VM Instances or Pods)
+- Firewall Rules
+- Cloud Account(s) and Permissions
+- Databases
+- ...
+
+If you had a handful of Applications (with Microservices) to manage in a single cloud, managing it wouldn't be terribly hard. However, in reality, Organizations tend to have myriad of Applications instantiated across various lifecycles and more than a few Clouds! When you log into the Cloud provider's Console, you have no easy way to zero-in on your App resources! Spinnaker is as much about Application "Management" as it is about Application "Deployment"
+
+### Spinnaker Microservices
+
+**Deck**
+
+  Browser-based UI
+
+**Gate**
+
+  API Gateway: All API callers, including the UI, communicate with Spinnaker through Gate
+
+**Echo**
+
+  Eventing Bus used for sending Notifications (like Emails, Slack, HipChat)
+
+**Orca**
+
+  Orchestration Engine that handles all ad-hoc operations and Pipelines
+
+**Fiat**
+
+  Spinnaker's Authorization Service. It is used to query a user’s access permissions for accounts, applications and service accounts.
+
+**Clouddriver**
+
+  The arms of the Octopus (read, Spinnaker) that reaches out to the Clouds and mutates the infrastructure. It also indexes and caches all deployed resources
+
+**Igor**
+
+  Integrates with build systems like Jenkins or TravisCI. Used to trigger pipelines via CI jobs. Also allows Jenkins/TravisCI stages to be used in Pipelines
+
+**Front50**
+
+  Data Persistence Layer. Basically, persists Spinnaker data to the backend store
+
+**Kayenta**
+
+  Canary Analysis Engine
+
+**Halyard**
+
+  Spinnaker's Configuration Service. It manages the lifecycle of each of the above services and only interacts with these services during Spinnaker startup, updates, and rollbacks.
+
+
+### Spinnaker Nomenclature
+
+**Project:**
+
+  A Spinnaker Project is a collection of Spinnaker Applications. It's a view that pulls information about multiple Spinnaker Apps into a single pane
+
+**Application:**
+
+  Think of a Cloud Native Application as described above: A collection of Load Balancers, Compute Instance(s), Firewall Rules etc. No surprise to see that a Spinnaker Application is a collection of Clusters, which in turn is a collection of Server Groups (or Deployments). And yes, a Spinnaker Application also includes firewalls and load balancers! So, a Spinnaker Application truly represents the "Cloud Native App (or Service)" that a team is going to deploy using Spinnaker, all configuration for that App, and all the infrastructure on which it will run.
+
+  Chances are, you will typically create a Spinnaker App per Cloud Native App you build
+
+**Clusters (think, Deployment in Kubernetes):**
+
+  Cluster is a collection of Server Groups (see below). Do not confuse Cluster here with Kubernetes Cluster! When deployed, a Server Group is a collection of instances of the running software (VM instances, Kubernetes Pods)
+
+**Server Groups (think, ReplicaSet in Kubernetes):**
+
+  The base resource, Server Group, identifies the deployable artifact and basic configuration settings such as number of instances, autoscaling policies, metadata etc. This resource is optionally associated with a Load Balancer and Firewall rules. 
+
+**Instances (think, Pods in Kubernetes):**
+
+  Server Group is a collection of the "atomic" entity within which a software is instantiated. Think individual virtual machine or a Kubernetes Pod. Hence, it should come as no surprise that we track Instance Count and Instance Types.
+
+**Load Balancers:**
+
+  Think of it as the entry doorway into your Cloud Native App. It is associated with ingress protocol, port ranges and often certificates. It balances traffic among instances in Server Groups. 
+
+**Firewalls:**
+
+  It defines network traffic access. Essentially a set of rules defined by IP Range (CIDR), protocol and port range
+
+**Pipeline:**
+
+  Pipeline is the App Deployment Management construct! It consists of a sequence of actions, known as Stages. You can pass parameters from Stage to Stage along the Pipeline. The Pipeline can be started manually or it can be triggered automatically by an external event, such as completion of a Jenkins Job or completion of a Container Image push to an Image Registry. It can also be triggered by another Stage in a different Pipeline!
+
+**Stage:**
+
+  A Stage in Spinnaker is an atomic building block for a pipeline, describing an action that the pipeline will perform. These stages can be sequenced in any order, though some stage sequences may be more common than others. Canned Stages are provided by Spinnaker to make it super simply to put together a Pipeline
+
+**Account:**
+
+  In Spinnaker, an Account is a named credential Spinnaker uses to authenticate against a Cloud "Provider" (think, AWS, GCP, Azure, Kubernetes etc). Each provider has slightly different requirements for what format credentials can be in, and what permissions they need to be afforded to them. You can have as many accounts added as desired - this will allow you to keep your lifecycle environments (staging vs. production) separate, as well restrict access to sets of resources using Spinnaker's Authorization mechanisms. When working in the context of Kubernetes, an Account directly relates to a Cluster as defined by the `$HOME/.kube/config` file. Clouddriver component of Spinnaker reads `$HOME/.kube/config` file and adds each "Cluster" entry as an Account in Spinnaker
+
+**Region:**
+
+  Public Cloud Providers (like Amazon or Google) are hosted in multiple locations. These locations are composed of Regions and Availability Zones. Each Region is a separate geographic area and is completely independent. This achieves the greatest possible fault tolerance and stability. For Kubernetes, Region maps to Namespaces. Regions are more applicable when working with federated Kubernetes Clusters as you likely have nodes running in more than just one Region.
+
+**Availability Zones:**
+
+  Each Region has multiple, isolated locations known as Availability Zones. Each Availability Zone is isolated, but the Availability Zones in a Region are connected through low-latency links. It is not a bad idea to think of an Availability Zone as a separate Data Center, although it is not always the case.
+
+**Stack:**
+
+  It should come as no surprise that various aspects of Spinnaker reflects the culture at Netflix and how they do Continuous Delivery. One aspect of that is how they name Cloud Resources. The naming pattern is `application_name-stack_name-detail-version` where Stack refers to the Application lifecycle or environment of the App resources. Like, "staging" or "production"
+
+**Detail:**
+
+  Detail refers to things like "canary-staging" or "blue-version" or anything really that you want to add to further clarify and identify the cloud resource
+
+**Status:**
+
+  Is an Instance healthy, unhealthy, disabled etc.
+
+
 ### Pre-requisites
 - Installed a 1 Master, 5 Node (Ubuntu 16.04) Kubernetes Cluster running the latest 1.11.2 version
 - Create a standalone VM (Ubuntu 16.04) to use for two purposes: Running Halyard and Running TCP Proxy for my Kubernetes Cluster. So when I refer to VM running Nginx or TCP Proxy or Halyard, I am talking about this 6th Node
