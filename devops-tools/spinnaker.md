@@ -312,6 +312,23 @@ hal config security authn ldap edit --user-dn-pattern="cn={0},OU=Employees,OU=Ci
 hal deploy apply
 ```
 
+Here's the problem with using just the `--user-dn-pattern`. As the documentation says, it is somewhat simplistic. In order to search a broader base of users who may exist in separate `OU` under the root, using `--user-search-filter` and `--user-search-base` is the way to go. Two quick caveats:
+
+1. When you use `--user-search-filter` and `--user-search-base`, you will get an error while trying to login saying "This LDAP operation needs to be run with proper binding". If you try to add `managerDn:` and `managerPassword:` like you do in Fiat, `hal` throws an error.
+2. When you add `userSearchFilter:` values, do not add an extra single quotes around `'{0}'`. So, this is WRONG: `userSearchFilter: (&(objectClass=user)(|(distinguishedName=CN='{0}', OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN='{0}', OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))`. It is subtle, but it can cause a lot of headache. The right way to is to remove the single quotes around the `{0}` entry
+
+So, to get around the `hal` constraints, you create `gate-local.yml` file with content like this:
+
+```bash
+ldap:
+  enabled: true
+  url: ldap://ds.cisco.com:3268
+  managerDn: dft-ds.gen@cisco.com
+  managerPassword: <password>
+  userSearchFilter: (&(objectClass=user)(|(distinguishedName=CN={0}, OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN={0}, OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))
+  userSearchBase: OU=Cisco Users,DC=cisco, DC=com
+```
+
 ### Add Kubernetes Accounts
 
 ```bash
@@ -447,9 +464,11 @@ spring:
 
 ### Install Fiat LDAP Authorization
 
+Helpful command: `hal config security authz ldap edit --help`
+
 ```bash
 hal config security authz ldap edit \
-    --url ldaps://ds.cisco.com:636/dc=cisco,dc=com \
+    --url ldap://ds.cisco.com:3268/dc=cisco,dc=com \
     --manager-dn 'dft-ds.gen@cisco.com' \
     --manager-password \
     --user-dn-pattern cn={0},ou=CiscoUsers \
@@ -464,5 +483,96 @@ Once the command is run, open up ~/.hal/config file, edit `CiscoUsers` to `Cisco
 userSearchFilter: (&(objectClass=user)(|(distinguishedName=CN={0}, OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN={0}, OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))
 userSearchBase: dc=cisco,dc=com
 ```
+
+**Update:**
+
+I finally was able to make things work without resorting to `userSearchFilter`. Here's what the end state looked like:
+
+```bash
+url: ldap://ds.cisco.com:3268/DC=cisco,DC=com
+managerDn: dft-ds.gen@cisco.com
+managerPassword: <password>
+groupSearchBase: OU=Standard,OU=Cisco Groups
+groupSearchFilter: (member={0})
+groupRoleAttributes: cn
+userDnPattern: cn={0},OU=Employees,OU=Cisco Users
+```
+
+However, in order to support users from multiple `OUs`, a better approach is to use `userSearchFilter:` and `userSearchBase:`. For that, I created `fiat-local.yml` and added the following:
+
+```bash
+auth:
+  groupMembership:
+    service: LDAP
+    ldap:
+      roleProviderType: LDAP
+      url: ldap://ds.cisco.com:3268
+      managerDn: dft-ds.gen@cisco.com
+      managerPassword: <password>
+      groupSearchBase: OU=Standard,OU=Cisco Groups,dc=cisco,dc=com
+      groupSearchFilter: (member={0})
+      groupRoleAttributes: cn
+      userSearchFilter: (&(objectClass=user)(|(distinguishedName=CN={0}, OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN={0}, OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))
+      userSearchBase: OU=Cisco Users,DC=cisco, DC=com
+  enabled: true
+```
+
+**Note:**
+I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDAP over TLS) connection failed. [Reference 1](https://community.spinnaker.io/t/ldap-authentication-ldaps-protocol/386), [Reference 2](https://langui.sh/2009/03/14/checking-a-remote-certificate-chain-with-openssl/)
+
+### Add Fiat Service Accounts
+
+Fiat Service Accounts enable the ability for automatically triggered pipelines to modify resources in protected accounts or applications. Here's how to create it, since we cannot use `hal` to perform CRUD operations
+
+```bash
+
+# Make sure your current kubernetes context points to the cluster and namespace where Spinnaker runs
+# You only need to run this if and only if Halyard is running outside of the Kubernetes cluster
+kubectl run -i --rm --restart=Never dummy --image=dockerqa/curl:ubuntu-xenial --command -- sleep 9999999
+
+kubectl exec -it dummy -- bash
+apt-get update
+apt-get install iputils-ping dnsutils jq vim
+
+# Make sure the service discovery works
+nslookup spin-front50
+
+# Create a sa.sh with the following content:
+FRONT50=http://spin-front50.spinnaker:8080
+FIAT=http://spin-fiat.spinnaker:7003
+ORCA=http://spin-orca.spinnaker:8083
+ROSCO=http://spin-rosco.spinnaker:8087
+IGOR=http://spin-igor.spinnaker:8088
+REDIS=redis://spin-redis.spinnaker:6379
+ECHO=http://spin-echo.spinnaker:8089
+CLOUDDRIVER=http://spin-clouddriver.spinnaker:7002
+DECK=http://spin-deck.spinnaker:9000
+GATE=http://spin-gate.spinnaker:8084
+
+chmod +x sa.sh
+source test.sh
+
+curl -X POST \
+  -H "Content-type: application/json" \
+  -d '{ "name": "cd-spinnaker.gen", "memberOf": ["spinnaker-admin"] }' \
+  $FRONT50/serviceAccounts
+
+# See the Service Account(s)
+curl -s $FRONT50/serviceAccounts | jq .
+
+# A Fiat sync may be necessary for all affected users to pick up the changes:
+curl -X POST $FIAT/roles/sync
+
+# Confirm the new service account has permissions to the resources you think it should by querying Fiat
+curl -s $FIAT/authorize/<sa-name>
+
+# If you made a mistake, and you want to delete it, run the following command
+curl -X DELETE -H "Content-type: application/json"  http://spin-front50:8080/serviceAccounts/<sa-name>
+
+```
+
+
+
+
 
 

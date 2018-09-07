@@ -11,7 +11,7 @@ sudo apt-get install ldap-utils
 [Reference](https://stackoverflow.com/questions/22224465/querying-windows-active-directory-server-using-ldapsearch-from-command-line)
 
 ```bash
-ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(cn=visardan,ou=Employees,ou=Cisco Users,dc=cisco,dc=com)'
+ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(sAMAccountName=anasharm)'
 
 # Search Users
 ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'CN=cd-spinnaker.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com' -w '<password>' '(sAMAccountName=visardan)'
@@ -25,7 +25,11 @@ ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "DC=cisco, DC=com" -D 'dft-ds.gen@
 # Return pre-selected list of attributes
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'CN=cd-spinnaker.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com' -w '<password>' '(sAMAccountName=visardan)' cn mail
 
+# Search using cn
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(cn=visardan)' cn mail
+
+# Find all users under OU=Employees, OU=Cisco Users, DC=Cisco, DC=Com who are included in Group of Groups
+ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees, OU=Cisco Users, DC=cisco, DC=com" -D 'CN=cd-spinnaker.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com' -w '<password>' '(&(objectClass=user)(memberof:1.2.840.113556.1.4.1941:=CN=dft-us-sdaas-users,OU=Standard,OU=Cisco Groups,DC=cisco,DC=com))' -z 1000 sAMAccountName
 ```
 
 If you are using LDAPS, create a ldaprc file in the same directory where you are running the command with this content:
@@ -41,6 +45,8 @@ TLS_REQCERT ALLOW
 ```bash
 # Search for all the Groups to which the User Belongs
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=anasharm,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)'
+
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=anasharm,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)'
 ```
 
 ### Configure ActiveDirectory settings
@@ -50,4 +56,3 @@ CN=dft-ds.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com
 Domain Controller: ds.cisco.com:3268
 Domain Name: cisco.com
 ```
-
