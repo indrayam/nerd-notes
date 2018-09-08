@@ -104,7 +104,15 @@ If you had a handful of Applications (with Microservices) to manage in a single 
 
 **Stage:**
 
-  A Stage in Spinnaker is an atomic building block for a pipeline, describing an action that the pipeline will perform. These stages can be sequenced in any order, though some stage sequences may be more common than others. Canned Stages are provided by Spinnaker to make it super simply to put together a Pipeline
+  A Stage in Spinnaker is an atomic building block for a pipeline, describing an action that the pipeline will perform. These stages can be sequenced in any order, though some stage sequences may be more common than others. Canned Stages are provided by Spinnaker to make it super simply to put together a Pipeline. For example:
+  - Bake: Container or VM
+  - Find Image
+  - Deploy: Several Different Strategies
+  - Wait
+  - Disable/Enable
+  - Resize
+  - Manual Judgement
+  - Check Preconditions
 
 **Account:**
 
