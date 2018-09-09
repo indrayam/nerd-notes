@@ -192,7 +192,7 @@ helm version --tls --tiller-namespace tiller-code version
 8. Create an alias for the Helm client
 
 ```bash
-alias h='helm version --tls --tiller-namespace tiller-code version'
+alias h='helm'
+TILLER_NAMESPACE='tiller-code'
 ```
-
 
