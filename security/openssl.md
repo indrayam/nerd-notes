@@ -17,6 +17,9 @@ If you want a non password protected key just remove the -des3 option
 
 ```bash
 openssl req -x509 -new -nodes -key ca.key -sha256 -days 1024 -out ca.crt
+
+# Another flavor
+openssl req -key ./helm-tiller-ca.key.pem -new -x509 -days 1095 -sha256 -out helm-tiller-ca.cert.pem -extensions v3_ca
 ```
 
 **Create a certificate (Done for each server)**

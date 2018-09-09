@@ -72,11 +72,11 @@ kubectl delete -f filename.yml # -f filename1.yml
 
 ```bash
 {
-USER="philip"
+USER="anand"
 GROUP="CoDE"
 openssl genrsa -out ${USER}.key 2048 # Get Key
 openssl req -new -key ${USER}.key -out ${USER}.csr -subj "/CN=${USER}/O=${GROUP}" # Create a CSR
-openssl x509 -req -in ${USER}.csr -CA ./kubernetes.crt -CAkey ./kubernetes.key -CAcreateserial -out ${USER}.crt # Generate Certificate
+openssl x509 -req -in ${USER}.csr -CA ./play.crt -CAkey ./play.key -CAcreateserial -out ${USER}.crt # Generate Certificate
 kubectl config set-credentials ${USER}-rtp-learn --client-certificate ./${USER}.crt --client-key ./${USER}.key --embed-certs=true
 kubectl config set-context ${USER}@k8s-on-p3-rtp-learn --cluster=k8s-on-p3-rtp-learn --user=${USER}-rtp-learn
 kubectl create namespace ${USER}
