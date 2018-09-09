@@ -14,6 +14,20 @@ helm init --client-only
 
 ### Secure Installation of Helm
 
+**Sources:**
+
+- [1](https://docs.helm.sh/using_helm/#using-ssl-between-helm-and-tiller)
+- [2](https://engineering.bitnami.com/articles/helm-security.html)
+
+**Assumption:**
+
+In order to secure the Tiller installation on Kubernetes, the following steps was performed:
+
+- Kubernetes Cluster has RBAC enabled. FWIW, all recent `kubeadm` powered Kubernetes Cluster installation come with RBAC enabled
+- Deployed Tiller in its own namespace (`tiller-code`) other than `kube-system` and configured the permissions so that Tiller is restricted to deploying resources in well-defined list of namespace(s). In this example, I use the `anand` namespace
+- All Release Information stored by Tiller will be stored as a Kubernetes Secret, and not Kubernetes ConfigMap
+- Use the `--tiller-tls-verify` option with helm init and the `--tls` flag with other Helm commands to enforce verification
+
 1. Create a namespace to host Tiller
 
 ```bash
@@ -94,6 +108,24 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
+5. Apply the changes to the Kubernetes Cluster
+
+You will have to run these commands as an Admin of the Cluster
+
+```bash
+kubectl create -f anand-tiller-role.yaml
+kubectl create -f anand-tiller-rolebinding.yaml
+kubectl create -f code-tiller-role.yaml
+kubectl create -f code-tiller-rolebinding.yaml
+
+# Confirm that the role and rolebindings have been created in the respective namespace
+k get role -n anand
+k get rolebindings -n anand
+k get role -n tiller-code
+k get rolebindings -n tiller-code
+
+```
+
 5. Create Certificate Authority, Certs and Keys for the Tiller Server and Helm Client
 
 ```bash
@@ -162,8 +194,5 @@ helm version --tls --tiller-namespace tiller-code version
 ```bash
 alias h='helm version --tls --tiller-namespace tiller-code version'
 ```
-
-
-
 
 
