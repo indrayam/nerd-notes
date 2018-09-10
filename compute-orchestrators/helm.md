@@ -250,7 +250,7 @@ helm version --tls --tiller-namespace tiller-code version
 
 ```bash
 alias h='helm'
-TILLER_NAMESPACE='tiller-code'
+export TILLER_NAMESPACE='tiller-code'
 ```
 
 ### Helm Commands
