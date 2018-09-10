@@ -12,12 +12,69 @@ To configure Helm client, but not install Tiller, do the following:
 helm init --client-only
 ```
 
+### Tiller Installation to play with (Not secure)
+
+1. Save the following in a YAML file (in this `sa-with-permissions.yaml`)
+
+```bash
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tiller-code
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tiller
+  namespace: tiller-code
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: tiller
+    namespace: tiller-code
+```
+
+2. Create it against the cluster you want to install Helm in
+
+```bash
+kubectl create -f sa-with-permissions.yaml
+```
+
+3. Install Tiller
+
+First the dry run to make sure it all looks good!
+
+```bash
+helm init \
+  --dry-run --debug \
+  --override 'spec.template.spec.containers[0].command'='{/tiller,--storage=secret}' \
+  --tiller-namespace=tiller-code \
+  --service-account=tiller
+```
+
+If so, run this
+
+```bash
+helm init \
+  --override 'spec.template.spec.containers[0].command'='{/tiller,--storage=secret}' \
+  --tiller-namespace=tiller-code \
+  --service-account=tiller
+```
+
 ### Secure Installation of Helm
 
 **Sources:**
 
-- [1](https://docs.helm.sh/using_helm/#using-ssl-between-helm-and-tiller)
-- [2](https://engineering.bitnami.com/articles/helm-security.html)
+- [Using SSL Between Helm and Tiller](https://docs.helm.sh/using_helm/#using-ssl-between-helm-and-tiller)
+- [Exploring The Security Of Helm](https://engineering.bitnami.com/articles/helm-security.html)
 
 **Assumption:**
 
@@ -196,3 +253,27 @@ alias h='helm'
 TILLER_NAMESPACE='tiller-code'
 ```
 
+### Helm Commands
+
+```bash
+
+# List releases
+helm ls --tls
+
+# Create Chart
+helm create <chart-name>
+
+# Look at the YAML output helm has "derived"
+helm template .
+
+# Install the Chart
+helm install . --name=<release-name> --tls
+
+# Perform a dry-run and debug before the installation
+helm install . 
+
+# Delete and Purge Releases
+helm delete --purge <release-name> --tls
+
+
+```
