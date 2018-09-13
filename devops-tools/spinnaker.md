@@ -25,43 +25,43 @@ If you had a handful of Applications (with Microservices) to manage in a single 
 
 ![Spinnaker Microservices](https://s3.amazonaws.com/us-east-1-anand-files/spinnaker-architecture.jpg)
 
-**Deck**
+**[Deck](https://github.com/spinnaker/deck)**
 
   Browser-based UI
 
-**Gate**
+**[Gate](https://github.com/spinnaker/gate)**
 
   API Gateway: All API callers, including the UI, communicate with Spinnaker through Gate
 
-**Echo**
+**[Echo](https://github.com/spinnaker/echo)**
 
   Eventing Bus used for sending Notifications (like Emails, Slack, HipChat)
 
-**Orca**
+**[Orca](https://github.com/spinnaker/orca)**
 
   Orchestration Engine that handles all ad-hoc operations and Pipelines
 
-**Fiat**
+**[Fiat](https://github.com/spinnaker/fiat)**
 
   Spinnaker's Authorization Service. It is used to query a user’s access permissions for accounts, applications and service accounts.
 
-**Clouddriver**
+**[Clouddriver](https://github.com/spinnaker/clouddriver)**
 
   The arms of the Octopus (read, Spinnaker) that reaches out to the Clouds and mutates the infrastructure. It also indexes and caches all deployed resources
 
-**Igor**
+**[Igor](https://github.com/spinnaker/igor)**
 
   Integrates with build systems like Jenkins or TravisCI. Used to trigger pipelines via CI jobs. Also allows Jenkins/TravisCI stages to be used in Pipelines
 
-**Front50**
+**[Front50](https://github.com/spinnaker/front50)**
 
   Data Persistence Layer. Basically, persists Spinnaker data to the backend store
 
-**Kayenta**
+**[Kayenta](https://github.com/spinnaker/kayenta)**
 
   Canary Analysis Engine
 
-**Halyard**
+**[Halyard](https://github.com/spinnaker/halyard)**
 
   Spinnaker's Configuration Service. It manages the lifecycle of each of the above services and only interacts with these services during Spinnaker startup, updates, and rollbacks.
 
