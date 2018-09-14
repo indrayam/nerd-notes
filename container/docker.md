@@ -1,5 +1,15 @@
 # docker help
 
+### docker login
+
+```bash
+docker login
+docker login -u="<userid>" -p="..." containers.cisco.com
+gcloud auth configure-docker # one time only
+# aws ecr command prints out the docker login command that lasts for 12 hrs
+eval $(aws ecr get-login --no-include-email --region us-east-1)
+```
+
 ### Get version
 
 ```bash
@@ -10,14 +20,6 @@ docker version
 
 ```bash
 docker info
-```
-
-### docker login
-
-```bash
-docker login
-docker login -u="<userid>" -p="..." containers.cisco.com
-gcloud auth docker-configure # one time only
 ```
 
 ### docker pull
@@ -99,7 +101,11 @@ d inspect anand-ubuntu-d | jq '.[0].State.Running'
 d inspect --format='{{ .NetworkSettings.IPAddress }}' anand-ubuntu-d
 d inspect anand-ubuntu-d1 | jq '.[0].NetworkSettings.IPAddress'
 d inspect --format '{{ .Name }} {{ .State.Running }}' anand-ubuntu-d anand-ubuntu-d1
+
+# To get a list of all the containers along with their current running state
 d inspect --format '{{ .Name }} {{ .State.Running }}' $(docker container ls -q -a)
+# To get a list of all the containers along with the complete command
+d inspect --format "{{.Name}}  {{.Config.Cmd}}" $(docker ps -a -q)
 ```
 
 ### Remove all containers
