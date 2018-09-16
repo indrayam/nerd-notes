@@ -49,13 +49,38 @@ docker build -t indrayam/kubia .
 ### Tagging Images
 
 ```bash
-d tag <source-image> indrayam/<target-image>
+d tag <source-image> <target-image>
 ```
 
 ### Run Docker container with an interactive shell
 
+`docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
+
+where,
+
+- `--rm` Automatically remove the container when it exits
+- `--tty | -t` Allocate a pseudo-TTY
+- `--interactive | -i` Keep STDIN open even if not attached
+- `--detach | -d` Run container in background and print container ID
+- `--name` Assign a name to the container
+- `--publish | -p` Publish a container's port(s) to the host
+- `--volume | -v` Bind mount a volume
+- `--workdir | -w` Working directory inside the container
+
 ```bash
+docker run \
+  --rm \
+  --tty \
+  --interactive \
+  --detach \
+  --name my_container \
+  --publish 3000:3000 \
+  --volume /my_volume \
+  --workdir /app \
+  IMAGE bash
+
 docker run --name kubia -p 8080:8080 -d indrayam/kubia
+
 docker exec -it kubia /bin/bash
 ```
 

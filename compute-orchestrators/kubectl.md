@@ -1,6 +1,28 @@
 # kubectl help
 kubectl controls the Kubernetes cluster manager
 
+### kubectl run
+
+`kubectl run NAME [OPTIONS] -- [COMMAND] [args]`
+
+where,
+
+- `--rm` If true, delete resources created in this command for attached containers
+- `--tty | -t` Allocated a TTY for each container in the pod
+- `--stdin | -i` Keep stdin open on the container(s) in the pod, even if nothing is attached
+- `--image` The image name for the container to run
+- `--` Separator to run command
+- `[COMMAND] [args]` Command to run inside the container
+
+```bash
+kubectl run <name-of-the-pod> \
+    --rm \
+    -t \
+    -i \
+    --image alpine \
+    -- sh            
+```
+
 ### Interact with help...
 
 ```bash
@@ -81,5 +103,6 @@ kubectl config set-credentials ${USER}-rtp-learn --client-certificate ./${USER}.
 kubectl config set-context ${USER}@k8s-on-p3-rtp-learn --cluster=k8s-on-p3-rtp-learn --user=${USER}-rtp-learn
 kubectl create namespace ${USER}
 kubectl create rolebinding ${USER}-admin --clusterrole admin --group ${GROUP} --namespace ${USER}
+#kubectl create rolebinding tiller-admin --clusterrole admin --group CoDE --namespace tiller-code
 }
 ```
