@@ -10,6 +10,48 @@ gcloud auth configure-docker # one time only
 eval $(aws ecr get-login --no-include-email --region us-east-1)
 ```
 
+### Run Docker container with an interactive shell
+
+`docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
+
+where,
+
+- `--rm` Automatically remove the container when it exits
+- `-t | --tty` Allocate a pseudo-TTY
+- `-i | --interactive` Keep STDIN open even if not attached
+- `-d | --detach` Run container in background and print container ID
+- `--name` Assign a name to the container
+- `-p | --publish` Publish a container's port(s) to the host
+- `-v | --volume` Bind mount a volume
+- `-w | --workdir` Working directory inside the container
+- `--env` Define environment variables
+- `--link` Add link to another container. Format: other-container-name-or-id:alias
+
+
+```bash
+docker run \
+  --rm \
+  --tty \
+  --interactive \
+  --detach \
+  --name my_container \
+  --publish 3000:3000 \
+  --volume /my_volume \
+  --workdir /app \
+  IMAGE bash
+
+docker run -i -t --rm --name ubuntu ubuntu bash
+docker run -i -t --rm --name alpine alpine ash
+
+docker run -d --name nginx -p 8080:80 nginx
+docker run -d --name httpd -p 8081:80 httpd
+docker run -d --name redis -p 6379:6379 redis
+docker run -d --name mongo -p 27017:27017 mongo
+docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=test1234 postgres
+docker run -d --name mariadb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=test1234 mariadb
+
+```
+
 ### Get version
 
 ```bash
@@ -50,38 +92,6 @@ docker build -t indrayam/kubia .
 
 ```bash
 d tag <source-image> <target-image>
-```
-
-### Run Docker container with an interactive shell
-
-`docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`
-
-where,
-
-- `--rm` Automatically remove the container when it exits
-- `--tty | -t` Allocate a pseudo-TTY
-- `--interactive | -i` Keep STDIN open even if not attached
-- `--detach | -d` Run container in background and print container ID
-- `--name` Assign a name to the container
-- `--publish | -p` Publish a container's port(s) to the host
-- `--volume | -v` Bind mount a volume
-- `--workdir | -w` Working directory inside the container
-
-```bash
-docker run \
-  --rm \
-  --tty \
-  --interactive \
-  --detach \
-  --name my_container \
-  --publish 3000:3000 \
-  --volume /my_volume \
-  --workdir /app \
-  IMAGE bash
-
-docker run --name kubia -p 8080:8080 -d indrayam/kubia
-
-docker exec -it kubia /bin/bash
 ```
 
 ### docker push

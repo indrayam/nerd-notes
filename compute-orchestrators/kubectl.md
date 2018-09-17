@@ -11,16 +11,36 @@ where,
 - `--tty | -t` Allocated a TTY for each container in the pod
 - `--stdin | -i` Keep stdin open on the container(s) in the pod, even if nothing is attached
 - `--image` The image name for the container to run
+- `--env` List of environment variables 
 - `--` Separator to run command
 - `[COMMAND] [args]` Command to run inside the container
 
 ```bash
-kubectl run <name-of-the-pod> \
-    --rm \
-    -t \
-    -i \
-    --image alpine \
-    -- sh            
+# Spin up an instance
+kubectl run test-$RANDOM --rm -i -t --image alpine -- ash
+kubectl run test-$RANDOM --rm -i -t --image ubuntu:16.04 -- bash
+kubectl run test-$RANDOM --rm -i -t --image indrayam/debug-container:latest -- bash
+
+kubectl run httpd --image httpd --replicas 3
+kubectl expose deploy httpd --port 8080 --target-port 80 --type NodePort
+
+kubectl run nginx --image nginx --replicas 3
+kubectl expose deploy nginx --port 8081 --target-port 80 --type NodePort
+
+kubectl run mongo --image mongo
+kubectl expose deploy mongo --port 27017 --type NodePort
+
+kubectl run redis --image redis 
+kubectl expose deploy redis --port 6379 --type NodePort
+
+kubectl run postgres --image postgres --env POSTGRES_PASSWORD=test1234
+kubectl expose deploy postgres --port 5432 --type NodePort
+
+kubectl run mariadb --image mariadb --env MYSQL_ROOT_PASSWORD=test1234
+kubectl expose deploy mariadb --port 3306 --type NodePort
+
+
+
 ```
 
 ### Interact with help...
