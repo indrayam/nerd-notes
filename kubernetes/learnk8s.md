@@ -50,3 +50,38 @@ open http://localhost:8011/api/v1/namespaces/kube-system/services/https:kubernet
 ```bash
 k get secret spinnaker-gate-tls -o jsonpath='{.data.tls\.crt}' | base64 --decode > ca.crt
 ```
+
+__Prerequisites for using RBAC on GKE__
+
+You must grant your user the ability to create roles in Kubernetes by running the following command. [USER_ACCOUNT] is the user's email address:
+
+```bash
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user "anand.sharma@gmail.com"
+```
+
+__How do you grant kubectl access to a Service Account__
+
+```bash
+# Switch to the right namespace where you want to create a Service Account. For example: httpbin
+# Create a Service account
+kubectl create sa codedeveloper
+
+# Map the appropriate role in the appropriate namespace(s)
+kubectl create rolebinding httpbin-admin --clusterrole admin --serviceaccount httpbin:codedeveloper --namespace httpbin
+kubectl create rolebinding code-demo-apps-admin --clusterrole admin --serviceaccount httpbin:codedeveloper --namespace code-demo-apps
+
+# Check if it all looks good
+kubectl get rolebinding httpbin-admin -o yaml
+
+# See the base64 encoded token value
+kubectl get secret codedeveloper-token-vx55v --namespace httpbin -o yaml
+
+# [OPTIONAL] Use k8sec to see the base64 decoded value, if you have it installed
+k8sec list
+
+# Set .kube/config settings
+kubectl config set-credentials codedeveloper-sa --token=$(kubectl get secret codedeveloper-token-vx55v -o jsonpath={.data.token} | base64 -d)
+kubectl config set-context codedeveloper-ctx --user=codedeveloper-sa
+
+# Open .kube/config and copy the cluster value into the context
+```

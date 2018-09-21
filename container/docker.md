@@ -27,7 +27,6 @@ where,
 - `--env` Define environment variables
 - `--link` Add link to another container. Format: other-container-name-or-id:alias
 
-
 ```bash
 docker run \
   --rm \
@@ -86,6 +85,7 @@ docker images ls -a
 ```bash
 docker build -t kubia .
 docker build -t indrayam/kubia .
+docker build --no-cache -t kubia .
 ```
 
 ### Tagging Images
@@ -105,13 +105,9 @@ docker push containers.cisco.com/anasharm/<image-name>:<tag>
 ### Get status of containers
 
 ```bash
-docker container ls 
 docker ps
-docker container ls -a
 docker ps -a
-docker container ls -l (Show the last container that was run)
 docker ps -l (Show the last container that was run)
-docker container ls -n 10 (Shows the last 10 containers, running or stopped)
 docker ps -n 10 (Shows the last 10 containers, running or stopped)
 ```
 
@@ -124,23 +120,28 @@ docker start <container name or uuid>
 ### Stop a running container
 
 ```bash
+# Graceful shutdown of a container
 docker stop <container name or uuid>
+
+# Kill the container
+docker kill <container name or uuid>
+```
+
+### Viewing History
+
+The history command lists all the layers composing an image. For each layer, it shows its creation time, size, and creation command. 
+
+```bash
+docker history <image-name>
 ```
 
 ### Finding out more about our container
 
 ```bash
 docker inspect <container name or uuid>
-d inspect --format='{{ .State.Running }}' anand-ubuntu-d
-d inspect anand-ubuntu-d | jq '.[0].State.Running'
-d inspect --format='{{ .NetworkSettings.IPAddress }}' anand-ubuntu-d
-d inspect anand-ubuntu-d1 | jq '.[0].NetworkSettings.IPAddress'
-d inspect --format '{{ .Name }} {{ .State.Running }}' anand-ubuntu-d anand-ubuntu-d1
-
-# To get a list of all the containers along with their current running state
-d inspect --format '{{ .Name }} {{ .State.Running }}' $(docker container ls -q -a)
-# To get a list of all the containers along with the complete command
-d inspect --format "{{.Name}}  {{.Config.Cmd}}" $(docker ps -a -q)
+d inspect --format='{{ .State.Running }}' <container name or uuid>
+d inspect --format='{{ .NetworkSettings.IPAddress }}' <container name or uuid>
+d inspect --format='{{.Config.ExposedPorts}}' <container name or uuid>
 ```
 
 ### Remove all containers
@@ -188,7 +189,15 @@ docker stats <container name or uuid> <container name or uuid>...
 ### Docker network
 
 ```bash
-docker network create --driver bridge <network-name>
+docker network ls
+docker network create dev
+docker network rm dev
+```
+
+Docker for Mac uses Hyperkit to run a xhyve VM for the Docker daemon. The VM uses VPNKit for exposing container ports to localhost. I was able to use the following command to access the xhyve VM:
+
+```bash
+screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
 ```
 
 ### Sprucing up debian stretch based nginx image 
@@ -204,3 +213,56 @@ apt-get update
 apt-get install vim net-tools procps iputils-ping dnsutils iproute2 iputils-tracepath
 
 ```
+
+### .dockerignore
+
+Before the docker CLI sends the context to the docker daemon, it looks for a file named .dockerignore in the root directory of the context. If this file exists, the CLI modifies the context to exclude files and directories that match patterns in it. This helps to avoid unnecessarily sending large or sensitive files and directories to the daemon and potentially adding them to images using ADD or COPY.
+
+[Reference](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+
+### Dockerfile 
+
+```bash
+FROM alpine
+
+# Who is the maintainer of this Dockerfile
+LABEL maintainer="Anand Sharma (anand.sharma@gmail.com)"
+
+# Any environment variables
+ENV ECHO_RESPONSE Hello
+
+# Setup the image for your purposes
+RUN ...
+
+# What is your work directory
+WORKDIR
+
+# Use COPY if you want to copy local files/folders to the image 
+COPY
+
+# Use ADD if you want to copy something using a URL in which case use ADD
+ADD
+
+# Expose Ports
+EXPOSE 
+
+# CMD (Shell or Exec form). It can be overwritten by command-line arguments to docker run
+CMD ["nginx", "-g", "daemon off;"]
+# CMD a b c (Shell form, not prefered)
+
+# ENTRYPOINT (Shell or Exec form). Allows you to run a container as an executable
+ENTRYPOINT ["top", "-b"]
+# ENTRYPOINT a b c (Shell form, not prefered)
+# Use command to pass additional paramters, that can be overridden by command-line params
+CMD []
+```
+
+### Find out what port is a container mapped to
+
+```bash
+docker port <container-name-or-id> 80
+```
+
+
+
+

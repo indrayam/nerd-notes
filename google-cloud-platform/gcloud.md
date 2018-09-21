@@ -1,19 +1,4 @@
-## gcloud help
-NAME
-    gcloud - manage Google Cloud Platform resources and developer workflow
-
-SYNOPSIS
-    gcloud GROUP | COMMAND [--account=ACCOUNT] [--configuration=CONFIGURATION]
-        [--flatten=[KEY,...]] [--format=FORMAT] [--help] [--project=PROJECT_ID]
-        [--quiet, -q] [--verbosity=VERBOSITY; default="warning"]
-        [--version, -v] [-h] [--log-http] [--trace-token=TRACE_TOKEN]
-        [--no-user-output-enabled]
-
-DESCRIPTION
-    The gcloud CLI manages authentication, local configuration, developer
-    workflow, and interactions with the Google Cloud Platform APIs.
-...
-...
+# gcloud help
 
 ### To get authenticated
 
@@ -294,4 +279,11 @@ gcloud auth configure-docker
 
 ```bash
 gcloud container images list --repository=us.gcr.io/evident-wind-163400
+```
+
+### Prerequisites for using RBAC
+You must grant your user the ability to create roles in Kubernetes by running the following command. [USER_ACCOUNT] is the user's email address:
+
+```bash
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user "anand.sharma@gmail.com"
 ```

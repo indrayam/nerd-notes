@@ -661,17 +661,74 @@ I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDA
 
 ### Add Fiat Service Accounts
 
-Fiat Service Accounts enable the ability for automatically triggered pipelines to modify resources in protected accounts or applications. Here's how to create it, since we cannot use `hal` to perform CRUD operations
+Spinnaker's Fiat offers Authorization functionality.
+
+There are three resources in Spinnaker that can be given permissions:
+
+- Spinnaker Accounts
+- Spinnaker Applications
+- Spinnaker Pipelines
+
+A single Spinnaker Account can contain multiple applications. Similarly, a single Spinnaker Application can involve multiple Spinnaker Accounts. Put simple, they have a M:N relationship with each other. Also, one Spinnaker Application can contain one or many Pipelines. However, one Pipeline can only belong to a single Spinnaker Application.
+
+**Spinnaker Accounts:**
+
+There are two types of access restrictions to a Spinnaker Account, `READ` and `WRITE`. Users that log into Spinnaker must belong to groups (LDAP or otherwise) that is assigned one `READ` permission to the account to view the cloud resources tied to the account. If they would like to make changes to these cloud resources, then the user must belong to a group that has been assigned `WRITE` permission to the Spinnaker account
+
+**Spinnaker Applications**
+
+Application permissions are pretty straightforward. If a logged in user belongs to group(s) that have been given READ permissions, they will be able to see the Spinnaker Application under "Applications" in Deck UI, but will not be able to modify the Application attributes. Not surprisingly, if the logged in user belongs to group(s) that have WRITE permissions, they will be able to modify the Application attributes.
+
+Note, having Application-level `WRITE` permission does not mean they can "deploy" code to the Spinnaker account(s). It also does not mean they can modify the pipelines associated with the Application. _Note: Need confirmation_
+
+**Unrestricted Spinnaker Accounts and Applications**
+
+It’s important to understand what may happen if you leave either an account or application without any configured permissions.
+
+- If an account is unrestricted, any user with access to Spinnaker can deploy a new application to that account.
+- If an application is unrestricted, any user with access to Spinnaker can deploy that application into a different account (_Note: Need to undrestand_). They may also be able to see basic information like instance names and counts within server groups.
+
+
+**Spinnaker Pipelines**
+
+When pipelines run against accounts and applications that are protected, it is necessary to configure them with enough permissions to access those protected resources. Fiat Service Accounts enable the ability for automatically triggered pipelines to modify resources in protected accounts or applications. 
+
+Service accounts are persistent and configuration merely consists of giving it a name and a set of roles. **Caution:** While it seems like you can create arbitrarily named FIAT Service Accounts that have nothing to do with LDAP, you will eventually get errors when you run the sync command (500) and authorize commands (404), and it does impact the overall functionality around the RunAsUser behavior despite the fact that the dropdown does show the entries.
+
+The Roles (translation: the LDAP groups that this Service Account is a member of) given to a Service Account determines who has access to use it. In order to prevent a privilege escalation vulnerability, only users with _every_ role the service account has may use it. Translation: Only users who have all of the specified roles assigned to the Service Account can edit or execute the pipeline!!
+
+For example, if a logged in user `sujmuthu` has roles `code-sujmuthu`, `dftcd-apps-developer` and `dftcd-apps-admin` and service account `dft-ds.gen` has role `code-sujmuthu`, then the logged in user `sujmuthu` has access to assign `dft-ds.gen` as the "Run As User" service account to any Pipeline that she has access to. However, she can only modify the pipeline if `sujmuthu` has access to the service account `dft-ds.gen` (she does) as well as the service account `dft-ds.gen` has write access to the Spinnaker Application to which this Pipeline belongs. Since `dft-ds.gen` only has role `code-sujmuthu`, it means the Spinnaker Application must give write permissions to the group `code-sujmuthu` in order for Sujatha to modify the Pipeline.
+
+Now, imagine if the service account logged in user `sujmuthu` has roles `code-sujmuthu`, `dftcd-apps-developer` and `dftcd-apps-admin` and service account `cd-spinnaker.gen` has roles `code-sujmuthu` and `code-anasharm` (a role that `sujmuthu` does not belong to), then the user does not have access to the service account `cd-spinnaker.gen`. So, if `sujmuthu` has write access to a Spinnaker Application which has a Pipeline that will be "Run as" `cd-spinnaker.gen`, `sujmuthu` will not be able to make any changes to this Pipeline despite the fact that she has write access to the Spinnaker Application.
+
+Bottom line, let's say there is an application called _ABC_. You decide to create an App Management and App Deployment interface for this application using Spinnaker. When you create a Spinnaker Application for _ABC_, you should create two LDAP groups: a small and mighty group that consists of application operators (_AppOps_) and another group consisting of all the application developers (_AppDevs_). 
+
+The Spinnaker Account tied to the Application should give write privileges to group _AppOps_ and read to group _AppDevs_. 
+
+The Spinnaker Application tied to the Application _ABC_ should give write privileges to group _AppOps_ and read to group _AppDevs_. 
+
+The Service Account created to run the Pipelines in the Application _ABC_ should be a member of ONLY _AppOps_ group.
+
+So, Users belonging to _AppOps_ group:
+
+- Can deploy the binaries of _ABC_ application, since they have write access to the Spinnaker Account and they have execute access to the Service Account tied to the Pipelines
+- Can access and modify application attributes of the Spinnaker Application created for _ABC_
+- Can modify the Pipelines
+
+Users belonging to _AppDev_ group can:
+
+- Cannot deploy the binaries of _ABC_ application, since they do not have write access to the Spinnaker Account and they do not have ANY access to the Service Account tied to the Pipelines
+- Can access, but not modify, the Spinnaker Application created for _ABC_
+- Cannot modify the Pipeline
+
+Here's how to create it, since we cannot use `hal` to perform CRUD operations
 
 ```bash
 
 # Make sure your current kubernetes context points to the cluster and namespace where Spinnaker runs
 # You only need to run this if and only if Halyard is running outside of the Kubernetes cluster
-kubectl run -i --rm --restart=Never dummy --image=dockerqa/curl:ubuntu-xenial --command -- sleep 9999999
-
-kubectl exec -it dummy -- bash
-apt-get update
-apt-get install iputils-ping dnsutils jq vim
+kubectl run -i --rm --restart=Never debugpod --image=indrayam/debug-container:latest --command -- sleep 9999999
+kubectl exec -it debugpod -- bash
 
 # Make sure the service discovery works
 nslookup spin-front50
@@ -689,8 +746,9 @@ DECK=http://spin-deck.spinnaker:9000
 GATE=http://spin-gate.spinnaker:8084
 
 chmod +x sa.sh
-source test.sh
+source sa.sh
 
+# Create or update Service Accounts using the following API call
 curl -X POST \
   -H "Content-type: application/json" \
   -d '{ "name": "cd-spinnaker.gen", "memberOf": ["spinnaker-admin"] }' \
@@ -709,6 +767,7 @@ curl -s $FIAT/authorize/<sa-name>
 curl -X DELETE -H "Content-type: application/json"  http://spin-front50:8080/serviceAccounts/<sa-name>
 
 ```
+
 
 
 
