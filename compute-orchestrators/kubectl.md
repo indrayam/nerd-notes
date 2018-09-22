@@ -116,11 +116,12 @@ kubectl delete -f filename.yml # -f filename1.yml
 {
 USER="anand"
 GROUP="CoDE"
+CLUSTER="play"
 openssl genrsa -out ${USER}.key 2048 # Get Key
 openssl req -new -key ${USER}.key -out ${USER}.csr -subj "/CN=${USER}/O=${GROUP}" # Create a CSR
-openssl x509 -req -in ${USER}.csr -CA ./play.crt -CAkey ./play.key -CAcreateserial -out ${USER}.crt # Generate Certificate
-kubectl config set-credentials ${USER}-rtp-learn --client-certificate ./${USER}.crt --client-key ./${USER}.key --embed-certs=true
-kubectl config set-context ${USER}@k8s-on-p3-rtp-learn --cluster=k8s-on-p3-rtp-learn --user=${USER}-rtp-learn
+openssl x509 -req -in ${USER}.csr -CA ${CLUSTER}.crt -CAkey ${CLUSTER}.key -CAcreateserial -out ${USER}.crt # Generate Certificate
+kubectl config set-credentials ${USER}-rtp-${CLUSTER} --client-certificate ${USER}.crt --client-key ${USER}.key --embed-certs=true
+kubectl config set-context ${USER}@k8s-on-p3-rtp-${CLUSTER} --cluster=k8s-on-p3-rtp-${CLUSTER} --user=${USER}-rtp-${CLUSTER}
 kubectl create namespace ${USER}
 kubectl create rolebinding ${USER}-admin --clusterrole admin --group ${GROUP} --namespace ${USER}
 #kubectl create rolebinding tiller-admin --clusterrole admin --group CoDE --namespace tiller-code

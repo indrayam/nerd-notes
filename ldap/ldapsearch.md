@@ -22,6 +22,9 @@ ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Employees,OU=Cisco Users, DC=
 # Search for a CEC or Generic User
 ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '<password>' '(&(objectClass=user)(|(distinguishedName=CN='visardan', OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN='visardan', OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))'
 
+# Search for a CEC or Generic User
+ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(&(objectClass=user)(|(distinguishedName=CN='spinnaker-demo1.gen', OU=Generics, OU=Cisco Users, DC=cisco, DC=com)(distinguishedName=CN='spinnaker-demo1.gen', OU=Employees, OU=Cisco Users, DC=cisco, DC=com)))'
+
 # Return pre-selected list of attributes
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'CN=cd-spinnaker.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com' -w '<password>' '(sAMAccountName=visardan)' cn mail
 
@@ -30,7 +33,12 @@ ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Employees,OU=Cisco Users, DC=
 
 # Find all users under OU=Employees, OU=Cisco Users, DC=Cisco, DC=Com who are included in Group of Groups
 ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees, OU=Cisco Users, DC=cisco, DC=com" -D 'CN=cd-spinnaker.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com' -w '<password>' '(&(objectClass=user)(memberof:1.2.840.113556.1.4.1941:=CN=dft-us-sdaas-users,OU=Standard,OU=Cisco Groups,DC=cisco,DC=com))' -z 1000 sAMAccountName
+
+# Find all the details about a Group
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(cn=code-anasharm)'
+
 ```
+
 
 If you are using LDAPS, create a ldaprc file in the same directory where you are running the command with this content:
 
@@ -54,7 +62,7 @@ ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=
 
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=phwhitin,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
 
-ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w 'dfT!1234DsPr0duct1oN' '(member=CN=jalagars,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=jalagars,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
 ```
 
 ### Configure ActiveDirectory settings
