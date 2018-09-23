@@ -659,7 +659,9 @@ auth:
 **Note:**
 I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDAP over TLS) connection failed. [Reference 1](https://community.spinnaker.io/t/ldap-authentication-ldaps-protocol/386), [Reference 2](https://langui.sh/2009/03/14/checking-a-remote-certificate-chain-with-openssl/)
 
-### Add Fiat Service Accounts
+### Spinnaker Authorization Service (Powered By Fiat)
+
+![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-1.jpg)
 
 Spinnaker's Fiat offers Authorization functionality.
 
