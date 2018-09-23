@@ -601,7 +601,7 @@ spring:
 2. Copy the file into ~/.hal/default/profiles/ folder
 3. Run: `hal deploy apply --service-names echo`
 
-### Install Fiat LDAP Authorization
+### Spinnaker Authentication
 
 Helpful command: `hal config security authz ldap edit --help`
 
@@ -659,7 +659,7 @@ auth:
 **Note:**
 I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDAP over TLS) connection failed. [Reference 1](https://community.spinnaker.io/t/ldap-authentication-ldaps-protocol/386), [Reference 2](https://langui.sh/2009/03/14/checking-a-remote-certificate-chain-with-openssl/)
 
-### Spinnaker Authorization Service (Powered By Fiat)
+### Spinnaker Authorization Service
 
 ![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-2.png)
 
