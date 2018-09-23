@@ -661,7 +661,7 @@ I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDA
 
 ### Spinnaker Authorization Service (Powered By Fiat)
 
-![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-1.jpg)
+![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-2.jpg)
 
 Spinnaker's Fiat offers Authorization functionality.
 
@@ -677,7 +677,7 @@ A single Spinnaker Account can contain multiple applications. Similarly, a singl
 
 There are two types of access restrictions to a Spinnaker Account, `READ` and `WRITE`. Users that log into Spinnaker must belong to groups (LDAP or otherwise) that is assigned one `READ` permission to the account to view the cloud resources tied to the account. If they would like to make changes to these cloud resources, then the user must belong to a group that has been assigned `WRITE` permission to the Spinnaker account
 
-_BOTTOMLINE:_
+Bottom line...
 
 Giving an LDAP group WRITE privileges to a Spinnaker account essentially means that users belonging to that group can deploy code to that account. You want to be very careful about giving this privilege
 
@@ -685,9 +685,9 @@ Giving an LDAP group WRITE privileges to a Spinnaker account essentially means t
 
 Application permissions are pretty straightforward. If a logged in user belongs to group(s) that have been given READ permissions, they will be able to see the Spinnaker Application under "Applications" in Deck UI, but will not be able to modify the Application attributes. Not surprisingly, if the logged in user belongs to group(s) that have WRITE permissions, they will be able to modify the Application attributes.
 
-Note, having Application-level `WRITE` permission does not mean they can "deploy" code to the Spinnaker account(s). It also does not mean they can modify the pipelines associated with the Application. _Note: Need confirmation_
+Note, having Application-level `WRITE` permission does not mean they can "deploy" code to the Spinnaker account(s). It also does not mean they can modify the pipelines associated with the Application. 
 
-_BOTTOMLINE:_
+Bottom line...
 
 Giving an LDAP group WRITE privileges to a Spinnaker Application essentially means that users belonging to that group can modify "all" Application attributes, including permissions. However, 
 - These users cannot magically escalate their permissions and gain the ability to deploy or edit Application resources assuming they do not have WRITE privileges to the Spinnaker Account(s) configured as part of the Spinnaker Application
