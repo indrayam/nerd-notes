@@ -661,7 +661,7 @@ I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDA
 
 ### Spinnaker Authorization Service (Powered By Fiat)
 
-![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-2.jpg)
+![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-2.png)
 
 Spinnaker's Fiat offers Authorization functionality.
 
