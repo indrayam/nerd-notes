@@ -478,7 +478,7 @@ hal config provider kubernetes account add cae-prd-rcdn-hcn --provider-version v
 hal config provider docker-registry account add ech-hcn --address containers.cisco.com \
     --repositories "codeplayground/hello-udeploy-cloud-native-web-app" \
     --username "anasharm"  \
-    --password "KWQOXLFdXR1gtZk72GH2RRqqVp+O+CHm/VxmU7YK3pA8ECntB8pfKe6yFk2cdKyR"
+    --password "<password>"
 ```
 
 ### Authentication UI
@@ -500,7 +500,7 @@ hal config provider docker-registry account add ech-hcn --address containers.cis
 {
 hal config ci jenkins enable
 
-PASSWORD='Maltose$$.123'
+PASSWORD='<password>'
 echo $PASSWORD | hal config ci jenkins master add my-jenkins-master \
     --address https://ci6.cisco.com \
     --username jenkins-ci.gen \
@@ -521,7 +521,7 @@ Not sure if this worked though. Not at the UI level
 ```bash
 {
 USERNAME='automation'
-PASSWORD='aut0mati0n'
+PASSWORD='<password>'
 USERNAME_PASSWORD_FILE='/home/ubuntu/.bitbucket-user'
 echo ${USERNAME}:${PASSWORD} > $USERNAME_PASSWORD_FILE
 GITSCM_HTTP_ARTIFACT_ACCOUNT_NAME=automation-gitscm
@@ -536,7 +536,7 @@ hal config artifact http account add ${GITSCM_HTTP_ARTIFACT_ACCOUNT_NAME} \
 
 ```bash
 {
-TOKEN='2193da351555ffde81fc563a5546f2ebf7b2e3e3'
+TOKEN='<password>'
 TOKEN_FILE='/home/ubuntu/.github-token'
 echo $TOKEN > $TOKEN_FILE
 GITHUB_ARTIFACT_ACCOUNT_NAME=indrayam-github
@@ -601,7 +601,7 @@ spring:
 2. Copy the file into ~/.hal/default/profiles/ folder
 3. Run: `hal deploy apply --service-names echo`
 
-### Spinnaker Authentication
+### Spinnaker Authorization
 
 Helpful command: `hal config security authz ldap edit --help`
 
@@ -659,7 +659,7 @@ auth:
 **Note:**
 I cannot make ldaps work in a Kubernetes environment. Keeps giving me LDAPS (LDAP over TLS) connection failed. [Reference 1](https://community.spinnaker.io/t/ldap-authentication-ldaps-protocol/386), [Reference 2](https://langui.sh/2009/03/14/checking-a-remote-certificate-chain-with-openssl/)
 
-### Spinnaker Authorization Service
+### Spinnaker RBAC Model
 
 ![Spinnaker Fiat Service](https://s3.amazonaws.com/us-east-1-anand-files/fiat-visual-version-2.png)
 
@@ -775,7 +775,7 @@ curl -X POST \
 
 curl -X POST \
   -H "Content-type: application/json" \
-  -d '{ "name": "spinnaker-demo2.gen", "memberOf": ["code-sujmuthu"] }' \
+  -d '{ "name": "spinnaker-demo2.gen", "memberOf": ["code-anasharm", "code-sujmuthu"] }' \
   $FRONT50/serviceAccounts | jq .
 
 # See the Service Account(s)
