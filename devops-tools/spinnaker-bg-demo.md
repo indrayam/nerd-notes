@@ -51,7 +51,7 @@ watch -n 2 kubectl --context=cae-prd-rcdn-hcn get svc -l app=hcnd-web-app-bg -o 
 4. Make the following changes:
     - Color in `cover.css` to green (assuming blue is running)
     - Change `values.yml` file
-    - Change the "Hola" text in `index.html` to show a difference
+    - [OPTIONAL] Change the "Hola" text in `index.html` to show a difference
 5. Go to the 3rd tab in iTerm2
 6. Run `make`
 7. Git commit (after adding to Stage)
