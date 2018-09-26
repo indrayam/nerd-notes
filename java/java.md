@@ -31,7 +31,8 @@ Use IP address of the host as opposed to DNS name
 
 followed by
 
-`sudo $JAVA_HOME/bin/keytool -import -alias <server_name> -keystore $JAVA_HOME/jre/lib/security/cacerts -file public.crt`
+`sudo $JAVA_HOME/bin/keytool -import -alias spinnaker-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file deck.crt`
+`sudo $JAVA_HOME/bin/keytool -import -alias spinnakerapi-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file gate.crt`
 
 Default Password: `changeit`
 
