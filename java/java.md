@@ -31,7 +31,7 @@ Use IP address of the host as opposed to DNS name
 
 followed by
 
-`$JAVA_HOME/bin/keytool -import -alias <server_name> -keystore $JAVA_HOME/jre/lib/security/cacerts -file public.crt`
+`sudo $JAVA_HOME/bin/keytool -import -alias <server_name> -keystore $JAVA_HOME/jre/lib/security/cacerts -file public.crt`
 
 Default Password: `changeit`
 
