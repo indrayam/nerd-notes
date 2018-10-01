@@ -17,9 +17,12 @@ where,
 
 ```bash
 # Spin up an instance
-kubectl run test-$RANDOM --rm -i -t --image alpine -- ash
-kubectl run test-$RANDOM --rm -i -t --image ubuntu:16.04 -- bash
-kubectl run test-$RANDOM --rm -i -t --image indrayam/debug-container:latest -- bash
+kubectl run test-$RANDOM --rm -i -t --restart=Never --image alpine -- ash
+kubectl run test-$RANDOM --rm -i -t --restart=Never --image ubuntu:16.04 -- bash
+kubectl run test-$RANDOM --rm -i -t --restart=Never --image indrayam/debug-container:latest -- bash
+k run debugpod -i -t --restart=Never --image indrayam/debug-container:0.1 -- /bin/bash
+k run debugpod -i -t --restart=Never --image-pull-policy=Always --image indrayam/debug-container:all -- sleep 31536000
+k run debugpod -i -t --restart=Never --image-pull-policy=Always --image containers.cisco.com/codeplayground/debug-container-openshift:0.1 -- sleep 31536000
 
 kubectl run httpd --image httpd --replicas 3
 kubectl expose deploy httpd --port 8080 --target-port 80 --type NodePort
@@ -122,7 +125,7 @@ kubectl create rolebinding ${USER}-admin --clusterrole admin --group ${GROUP} --
 }
 ```
 
-# Create the namespace, rolebinding for the user and generate a kube/config configuration for the user
+### Create the namespace, rolebinding for the user and generate a kube/config configuration for the user
 
 ```bash
 {
@@ -140,3 +143,25 @@ kubectl create rolebinding ${USER}-admin --clusterrole admin --group ${GROUP} --
 }
 
 ```
+
+### Port Forwarding
+
+```bash
+# The first port is the localhost port you want to forward on. The second port is the container port
+k port-forward nginx-web-75b97d786d-6mzjx 8080:80
+```
+
+Starting in kubectl 1.10 and above, you can even do this:
+
+```bash
+k port-forward deploy/<deploy-name> <localPort:containerPort>
+k port-forward svc/<deploy-name> <localPort:containerPort>
+k port-forward rs/<deploy-name> <localPort:containerPort>
+```
+
+### Sort kubectl responses by certain column
+
+```bash
+k get secrets -o wide --sort-by=.metadata.creationTimestamp
+```
+

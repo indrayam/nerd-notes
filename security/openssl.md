@@ -213,13 +213,17 @@ Use this online converter until you figure out how to do it on the command line.
 #### Encrypt a file 
 
 ```bash
-openssl enc -aes-256-cbc -e -in linux-bootstrap.tar.gz -out linux-bootstrap.tar.gz.enc
+openssl aes-256-cbc -e -in linux-bootstrap.tar.gz -out linux-bootstrap.tar.gz.enc
+# If using OpenSSL 1.1.1, use the following...
+openssl aes-256-cbc -pbkdf2 -e -in bash-bootstrap.tar.gz -out bash-bootstrap.tar.gz.enc
 ```
 
 #### Decrypt an encrypted file
 
 ```bash
 openssl aes-256-cbc -d -in linux-bootstrap.tar.gz.enc -out linux-bootstrap.tar.gz
+# If using OpenSSL 1.1.1, use the following...
+openssl aes-256-cbc -pbkdf2 -d -in bash-bootstrap.tar.gz.enc -out bash-bootstrap.tar.gz
 ```
 
 ![Stackoverflow Snippet 2](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/openssl-footer.png)
