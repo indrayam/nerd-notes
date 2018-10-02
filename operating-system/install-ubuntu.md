@@ -295,7 +295,7 @@ kotlinc-jvm <Hit Return>
 ```bash
 git clone https://github.com/udhos/update-golang
 cd update-golang
-sudo RELEASE=1.10 ./update-golang.sh
+sudo RELEASE=1.11 ./update-golang.sh
 #Update ~/.zshrc and add /usr/local/go/bin in $PATH (if not already done)
 ```
 

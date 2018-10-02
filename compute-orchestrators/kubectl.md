@@ -240,3 +240,92 @@ spec:
   imagePullSecrets:
     - name: <secret-name> 
 ```
+
+### Take a peek inside etcd
+
+As we all know, all Kubernetes resources are stored inside `etcd`. Can we see it? Turns out, you actually can. I used the open source tool [auger](https://github.com/jpbetz/auger) to make this happen.
+
+**Pre-requisites:**
+
+1. You have a Kubernetes cluster up and running. These steps assume that the cluster was installed using `kubeadm`
+2. All the commands are being run directly on the VM where the `etcd` instance of your cluster is running
+3. The VM is running a Ubuntu 16.04 (It might work on other flavors of Linux)
+4. `Go` is installed on your VM
+5. Since `auger` is a Go tool, make sure `GOPATH` is set to `~/workspace/go-apps`. `PATH` includes `$GOPATH/bin`
+
+
+**Step 1: Install auger:**
+
+1. `cd ~/`
+2. `git clone https://github.com/jpbetz/auger workspace/go-apps/src/github.com/kubernetes-incubator/auger`
+3. Since I did not have [glide](https://github.com/Masterminds/glide) installed, I installed it by running `curl https://glide.sh/get | sh`. I know, I know. Not the smartest idea.
+4. `cd workspace/go-apps/src/github.com/kubernetes-incubator/auger`
+5. `glide install -v`
+6. `cd ~/`
+7. `go install -v github.com/kubernetes-incubator/auger`
+8. `auger -h`
+
+
+**Step 2: Install and configure etcdctl:**
+
+Once auger is up and running, you need to make sure you have etcdctl installed as well [Source: etcd](https://github.com/etcd-io/etcd/releases):
+
+```bash
+ETCD_VER=v3.3.9
+
+# choose either URL
+GOOGLE_URL=https://storage.googleapis.com/etcd
+GITHUB_URL=https://github.com/coreos/etcd/releases/download
+DOWNLOAD_URL=${GOOGLE_URL}
+
+rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
+rm -rf /tmp/etcd-download-test && mkdir -p /tmp/etcd-download-test
+
+curl -L ${DOWNLOAD_URL}/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
+tar xzvf /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz -C /tmp/etcd-download-test --strip-components=1
+rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
+
+ETCDCTL_API=3 /tmp/etcd-download-test/etcdctl version
+sudo mv /tmp/etcd-download-test/etcdctl /usr/local/bin
+```
+
+Assuming you have installed Kubernetes using `kubeadm`, the command to test `etcdctl` will look something like this:
+
+```bash
+sudo ETCDCTL_API=3 etcdctl member list \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+```
+
+Tweak the above command if the location of the `etcd` cert and the Kubernetes API server cert and key are in different location on your VM. If the above command is successful, you've successfully installed and configured `etcdctl` to talk to your Kubernetes `etcd` instance
+
+**Step 3: Take a peek inside your Kubernetes etcd:**
+
+1. `kubectl run web --image nginx --replicas 1`
+2. `kubectl get pods`
+
+Make a note of the Pod name that was created by Step 1
+
+3. Run the following command without using `auger`:
+
+```bash
+sudo ETCDCTL_API=3 etcdctl get /registry/pods/default/web-757b65ffcd-7m27g \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+```
+
+You should see funny text and binary dump on your terminal. Now run the same command, but pipe the output to `auger`:
+
+```bash
+sudo ETCDCTL_API=3 etcdctl get /registry/pods/spinnaker/spin-fiat-757b65ffcd-7m27g \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key | auger decode
+```
+
+Viola!
