@@ -165,3 +165,78 @@ k port-forward rs/<deploy-name> <localPort:containerPort>
 k get secrets -o wide --sort-by=.metadata.creationTimestamp
 ```
 
+### ImagePullSecrets for Private Registry
+
+Structure of the ImagePullSecret looks like this:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: codeplayground-anandkeys-pull-secret
+data:
+  .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICJjb250YWluZXJzLmNpc2NvLmNvbSI6IHsKICAgICAgImF1dGgiOiAiWTI5a1pYQnNZWGxuY205MWJtUXJZVzVoYm1SclpYbHpPbGRPU1ZWWFFUQlBTazFSV2psTVdGZFZXVEZhUjBaSU4wc3hWalJVTVZsVVNWSlpVelJXVnpGT1UwdEJPVXcwTnpOU1dEVlhXVkpVTlVkVFVFOHdSRWs9IiwKICAgICAgImVtYWlsIjogIiIKICAgIH0KICB9Cn0=
+type: kubernetes.io/dockerconfigjson
+```
+
+`.dockerconfigjson` is really nothing a base64 encoded version of a file that looks like this:
+
+```json
+{
+  "auths": {
+    "containers.cisco.com": {
+      "auth": "Y29kZXBsYXlncm91bmQrYW5hbmRrZXlzOldOSVVXQTBPSk1RWjlMWFdVWTFaR0ZIN0sxVjRUMVlUSVJZUzRWVzFOU0tBOUw0NzNSWDVXWVJUNUdTUE8wREk=",
+      "email": ""
+    }
+  }
+}
+```
+
+The `auth` section itself is a base64 encoded version of something like this:
+
+```bash
+codeplayground+anandkeys:WNIUWA0OJMQZ9LXWUY1ZGFH7K1V4T1YTIRYS4VW1NSKA9L473RX5WYRT5GSPO0DI
+```
+
+Bottom line, if you had to create the Kubernetes Secret that captures the authentication details of the registry, you could do it the brute-force way using the following approach:
+
+1. `echo -n "<userid>:<password>" | base64`
+2. Use the output of Step 1 to create a JSON file like this:
+
+```json
+{
+  "auths": {
+    "containers.cisco.com": {
+      "auth": "<output-from-step-1",
+      "email": ""
+    }
+  }
+}
+```
+
+3. Base64 encode the output of Step 2
+4. Create a Kubernetes Secret YAML definition as follows:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: <secret-name>
+data:
+  .dockerconfigjson: <output-from-step-3>
+type: kubernetes.io/dockerconfigjson
+```
+
+5. `kubectl create -f <filename>.yml`
+6. Modify the Deployment template to include the following. The `<secret-name>` is the same as in Step 4 above
+
+```yaml
+...
+spec:
+  containers:
+    - name: secretpod
+      image: containers.cisco.com/codeplayground/secret-repo:0.1
+  
+  imagePullSecrets:
+    - name: <secret-name> 
+```
