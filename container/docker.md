@@ -2,10 +2,14 @@
 
 ### docker login
 
+[Google Cloud Registry Authentication Mechanisms](https://cloud.google.com/container-registry/docs/advanced-authentication)
+[Sharing Docker Containers in Google Container Registry](https://medium.com/google-cloud/sharing-docker-containers-in-google-container-registry-1e816b88eae9)
+
 ```bash
 docker login
 docker login -u="<userid>" -p="..." containers.cisco.com
 gcloud auth configure-docker # one time only
+docker login -u _json_key -p "$(cat ~/.gcp/gce-account.json)" https://us.gcr.io
 # aws ecr command prints out the docker login command that lasts for 12 hrs
 eval $(aws ecr get-login --no-include-email --region us-east-1)
 ```
