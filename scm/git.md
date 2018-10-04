@@ -55,3 +55,4 @@ git branch -r --merged | egrep -v "(\*|master$|develop$)" | sed 's/origin\///' |
 
 [Checkout PR Locally](https://gist.github.com/indrayam/2f1b81ce33d1a6f30140d4d5f2b79b37)
 [GitHub Forking](https://gist.github.com/indrayam/c5376735e5702d5cfc7f1646f64af2d8)
+[Use Hub CLI](https://hub.github.com/)
