@@ -53,6 +53,7 @@ git branch -r --merged | egrep -v "(\*|master$|develop$)" | sed 's/origin\///' |
 
 ### Fork and Sync
 
-[Checkout PR Locally](https://gist.github.com/indrayam/2f1b81ce33d1a6f30140d4d5f2b79b37)
 [GitHub Forking](https://gist.github.com/indrayam/c5376735e5702d5cfc7f1646f64af2d8)
+[Checking out GitHub PRs Locally](https://blog.scottlowe.org/2015/09/04/checking-out-github-pull-requests-locally/)
+[Checkout PR Locally](https://gist.github.com/indrayam/2f1b81ce33d1a6f30140d4d5f2b79b37)
 [Use Hub CLI](https://hub.github.com/)
