@@ -16,6 +16,7 @@ Btw, `systemd` calls these daemons as "units". `systemctl` command is the system
 - `systemctl list-units | grep -i .service`: List all "true" daemons/processes running, since they all end in ".service"
 - `systemctl --failed` lists all the services/units that failed during startup
 - `systemctl is-enabled ssh[.service]`
+- `sudo systemctl daemon-reload` 
 - `sudo systemctl reboot`
 - `sudo systemctl poweroff`
 - `sudo systemctl suspend`
@@ -23,8 +24,39 @@ Btw, `systemd` calls these daemons as "units". `systemctl` command is the system
 - `journalctl -b` To look at logs from the system boot
 - `journalctl -u <unit-name>` To look at logs for a specific service
 
+### Sample system service file
 
+To create a `systemd` unit file, create `<service-name>.service` file in `/etc/systemd/system` folder with content that looks like the following. Obviously, change the `ExecStart` and `ExecStop` entries to adapt it to the service in question
 
+```bash
+[Unit]
+Description=Redis In-Memory Data Store
+After=network.target
+
+[Service]
+User=redis
+Group=redis
+# Use the setting below to increate max open files setting for this service
+LimitNOFILE=65536
+ExecStart=/usr/local/bin/redis-server /etc/redis/6379/redis.conf
+ExecStop=/usr/local/bin/redis-cli shutdown
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+[Unit]
+Description=Disable Transparent Huge Pages (THP)
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c "echo 'never' > /sys/kernel/mm/transparent_hugepage/enabled && echo 'never' > /sys/kernel/mm/transparent_hugepage/defrag"
+
+[Install]
+WantedBy=multi-user.target
+```
 ### chkconfig
 [Source](https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html)
 

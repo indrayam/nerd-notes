@@ -37,6 +37,8 @@ ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees, OU=Cisco Users, DC=
 # Find all the details about a Group
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(cn=code-anasharm)'
 
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(cn=code-admin)'
+
 ```
 
 

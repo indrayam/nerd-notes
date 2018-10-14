@@ -1,5 +1,13 @@
 # ulimit
 
+## To check process limits
+
+- Find the process id (PID): `ps -ef | grep -i <process-name>`
+- `cat /proc/PID/limits`
+
+
+## Basics
+
 [Source 1](https://stackoverflow.com/a/34645)
 
 You could always try doing a `ulimit -n 2048`. This will only reset the limit for your current shell and the number you specify must not exceed the hard limit
