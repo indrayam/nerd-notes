@@ -54,5 +54,11 @@ glance image-create --name "ubuntu" --file xenial-server-cloudimg-amd64-disk1.ra
 Or
 
 ```bash
-o image create --private --file xenial-server-cloudimg-amd64-disk1.raw --disk-format raw "ubuntu-16.04"
+o image create --private --file xenial-server-cloudimg-amd64-disk1.raw --disk-format raw "CoDE-xenial-server-cloudimg-amd64-disk1"
+```
+
+### Get a specific value
+
+```bash
+openstack server show -c status --format value my-instance-name
 ```

@@ -14,7 +14,7 @@
 - System Preferences | Dock (Add Maginification, reduce size)
 - System Preferences | Trackpad (Add Tap to Click; Remove Scroll direction setting of "Normal")
 
-### Install OS Updates and 
+### Install OS Updates XCode Command Line Tools
 - Open App Store and start updating softwares, if any
 - Add Terminal App from *"Applications > Utility > Terminal"* to the Dock
 - Run the following command to install XCode and the command line tools:
