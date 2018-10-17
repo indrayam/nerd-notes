@@ -17,12 +17,13 @@
 ### Install OS Updates XCode Command Line Tools
 - Open App Store and start updating softwares, if any
 - Add Terminal App from *"Applications > Utility > Terminal"* to the Dock
-- Run the following command to install XCode and the command line tools:
-    `> xcode-select --install`
-- Select "Get XCode"
+- Run the following command to install XCode. This will essentially prompt you and say that you do not have XCode and ask you to get XCode. Get it!
+> `> xcode-select --install`
 - Once everything is installed, run 'XCode' and Accept the License. This will also trigger installation of components
-- Open the terminal and run the following to install the command-line utilities
-    `> xcode-select --install`
+- Open the terminal and run the following again, this time to install the command-line utilities
+> `> xcode-select --install`
+- Run the following to print the path where XCode Command Line Tools was installed
+> `> xcode-select -p`
 
 ### Change the default settings for Finder, Terminal and TextEdit
 - Open Finder | Preferences
