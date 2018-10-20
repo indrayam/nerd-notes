@@ -1,24 +1,10 @@
-# mysql tools
-
-## Post-Installation
-
-```bash
-sudo mysql_secure_installation
-sudo systemctl status mariadb
-```
-
-## mysqladmin
-
-```bash
-sudo mysqladmin version
-# OR
-mysqladmin -u admin -p version
-```
-
-
 ## mysql
 
 ```sql
-GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'c0der0cks!' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY '...' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+SHOW DATABASES;
+CREATE DATABASE orca;
+DROP DATABASE orca;
+GRANT ALL ON orca.* TO 'spinnaker'@'%' IDENTIFIED BY '...';
 ```
