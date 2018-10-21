@@ -1,21 +1,40 @@
 # sublime text
 
-`Cmd + P``
+## How to fix color scheme to use better selection colors?
+
+If you select a color scheme, and you actually do not like the way selecting text in the editor looks like, here's a color selection that works for me
+
+- Open up Sublime Text preferences and see the current location of the color scheme that is in use
+- Open the Color Scheme's `.tmTheme` file
+- Search for `selection` and `selectionForeground`. Replace (or create) the following values:
+
+```xml
+    <key>selection</key>
+    <string>#9D550F</string>
+    <key>selectionForeground</key>
+    <string>#fffff8</string>
+```
+
+- Save the file
+
+## Keyboard Shortcuts
+
+`Cmd + P`
 Search files in the current project
 
-`Cmd + C``
+`Cmd + C`
 Copy
 
-`Cmd + V``
+`Cmd + V`
 Paste
 
-`Cmd + Shift + V``
+`Cmd + Shift + V`
 Paste and indent correctly
 
-`Cmd + X``
+`Cmd + X`
 Cut line
 
-`Cmd + K, Cmd + K``
+`Cmd + K, Cmd + K`
 Delete to the end of the line
 
 `Cmd + K, Cmd + Backspace`
@@ -87,7 +106,7 @@ Integrated (or External) Terminal
 `Cmd K, Cmd B`
 Toggle “Explore” View
 
-#### Plugin AlignTab (Alignment on Steroids)
+## Plugin AlignTab (Alignment on Steroids)
 `Shift + Cmd + P` Search for AlignTab, Select Live Preview or Table Mode
 
 OR
