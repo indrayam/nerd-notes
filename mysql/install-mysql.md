@@ -3,8 +3,8 @@
 ## Installation
 
 ```bash
-./openstack-create rcdnplay mariadb-db1 mariadb
-./openstack-create rcdnplay mariadb-db2 mariadb
+./openstack-create rtpdev mariadb-db1 mariadb
+./openstack-create rtpdev mariadb-db2 mariadb
 ```
 
 ## Post-Installation (Both MariaDB instances)
@@ -15,10 +15,11 @@ Running this script above will run the steps below. Make sure not to change `roo
 ```bash
 sudo mysql_secure_installation
 sudo systemctl status mariadb
-sudo mysql
 ```
 
 Create a new admin account for all MariaDB administration tasks.
+
+`sudo mysql`:
 
 ```sql
 GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'password' WITH GRANT OPTION;
@@ -26,9 +27,7 @@ FLUSH PRIVILEGES;
 exit;
 ```
 
-## Steps to run on MySQL Master
-
-### Add this to master /etc/mysql/my.cnf of mysql (Master)
+## Add this to master /etc/mysql/my.cnf of mysql (Master)
 
 `sudo vim /etc/mysql/my.cnf`:
 
@@ -37,18 +36,20 @@ exit;
 ...
 server-id = 1
 #bind-address = 127.0.0.1
-replicate-do-db=orca
+replicate-do-db = orca
 ...
 ```
 
 ```bash
+{
 sudo systemctl stop mariadb
 sudo systemctl status mariadb
 sudo systemctl start mariadb
 sudo systemctl status mariadb
+}
 ```
 
-### Run these as 'admin' user on the mysql (Master)
+## Run these as 'admin' user on the mysql (Master)
 
 Run `mysql -u admin -p` 
 
@@ -83,9 +84,7 @@ UNLOCK TABLES;
 exit;
 ```
 
-## MySQL Slave
-
-### Add this to master /etc/mysql/my.cnf of mysql (Slave)
+## Add this to master /etc/mysql/my.cnf of mysql (Slave)
 
 `sudo vim /etc/mysql/my.cnf`:
 
@@ -95,13 +94,15 @@ server-id = 2
 ```
 
 ```bash
+{
 sudo systemctl stop mariadb
 sudo systemctl status mariadb
 sudo systemctl start mariadb
 sudo systemctl status mariadb
+}
 ```
 
-### Run these as 'admin' user on mysql (Slave)
+## Run these as 'admin' user on mysql (Slave)
 
 Run `mysql -u admin -p` 
 
@@ -122,17 +123,56 @@ mysql -u admin -p
 USE orca;
 SHOW TABLES;
 SELECT * FROM tasks;
-CHANGE MASTER TO MASTER_HOST='10.10.0.20', MASTER_USER='replication_user', MASTER_PASSWORD='repl1cat10n', MASTER_LOG_FILE='mariadb-bin.000002', MASTER_LOG_POS=1551; # Put the proper IP address, MASTER_LOG_FILE and MASTER_LOG_POS values that you got from MariaDB Master
+CHANGE MASTER TO MASTER_HOST='10.11.0.6', MASTER_USER='replication_user', MASTER_PASSWORD='repl1cat10n', MASTER_LOG_FILE='mariadb-bin.000002', MASTER_LOG_POS=1535; # Put the proper IP address, MASTER_LOG_FILE and MASTER_LOG_POS values that you got from MariaDB Master
 SHOW SLAVE STATUS\G;
 START SLAVE;
 SHOW SLAVE STATUS\G;
 ```
 
-### Run these ONLY AFTER Slave has been setup
+## Run these on the Master after Replication Setup
+
+`mysql -u admin -p`:
 
 ```sql
+USE orca;
 INSERT INTO tasks (title, description) VALUES ('task2', 'This is a description for task 2');
 INSERT INTO tasks (title, description) VALUES ('task3', 'This is a description for task 3');
 INSERT INTO tasks (title, description) VALUES ('task4', 'This is a description for task 4');
-INSERT INTO tasks (title, description) VALUES ('task45', 'This is a description for task 45');
+```
+
+## Run these on the Slave to check Replication
+
+```sql
+USE orca;
+SELECT * FROM tasks;
+```
+
+## Configure TCP Proxy (OPTIONAL)
+
+Assuming you are using a TCP Proxy (like Nginx) to route traffic to your MariaDB VMs, here's the configuration for the TCP Proxy in front of the MariaDB master instance:
+
+```bash
+    upstream mariadb-master-3306 {
+        server 10.0.0.11:3306 max_fails=3 fail_timeout=10s;
+    }
+
+    server {
+        listen 3306;
+        proxy_pass mariadb-master-3306;
+        proxy_next_upstream on;
+    }
+```
+
+Here's the configuration for the TCP Proxy in front of the MariaDB slave instance:
+
+```bash
+    upstream mariadb-slave-3306 {
+        server 10.0.0.33:3306 max_fails=3 fail_timeout=10s;
+    }
+
+    server {
+        listen 3306;
+        proxy_pass mariadb-slave-3306;
+        proxy_next_upstream on;
+    }
 ```
