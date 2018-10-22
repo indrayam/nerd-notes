@@ -28,6 +28,13 @@ Chances are you will see one, but not both, if you are getting timeout errors. I
 
 I am sure there is a way to manually add the route using `ip route` or `ip link` commands as shown in this article: [Can't connect to minikube (virtualbox) all of a sudden?](https://www.reddit.com/r/kubernetes/comments/6rt18h/cant_connect_to_minikube_virtualbox_all_of_a/)
 
+3. We noticed a pattern where turning on VPN deleted the `192.168.99.0/24 dev vboxnet  scope link` entry from `ip route` command. In order to get around this, we had to run the following command to make minikube work again:
+
+```bash
+sudo route -nv add -net 192.168.99.0/24 -interface vboxnet0
+```
+
+
 ### Minikube Help
 mk help
 
