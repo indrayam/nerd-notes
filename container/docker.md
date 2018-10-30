@@ -167,6 +167,8 @@ d rmi -f $(docker image -a -q)
 docker attach <container name or uuid> 
 ```
 
+To detach the tty without exiting the shell, use the escape sequence Ctrl+p + Ctrl+q followed by Ctrl+C.
+
 ### Logs
 
 ```bash
