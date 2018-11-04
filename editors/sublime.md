@@ -1,5 +1,13 @@
 # sublime text
 
+## How do you make Sublime Text 3 open a file in a new tab instead of opening it in the current tab?
+
+This is because you were only previewing the previous file. If you click on a file once in the sidebar, by default it opens in preview mode. Clicking another file will open it in preview mode, in the same tab.
+
+In other words, single-clicking a file in the sidebar opens that file in preview mode, and single-clicking on another file replaces the first file with the second. If you want to keep a previewed file open, you need to double-click it, then the next single-clicked file will open in a new preview tab.
+
+Source: [How do you make Sublime Text 3 open a file in a new tab instead of opening it in the current tab?](https://stackoverflow.com/questions/37765356/how-do-you-make-sublime-text-3-open-a-file-in-a-new-tab-instead-of-opening-it-in)
+
 ## How to fix color scheme to use better selection colors?
 
 If you select a color scheme, and you actually do not like the way selecting text in the editor looks like, here's a color selection that works for me

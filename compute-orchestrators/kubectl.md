@@ -138,7 +138,7 @@ openssl req -new -key ${USER}.key -out ${USER}.csr -subj "/CN=${USER}/O=${GROUP}
 openssl x509 -req -in ${USER}.csr -CA ${CLUSTER}.crt -CAkey ${CLUSTER}.key -CAcreateserial -out ${USER}.crt # Generate Certificate
 kubectl config set-credentials ${USER}-${LOCATION}-${CLUSTER} --client-certificate ${USER}.crt --client-key ${USER}.key --embed-certs=true
 kubectl config set-context ${USER}@k8s-on-p3-${LOCATION}-${CLUSTER} --cluster=k8s-on-p3-${LOCATION}-${CLUSTER} --user=${USER}-${LOCATION}-${CLUSTER}
-#kubectl create namespace ${USER}
+kubectl create namespace ${USER}
 kubectl create rolebinding ${USER}-admin --clusterrole admin --group ${GROUP} --namespace ${USER}
 }
 
