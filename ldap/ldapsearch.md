@@ -54,7 +54,7 @@ TLS_REQCERT ALLOW
 
 ```bash
 # Search for all the Groups to which the User Belongs
-ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=deepejai,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=anasharm,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
 
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=jenkins-admin.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com)' cn
 
@@ -65,6 +65,8 @@ ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=phwhitin,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
 
 ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=jalagars,OU=Employees,OU=Cisco Users,DC=cisco,DC=com)' cn
+
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Cisco Groups, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(member=CN=cd-spinnaker.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com)' cn
 ```
 
 ### Configure ActiveDirectory settings

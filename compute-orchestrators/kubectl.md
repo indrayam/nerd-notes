@@ -16,13 +16,14 @@ where,
 - `[COMMAND] [args]` Command to run inside the container
 
 ```bash
+
 # Spin up an instance
 kubectl run test-$RANDOM --rm -i -t --restart=Never --image alpine -- ash
 kubectl run test-$RANDOM --rm -i -t --restart=Never --image ubuntu:16.04 -- bash
 kubectl run test-$RANDOM --rm -i -t --restart=Never --image indrayam/debug-container:latest -- bash
 k run debugpod -i -t --restart=Never --image indrayam/debug-container:0.1 -- /bin/bash
-k run debugpod -i -t --restart=Never --image-pull-policy=Always --image indrayam/debug-container:all -- sleep 31536000
-k run debugpod -i -t --restart=Never --image-pull-policy=Always --image containers.cisco.com/codeplayground/debug-container-openshift:0.1 -- sleep 31536000
+k run debugpod -i -t --restart=Never --image-pull-policy=Always --image indrayam/debug-container-spinnaker:0.1 -- sleep 31536000
+k run debugpod -i -t --restart=Never --image-pull-policy=Always --image containers.cisco.com/codeplayground/debug-container-openshift:0.2 -- sleep 31536000
 
 kubectl run httpd --image httpd --replicas 3
 kubectl expose deploy httpd --port 8080 --target-port 80 --type NodePort
@@ -41,8 +42,6 @@ kubectl expose deploy postgres --port 5432 --type NodePort
 
 kubectl run mariadb --image mariadb --env MYSQL_ROOT_PASSWORD=test1234
 kubectl expose deploy mariadb --port 3306 --type NodePort
-
-
 
 ```
 

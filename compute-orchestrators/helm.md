@@ -20,13 +20,13 @@ helm init --client-only
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tiller-code
+  name: tiller-world
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: tiller
-  namespace: tiller-code
+  namespace: tiller-world
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -39,7 +39,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: tiller
-    namespace: tiller-code
+    namespace: tiller-world
 ```
 
 2. Create it against the cluster you want to install Helm in
@@ -56,7 +56,7 @@ First the dry run to make sure it all looks good!
 helm init \
   --dry-run --debug \
   --override 'spec.template.spec.containers[0].command'='{/tiller,--storage=secret}' \
-  --tiller-namespace=tiller-code \
+  --tiller-namespace=tiller-world \
   --service-account=tiller
 ```
 
@@ -65,7 +65,7 @@ If so, run this
 ```bash
 helm init \
   --override 'spec.template.spec.containers[0].command'='{/tiller,--storage=secret}' \
-  --tiller-namespace=tiller-code \
+  --tiller-namespace=tiller-world \
   --service-account=tiller
 ```
 
