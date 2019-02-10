@@ -28,7 +28,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://localhost:2375
 
 sudo systemctl daemon-reload
 sudo systemctl stop docker 
-sudo usermod -a -G docker jenkins
+sudo usermod -a -G docker jenkins ubuntu
 sudo systemctl start docker
 ```
 
