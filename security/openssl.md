@@ -27,7 +27,7 @@ openssl req -key ./helm-tiller-ca.key.pem -new -x509 -days 1095 -sha256 -out hel
 1. Create the certificate key
 
 ```bash
-openssl genrsa -out jenkins-code.cisco.com.key 2048
+openssl genrsa -out jenkins1-code.cisco.com.key 2048
 ```
 
 2. Create the signing request (Certificate Signing Request - CSR)
@@ -36,8 +36,8 @@ Interactive
 
 ```bash
 openssl req -new \
-    -key jenkins-code.cisco.com.key \
-    -out jenkins-code.cisco.com.csr
+    -key jenkins1-code.cisco.com.key \
+    -out jenkins1-code.cisco.com.csr
 ```
 
 OR

@@ -72,6 +72,8 @@ For example:
 ```bash
 {
 echo quit | openssl s_client -showcerts -servername daniel.haxx.se -connect daniel.haxx.se:443 > cacert.pem
+echo quit | openssl s_client -showcerts -servername kuard1-code.cisco.com -connect kuard1-code.cisco.com:443 > kuard1-cisco.pem
+
 curl --cacert cacert.pem https://daniel.haxx.se
 }
 ```
