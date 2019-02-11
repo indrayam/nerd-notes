@@ -200,7 +200,7 @@ openssl x509 -req -sha256 \
     + Select "Permanant Agent"
       - Name: minion-1
       - Description: minion-1
-      - # of executors: 2
+      - Number of executors: 2
       - Remote Root directory: /home/ubuntu/jenkins
       - Labels: minion-1
       - Usage: Use this node as much as possible
