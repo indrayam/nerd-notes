@@ -1,9 +1,9 @@
 # openssl
 
-### Reference
+## Reference
 Refer to cfssl document for more examples on certificate creation
 
-### Create SSL Cert for Web Server
+## Create SSL Cert for Web Server
 - [How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04)
 - [Reference Gist on GitHub](https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309)
 - [OpenSSL Essentials: Working with SSL Certificates, Private Keys and CSRs](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
@@ -96,7 +96,44 @@ openssl x509 -req -sha256 \
 openssl x509 -in jenkins-code.cisco.com.crt -text -noout
 ```
 
-### Generate Certificate and Key
+## Add Certificate Authority certificates to the Operating System (Ubuntu)
+
+Source: [Adding trusted root certificates to the server](https://manuals.gfi.com/en/kerio/connect/content/server-configuration/ssl-certificates/adding-trusted-root-certificates-to-the-server-1605.html)
+
+```bash
+sudo mv *.crt /usr/local/share/ca-certificates
+sudo update-ca-certificates
+```
+
+If you want to remove it, delete the files from `/usr/local/share/ca-certificates` and run
+
+```bash
+sudo update-ca-certificates --fresh
+```
+
+## Add Certificate Authority certificates to the Operating System (MacOSX)
+
+Source: [Adding trusted root certificates to the server](https://manuals.gfi.com/en/kerio/connect/content/server-configuration/ssl-certificates/adding-trusted-root-certificates-to-the-server-1605.html)
+
+```bash
+which curl
+```
+
+If you are using `/usr/bin/curl`, the only way I was able to make this curl work was by running the following command:
+
+```bash
+cd ~/workspace/self-signed-certificates/ca-certs
+curl --cacert code-ca-jenkins-spinnaker.crt https://spinnaker-code.cisco.com
+```
+
+I was not able to figure out where and how to add the certificates so that curl would honor it. Instead, I installed `curl` using Homebrew and then it all worked. That being said, I had run the following commands. Not sure if that's why these worked:
+
+```bash
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-jenkins-spinnaker.crt
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-jenkins1.crt
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-spinnaker1.crt
+
+## Generate Certificate and Key
 
 ```bash
 {
@@ -107,7 +144,7 @@ openssl x509 -req -in ${USER}.csr -CA ./kubernetes.crt -CAkey ./kubernetes.key -
 }
 ```
 
-### Interact with Certificates
+## Interact with Certificates
 
 ```bash
 cfssl certinfo -cert ca.pem # print the certificate in JSON format
@@ -123,7 +160,7 @@ openssl x509 -noout -enddate -in ca.pem # print the End Date field from the cert
 openssl x509 -noout -pubkey -in ca.pem # print the Public Key
 ```
 
-### Interact with Certificate Signing Request
+## Interact with Certificate Signing Request
 
 ```bash
 cfssl certinfo -csr ca.pem # print the certificate signing request in JSON format
@@ -133,7 +170,7 @@ openssl req -text -in ca.csr #print the certificate request in text form
 openssl req -text -noout -in ca.csr #print the certificate request in text form without the certificate
 ```
 
-### Interact with Private key
+## Interact with Private key
 
 ```bash
 openssl rsa -in ca-key.pem #print the (RSA) private key
@@ -148,14 +185,18 @@ openssl req -text -in ca.csr #print the certificate request in text form
 openssl req -text -noout -in ca.csr #print the certificate request in text form without the certificate
 ```
 
-#### Create Base64 encoding (The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string)
+## Create Base64 encoding
+
+The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string
 
 ```bash
 echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | openssl base64 -e -A
 echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | base64
 ```
 
-#### Create Base64 decoding (The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string)
+## Create Base64 decoding 
+
+The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string
 
 ```bash
 openssl enc -base64 -d <<< ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR 
@@ -164,16 +205,17 @@ echo -n “ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR” | openssl bas
 echo -n "ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR" | base64 --decode
 ```
 
-#### Poor man’s Base64URL Encoding
+## Poor man’s Base64URL Encoding
 
 ```bash
 echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | openssl base64 -e -A | sed s/\+/-/ | sed -E s/=+$//
 echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | base64 | sed s/\+/-/ | sed -E s/=+$//
 ```
 
-![Stackoverflow Snippet 1](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/base64-encoding.png)
+**Image: Stackoverflow Snippet 1**
+![Stackoverflow Snippet 1](https://storage.googleapis.com/us-east-4-anand-files/media-files-shared/base64-encoding.png)
 
-#### Create SHA256 digest in a hexadecimal format
+## Create SHA256 digest in a hexadecimal format
 
 ```bash
 echo -n "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=" | openssl dgst -sha256
@@ -181,7 +223,7 @@ perl -e "print qq(eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iL
 ea8508d2d4b6bc3ab82b5396aeb23f715e23f6c82761f49de935a8a0e6ec094f
 ```
 
-#### Create SHA256 digest with secret “secret” in a hexadecimal format
+## Create SHA256 digest with secret “secret” in a hexadecimal format
 
 ```bash
 echo -n "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=" | openssl dgst -sha256 -hmac ‘secret’
@@ -189,7 +231,7 @@ perl -e "print qq(eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iL
 990d53e547ddd1335bd1a8f60094a8ea2d0324a4b3be921261b4cabd1781c27e
 ```
 
-#### Create SHA256 digest with secret “secret” in a binary format
+## Create SHA256 digest with secret “secret” in a binary format
 
 ```bash
 echo -n "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0=" | openssl dgst -sha256 -hmac ‘secret’ -binary
@@ -197,13 +239,13 @@ perl -e "print qq(eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iL
 990d53e547ddd1335bd1a8f60094a8ea2d0324a4b3be921261b4cabd1781c27e
 ```
 
-#### Create Base64 encoding of binary data
+## Create Base64 encoding of binary data
 
 ```bash
 openssl base64 -in <filename>
 ```
 
-#### Create Hex from a binary file
+## Create Hex from a binary file
 
 ```bash
 xxd -p -c 256 digest.bin
@@ -214,7 +256,7 @@ Why do we need the digest to be dumped in binary format? Because if you do not, 
 Use this online converter until you figure out how to do it on the command line...
 [Text Converter](http://www.percederberg.net/tools/text_converter.html)
 
-#### Encrypt a file 
+## Encrypt a file 
 
 ```bash
 openssl aes-256-cbc -e -in bash-bootstrap-kubernetes.tar.gz -out bash-bootstrap-kubernetes-0.tar.gz.enc
@@ -222,7 +264,7 @@ openssl aes-256-cbc -e -in bash-bootstrap-kubernetes.tar.gz -out bash-bootstrap-
 openssl aes-256-cbc -pbkdf2 -e -in bash-bootstrap-kubernetes.tar.gz -out bash-bootstrap-kubernetes-1.tar.gz.enc
 ```
 
-#### Decrypt an encrypted file
+## Decrypt an encrypted file
 
 ```bash
 openssl aes-256-cbc -d -in linux-bootstrap.tar.gz.enc -out linux-bootstrap.tar.gz
@@ -230,4 +272,8 @@ openssl aes-256-cbc -d -in linux-bootstrap.tar.gz.enc -out linux-bootstrap.tar.g
 openssl aes-256-cbc -pbkdf2 -d -in bash-bootstrap.tar.gz.enc -out bash-bootstrap.tar.gz
 ```
 
-![Stackoverflow Snippet 2](https://s3.amazonaws.com/us-east-1-anand-files/media-files-shared/openssl-footer.png)
+**Image: Stackoverflow Snippet 2**
+
+![Stackoverflow Snippet 2](https://storage.googleapis.com/us-east-4-anand-files/media-files-shared/openssl-footer.png)
+
+
