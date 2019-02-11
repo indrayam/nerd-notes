@@ -4,8 +4,9 @@
 Refer to cfssl document for more examples on certificate creation
 
 ### Create SSL Cert for Web Server
-[How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04)
-[Reference Gist on GitHub](https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309)
+- [How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04)
+- [Reference Gist on GitHub](https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309)
+- [OpenSSL Essentials: Working with SSL Certificates, Private Keys and CSRs](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
 
 **Create Root CA (Done Once)**
 
