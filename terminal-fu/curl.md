@@ -72,7 +72,22 @@ For example:
 ```bash
 {
 echo quit | openssl s_client -showcerts -servername daniel.haxx.se -connect daniel.haxx.se:443 > cacert.pem
-echo quit | openssl s_client -showcerts -servername kuard1-code.cisco.com -connect kuard1-code.cisco.com:443 > kuard1-cisco.pem
+echo quit | openssl s_client -showcerts -servername kuard1-code.cisco.com -connect kuard1-code.cisco.com:443 > kuard1-code.pem
+
+echo quit | openssl s_client -showcerts -servername jenkins-code.cisco.com -connect jenkins-code.cisco.com:443 > jenkins-code.pem
+openssl x509 -in jenkins-code.pem -text
+echo quit | openssl s_client -showcerts -servername spinnaker-code.cisco.com -connect spinnaker-code.cisco.com:443 > spinnaker-code.pem
+openssl x509 -in spinnaker-code.pem -text
+echo quit | openssl s_client -showcerts -servername spinnakerapi-code.cisco.com -connect spinnakerapi-code.cisco.com:443 > spinnakerapi-code.pem
+openssl x509 -in spinnakerapi-code.pem -text
+
+echo quit | openssl s_client -showcerts -servername jenkins1-code.cisco.com -connect jenkins1-code.cisco.com:443 > jenkins1-code.pem
+openssl x509 -in jenkins1-code.pem -text
+echo quit | openssl s_client -showcerts -servername spinnaker1-code.cisco.com -connect spinnaker1-code.cisco.com:443 > spinnaker1-code.pem
+openssl x509 -in spinnaker1-code.pem -text
+echo quit | openssl s_client -showcerts -servername spinnaker1api-code.cisco.com -connect spinnaker1api-code.cisco.com:443 > spinnaker1api-code.pem
+openssl x509 -in spinnaker1api-code.pem -text
+
 
 curl --cacert cacert.pem https://daniel.haxx.se
 }

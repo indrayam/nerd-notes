@@ -148,12 +148,14 @@ openssl x509 -req -sha256 \
     + sftp the file to the Jenkins server. In the folder `/var/lib/jenkins/plugins`
     + Make sure the ownership of the file is set to the userid used by `jenkins`. In Ubuntu, the UID was `jenkins`
 - Configure `Manage Jenkins > Configure Global Security`. Enable Security. Select `Active Directory` and enter the following data:
-    + `Domain Name:` cisco.com
-    + `Domain Controller:` ds.cisco.com:3268
-    + `Bind DN:` CN=dft-ds.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com
+    + `Domain Name:` **cisco.com**
+    + `Domain Controller:` **ds.cisco.com:3268**
+    + `Bind DN:` **CN=dft-ds.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com**
     + `Bind Password:` ...
-    + `TLS Config:` Trust all certificates
-- Click `Test Domain` and make sure it returns Success
+    + `TLS Configuration:` **Trust all certificates**
+    + Click `Test Domain` and make sure it returns Success
+    + Click on `Advanced`
+    + Group Membership Lookup Strategy: Change from "Automatic" to **"Recursive Group Queries"**
 - Configure `Authorization`. Select `Project-based Matrix Authorization`. Make sure `Anonymous Users` and `Authenticated Users` have `Administer` checkbox checked (under `Overall`). Add your userid `anasharm`. Make sure it also has "Administer" privileges.
 - Log out. Log in as `anasharm`. Once it all looks good, revert the Authorization settings for `Anonymous Users` and `Authenticated Users` to `Read` under `Overall`
 - Configure `Manage Jenkins > Global Tool Configuration`

@@ -142,8 +142,6 @@ openssl req -text -in ca.csr #print the certificate request in text form
 openssl req -text -noout -in ca.csr #print the certificate request in text form without the certificate
 ```
 
-
-
 #### Create Base64 encoding (The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string)
 
 ```bash

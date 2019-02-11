@@ -31,8 +31,16 @@ Use IP address of the host as opposed to DNS name
 
 followed by
 
-`sudo $JAVA_HOME/bin/keytool -import -alias spinnaker-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file deck.crt`
-`sudo $JAVA_HOME/bin/keytool -import -alias spinnakerapi-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file gate.crt`
+```bash
+{
+sudo $JAVA_HOME/bin/keytool -import -alias jenkins-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file jenkins-code.pem
+sudo $JAVA_HOME/bin/keytool -import -alias spinnaker-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file spinnaker-code.pem
+sudo $JAVA_HOME/bin/keytool -import -alias spinnakerapi-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file spinnakerapi-code.pem
+sudo $JAVA_HOME/bin/keytool -import -alias jenkins1-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file jenkins1-code.pem
+sudo $JAVA_HOME/bin/keytool -import -alias spinnaker1-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file spinnaker1-code.pem
+sudo $JAVA_HOME/bin/keytool -import -alias spinnaker1api-code.cisco.com -keystore $JAVA_HOME/jre/lib/security/cacerts -file spinnaker1api-code.pem
+}
+```
 
 Default Password: `changeit`
 
