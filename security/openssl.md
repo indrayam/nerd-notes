@@ -4,19 +4,24 @@
 Refer to cfssl document for more examples on certificate creation
 
 ### Create SSL Cert for Web Server
+[How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04)
 [Reference Gist on GitHub](https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309)
 
 **Create Root CA (Done Once)**
 
 ```bash
+openssl genrsa -out ca.key 4096
+```
+If you want a password protected key, use the following
+
+```bash
 openssl genrsa -des3 -out ca.key 4096
 ```
-If you want a non password protected key just remove the -des3 option
 
 **Create and self-sign the Root Certificate**
 
 ```bash
-openssl req -x509 -new -nodes -key ca.key -sha256 -days 1024 -out ca.crt
+openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt
 
 # Another flavor
 openssl req -key ./helm-tiller-ca.key.pem -new -x509 -days 1095 -sha256 -out helm-tiller-ca.cert.pem -extensions v3_ca

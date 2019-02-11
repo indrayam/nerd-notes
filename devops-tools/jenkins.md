@@ -78,10 +78,10 @@ server {
 }
 ```
 
-- Create self-signed certificate for `jenkins1-code.conf` in `~/src/certs`:
-    + `openssl genrsa -des3 -out ca.key 4096` (Remove `-des3` if do not need a passphrase)
-    + `openssl req -x509 -new -nodes -key ca.key -sha256 -days 1024 -out ca.crt`
-    + `openssl genrsa -out jenkins1-code.cisco.com.key 2048`
+- Create self-signed certificate for `jenkins1-code.conf` in `~/src/certs`. Reference: [How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04)
+    + `openssl genrsa -out ca.key 4096`
+    + `openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt`
+    + `openssl genrsa -out jenkins1-code.cisco.com.key 4096`
     + Create CSR:
 
 ```
