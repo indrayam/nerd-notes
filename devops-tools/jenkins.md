@@ -276,5 +276,12 @@ curl -L -O https://ci6.cisco.com/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s https://ci6.cisco.com -auth anasharm:fd42059e120bf3de8d1d61894580a774 help console
 ```
 
+- Configure Jenkins to have greater sessionTimeout etc.
+
+```bash
+
+cd /etc/default
+sudo vim jenkins
+# Edit JENKINS_ARGS (basically the last line) and add --sessionTimeout=10080 to increase session timeout
 
 

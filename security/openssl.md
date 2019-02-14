@@ -126,7 +126,7 @@ cd ~/workspace/self-signed-certificates/ca-certs
 curl --cacert code-ca-jenkins-spinnaker.crt https://spinnaker-code.cisco.com
 ```
 
-I was not able to figure out where and how to add the certificates so that curl would honor it. Instead, I installed `curl` using Homebrew and then it all worked. That being said, I had run the following commands. Not sure if that's why these worked:
+I was not able to figure out where and how to add the certificates so that the default installed curl (`/usr/bin/curl`) would honor it. Instead, I installed `curl` using Homebrew and then it all worked after I added the certificate authority certs into the OS store using these commands:
 
 ```bash
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-jenkins-spinnaker.crt
