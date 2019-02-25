@@ -1,4 +1,4 @@
-## zsh
+# zsh
 
 [Zsh Lovers](http://grml.org/zsh/zsh-lovers.html)
 
@@ -39,7 +39,7 @@
 - **STDIN** redirection: Use `<`. For example: `wc -l < /etc/group`
 - **STDOUT** redirection: Use `>, >>`. For example: `echo "Hello, World!" > hello.txt`
 
-### Auto Completion
+## Auto Completion
 
 ```bash
 echo $fpath
@@ -54,3 +54,33 @@ compinit _kubectx # Not sure if this will be necessary after sourcing ~/.zshrc
 compinit _kubens # Not sure if this will be necessary after sourcing ~/.zshrc
 which _kubectx 
 which _kubens
+
+## Built-in time function
+
+Source: [Is there any command like time but for memory usage](https://superuser.com/questions/480928/is-there-any-command-like-time-but-for-memory-usage/767491#767491)
+
+`zsh` has a more powerful built-in `time` command than `bash` has, and the `zsh` version can report memory statistics.
+
+Even if you don't regularly use `zsh` as your day-to-day shell, you can just run it when you need to gather these kinds of statistics.
+
+Set the `TIMEFMT` environment variable to indicate the output you want. Here is what I have in my `.zshrc` file (perhaps a bit too fancy, but I like it):
+
+    TIMEFMT='%J   %U  user %S system %P cpu %*E total'$'\n'\
+    'avg shared (code):         %X KB'$'\n'\
+    'avg unshared (data/stack): %D KB'$'\n'\
+    'total (sum):               %K KB'$'\n'\
+    'max memory:                %M MB'$'\n'\
+    'page faults from disk:     %F'$'\n'\
+    'other page faults:         %R'
+
+Sample output:
+
+    % time ls
+    [... the output of ls, followed by:]
+    ls -G   0.00s  user 0.00s system 91% cpu 0.004 total
+    avg shared (code):         0 KB
+    avg unshared (data/stack): 0 KB
+    total (sum):               0 KB
+    max memory:                668 MB
+    page faults from disk:     0
+    other page faults:         337
