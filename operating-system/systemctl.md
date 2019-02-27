@@ -4,7 +4,7 @@ An init system that manages how daemons stop, start and restart. It also manages
 
 Btw, `systemd` calls these daemons as "units". `systemctl` command is the systemd control command that allows us to control everything
 
-### systemctl
+## systemctl
 
 - `systemctl status ssh[.service]`: List the status of the service/unit
 - `sudo systemctl start ssh[.service]`: Start the service/unit
@@ -24,7 +24,7 @@ Btw, `systemd` calls these daemons as "units". `systemctl` command is the system
 - `journalctl -b` To look at logs from the system boot
 - `journalctl -u <unit-name>` To look at logs for a specific service
 
-### Sample system service file
+## Sample system service file
 
 To create a `systemd` unit file, create `<service-name>.service` file in `/etc/systemd/system` folder with content that looks like the following. Obviously, change the `ExecStart` and `ExecStop` entries to adapt it to the service in question
 
@@ -57,7 +57,7 @@ ExecStart=/bin/sh -c "echo 'never' > /sys/kernel/mm/transparent_hugepage/enabled
 [Install]
 WantedBy=multi-user.target
 ```
-### chkconfig
+## chkconfig
 [Source](https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html)
 
 ```bash
@@ -65,3 +65,37 @@ chkconfig --add <service-name>
 chkconfig --level 235 <service-name> on
 chkconfig --list
 ```
+
+## Run json-server service with systemd
+
+- Create `/etc/systemd/system/jsonserver.service`:
+
+```bash
+[Unit]
+Description=json-server
+
+[Service]
+ExecStart=/usr/bin/json-server --watch /web/cd-console-web-app/db.json
+# Required on some systems
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=json-server
+#User=<alternate user>
+#Group=<alternate group>
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- Enable the service by running `sudo systemctl enable nodeserver.service`
+- `sudo systemctl start jsonserver`
+- `sudo systemctl status jsonserver`
+- `sudo systemctl stop jsonserver`
+
+
+
+

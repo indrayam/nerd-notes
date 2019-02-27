@@ -1,6 +1,6 @@
 # nginx
 
-### Update the default Nginx version on Ubuntu 16.04
+## Update the default Nginx version on Ubuntu 16.04
 
 ```bash
 sudo wget https://nginx.org/keys/nginx_signing.key
@@ -16,7 +16,7 @@ sudo vim /etc/nginx/tcppassthrough.conf (Update the Upstream Port numbers for 80
 sudo nginx -t # to check if the configuration is ok
 ```
 
-### Nginx as L4 TCP Proxy
+## Nginx as L4 TCP Proxy
 
 Update /etc/nginx/nginx.conf with these changes to the http block...
 
@@ -44,7 +44,7 @@ stream {
 }
 ```
 
-### Nginx with Self-signed HTTPS (HTTP redirecting to HTTPS)
+## Nginx with Self-signed HTTPS (HTTP redirecting to HTTPS)
 
 Create a certificate and key for the domain (see openssl for details)
 
@@ -94,7 +94,7 @@ include /etc/nginx/sites-enabled/*;
 5. sudo systemctl stop nginx
 6. sudo systemctl start nginx
 
-### Nginx with Certbot
+## Nginx with Certbot
 
 ```bash
 
@@ -116,9 +116,33 @@ cat > $WEBROOT/index.html << EOF
 </html>
 EOF
 chown ${USER_ID}.${USER_ID} $WEBROOT/index.html
-
 ```
 
+## Nginx Proxy Pass with Rewrite
+
+```bash
+# Default server configuration
+
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+  server_name cdconsole-angular.cisco.com;
+
+  proxy_set_header HOST $host;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+  location / {
+      root   /web/cdconsole;
+      index  index.html index.htm;
+  }
 
 
+  location /api {
+    rewrite    /api/([^/]+) /$1 break;
+    proxy_pass http://127.0.0.1:3000;
+  }
+}
+```
 
