@@ -1,8 +1,25 @@
 # gpg2
 
-[Source](https://futureboy.us/pgp.html#GettingStarted)
+- [Source](https://futureboy.us/pgp.html#GettingStarted)
+- [How to use GPG on the command line](http://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/)
+- [Generating a new GPG key](https://help.github.com/en/articles/generating-a-new-gpg-key)
+- [GPG Cheat Sheet](http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/)
+
 GPG version 2 may be on your system with the executable name gpg2 . Either executable can be used for these demonstrations. Both are very compatible with each other. (If you want to know a million different opinions on which you should be using, do a web search.) Version 1 is more tested, and is usually a single monolithic executable. Version 2 is compiled with crypto libraries like libgcrypt externally linked, and is designed to work better with external password entry tools. That is, gpg2 is designed for graphical environments, while gpg works better for automated and command-line use. From the command-line, I use version 1.
 
+
+## Install on MacOSX
+
+```bash
+brew install gnupg
+```
+
+## Install on Ubuntu 16.04
+
+```bash
+# By default gpg 1.x is available on Ubuntu 16.04
+sudo apt-get install gpg2
+```
 
 ## Export and Import
 
