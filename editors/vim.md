@@ -37,10 +37,51 @@ Ctrl + k # Move cursor to the split above
 #...
 ```
 
-**How do you know which buffer is active?**
+**How do you know which buffer is active?** Look at the airline status line. The one with the cursor will be highlighted
 
-Look at the airline status line. The one with the cursor will be highlighted
+More split goodness below...
 
+```
+"Max out the height of the current split
+ctrl + w _
 
+"Max out the width of the current split
+ctrl + w |
 
+"Normalize all split sizes, which is very handy when resizing terminal
+ctrl + w =
 
+"Swap top/bottom or left/right split
+Ctrl+W R
+```
+
+Source: [Vim Splits - Move Faster and More Naturally](https://thoughtbot.com/blog/vim-splits-move-faster-and-more-naturally)
+
+## Dealing with Multiple Files
+
+```bash
+cd <project-folder>
+vim **/.java (or **/.py)
+:ls
+:bn
+:bp
+:bd!
+:b10
+```
+
+## Dealing with Sessions
+
+```bash
+:mks ~/.vim-sessions/<project-name>.vim
+:source ~/.vim-sessions/<project-name>.vim
+# or
+vim -S ~/.vim-sessions/<project-name>.vim 
+```
+
+## Searching across files
+
+```bash
+<c-p> to bring up CtrlP
+<c-f> and <c-b> to cycle between modes
+<c-d> to switch to filename search instead of full path
+```
