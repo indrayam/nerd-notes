@@ -8,13 +8,15 @@ export EDITOR=vim # If it is not already set
 sudoedit <filename>
 ```
 
-## Toggle Hybrid line numbers 
+## Toggle Hybrid line numbers
+
 [Source](https://jeffkreeftmeijer.com/vim-number/)
 
 `:set number relativenumber`
 `:set nonumber norelativenumber`
 
 ## If you need to force a screen redraw
+
 `:redraw!`
 
 ## Dealing with Buffers
@@ -29,7 +31,7 @@ bd # delete buffer
 ## Dealing with Splits
 
 ```bash
-vsp [filename] # vertical split 
+vsp [filename] # vertical split
 sp [filename] # horizontal split
 close # close the split
 Ctrl + j # Move cursor to the split below
@@ -75,7 +77,16 @@ vim **/.java (or **/.py)
 :mks ~/.vim-sessions/<project-name>.vim
 :source ~/.vim-sessions/<project-name>.vim
 # or
-vim -S ~/.vim-sessions/<project-name>.vim 
+vim -S ~/.vim-sessions/<project-name>.vim
+```
+
+That said, vim-obsession plugin is far too cool. Here's what you do:
+
+```bash
+:Obsess
+# This will automatically start tracking your sessions. When you quit, it will save things in a file called Sessions.vim
+:Obsess!
+# If you want to stop tracking and delete the Sessions.vim file
 ```
 
 ## Searching across files
