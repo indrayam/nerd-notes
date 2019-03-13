@@ -5,6 +5,7 @@
 Source: 
 - [Block Storage](https://docs.openstack.org/mitaka/install-guide-ubuntu/launch-instance-cinder.html)
 - [OpenStack - Creating and Attaching a Volume into an Instance](http://www.darwinbiler.com/openstack-creating-and-attaching-a-volume-into-an-instance/)
+- [How to install xfs and create xfs file system on Debian/Ubuntu Linux](https://www.cyberciti.biz/faq/how-to-install-xfs-and-create-xfs-file-system-on-debianubuntu-linux/)]
 
 ```bash
 # [OPTIONAL STEPS] openstack volume command gave an error in the older version
