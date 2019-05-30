@@ -49,7 +49,7 @@ curl -s http://releases.ubuntu.com/17.10/SHA256SUMS
 
 When you use curl to communicate with a HTTPS site (or any other protocol that uses TLS), it will by default verify that the server is signed by a trusted Certificate Authority (CA). It does this by checking the CA bundle it was built to use, or instructed to use by the `--cacert` command line option.
 
-Sometimes you end up with a sitation where you don't have the necessary CA cert in your bundle.
+Sometimes you end up with a situation where you don't have the necessary CA cert in your bundle.
 
 ### Do not disable:
 

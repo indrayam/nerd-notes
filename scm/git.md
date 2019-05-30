@@ -1,5 +1,29 @@
 # git
 
+## Credential Helper
+If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username and password every time it talks to GitHub.
+
+Find out if Git and the osxkeychain helper are already installed:
+
+```
+$ git credential-osxkeychain
+# Test for the cred helper
+> Usage: git credential-osxkeychain <get|store|erase>
+```
+
+If it's not installed, install it:
+
+```
+brew install git
+```
+
+Tell Git to use osxkeychain helper using the global credential.helper config:
+
+```
+$ git config --global credential.helper osxkeychain
+# Set git to use the osxkeychain credential helper
+```
+
 ## Find a way with which to list the remote branches by their last modified date
 
 ```bash
