@@ -180,31 +180,39 @@ kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v3.yaml
 kubectl delete -f samples/bookinfo/networking/virtual-service-all-v1.yaml
 ```
 
-Clean it all up:
-
-```
-samples/bookinfo/platform/kube/cleanup.sh
-```
-
 ### TCP Echo sample application
 
 ```bash
 kn default
 kubectl apply -f <(istioctl kube-inject -f samples/tcp-echo/tcp-echo-services.yaml)
+# Define Gateway, Destination Rule
+# Virtual Service which routes things to v1
+kubectl apply -f samples/tcp-echo/tcp-echo-all-v1.yaml
 export INGRESS_HOST=64.102.179.211
 export INGRESS_PORT=31400
 for i in {1..10}; do \
     docker run -e INGRESS_HOST=$INGRESS_HOST -e INGRESS_PORT=$INGRESS_PORT -it --rm busybox sh -c "(date; sleep 1) | nc $INGRESS_HOST $INGRESS_PORT"; \
 done
-docker run -e INGRESS_HOST=$INGRESS_HOST -e INGRESS_PORT=$INGRESS_PORT -it --rm busybox sh -c "(date; sleep 1) | nc $INGRESS_HOST $INGRESS_PORT"
-sh -c "(date; sleep 1) | nc -c $INGRESS_HOST $INGRESS_PORT"
+# Virtual Service which routes things 20% of traffic to v2
+kubectl apply -f samples/tcp-echo/tcp-echo-20-v2.yaml
+for i in {1..10}; do \
+    docker run -e INGRESS_HOST=$INGRESS_HOST -e INGRESS_PORT=$INGRESS_PORT -it --rm busybox sh -c "(date; sleep 1) | nc $INGRESS_HOST $INGRESS_PORT"; \
+done
+# docker run -e INGRESS_HOST=$INGRESS_HOST -e INGRESS_PORT=$INGRESS_PORT -it --rm busybox sh -c "(date; sleep 1) | nc $INGRESS_HOST $INGRESS_PORT"
+# sh -c "(date; sleep 1) | nc -c $INGRESS_HOST $INGRESS_PORT"
 ```
 
-## Uninstall
+### Httpbin sample application
 
 ```bash
-helm template install/kubernetes/helm/istio --name istio --namespace $NAMESPACE | kubectl delete -f -
-kubectl delete namespace $NAMESPACE
+kn default
+kubectl apply -f <(istioctl kube-inject -f samples/httpbin/httpbin.yaml)
+# Define Gateway and Virtual Service
+kubectl apply -f samples/httpbin/httpbin-gateway.yaml
+export INGRESS_HOST=64.102.179.211
+curl --silent httpbin-code.cisco.com/html
+curl --silent --head httpbin-code.cisco.com/status/500
+curl --silent httpbin-code.cisco.com/delay/5
 ```
 
 ## Access Kiali
@@ -240,7 +248,7 @@ k port-forward -n istio-system svc/jaeger-query 16686
 
 Kiali:
 
-```
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -293,7 +301,7 @@ EOF
 
 Grafana:
 
-```
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -346,7 +354,7 @@ EOF
 
 Prometheus
 
-```
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -399,7 +407,7 @@ EOF
 
 Tracing
 
-```
+```bash
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -448,4 +456,23 @@ spec:
       mode: DISABLE
 ---
 EOF
+```
+
+## Uninstall
+
+```bash
+export NAMESPACE="istio-system"
+# Bookinfo
+samples/bookinfo/platform/kube/cleanup.sh
+# TCP Echo
+kubectl delete -f samples/tcp-echo/tcp-echo-all-v1.yaml
+kubectl delete -f samples/tcp-echo/tcp-echo-services.yaml
+# Httpbin
+kubectl delete -f samples/httpbin/httpbin.yaml
+kubectl delete -f samples/httpbin/httpbin-gateway.yaml
+# Istio
+kubectl delete -f install/kubernetes/helm/istio-init/files
+helm template install/kubernetes/helm/istio --name istio --namespace $NAMESPACE | kubectl delete -f -
+# Istio Namespace
+kubectl delete namespace $NAMESPACE
 ```
