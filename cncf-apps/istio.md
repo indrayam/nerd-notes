@@ -469,11 +469,11 @@ export NAMESPACE="istio-system"
 # Bookinfo
 samples/bookinfo/platform/kube/cleanup.sh
 # TCP Echo
-kubectl delete -f samples/tcp-echo/tcp-echo-all-v1.yaml
 kubectl delete -f samples/tcp-echo/tcp-echo-services.yaml
+kubectl delete -f samples/tcp-echo/tcp-echo-all-v1.yaml
 # Httpbin
-kubectl delete -f samples/httpbin/httpbin.yaml
 kubectl delete -f samples/httpbin/httpbin-gateway.yaml
+kubectl delete -f samples/httpbin/httpbin.yaml
 # Istio
 kubectl delete -f install/kubernetes/helm/istio-init/files
 helm template install/kubernetes/helm/istio --name istio --namespace $NAMESPACE | kubectl delete -f -
