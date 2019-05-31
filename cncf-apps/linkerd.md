@@ -2,4 +2,3 @@
 
 ## Install Linkerd
 
-Coming soon...

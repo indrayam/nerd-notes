@@ -122,7 +122,7 @@ helm template install/kubernetes/helm/istio --name istio \
 k apply -f istio.yaml
 ```
 
-## Running Bookinfo sample 
+## Running Sample Apps
 
 ```bash
 kn default
@@ -215,7 +215,7 @@ curl --silent --head httpbin-code.cisco.com/status/500
 curl --silent httpbin-code.cisco.com/delay/5
 ```
 
-## Access Kiali
+## Play with Kiali
 
 ```bash
 k port-forward -n istio-system svc/kiali 20001
@@ -226,7 +226,7 @@ watch -n 1 curl -o /dev/null -s -w %{http_code} $INGRESS_HOST/productpage
 # Login with admin and the password you set
 ```
 
-## Access Grafana
+## Play with Grafana
 
 ```bash
 # Make sure these services are working
@@ -237,7 +237,7 @@ kubectl -n $NAMESPACE port-forward $(kubectl -n $NAMESPACE get pod -l app=grafan
 # Open http://localhost:3000/dashboard/db/istio-mesh-dashboard
 ```
 
-## Access Jaeger
+## Play with Jaeger
 
 ```bash
 k port-forward -n istio-system svc/jaeger-query 16686
@@ -457,6 +457,10 @@ spec:
 ---
 EOF
 ```
+
+Since I work on OpenStack, I had to open to do two things, one of which I almost always forget:
+- Add the new TCP Ports in OpenStack Security settings
+- Setup TCP Proxy in Nginx
 
 ## Uninstall
 
