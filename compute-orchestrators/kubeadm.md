@@ -28,11 +28,11 @@ kubectl delete node learn-k8s-node-5
 ```bash
 {
 sudo apt-get update
-sudo apt-get install -y kubectl=1.13.3-00 kubeadm=1.13.3-00
+sudo apt-get install -y kubectl=1.14.2-00 kubeadm=1.14.2-00
 kubeadm version # Check that you now have the latest version
 sudo kubeadm upgrade plan
-sudo kubeadm upgrade apply v1.13.3
-sudo apt-get install -y kubelet=1.13.3-00
+sudo kubeadm upgrade apply v1.14.2
+sudo apt-get install -y kubelet=1.14.2-00
 sudo systemctl restart kubelet
 sudo systemctl status kubelet
 kubectl get nodes -o wide
@@ -50,7 +50,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 ```bash
 {
 sudo apt-get update
-sudo apt-get install -y kubectl=1.13.3-00
+sudo apt-get install -y kubectl=1.14.2-00
 }
 ```
 
@@ -77,8 +77,8 @@ kubectl drain play-k8s-node-9 --ignore-daemonsets --delete-local-data
 
 ```bash
 {
-sudo kubeadm upgrade node config --kubelet-version v1.13.3
-sudo apt-get install -y kubelet=1.13.3-00 kubeadm=1.13.3-00
+sudo kubeadm upgrade node config --kubelet-version v1.14.2
+sudo apt-get install -y kubelet=1.14.2-00 kubeadm=1.14.2-00
 sudo systemctl restart kubelet
 sudo systemctl status kubelet
 }
