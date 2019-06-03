@@ -1,7 +1,7 @@
 # Envoy on Ubuntu Xenial and macOS Mojave: The Hard Way
 
 ## Table of Contents
-- [General Notes](#gotchas)
+- [General Notes](#general-notes)
 - [Build Envoy on macOS Mojave (10.14.5)](#build-envoy-on-macos-mojave-10145)
 - [Build Envoy on Ubuntu Xenial (16.04)](#build-envoy-on-ubuntu-xenial-1604)
 
