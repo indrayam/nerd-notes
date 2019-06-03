@@ -7,12 +7,12 @@
 
 ## General Notes
 - Start [here](https://github.com/envoyproxy/envoy/tree/master/bazel#building-envoy-with-bazel)!
-- Using Docker images to play with Envoy container is definitely doing "Envoy the Easy Way". I was interested in "Envoy the Hard Way" :wink:
+- Using [Docker images](https://www.envoyproxy.io/docs/envoy/v1.10.0/start/start#quick-start-to-run-simple-example) to play with Envoy container is definitely doing "Envoy the Easy Way". I was interested in "Envoy the Hard Way" :wink:
 - Not knowing [Bazel](https://docs.bazel.build/versions/master/build-ref.html) build tool did not help. Scanning through the following URLs, while not necessary, at least helped me better understand what was going on:
    + [Bazel: Concepts and Terminology](https://docs.bazel.build/versions/master/build-ref.html)
    + [Bazel: Introduction to Bazel: Building a C++ Project](https://docs.bazel.build/versions/0.22.0/tutorial/cpp.html)
    + [Bazel: Installing Bazel on macOS](https://docs.bazel.build/versions/0.22.0/install-os-x.html)
-- **DO NOT** download the Envoy binaries from the "Releases" section in GitHub and try compiling. It complained about not being a Git repo. The way I got around it is by downloading the version of the Envoy source code that was tagged with the version I was interested in. There is another way around it as documented in [Step 1](https://github.com/envoyproxy/envoy/issues/2181#issuecomment-378290320) in this GitHub issue thread. Basically, download the Envoy Release tar gzipped file, untar it, create a SOURCE_VERSION file in `~/envoy/ci` sub-folder and put the SHA of the Release 
+- **DO NOT** download the Envoy binaries from the "Releases" section in GitHub and try compiling. It complained about not being a Git repo. The way I got around it is by downloading the version of the Envoy source code that was tagged with the version I was interested in. There is another way around it as documented in [Step 1](https://github.com/envoyproxy/envoy/issues/2181#issuecomment-378290320) in this GitHub issue thread. Basically, download the Envoy Release tar gzipped file, untar it, create a SOURCE_VERSION file in `~/envoy/ci` sub-folder and put the Git Commit SHA of the Release. For example, Git Commit SHA of [v1.10.0](https://github.com/envoyproxy/envoy/releases/tag/v1.10.0) is [e95ef6bc43daeda16451ad4ef20979d8e07a5299](https://github.com/envoyproxy/envoy/commit/e95ef6bc43daeda16451ad4ef20979d8e07a5299). Where did I find this? Look to the top-right for the full Git Commit SHA
 - I was also able to refer to the document [Developer use of CI Docker images](https://github.com/envoyproxy/envoy/blob/8d1ad35aa724962f64f7535531e408c9a93d364c/ci/README.md) and use `IMAGE_NAME=envoyproxy/envoy-build-ubuntu ./ci/run_envoy_docker.sh './ci/do_ci.sh bazel.release.server_only'` to make things work
 
 ## Build Envoy on Ubuntu Xenial (16.04)
