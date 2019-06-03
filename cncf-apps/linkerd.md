@@ -19,7 +19,7 @@ kubectl -n linkerd get svc
 linkerd dashboard &
 ```
 
-## Expose Linkerd Dashboard using TCP Proxy
+## Expose Linkerd Dashboard using TCP Proxy (OPTIONAL)
 
 Create a `linkerd-ingress.yaml` file
 
@@ -42,4 +42,9 @@ Run: `k apply -f linkerd-ingress.yaml`
 
 To test, run:
 
-`curl -L -H "Host: linkerd-code.cisco.com" http://${INGRESS_HOST}/`
+```bash
+export INGRESS_HOST=64.102.179.211
+curl -L -H "Host: linkerd-code.cisco.com" http://${INGRESS_HOST}/
+```
+
+
