@@ -314,7 +314,7 @@ brew update
 brew upgrade
 ```
 
-1. Install `go`:
+2. Install `go`:
 
 ```bash
 brew install go
@@ -338,7 +338,7 @@ go version
 # go version go1.12.5 darwin/amd64
 ```
 
-2. Install `jdk`:
+3. Install `jdk`:
 
 Download Java 8 directly from [Oracle](https://www.java.com/en/download/mac_download.jsp) and follow these [instructions](https://www.java.com/en/download/help/mac_install.xml)
 
@@ -361,7 +361,7 @@ java -version
 # Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
 ```
 
-3. Install [Buildifer](https://github.com/bazelbuild/buildtools)
+4. Install [Buildifer](https://github.com/bazelbuild/buildtools)
 
 ```bash
 go get -u github.com/bazelbuild/buildtools/buildifier
@@ -381,7 +381,7 @@ source ~/.zshrc
 echo $BUILDIFIER_BIN
 ```
 
-4. Install Bazel version 0.22:
+5. Install Bazel version 0.22:
 
 *NOTE*: Using the latest version (0.26) of Bazel gave errors.
 
@@ -404,7 +404,7 @@ Build timestamp: 1548680418
 Build timestamp as int: 1548680418
 ```
 
-5. Install the following External Dependencies
+6. Install the following External Dependencies
 
 ```bash
 brew install coreutils wget cmake libtool automake ninja clang-format autoconf aspell
@@ -450,14 +450,14 @@ Spell checker with better logic than ispell
 ...
 ```
 
-6. Git clone the exact version of Envoy source that you want to install
+7. Git clone the exact version of Envoy source that you want to install
 
 ```bash
 cd ~/src
 git clone --branch v1.10.0 git@github.com:envoyproxy/envoy.git
 ```
 
-7. Run envoy build
+8. Run envoy build
 
 ```bash
 cd ~/src/envoy
@@ -471,7 +471,7 @@ cd ~/src/envoy/bazel-bin/source/exe
 ls -al envoy-static
 ```
 
-8. Test the build
+9. Test the build
 
 Create the following `config.yaml` file in the `~/src/envoy/bazel-bin/source/exe` folder:
 
