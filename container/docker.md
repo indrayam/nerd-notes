@@ -269,6 +269,11 @@ CMD []
 docker port <container-name-or-id> 80
 ```
 
+### Remove a ton of dangling images
 
+```bash
+docker image prune
+```
 
+Source: [Cindy Sridharan's tweet](https://twitter.com/copyconstruct/status/1134205640035848192)
 
