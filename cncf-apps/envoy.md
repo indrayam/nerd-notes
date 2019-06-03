@@ -115,27 +115,7 @@ sudo apt-get install \
    virtualenv
 ```
 
-Here is the version I have running for each of the external dependencies:
-
-```bash
-apt show libtool \
-   cmake \
-   clang-format-6.0 \
-   automake \
-   autoconf \
-   make \
-   ninja-build \
-   curl \
-   unzip \
-   pkg-config \
-   zip \
-   g++ \
-   zlib1g-dev \
-   python \
-   virtualenv
-```
-
-gives the following output:
+Here is the version I have running for each of the external dependencies (run `apt show libtool cmake clang-format-6.0 automake autoconf make ninja-build curl unzip pkg-config zip g++ zlib1g-dev python virtualenv`):
 
 ```
 Package: libtool
@@ -430,13 +410,7 @@ Build timestamp as int: 1548680418
 brew install coreutils wget cmake libtool automake ninja clang-format autoconf aspell
 ```
 
-Here is the version I have running for each of the external dependencies:
-
-```bash
-brew info coreutils wget cmake libtool automake ninja clang-format autoconf aspell
-```
-
-gives the following output:
+Here is the version I have running for each of the external dependencies (run `brew info coreutils wget cmake libtool automake ninja clang-format autoconf aspell`):
 
 ```
 coreutils: stable 8.31 (bottled), HEAD
