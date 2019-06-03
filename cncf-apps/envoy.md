@@ -1,4 +1,19 @@
-# Envoy on Ubuntu Xenial (16.04) and macOS Mojave (10.14.5)
+# Envoy on Ubuntu Xenial and macOS Mojave
+
+## Table of Contents
+- [General Notes](#gotchas)
+- [Build Envoy on Ubuntu Xenial (16.04)](#build-envoy-on-ubuntu-xenial-1604)
+- [Build Envoy on macOS Mojave (10.14.5)](#build-envoy-on-macos-mojave-10145)
+
+## General Notes
+- Start [here](https://github.com/envoyproxy/envoy/tree/master/bazel#building-envoy-with-bazel)!
+- Using Docker images to play with Envoy container is definitely doing "Envoy the Easy Way". I was interested in "Envoy the Hard Way" :wink:
+- Not knowing [Bazel](https://docs.bazel.build/versions/master/build-ref.html) build tool did not help. Scanning through the following URLs, while not necessary, at least helped me better understand what was going on:
+   + [Bazel: Concepts and Terminology](https://docs.bazel.build/versions/master/build-ref.html)
+   + [Bazel: Introduction to Bazel: Building a C++ Project](https://docs.bazel.build/versions/0.22.0/tutorial/cpp.html)
+   + [Bazel: Installing Bazel on macOS](https://docs.bazel.build/versions/0.22.0/install-os-x.html)
+- **DO NOT** download the Envoy binaries from the "Releases" section in GitHub and try compiling. It complained about not being a Git repo. The way I got around it is by downloading the version of the Envoy source code that was tagged with the version I was interested in. There is another way around it as documented in [Step 1](https://github.com/envoyproxy/envoy/issues/2181#issuecomment-378290320) in this GitHub issue thread. Basically, download the Envoy Release tar gzipped file, untar it, create a SOURCE_VERSION file in `~/envoy/ci` sub-folder and put the SHA of the Release 
+- I was also able to refer to the document [Developer use of CI Docker images](https://github.com/envoyproxy/envoy/blob/8d1ad35aa724962f64f7535531e408c9a93d364c/ci/README.md) and use `IMAGE_NAME=envoyproxy/envoy-build-ubuntu ./ci/run_envoy_docker.sh './ci/do_ci.sh bazel.release.server_only'` to make things work
 
 ## Build Envoy on Ubuntu Xenial (16.04)
 
@@ -305,7 +320,6 @@ sudo mv config.yaml /etc/envoy
 envoy -c /etc/envoy/config.yaml
 ```
 
-
 ## Build Envoy on macOS Mojave (10.14.5)
 
 1. Install Homebrew:
@@ -571,5 +585,4 @@ transfer-encoding: chunked
 ```
 
 Bingo! You are all set!
-
 
