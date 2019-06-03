@@ -1,4 +1,4 @@
-# Envoy on Ubuntu Xenial and macOS Mojave
+# Envoy on Ubuntu Xenial and macOS Mojave: The Hard Way
 
 ## Table of Contents
 - [General Notes](#gotchas)
