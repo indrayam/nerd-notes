@@ -4,6 +4,7 @@
 - [General Notes](#general-notes)
 - [Build Envoy on macOS Mojave (10.14.5)](#build-envoy-on-macos-mojave-10145)
 - [Build Envoy on Ubuntu Xenial (16.04)](#build-envoy-on-ubuntu-xenial-1604)
+- [Filters Enabled by Default](#filters-enabled-by-default)
 
 ## General Notes
 - Start [here](https://github.com/envoyproxy/envoy/tree/master/bazel#building-envoy-with-bazel)!
@@ -188,7 +189,7 @@ ls -al envoy-static
 
 9. Test the build
 
-Create the following `config.yaml` file in the `~/src/envoy/bazel-bin/source/exe` folder:
+Create the following `envoy.yaml` file in the `~/src/envoy/bazel-bin/source/exe` folder:
 
 ```yaml
 admin:
@@ -247,7 +248,7 @@ static_resources:
 
 Run:
 
-`./envoy-static -c config.yaml`
+`./envoy-static -c envoy.yaml`
 
 Open a new terminal window and run:
 
@@ -462,7 +463,7 @@ ls -al envoy-static
 
 8. Test the build
 
-Create the following `config.yaml` file in the `~/src/envoy/bazel-bin/source/exe` folder:
+Create the following `envoy.yaml` file in the `~/src/envoy/bazel-bin/source/exe` folder:
 
 ```yaml
 admin:
@@ -521,7 +522,7 @@ static_resources:
 
 Run:
 
-`./envoy-static -c config.yaml`
+`./envoy-static -c envoy.yaml`
 
 Open a new terminal window and run:
 
@@ -556,8 +557,77 @@ Bingo! You are all set!
 cd ~/src/envoy/bazel-bin/source/exe
 sudo cp envoy-static /usr/local/bin/envoy
 sudo mkdir -p /etc/envoy
-sudo mv config.yaml /etc/envoy
+sudo mv envoy.yaml /etc/envoy
 # Assuming /usr/local/bin is already in your PATH...
-envoy -c /etc/envoy/config.yaml
+envoy -c /etc/envoy/envoy.yaml
 ```
 
+## Filters Enabled By Default
+
+When you run the `envoy -c /etc/envoy/envoy.yaml` command, the console output shows the Envoy filters 
+
+```
+access_loggers: 
+    envoy.file_access_log
+    envoy.http_grpc_access_log
+filters.http: 
+    envoy.buffer
+    envoy.cors
+    envoy.ext_authz
+    envoy.fault
+    envoy.filters.http.grpc_http1_reverse_bridge
+    envoy.filters.http.header_to_metadata
+    envoy.filters.http.jwt_authn
+    envoy.filters.http.rbac
+    envoy.filters.http.tap
+    envoy.grpc_http1_bridge
+    envoy.grpc_json_transcoder
+    envoy.grpc_web,envoy.gzip
+    envoy.health_check
+    envoy.http_dynamo_filter
+    envoy.ip_tagging
+    envoy.lua
+    envoy.rate_limit
+    envoy.router
+    envoy.squash
+filters.listener: 
+    envoy.listener.original_dst
+    envoy.listener.original_src
+    envoy.listener.proxy_protocol
+    envoy.listener.tls_inspector
+filters.network: 
+    envoy.client_ssl_auth
+    envoy.echo
+    envoy.ext_authz
+    envoy.filters.network.dubbo_proxy
+    envoy.filters.network.mysql_proxy
+    envoy.filters.network.rbac
+    envoy.filters.network.sni_cluster
+    envoy.filters.network.thrift_proxy
+    envoy.filters.network.zookeeper_proxy
+    envoy.http_connection_manager
+    envoy.mongo_proxy
+    envoy.ratelimit
+    envoy.redis_proxy
+    envoy.tcp_proxy
+stat_sinks: 
+    envoy.dog_statsd
+    envoy.metrics_service
+    envoy.stat_sinks.hystrix
+    envoy.statsd
+tracers: 
+    envoy.dynamic.ot
+    envoy.lightstep
+    envoy.tracers.datadog
+    envoy.zipkin
+transport_sockets.downstream: 
+    envoy.transport_sockets.alts
+    envoy.transport_sockets.tap
+    raw_buffer
+    tls
+transport_sockets.upstream: 
+    envoy.transport_sockets.alts
+    envoy.transport_sockets.tap
+    raw_buffer
+    tls
+```
