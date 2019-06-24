@@ -71,3 +71,37 @@ alias awslssec='aws ec2 describe-security-groups --query "SecurityGroups[*].{vpc
 ```bash
 aws ec2 describe-images --filters 'Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-*-amd64*' --query 'Images[*].[ImageId,CreationDate,Description]' --output text | sort -k2 -r | head -n5
 ```
+
+### Using aws profiles to connect to Cisco Cloud Storage
+
+Edit `~/.aws/config` like this:
+
+```bash
+[default]
+region = us-east-1
+output = json
+[profile ciscoalln]
+region = us-east-1
+output = json
+```
+
+Edit `~/.aws/credentials` like this:
+
+```bash
+[default]
+aws_access_key_id = ...
+aws_secret_access_key = ...
+[ciscoalln]
+aws_access_key_id = ...
+aws_secret_access_key = ...
+```
+
+Interact with Cisco Cloud Storage using the following commands:
+
+```bash
+aws --profile ciscoalln --endpoint-url https://alln-cloud-storage-1.cisco.com s3 ls
+aws --profile ciscoalln --endpoint-url https://alln-cloud-storage-1.cisco.com s3 mb s3://demo
+aws --profile ciscoalln --endpoint-url https://alln-cloud-storage-1.cisco.com s3 ls s3://demo
+aws --profile ciscoalln --endpoint-url https://alln-cloud-storage-1.cisco.com s3 cp cdcli-final.png s3://demo
+```
+
