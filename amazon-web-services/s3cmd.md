@@ -14,9 +14,17 @@ s3cmd get --recursive s3://us-east-1-anand-files/media-files/
 
 ### Configure s3cmd to interact with Cisco Cloud Storage
 
-Copy `.s3cfg` to `.s3cfg.bk`
+- Find the case notes when your object storage was provisioned. It should have information that looks like:
 
-Edit `.s3cfg` as follows:
+```bash
+Endpoint: alln-cloud-storage-1.cisco.com
+"user": "cd_code$cd",
+"access_key": "...",
+"secret_key": "..."
+```
+- Focus on the value of "user". Everything before the "$" sign is the tenant name. So, in our example, `cd_code` is the tenant name
+- The HTTPS URL to access files stored inside Cloud Storage would be derived using this logic: `https://<end-point>/<tenant-name>:<bucket-name>/<file-name>`. Assuming you create a bucket named "demo" and inside the bucket you have a file named "hello.txt", the URL to access this file would be `https://alln-cloud-storage-1.cisco.com/cd_code:demo/hello.txt`
+- Copy `.s3cfg` to `.s3cfg.bk` and then edit `.s3cfg` as follows:
 
 ```bash
 [default]
@@ -34,11 +42,26 @@ secret_key = ...
 signature_v2 = False
 ```
 
-Run the following commands to interact with Cisco Cloud Storage:
+Following s3cmd commands can be used to interact with Cisco Cloud Storage:
 
 ```bash
 s3cmd ls
+# Create a bucket
 s3cmd mb s3://demo
+# Put a file inside the bucket. This file will NOT be publicly accessible
 s3cmd put cd-console.png s3://demo
+# List all files inside your account
 s3cmd la
+# Get the file from the Cloud Storage
+s3cmd get s3://demo/cd-console.png demo.png
+# Make a file public
+s3cmd --acl-public setacl s3://demo/cd-console.png
+# Fetch the file
+curl -L -O "https://alln-cloud-storage-1.cisco.com/cd_code:demo/cd-console.png"
 ```
+
+**Note:**
+
+
+```
+
