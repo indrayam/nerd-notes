@@ -1,4 +1,14 @@
 # aws cli
+
+AWS v2 is the new client. Download it [here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux-mac.html)
+
+```bash
+curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-macos.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws2 configure
+```
+
 ```bash
 NAME
        aws -

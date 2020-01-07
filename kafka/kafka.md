@@ -21,3 +21,22 @@ zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties &
 kafka-server-start /usr/local/etc/kafka/server.properties &
 kafka-server-start /usr/local/etc/kafka/server1.properties &
 ```
+
+## Kafka Create Topic
+
+```bash
+kafka-topics --bootstrap-server localhost:9091 --create --topic demo1 --partitions 2 --replication-factor 2
+```
+
+## Kafka Console Producer
+
+```bash
+kafka-console-producer --broker-list localhost:9091 --topic demo1
+```
+
+## Kafka Console Consumer
+
+```bash
+kafka-console-consumer --bootstrap-server localhost:9091 --topic demo1
+kafka-console-consumer --bootstrap-server localhost:9091 --topic demo1 --from-beginning
+```

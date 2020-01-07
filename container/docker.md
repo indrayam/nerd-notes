@@ -7,7 +7,7 @@
 
 ```bash
 docker login
-docker login -u="<userid>" -p="..." containers.cisco.com
+docker login -u="<userid>" -p="..." <ech-server-name>
 gcloud auth configure-docker # one time only
 docker login -u _json_key -p "$(cat ~/.gcp/gce-account.json)" https://us.gcr.io
 # aws ecr command prints out the docker login command that lasts for 12 hrs
@@ -72,7 +72,7 @@ docker info
 ```bash
 docker pull indrayam/<image-name>:<tag>
 gcloud docker -- pull us.gcr.io/evident-wind-163400/myhttpd:latest
-docker pull containers.cisco.com/anasharm/<image-name>:<tag>
+docker pull <ech-server-name>/anasharm/<image-name>:<tag>
 ```
 
 ### Get status of images
@@ -103,7 +103,7 @@ d tag <source-image> <target-image>
 ```bash
 docker push indrayam/<image-name>:<tag>
 gcloud docker -- push us.gcr.io/evident-wind-163400/myhttpd:latest
-docker push containers.cisco.com/anasharm/<image-name>:<tag>
+docker push <ech-server-name>/anasharm/<image-name>:<tag>
 ```
 
 ### Get status of containers

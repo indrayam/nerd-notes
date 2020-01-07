@@ -23,7 +23,7 @@ kubectl run test-$RANDOM --rm -i -t --restart=Never --image ubuntu:16.04 -- bash
 kubectl run test-$RANDOM --rm -i -t --restart=Never --image indrayam/debug-container:latest -- bash
 k run debugpod -i -t --restart=Never --image indrayam/debug-container:0.1 -- /bin/bash
 k run debugpod -i -t --restart=Never --image-pull-policy=Always --image indrayam/debug-container-spinnaker:0.1 -- sleep 31536000
-k run debugpod -i -t --restart=Never --image-pull-policy=Always --image containers.cisco.com/codeplayground/debug-container-openshift:0.2 -- sleep 31536000
+k run debugpod -i -t --restart=Never --image-pull-policy=Always --image <ech-server-name>/codeplayground/debug-container-openshift:0.2 -- sleep 31536000
 
 kubectl run httpd --image httpd --replicas 3
 kubectl expose deploy httpd --port 8080 --target-port 80 --type NodePort
@@ -183,7 +183,7 @@ type: kubernetes.io/dockerconfigjson
 ```json
 {
   "auths": {
-    "containers.cisco.com": {
+    "<ech-server-name>": {
       "auth": "Y29kZXBsYXlncm91bmQrYW5hbmRrZXlzOldOSVVXQTBPSk1RWjlMWFdVWTFaR0ZIN0sxVjRUMVlUSVJZUzRWVzFOU0tBOUw0NzNSWDVXWVJUNUdTUE8wREk=",
       "email": ""
     }
@@ -205,7 +205,7 @@ Bottom line, if you had to create the Kubernetes Secret that captures the authen
 ```json
 {
   "auths": {
-    "containers.cisco.com": {
+    "<ech-server-name>": {
       "auth": "<output-from-step-1",
       "email": ""
     }
@@ -234,7 +234,7 @@ type: kubernetes.io/dockerconfigjson
 spec:
   containers:
     - name: secretpod
-      image: containers.cisco.com/codeplayground/secret-repo:0.1
+      image: <ech-server-name>/codeplayground/secret-repo:0.1
   
   imagePullSecrets:
     - name: <secret-name> 
