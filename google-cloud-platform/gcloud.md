@@ -6,6 +6,7 @@
 gcloud auth login
 gloud init
 gcloud init --console-only
+gcloud config configurations activate default (or cisco)
 ```
 
 ### Manage your active Application Default Credentials (ADC)

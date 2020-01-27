@@ -1,4 +1,5 @@
 # az cli
+
 ```bash
 For version info, use 'az --version'
 
@@ -16,6 +17,7 @@ Subgroups:
 ```
 
 ### Getting help for a sub-command
+
 For example: Here's how you get help for "configure" sub-command
 
 ```bash

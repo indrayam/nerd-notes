@@ -1,9 +1,11 @@
 # openssl
 
 ## Reference
+
 Refer to cfssl document for more examples on certificate creation
 
 ## Create SSL Cert for Web Server
+
 - [How To Create a Self-Signed SSL Certificate for Nginx in Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-16-04)
 - [Reference Gist on GitHub](https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309)
 - [OpenSSL Essentials: Working with SSL Certificates, Private Keys and CSRs](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
@@ -13,6 +15,7 @@ Refer to cfssl document for more examples on certificate creation
 ```bash
 openssl genrsa -out ca.key 4096
 ```
+
 If you want a password protected key, use the following
 
 ```bash
@@ -128,7 +131,7 @@ curl --cacert code-ca-jenkins-spinnaker.crt https://spinnaker-code.cisco.com
 
 I was not able to figure out where and how to add the certificates so that the default installed curl (`/usr/bin/curl`) would honor it. Instead, I installed `curl` using Homebrew and then it all worked after I added the certificate authority certs into the OS store using these commands:
 
-```bash
+````bash
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-jenkins-spinnaker.crt
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-jenkins1.crt
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain code-ca-spinnaker1.crt
@@ -142,7 +145,7 @@ openssl genrsa -out ${USER}.key 2048 # Get Key
 openssl req -new -key ${USER}.key -out ${USER}.csr -subj "/CN=${USER}/O=CoDE" # Create a CSR
 openssl x509 -req -in ${USER}.csr -CA ./kubernetes.crt -CAkey ./kubernetes.key -CAcreateserial -out ${USER}.crt # Generate Certificate
 }
-```
+````
 
 ## Interact with Certificates
 
@@ -176,7 +179,7 @@ openssl req -text -noout -in ca.csr #print the certificate request in text form 
 openssl rsa -in ca-key.pem #print the (RSA) private key
 openssl rsa -text -in ca-key.pem #print the private key in text format
 openssl rsa -text -noout -in ca-key.pem #print the private key in text format, but do not print the private key out
-openssl rsa -outform DES -in ca-key.pem #print the private key in DES 
+openssl rsa -outform DES -in ca-key.pem #print the private key in DES
 ```
 
 ```bash
@@ -194,12 +197,12 @@ echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | openssl base64 -e -A
 echo -n "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ" | base64
 ```
 
-## Create Base64 decoding 
+## Create Base64 decoding
 
 The values of the encoded output should be exactly the same if the input string is the same. Be careful about spaces and newlines at the end of the string
 
 ```bash
-openssl enc -base64 -d <<< ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR 
+openssl enc -base64 -d <<< ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR
 OR
 echo -n “ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR” | openssl base64 -d -A
 echo -n "ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKemRXSWlPaUpLYjJVaWZR" | base64 --decode
@@ -256,12 +259,12 @@ Why do we need the digest to be dumped in binary format? Because if you do not, 
 Use this online converter until you figure out how to do it on the command line...
 [Text Converter](http://www.percederberg.net/tools/text_converter.html)
 
-## Encrypt a file 
+## Encrypt a file
 
 ```bash
-openssl aes-256-cbc -e -in bash-bootstrap-kubernetes.tar.gz -out bash-bootstrap-kubernetes-0.tar.gz.enc
+openssl aes-256-cbc -e -in linux-bootstrap.tar.gz -out linux-bootstrap.tar.gz.enc
 # If using OpenSSL 1.1.1, use the following...
-openssl aes-256-cbc -pbkdf2 -e -in bash-bootstrap-kubernetes.tar.gz -out bash-bootstrap-kubernetes-1.tar.gz.enc
+openssl aes-256-cbc -e -in linux-bootstrap.tar.gz -out linux-bootstrap-openssl-1_1_1.tar.gz.enc
 ```
 
 ## Decrypt an encrypted file
@@ -269,11 +272,9 @@ openssl aes-256-cbc -pbkdf2 -e -in bash-bootstrap-kubernetes.tar.gz -out bash-bo
 ```bash
 openssl aes-256-cbc -d -in linux-bootstrap.tar.gz.enc -out linux-bootstrap.tar.gz
 # If using OpenSSL 1.1.1, use the following...
-openssl aes-256-cbc -pbkdf2 -d -in bash-bootstrap.tar.gz.enc -out bash-bootstrap.tar.gz
+openssl aes-256-cbc -d -in linux-bootstrap-openssl-1_1_1.tar.gz.enc -out linux-bootstrap.tar.gz
 ```
 
 **Image: Stackoverflow Snippet 2**
 
 ![Stackoverflow Snippet 2](https://storage.googleapis.com/us-east-4-anand-files/media-files-shared/openssl-footer.png)
-
-
