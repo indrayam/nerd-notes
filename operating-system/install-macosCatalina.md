@@ -111,9 +111,8 @@ Refer to the `brew-install.sh` script in `Dropbox/` under `workspace/brew`
 
 ### Configure Sublime Text 3
 
-Install Package Control Plugin in Sublime Text 3 by selecting "Tools | Install Package Control"
-
-Go to `Sublime Text | Preferences | Package Settings | Package Control | Settings - User`. Append the following entries to the file. Refer to this [gist](https://gist.github.com/indrayam/eac5dc48a701d71d142063f13d269269) for latest values of installed packages:
+- Install Package Control Plugin in Sublime Text 3 by selecting "Tools | Install Package Control"
+- Go to `Sublime Text | Preferences | Package Settings | Package Control | Settings - User`. Append the following entries to the file. Refer to this [gist](https://gist.github.com/indrayam/eac5dc48a701d71d142063f13d269269) for latest values of installed packages:
 
 ```bash
     "in_process_packages":
@@ -151,11 +150,9 @@ Go to `Sublime Text | Preferences | Package Settings | Package Control | Setting
 
 After adding the packages you want to on Package Control.sublime-settings, just restart Sublime Text and the Package Control will start installing those packages. Open console window (`Ctrl+^`) immediately after restart to see activities.
 
-Once all the installation is complete, copy the Sublime Text 3 settings from this [gist](https://gist.github.com/indrayam/41fc917003231f528765406cdca6aab3)
-
-Copy the latest `Projects` folder from your existing Mac's Sublime Text (`Browse Packages | User`) or get it from `Dropbox | workspace | macos`
-
-Finally, update GitSavvy settings as below:
+- Copy the Sublime Text 3 settings from this [gist](https://gist.github.com/indrayam/41fc917003231f528765406cdca6aab3)
+- Copy the latest `Projects` folder from your existing Mac's Sublime Text (`Browse Packages | User`) or get it from `Dropbox | workspace | macos-setup | Sublime-Text`
+- Update GitSavvy settings as below:
 
 ```bash
 {
@@ -168,8 +165,7 @@ Finally, update GitSavvy settings as below:
     "show_remotes_in_branch_dashboard": true,
 }
 ```
-
-
+- Copy the folder `Dropbox | workspace | macos-setup | Sublime-Text | Materialize` into `/Users/anasharm/Library/Application Support/Sublime Text 3/Packages`
 
 ### Configure VS Code
 - Install the VS Code Plugins be using the script in this [gist](https://gist.github.com/indrayam/df2bf10402cc53527386ecf224d38728)
