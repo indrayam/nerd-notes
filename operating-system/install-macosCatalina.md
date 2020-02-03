@@ -153,7 +153,23 @@ After adding the packages you want to on Package Control.sublime-settings, just 
 
 Once all the installation is complete, copy the Sublime Text 3 settings from this [gist](https://gist.github.com/indrayam/41fc917003231f528765406cdca6aab3)
 
-Finally. copy the latest `Projects` folder from your existing Mac's Sublime Text (`Browse Packages | User`) or get it from `Dropbox | workspace | macos`
+Copy the latest `Projects` folder from your existing Mac's Sublime Text (`Browse Packages | User`) or get it from `Dropbox | workspace | macos`
+
+Finally, update GitSavvy settings as below:
+
+```bash
+{
+    "git_path": "/usr/local/bin/git",
+    "api_tokens": {
+        "github.com": "..."
+    },
+    "show_panel_for": ["pull", "push"],
+    "sort_by_recent_in_branch_dashboard": true,
+    "show_remotes_in_branch_dashboard": true,
+}
+```
+
+
 
 ### Configure VS Code
 - Install the VS Code Plugins be using the script in this [gist](https://gist.github.com/indrayam/df2bf10402cc53527386ecf224d38728)
@@ -188,6 +204,20 @@ I do understand [automations](https://stackoverflow.com/questions/32628351/expor
 - `npm ls -g --depth=0 > ~/Dropbox/workspace/...`
 - `npm update -g`
 
+### Install Krew Plugins
+
+```bash
+(
+  set -x; cd "$(mktemp -d)" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/download/v0.3.3/krew.{tar.gz,yaml}" &&
+  tar zxvf krew.tar.gz &&
+  KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" &&
+  "$KREW" install --manifest=krew.yaml --archive=krew.tar.gz &&
+  "$KREW" update
+)
+```
+
+- Run `krew-plugins.sh` from `Dropbox | workspace | macos-setup`
 
 ### Dock Sequence
 
