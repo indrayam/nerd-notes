@@ -88,6 +88,10 @@ mas search Things
 mas install 904280696
 mas search kindle
 mas install 405399194
+mas search unsplash
+mas install 1284863847
+mas search tweetdeck
+mas install 485812721
 ```
 
 I had to install Dato manually :-). Configure Dato to add Date, Week Number and Time Zones as needed.
