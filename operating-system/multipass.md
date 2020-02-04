@@ -4,8 +4,8 @@
 
 ```bash
 brew cask install multipass
-sudo multipass set local.driver=virtualbox
-multipass set client.primary-name=bionic
+sudo multipass set local.driver=virtualbox 
+sudo multipass set client.primary-name=bionic
 ```
 
 ## Basic Interactions
