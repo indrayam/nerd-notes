@@ -7,11 +7,37 @@
 
 ```bash
 docker login
+docker pull hello-world
+
+# ech (get it from ech web UI)
 docker login -u="<userid>" -p="..." <ech-server-name>
-gcloud auth configure-docker # one time only
-docker login -u _json_key -p "$(cat ~/.gcp/gce-account.json)" https://us.gcr.io
-# aws ecr command prints out the docker login command that lasts for 12 hrs
-eval $(aws ecr get-login --no-include-email --region us-east-1)
+
+# gcloud
+gcloud auth configure-docker
+gcloud projects list
+docker tag hello-world gcr.io/[PROJECT-ID]/hello-world:v1
+docker push gcr.io/[PROJECT-ID]/hello-world:v1
+
+# aws
+aws sts get-caller-identity
+aws ecr get-login-password | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.us-east-1.amazonaws.com
+aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true
+docker tag hello-world aws_account_id.dkr.ecr.us-east-1.amazonaws.com/hello-world:v1
+docker push aws_account_id.dkr.ecr.us-east-1.amazonaws.com/hello-world:v1
+
+
+# azure
+az group create --name SEAZ --location eastus
+az acr create -n acrdemo -g SEAZ --sku Basic
+az acr login --name [Registry-Name]
+docker tag hello-world [Registry-Name].azurecr.io/hello-world:v1
+docker push [Registry-Name].azurecr.io/hello-world:v1
+```
+
+### Get AWS Account ID
+
+```bash
+
 ```
 
 ### Run Docker container with an interactive shell
