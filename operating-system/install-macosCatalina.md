@@ -194,6 +194,14 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
+- Install AWS CLI v1
+
+```bash
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws-cli/v1 -b /usr/local/bin/aws
+```
+
 ### Install Node Modules
 
 - Run `npm ls -g --depth=0` on one machine
