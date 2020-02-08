@@ -69,7 +69,7 @@ brew cask install iterm2
 Source: [Homebrew.sh Formulas](https://formulae.brew.sh/cask/)
 
 ```bash
-brew cask install google-chrome firefox evernote dropbox font-fira-code java osxfuse visual-studio-code sublime-text snagit jetbrains-toolbox microsoft-edge virtualbox vmware-fusion robo-3t postman tableplus webex-meetings webex-teams zoomus slack telegram wechat whatsapp skype multipass 
+brew cask install google-chrome firefox evernote dropbox font-fira-code java osxfuse visual-studio-code sublime-text snagit jetbrains-toolbox microsoft-edge virtualbox vmware-fusion robo-3t postman tableplus webex-meetings webex-teams zoomus slack telegram wechat whatsapp skype multipass box-sync
 brew install mas # interact with AppleStore Apps
 ```
 
@@ -110,8 +110,14 @@ I had to install Dato manually :-). Configure Dato to add Date, Week Number and 
 
 ### Install Homebrew CLI Forumulas
 
-Refer to the `brew-install.sh` script in `Dropbox/` under `workspace/brew`
+Refer to the `brew-install.sh` script in `Dropbox/` under `workspace/brew`. 
 
+Make sure you run this:
+
+```bash
+# To install useful key bindings and fuzzy completion:
+$(brew --prefix)/opt/fzf/install
+```
 
 ### Configure Sublime Text 3
 

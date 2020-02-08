@@ -54,6 +54,7 @@ minikube start --memory=8192 --cpus=4 --kubernetes-version=v1.10.0 \
     --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
     --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
     --vm-driver='virtualbox'
+minikube start --memory='2000mb' --cpus=2 --vm-driver=virtualbox
 
 ### Get the kubernetes URL(s) for the specified service in your local cluster
 mk service <service-name> --url
