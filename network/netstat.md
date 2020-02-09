@@ -1,5 +1,11 @@
 # netstat
 
+### Routing Table
+
+```bash
+netstat -r
+```
+
 ### Finding if a particular port is in use on a host
 
 ```bash
