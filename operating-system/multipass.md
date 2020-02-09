@@ -4,7 +4,10 @@
 
 ```bash
 brew cask install multipass
-sudo multipass set local.driver=virtualbox 
+sudo multipass get local.driver
+sudo multipass set local.driver=virtualbox
+sudo multipass set local.driver=hyperkit
+sudo multipass get client.primary-name
 sudo multipass set client.primary-name=bionic
 ```
 

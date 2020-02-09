@@ -119,6 +119,13 @@ Make sure you run this:
 $(brew --prefix)/opt/fzf/install
 ```
 
+OR
+
+```bash
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
 ### Configure Sublime Text 3
 
 - Install Package Control Plugin in Sublime Text 3 by selecting "Tools | Install Package Control"
