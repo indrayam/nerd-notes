@@ -6,6 +6,7 @@ Source: [VirtualBox Network Settings: Complete Guide](https://www.nakivo.com/blo
 
 ```bash
 vb list vms
+vb list runningvms
 vb list hostinfo
 vb showvminfo <vmname|uuid> 
 ```
