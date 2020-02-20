@@ -1,16 +1,17 @@
 # Install MacOS (Catalina)
 
 ### Power up and the basics
+
 - Power on the MacBook
 - Choose your country and select your keyboard preferences
 - Connect to Wi-Fi network
 - Enter the Apple ID and connect to iCloud
 - Setup the Unix Account
-    Full Name
-    Account Name
-    Password
-    Password Verify
-    Hint
+  Full Name
+  Account Name
+  Password
+  Password Verify
+  Hint
 - System Preferences | Dock (Add Maginification, reduce size)
 - System Preferences | Trackpad (Add Tap to Click; Remove Scroll direction setting of "Normal")
 - Setup Siri
@@ -51,18 +52,19 @@ brew cask install iterm2
 ```
 
 ### Configure iTerm2
+
 - Run iTerm2
 - Changes in `Preferences | Appearance`
-    + Check `Show tab bar even when there is only one tab`
-    + Select `Dark` Theme
+  - Check `Show tab bar even when there is only one tab`
+  - Select `Dark` Theme
 - Changes in `Preferences | Profiles | Text`
-    + Set `Vertical Bar`
-    + Change Font to `JetBrains Mono 22`, Check `Use Ligatures`
+  - Set `Vertical Bar`
+  - Change Font to `JetBrains Mono 22`, Check `Use Ligatures`
 - Changes in `Preferences | Profiles | Window`
-    + Select `Background Image`. Select the image from Dropbox zz_miscellaneous/ folder (`BlackHole..`)
-    + Columns `450 x 150`
+  - Select `Background Image`. Select the image from Dropbox zz_miscellaneous/ folder (`BlackHole..`)
+  - Columns `450 x 150`
 - Changes in `Preferences | Profiles | Terminal`
-    + Check `Unlimited Scrollback`
+  - Check `Unlimited Scrollback`
 
 ### Install Homebrew Cask Formulas
 
@@ -100,9 +102,9 @@ I had to install Dato manually :-). Configure Dato to add Date, Week Number and 
 
 - Open Jetbrains Toolbox
 - Download
-    + IntelliJ IDEA Ultimate 
-    + PyCharm Professional 
-    + GoLand 
+  - IntelliJ IDEA Ultimate
+  - PyCharm Professional
+  - GoLand
 
 ### Install VS Code Plugins
 
@@ -110,7 +112,7 @@ I had to install Dato manually :-). Configure Dato to add Date, Week Number and 
 
 ### Install Homebrew CLI Forumulas
 
-Refer to the `brew-install.sh` script in `Dropbox/` under `workspace/brew`. 
+Refer to the `brew-install.sh` script in `Dropbox/` under `workspace/brew`.
 
 Make sure you run this:
 
@@ -165,7 +167,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ]
 ```
 
-After adding the packages you want to on Package Control.sublime-settings, just restart Sublime Text and the Package Control will start installing those packages. Open console window (`Ctrl+^`) immediately after restart to see activities.
+After adding the packages you want to Package Control.sublime-settings, just restart Sublime Text and the Package Control will start installing those packages. Open console window (`Ctrl+^`) immediately after restart to see activities.
 
 - Copy the Sublime Text 3 settings from this [gist](https://gist.github.com/indrayam/41fc917003231f528765406cdca6aab3)
 - Copy the latest `Projects` folder from your existing Mac's Sublime Text (`Browse Packages | User`) or get it from `Dropbox | workspace | macos-setup | Sublime-Text`
@@ -182,14 +184,17 @@ After adding the packages you want to on Package Control.sublime-settings, just 
     "show_remotes_in_branch_dashboard": true,
 }
 ```
+
 - Copy the folder `Dropbox | workspace | macos-setup | Sublime-Text | Materialize` into `/Users/anasharm/Library/Application Support/Sublime Text 3/Packages`
 
 ### Configure VS Code
+
 - Install the VS Code Plugins be using the script in this [gist](https://gist.github.com/indrayam/df2bf10402cc53527386ecf224d38728)
 - Configure the settings by pasting the latest configuration stored in this [gist](https://gist.github.com/indrayam/94bc32e093000a45fb653a6bf9e32cfc)
 - Copy the Project Manager's JSON file over
 
 ### Configure the Zsh
+
 - Install oh-my-zsh
 - Copy the SSH dotfiles from the "vault"
 - Clone the .dotfiles repo into ~/.dotfiles
@@ -287,4 +292,3 @@ I do understand [automations](https://stackoverflow.com/questions/32628351/expor
 - Calculator
 - Daisy Disk
 - Activity Monitor (showing CPU)
-

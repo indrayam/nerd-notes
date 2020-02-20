@@ -19,3 +19,6 @@ After this you could run the complete re-indexing of your hard drive (be aware t
 
 `sudo rm -rf /.Spotlight-V100/*`
 The next and final step would be to add others to your (do not scan), privacy settings.
+
+`codesign -dvv /usr/libexec/routined`
+To check if a binary is signed binary by Apple
