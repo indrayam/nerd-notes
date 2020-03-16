@@ -172,13 +172,36 @@ change to gpg2:
 git config --global gpg.program gpg2
 ```
 
-5. Optional: try disable TTY if you have problems with making auto-signed commits from your IDE or other software
+5. Setup GPG, GPG Agent and PinEntry
+
+[Source](https://gist.github.com/bmhatfield/cc21ec0a3a2df963bffa3c1f884b676b)
+
+- Create `~/.gnupg/gpg.conf` with the following content:
 
 ```
-$ echo 'no-tty' >> ~/.gnupg/gpg.conf
+# Uncomment within config (or add this line)
+use-agent
 ```
 
-In my specific case, this point was mandatory.
+- Create `~/.gnupg/gpg-agent.conf` with the following content:
+
+```
+# Enables GPG to find gpg-agent
+use-standard-socket
+
+# Connects gpg-agent to the OSX keychain via the brew-installed
+# pinentry program from GPGtools. This is the OSX 'magic sauce',
+# allowing the gpg key's passphrase to be stored in the login
+# keychain, enabling automatic key signing.
+pinentry-program /usr/local/bin/pinentry-mac
+
+default-cache-ttl 34560000
+max-cache-ttl 34560000
+```
+
+- Change `~/.zshrc` and add `gpg-agent` in plugins section
+- Restart shell
+- Login once from command-line. Enter Keyphrase. After that, it should be cached.
 
 ## Prints the GPG key ID, in ASCII armor format
 gpg --armor --export A190E97F52B7DBAC
