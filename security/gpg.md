@@ -25,11 +25,11 @@ sudo apt-get install gpg2
 
 ```bash
 # Export
-gpg --export-secret-keys -a 2A30D3C45B5C792CC603C82AA190E97F52B7DBAC > anand_sharma_gpg_p.asc
-gpg --export -a 2A30D3C45B5C792CC603C82AA190E97F52B7DBAC > anand_sharma_gpg.asc
+gpg --export-secret-keys -a 2A30D3C45B5C792CC603C82AA190E97F52B7DBAC > anasharm_privatekey.asc
+gpg --export -a 2A30D3C45B5C792CC603C82AA190E97F52B7DBAC > anasharm_publickey.asc
 # Go to the new machine and import
-gpg --import anand_sharma_gpg_p.asc
-gpg --import anand_sharma_gpg.asc
+gpg --import anasharm_privatekey.asc
+gpg --import anasharm_publickey.asc
 ```
 
 ## Using GPG
@@ -186,20 +186,31 @@ use-agent
 - Create `~/.gnupg/gpg-agent.conf` with the following content:
 
 ```
-# Enables GPG to find gpg-agent
-use-standard-socket
-
 # Connects gpg-agent to the OSX keychain via the brew-installed
 # pinentry program from GPGtools. This is the OSX 'magic sauce',
 # allowing the gpg key's passphrase to be stored in the login
 # keychain, enabling automatic key signing.
 pinentry-program /usr/local/bin/pinentry-mac
-
-default-cache-ttl 34560000
-max-cache-ttl 34560000
 ```
 
-- Change `~/.zshrc` and add `gpg-agent` in plugins section
+- Change your Zsh shell script by adding the following excerpt
+
+```
+## GPG
+# Source: https://gist.github.com/bmhatfield/cc21ec0a3a2df963bffa3c1f884b676b
+# Add the following to your shell init to set up gpg-agent automatically for every shell
+# In order for gpg to find gpg-agent, gpg-agent must be running, and there must be an env
+# variable pointing GPG to the gpg-agent socket. This little script, which must be sourced
+# in your shell's init script (ie, .bash_profile, .zshrc, whatever), will either start
+# gpg-agent or set up the GPG_AGENT_INFO variable if it's already running.
+
+# Add the following to your shell init to set up gpg-agent automatically for every shell
+if [ -n "$(pgrep gpg-agent)" ]; then
+    echo "GnuPG Agent is running"
+else
+    eval $(gpg-agent --daemon --default-cache-ttl 31536000)
+fi
+```
 - Restart shell
 - Login once from command-line. Enter Keyphrase. After that, it should be cached.
 
