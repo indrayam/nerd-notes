@@ -1,20 +1,30 @@
 # nginx
 
-## Update the default Nginx version on Ubuntu 16.04
+## Update the default Nginx version on Ubuntu 18.04
+
+[Source: How to Install Nginx Latest Version on Ubuntu 18.04, Ubuntu 19.04](https://www.linuxbabe.com/ubuntu/install-nginx-latest-version-ubuntu-18-04)
 
 ```bash
 sudo wget https://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
 sudo vim /etc/apt/sources.list.d/nginx.list 
-  #Add the following lines to nginx.list:
-  deb https://nginx.org/packages/mainline/ubuntu/ xenial nginx
-  deb-src https://nginx.org/packages/mainline/ubuntu/ xenial nginx
-sudo apt-get remove nginx #Remove existing Nginx install (if any)
+
+#Add the following lines to nginx.list:
+deb [arch=amd64] http://nginx.org/packages/mainline/ubuntu/ bionic nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ bionic nginx
 sudo apt-get update
+
+sudo apt-get remove nginx nginx-common nginx-full nginx-core #Remove existing Nginx install (if any)
 sudo apt-get install nginx
-sudo vim /etc/nginx/tcppassthrough.conf (Update the Upstream Port numbers for 80 and/or 443) # See above
 sudo nginx -t # to check if the configuration is ok
+sudo systemctl start nginx
+# Enable auto start at boot time
+sudo systemctl enable nginx
+# Check status
+sudo systemctl status nginx
 ```
+
+Check the default configuration in `/etc/nginx/conf.d/default.conf`. Web root folder is `/usr/share/nginx/html`.
 
 ## Nginx as L4 TCP Proxy
 
