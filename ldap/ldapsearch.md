@@ -8,7 +8,8 @@ sudo apt-get install ldap-utils
 
 ### User Search
 
-[Reference](https://stackoverflow.com/questions/22224465/querying-windows-active-directory-server-using-ldapsearch-from-command-line)
+[Reference 1](https://stackoverflow.com/questions/22224465/querying-windows-active-directory-server-using-ldapsearch-from-command-line)
+[Reference 2](https://www.digitalocean.com/community/tutorials/how-to-manage-and-use-ldap-servers-with-openldap-utilities)
 
 ```bash
 ldapsearch -LLL -H ldap://ds.cisco.com:389 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'dft-ds.gen@cisco.com' -w '' '(sAMAccountName=anasharm)'
@@ -75,4 +76,47 @@ ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Cisco Groups, DC=cisco, DC=co
 CN=dft-ds.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com
 Domain Controller: ds.cisco.com:3268
 Domain Name: cisco.com
+```
+
+### Useful Queries
+
+```bash
+
+# Show the groups already created/migrated to groups.cisco.com
+ldapsearch -LLL -H ldaps://ds.cisco.com:636 -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'CN=dft-ds.gen,OU=Generics,OU=Cisco Users,DC=cisco,DC=com' -w $DFT_PASSWORD '(sAMAccountName=anasharm)' | grep -v "OU=[Mailer|Standard|Grouper|Organizational]" | grep -i "OU=Cisco Groups,DC=cisco,DC=com"
+
+```
+
+### Work Notes
+
+
+```
+// Employees are all here...
+--CN=anasharm
+OU=Employees
+OU=Cisco Users
+DC=cisco
+DC=com
+
+
+// Standard Groups are all here...
+--CN=dftcd-apps-admin
+OU=Standard
+OU=Cisco Groups
+DC=cisco
+DC=com
+
+
+// Mailer Groups are all here...
+--CN=code-leads
+OU=Mailer
+OU=Cisco Groups
+DC=cisco
+DC=com
+
+// Groups created by groups.cisco.com are all here...
+--CN=hello-code-admin
+OU=Cisco Groups
+DC=cisco
+DC=com
 ```
