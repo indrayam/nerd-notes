@@ -120,3 +120,20 @@ OU=Cisco Groups
 DC=cisco
 DC=com
 ```
+
+```
+// Cisco Employee
+ldapsearch -v -LLL -b "OU=Employees,OU=Cisco Users, DC=cisco, DC=com" -D 'anasharm@cisco.com' -w $OS_PASSWORD '(cn=anasharm)'
+
+// Generic Users
+ldapsearch -v -LLL -b "OU=Generics,OU=Cisco Users, DC=cisco, DC=com" -D 'anasharm@cisco.com' -w $OS_PASSWORD '(cn=jenkins-ci.gen)'
+
+// Standard Group
+ldapsearch -LLL -b "OU=Standard,OU=Cisco Groups, DC=cisco, DC=com" -D 'anasharm@cisco.com' -w $OS_PASSWORD '(cn=dftcd-apps-admin)'
+
+// Mailer Group
+ldapsearch -LLL -b "OU=Mailer,OU=Cisco Groups, DC=cisco, DC=com" -D 'anasharm@cisco.com' -w $OS_PASSWORD '(cn=cd-experience-dev)'
+
+// Group created using Groups.cisco.com
+ldapsearch -LLL -b "OU=Cisco Groups, DC=cisco, DC=com" -D 'anasharm@cisco.com' -w $OS_PASSWORD '(cn=hello-code-admin)'
+```

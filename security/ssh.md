@@ -26,3 +26,29 @@ Host aws
 ```bash
 ssh -o ProxyCommand="ssh user@ip-proxy-host nc %h %p" user@ip-destination-host
 ```
+
+### Usage 3: SSH Config using ProxyJump or ProxyCommand
+
+Source: [SSH to remote hosts though a proxy or bastion with ProxyJump](https://www.redhat.com/sysadmin/ssh-proxy-bastion-proxyjump)
+
+```bash
+### The Bastion Host
+Host bastion1-rcdn
+  HostName bastion1-rcdn-code.cisco.com
+  User ubuntu
+  Port 22
+  IdentityFile ~/.ssh/id_rsa
+
+## The Remote Host
+Host nprd1-rcdn
+  HostName 10.10.0.13
+  User ubuntu
+  Port 22
+  ProxyJump bastion1-rcdn
+OR
+Host nprd1-rcdn
+  HostName 10.10.0.13
+  User ubuntu
+  Port 22
+  ProxyCommand ssh bastion1-rcdn -W %h:%p
+```
