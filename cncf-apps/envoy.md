@@ -282,7 +282,6 @@ Enjoy!
 1. Install `go`:
 
 ```bash
-export GOPATH=$HOME/workspace/go
 wget https://dl.google.com/go/go1.14.3.linux-amd64.tar.gz
 sha256sum go1.14.3.linux-amd64.tar.gz
 tar -xvzf go1.14.3.linux-amd64.tar.gz
@@ -304,8 +303,8 @@ Source the Zsh (or Bash) profile:
 
 ```bash
 # Install Java
-apt-get -y install default-jdk
-ln -s /usr/lib/jvm/java-11-openjdk-amd64 /usr/local/java
+sudo apt-get -y install default-jdk
+sudo ln -s /usr/lib/jvm/java-11-openjdk-amd64 /usr/local/java
 java --version
 ```
 
