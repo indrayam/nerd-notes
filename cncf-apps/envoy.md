@@ -34,7 +34,7 @@ brew upgrade
 
 ```bash
 brew install go
-export GOPATH=$HOME/workspace/go-apps
+export GOPATH=$HOME/workspace/go
 mkdir -p ${GOPATH}
 ```
 
@@ -277,29 +277,23 @@ transfer-encoding: chunked
 
 Enjoy!
 
-## Build Envoy on Ubuntu Xenial (16.04)
+## Build Envoy on Ubuntu Bionic (18.04)
 
 1. Install `go`:
 
 ```bash
-# Install Go
-# sudo add-apt-repository -y ppa:longsleep/golang-backports
-# sudo apt-get -y update
-# sudo apt-get install -y golang-go
-# mkdir -p ${USER_HOME}/workspace/go-apps
-## OR
-export GOPATH=$HOME/workspace/go-apps
-git clone https://github.com/udhos/update-golang
-RELEASE=1.12 ./update-golang/update-golang.sh
-RELEASE=1.12 sudo ./update-golang.sh
-mkdir -p ${GOPATH}
+export GOPATH=$HOME/workspace/go
+wget https://dl.google.com/go/go1.14.3.linux-amd64.tar.gz
+sha256sum go1.14.3.linux-amd64.tar.gz
+tar -xvzf go1.14.3.linux-amd64.tar.gz
+sudo mv go /usr/local
 ```
 
 Update PATH settings in your `.zshrc` (or `.bashrc`) to include the following:
 
 ```bash
-export GOPATH=$HOME/workspace/go-apps
-export PATH=${GOPATH}/bin:$PATH
+export GOPATH=$HOME/workspace/go
+export PATH=${GOPATH}/bin:/usr/local/go/bin:$PATH
 ```
 
 Source the Zsh (or Bash) profile:
@@ -311,7 +305,8 @@ Source the Zsh (or Bash) profile:
 ```bash
 # Install Java
 apt-get -y install default-jdk
-ln -s /usr/lib/jvm/java-8-openjdk-amd64 /usr/local/java
+ln -s /usr/lib/jvm/java-11-openjdk-amd64 /usr/local/java
+java --version
 ```
 
 3. Install [Buildifer](https://github.com/bazelbuild/buildtools)
@@ -331,28 +326,14 @@ Source the Zsh (or Bash) profile:
 
 `source ~/.zshrc`
 
-4. Install Bazel version 0.22:
+4. Install Bazelisk:
 
-*NOTE*: Using the latest version (0.26) of Bazel gave errors.
+Bazelisk ensures that the right version of Bazel is used for the compilation
 
 ```bash
 cd src/
-curl -L -O https://github.com/bazelbuild/bazel/releases/download/0.22.0/bazel-0.22.0-installer-linux-x86_64.sh
-chmod +x bazel-0.26.0-installer-linux-x86_64.sh
-sudo ./bazel-0.26.0-installer-linux-x86_64.sh
-# This will install bazel in /usr/local/bin
-```
-
-Run `bazel version` to make sure it is running the correct version (v0.22.0):
-
-```bash
-WARNING: --batch mode is deprecated. Please instead explicitly shut down your Bazel server using the command "bazel shutdown".
-INFO: Invocation ID: 425d090b-1c93-4501-bba6-ed2a704e1d68
-Build label: 0.22.0
-Build target: bazel-out/k8-opt/bin/src/main/java/com/google/devtools/build/lib/bazel/BazelServer_deploy.jar
-Build time: Mon Jan 28 12:58:08 2019 (1548680288)
-Build timestamp: 1548680288
-Build timestamp as int: 154868028
+sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64
+sudo chmod +x /usr/local/bin/bazel
 ```
 
 5. Install the following External Dependencies
@@ -376,82 +357,20 @@ sudo apt-get install \
    virtualenv
 ```
 
-Here is the version I have running for each of the external dependencies (run `apt show libtool cmake clang-format-6.0 automake autoconf make ninja-build curl unzip pkg-config zip g++ zlib1g-dev python virtualenv`):
-
-```
-Package: libtool
-Version: 2.4.6-0.1
-...
-
-Package: cmake
-Version: 3.5.1-1ubuntu3
-...
-
-Package: clang-format-6.0
-Version: 1:6.0-1ubuntu2~16.04.1
-...
-
-Package: automake
-Version: 1:1.15-4ubuntu1
-...
-
-Package: autoconf
-Version: 2.69-9
-...
-
-Package: make
-Version: 4.1-6
-...
-
-Package: ninja-build
-Version: 1.5.1-0.1ubuntu1
-...
-
-Package: curl
-Version: 7.47.0-1ubuntu2.13
-...
-
-Package: unzip
-Version: 6.0-20ubuntu1
-...
-
-Package: pkg-config
-Version: 0.29.1-0ubuntu1
-...
-
-Package: zip
-Version: 3.0-11
-...
-
-Package: g++
-Version: 4:5.3.1-1ubuntu1
-...
-
-Package: zlib1g-dev
-Version: 1:1.2.8.dfsg-2ubuntu4.1
-...
-
-Package: python
-Version: 2.7.12-1~16.04
-...
-
-Package: virtualenv
-Version: 15.0.1+ds-3ubuntu1
-...
-```
-
 6. Git clone the exact version of Envoy source that you want to install
 
 ```bash
 cd ~/src
-git clone --branch v1.10.0 git@github.com:envoyproxy/envoy.git
+git clone --branch v1.14.1 git@github.com:envoyproxy/envoy.git
 ```
 
 7. Run envoy build
 
 ```bash
 cd ~/src/envoy
-bazel build //source/exe:envoy-static
+vim ci/SOURCE_VERSION
+# Added this line: 3504d40f752eb5c20bc2883053547717bcb92fd8
+bazel build -c opt //source/exe:envoy-static
 ```
 
 Sit back and relax. This will take a while. Once it is all complete, go to the following folder:
