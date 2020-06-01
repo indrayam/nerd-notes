@@ -12,8 +12,8 @@ sudo vim /etc/apt/sources.list.d/nginx.list
 #Add the following lines to nginx.list:
 deb [arch=amd64] http://nginx.org/packages/mainline/ubuntu/ bionic nginx
 deb-src http://nginx.org/packages/mainline/ubuntu/ bionic nginx
-sudo apt-get update
 
+sudo apt-get update
 sudo apt-get remove nginx nginx-common nginx-full nginx-core #Remove existing Nginx install (if any)
 sudo apt-get install nginx
 sudo nginx -t # to check if the configuration is ok

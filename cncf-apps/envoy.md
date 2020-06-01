@@ -338,7 +338,7 @@ sudo chmod +x /usr/local/bin/bazel
 5. Install the following External Dependencies
 
 ```bash
-sudo apt-get install \
+sudo apt-get -y install \
    libtool \
    cmake \
    clang-format-6.0 \
