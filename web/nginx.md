@@ -24,6 +24,47 @@ sudo systemctl enable nginx
 sudo systemctl status nginx
 ```
 
+Sample Reverse Proxy:
+
+No SSL:
+
+```
+server {
+	listen 80;
+	listen [::]:80;
+
+	access_log /var/log/nginx/reverse-access.log;
+	error_log /var/log/nginx/reverse-error.log;
+
+	location / {
+    #proxy_set_header Host $host;
+    #proxy_set_header X-Real-IP $remote_addr;
+    proxy_pass https://alln-cloud-storage-1.cisco.com;
+	}
+}
+```
+
+With SSL:
+
+```
+server {
+	listen 443 ssl;
+	listen [::]:443 ssl;
+  ssl_certificate /etc/ssl/codes3-cisco-com-stackedchain.pem;
+  ssl_certificate_key /etc/ssl/codes3-cisco-com.key;
+  server_name codes3-rtp1.cisco.com;
+
+	access_log /var/log/nginx/reverse-access.log;
+	error_log /var/log/nginx/reverse-error.log;
+
+	location / {
+    #proxy_set_header Host $host;
+    #proxy_set_header X-Real-IP $remote_addr;
+    proxy_pass https://rtp1-cloud-storage-1.cisco.com;
+	}
+}
+```
+
 Check the default configuration in `/etc/nginx/conf.d/default.conf`. Web root folder is `/usr/share/nginx/html`.
 
 ## Nginx as L4 TCP Proxy
