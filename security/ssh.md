@@ -52,3 +52,34 @@ Host nprd1-rcdn
   Port 22
   ProxyCommand ssh bastion1-rcdn -W %h:%p
 ```
+
+Another way of doing this...
+
+```bash
+## CodeOn Deployment Server
+Host codeon
+  StrictHostKeyChecking no
+  HostName codeon-deploy-alln.cisco.com
+  User sdlcadm
+  Port 22
+  IdentityFile ~/.ssh/codeon_rsa
+
+Host dba
+  StrictHostKeyChecking no
+  HostName drvprd-admin-server.cisco.com
+  User oadrvprd
+  Port 22
+  IdentityFile ~/.ssh/codeon_rsa
+  ProxyCommand ssh -W %h:%p codeon
+  #ProxyJump codeon
+```
+
+### Usage 4: Samples
+
+```bash
+# Using ProxyCommand. Notice that whatever commands you pass to ProxyCommand is the command that is run locally first. Rest is run on the Proxy Host
+ssh -o StrictHostKeyChecking=no -o ProxyCommand='ssh -W %h:%p -o IdentityFile=~/.ssh/codeon_rsa sdlcadm@codeon-deploy-alln.cisco.com' oadrvprd@drvprd-admin-server.cisco.com 'ls -al'
+
+# Using ProxyJump
+ssh -o StrictHostKeyChecking=no -o IdentityFile=~/.ssh/codeon_rsa -J sdlcadm@codeon-deploy-alln.cisco.com oadrvprd@drvprd-admin-server.cisco.com 'ls -al’
+```
