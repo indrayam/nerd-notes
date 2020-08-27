@@ -64,6 +64,27 @@ Host codeon
   Port 22
   IdentityFile ~/.ssh/codeon_rsa
 
+Host codeon1
+  StrictHostKeyChecking no
+  HostName sdlc-dply-prd-01.cisco.com
+  User sdlcadm
+  Port 22
+  IdentityFile ~/.ssh/codeon_rsa
+
+Host codeon2
+  StrictHostKeyChecking no
+  HostName sdlc-dply-prd-02.cisco.com
+  User sdlcadm
+  Port 22
+  IdentityFile ~/.ssh/codeon_rsa
+
+Host codeon3
+  StrictHostKeyChecking no
+  HostName sdlc-dply-prd-03.cisco.com
+  User sdlcadm
+  Port 22
+  IdentityFile ~/.ssh/codeon_rsa
+
 Host dba
   StrictHostKeyChecking no
   HostName drvprd-admin-server.cisco.com
