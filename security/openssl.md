@@ -262,7 +262,7 @@ Use this online converter until you figure out how to do it on the command line.
 ## Encrypt a file
 
 ```bash
-openssl enc -aes-256-cbc -salt -in xenial.tar.gz -out xenial.tar.gz.enc
+openssl enc -aes-256-cbc -salt -in bash.tar.gz -out bionic-lite.tar.gz.enc
 openssl enc -aes-256-cbc -salt -in xenial-lite.tar.gz -out xenial-lite.tar.gz.enc
 # If using OpenSSL 1.1.1, use the following...
 openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in bionic.tar.gz -out bionic.tar.gz.enc
@@ -272,7 +272,7 @@ openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in bionic-lite.t
 ## Decrypt an encrypted file
 
 ```bash
-openssl aes-256-cbc -d -in zsh-bootstrap-xenial.tar.gz.enc -out zsh-bootstrap-xenial.tar.gz
+openssl -aes-256-cbc -d -in bionic-lite.tar.gz.enc -out bash.tar.gz
 # If using OpenSSL 1.1.1, use the following...
 openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -d -in bionic.tar.gz.enc -out bionic.tar.gz
 openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -d -in bionic-lite.tar.gz.enc -out bionic-lite.tar.gz
