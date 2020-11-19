@@ -98,6 +98,7 @@
 - code
 - subl
 - vim
+- ox (rust-based)
 
 ## Source Code
 - git
@@ -209,6 +210,7 @@
 - scout (better netcat)
 - rsync
 - inlets
+- dog (Rust based dig clone)
 
 ## Data Streams
 - rclone
