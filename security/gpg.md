@@ -7,12 +7,22 @@
 
 GPG version 2 may be on your system with the executable name gpg2 . Either executable can be used for these demonstrations. Both are very compatible with each other. (If you want to know a million different opinions on which you should be using, do a web search.) Version 1 is more tested, and is usually a single monolithic executable. Version 2 is compiled with crypto libraries like libgcrypt externally linked, and is designed to work better with external password entry tools. That is, gpg2 is designed for graphical environments, while gpg works better for automated and command-line use. From the command-line, I use version 1.
 
-
 ## Install on MacOSX
 
 ```bash
 brew install gnupg
 ```
+
+Connects gpg-agent to the OSX keychain via the brew-installed pinentry program from GPGtools. This is the OSX 'magic sauce', allowing the gpg key's passphrase to be stored in the login
+
+# keychain, enabling automatic key signing.
+
+```bash
+brew install pinentry
+brew install pinentry-mac
+```
+
+##
 
 ## Install on Ubuntu 16.04
 
@@ -46,14 +56,14 @@ gpg -k
 [Source](https://gitlab.com/help/user/project/repository/gpg_signed_commits/index.md)
 
 1. Generate the private/public key pair with the following command, which will
-spawn a series of questions:
+   spawn a series of questions:
 
 ```
 gpg --full-gen-key
 ```
 
 2. The first question is which algorithm can be used. Select the kind you want
-or press `Enter` to choose the default (RSA and RSA):
+   or press `Enter` to choose the default (RSA and RSA):
 
 ```
 Please select what kind of key you want:
@@ -73,7 +83,7 @@ Requested keysize is 4096 bits
 ```
 
 4. Specify the validity period of your key. This is something
-subjective, and you can use the default value, which is to never expire:
+   subjective, and you can use the default value, which is to never expire:
 
 ```
 Please specify how long the key should be valid.
@@ -93,8 +103,8 @@ Is this correct? (y/N) y
 ```
 
 6. Enter your real name, the email address to be associated with this key
-(should match a verified email address you use in GitLab) and an optional
-comment (press `Enter` to skip):
+   (should match a verified email address you use in GitLab) and an optional
+   comment (press `Enter` to skip):
 
 ```
 GnuPG needs to construct a user ID to identify your key.
@@ -110,17 +120,16 @@ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 
 7. Pick a strong password when asked and type it twice to confirm.
 
-
 8. Use the following command to list the private GPG key you just created:
 
 ```
-gpg --list-secret-keys --keyid-format LONG anand.sharma@gmail.com
+gpg --list-secret-keys --keyid-format LONG --fingerprint anand.sharma@gmail.com
 ```
 
 Replace <your_email> with the email address you entered above.
 
 9. Copy the GPG key ID that starts with sec. In the following example, that's
-`30F2B65B9246B6CA`:
+   `30F2B65B9246B6CA`:
 
 ```
 sec   rsa4096/30F2B65B9246B6CA 2017-08-18 [SC]
@@ -140,11 +149,10 @@ gpg --armor --export 30F2B65B9246B6CA
 1. Use the following command to list the private GPG key you just created:
 
 ```
-gpg --list-secret-keys --keyid-format LONG anasharm@cisco.com
+gpg --list-secret-keys --keyid-format LONG --fingerprint anasharm@cisco.com
 ```
 
 Replace <your_email> with the email address you entered above.
-
 
 2. Copy the GPG key ID that starts with `sec`. In the following example, that's `30F2B65B9246B6CA`:
 
@@ -163,10 +171,9 @@ git config --global user.signingkey 30F2B65B9246B6CA
 
 Replace `30F2B65B9246B6CA` with your GPG key ID.
 
-
 4. (Optional) If Git is using gpg and you get errors like secret key not available
-or gpg: signing failed: secret key not available, run the following command to
-change to gpg2:
+   or gpg: signing failed: secret key not available, run the following command to
+   change to gpg2:
 
 ```
 git config --global gpg.program gpg2
@@ -211,10 +218,12 @@ else
     eval $(gpg-agent --daemon --default-cache-ttl 31536000)
 fi
 ```
+
 - Restart shell
 - Login once from command-line. Enter Keyphrase. After that, it should be cached.
 
 ## Prints the GPG key ID, in ASCII armor format
+
 gpg --armor --export A190E97F52B7DBAC
 
 Copy your GPG key
@@ -223,6 +232,7 @@ Copy your GPG key
 -----END PGP PUBLIC KEY BLOCK-----
 
 ## Edit a GPG Key (https://coderwall.com/p/tx_1-g/gpg-change-email-for-key-in-pgp-key-servers)
+
 You cannot delete keys nor modify UIDs for keys uploaded to PGP key servers. To change your email, you must add a new UID.
 
 ```
@@ -255,12 +265,15 @@ $ gpg --keyserver hkp://pgp.mit.edu --send-keys <keyID>
 ```
 
 ## Send GPG Key to MIT Key Server
+
 $ gpg --keyserver hkp://pgp.mit.edu --send-keys <keyID>
 
 ## Encrypt files using private GPG key
+
 gpg -r "anand.sharma@gmail.com” --encrypt <file-name> (generates a binary file with “.gpg” extension)
 gpg -r "anand.sharma@gmail.com" --armor --encrypt <file-name> (generates an ASCII file with “.asc” extension)
 
 ## Decrypt files using private GPG key
+
 gpg --decrypt <file-name.gpg> > filename OR
 gpg --decrypt <file-name.asc> > filename
