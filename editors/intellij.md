@@ -54,6 +54,7 @@
 
 ## Keyboard Shortcuts: Writing/Editing Code
 
+- `Alt + F` => Navigate File Structure
 - `Alt + Cmd + L` => Format Code ✅
 - `Cmd + N` => Generate Code ❗
 - `Ctrl + O` => Override Methods ✅
@@ -64,8 +65,8 @@
 - `Cmd + -` => Fold the function you are in
 - `Cmd + +` => Expand the function you are in
 - `Editor Actions | Split Line` (Remove Keyboard shortcut)
-- `Cmd + Return` => Editor Actions | Start New Line
-- `Shift + Cmd + Return` => Editor Actions | Start New Line Before Current
+- `Cmd + Return` => Editor Actions | Start New Line ✅
+- `Shift + Cmd + Return` => Editor Actions | Start New Line Before Current ✅
 - `Shift + Cmd + D` => Editor Actions | Duplicate Line
 - `Shift + Cmd + K` => Editor Actions | Delete Line
 - `Ctrl + G` => Go to Line
@@ -75,64 +76,68 @@
   - In VS Code, it is `Alt + Click(s)`
 - `Alt + V` => Vim Emulator Enable/Disable Toggle
 - `Shift + Cmd + '` => Maximize Tool Window
-- `Alt + O` (alphabet O) => Open the Recent Projects Window...
+- `Alt + O` (alphabet O) => Open the Recent Projects Window... ✅
 - `Alt + 0` (number Zero) => Open...
 - `Ctrl + Cmd + F` => Presentation Mode
 - `Ctrl + Alt + H` => Call Hierarchy (Trace the method calls that led to the current method being invoked)
 
 ## Keyboard Shortcuts: Commenting Code
 
-- `Cmd + /` => Comment Code
-- `Alt + Cmd + /` => Comment Code (using Block Comments)
+- `Cmd + /` => Comment Code ✅
+- `Alt + Cmd + /` => Comment Code (using Block Comments) ✅
 
 ## Keyboard Shortcuts: Build Interactions
 
 - `Alt + C` => Build the selected file...
-- `Cmd + Shift + I` (as in alphabet i) => Reload Gradle Project...
+- `Cmd + Shift + I` (as in alphabet i) => Reload Gradle Project... ✅
 
 ## Keyboard Shortcuts: SCM Interactions
 
+- `Alt + Cmd + H` => Share on GitHub ❗
 - `Ctrl + V` => Add Project to Git
-- `Cmd + K` => Commit
-- `Alt + Cmd + K` => Commit & Push
+- `Cmd + K` => Commit (Also brings up the Commit Window) ✅
+- `Alt + Cmd + K` => Commit & Push ✅
 - `Alt + 1` => Bring up the Branches Window
-- `Cmd + Enter` => Submit Changes across the Git Experience
-- `Alt + Cmd + H` => Share on GitHub
+- `Cmd + Enter` => Submit Changes across the Git Experience ✅
 
 ## Keyboard Shortcuts: Refactoring
 
-- `Ctrl + T` => Refactoring Menu showing all options. Use number next to the option to navigate quickly
+- `Ctrl + T` => Refactoring Menu showing all options. Use number next to the option to navigate quickly ❗
 - `Alt + Cmd + V` => Create/Refactor contextually…
 - `Alt + R` => Rename
 
-## Keyboard Shortcuts: Finding/Navigating to Things
+## Keyboard Shortcuts: Finding
 
-- `Alt + F` => Navigate File Structure
-- `Cmd + F` => Find…
-- `Alt + Cmd + F` => Replace
-- `Cmd + E` => Recent Files
-- `Shift + Cmd + P` => Find Actions (Sublime Text and/or VS Code)
-- `Cmd + P` => Navigate to File
+- `Cmd + F` => Find… ✅
+- `Shift + Cmd + F` => Find in Files inside the opened Project
+- `Shift + Cmd + R` => Replace in Files inside the opened Project
+- `Alt + Cmd + F` => Replace ✅
+- `Cmd + E` => Recent Files ✅
+- `Shift + Cmd + P` => Find Actions (Sublime Text and/or VS Code) ✅
+- `Cmd + P` => Navigate to File ✅
 - `Cmd + O` => Navigate to Types
 - `Alt + Cmd + O` => Navigate to Symbol
-- `Ctrl + `` => Terminal
-- `Cmd + 1` => Project Window
-- `Shift + Escape` => Hide Tool Window
-- `Cmd + ,` => Open Preferences
-- `Cmd + ;` => Open Project Settings
+- `Ctrl + `` => Terminal ✅
+- `Cmd + 1` => Project Window ✅
+- `Alt + _` => Hide Tool Window ✅
+- `Cmd + ,` => Open Preferences ✅
+- `Cmd + ;` => Open Project Settings ✅
+
+## Keyboard Shortcuts: Navigating Around
+
 - `Cmd + Shift + T`  => Navigate between the Test and the thing you are Testing. Or, to switch back from test method to actual method in the Class being - tested
 - `Alt + Cmd + B` => Navigate between Function and Testing
 - `Cmd + B` => Go to Declarations or Usages
 
 ## Keyboard Shortcuts: Select for Copy/Paste
 
-- `Alt + Up Arrow` => To gradually increase the contextual selection block
-- `Alt + Down Arrow` => To gradually decrease the contextual selection block
-- `Cmd + L` => Select Line under Caret
+- `Alt + Up Arrow` => To gradually increase the contextual selection block ✅
+- `Alt + Down Arrow` => To gradually decrease the contextual selection block ✅
+- `Cmd + L` => Select Line under Caret ✅
+- `Cmd + D` => Editor Actions | Add Selection for Next occurrence ✅
 - `Cmd + G` => Find Next Occurrence
 - `Cmd + Shift + G` => Find Previous Occurrence
 - `Ctrl + Cmd + G` => Editor | Select all Occurences
-- `Cmd + D` => Editor Actions | Add Selection for Next occurrence
 
 ## Keyboard Shortcuts: Live Templates
 
@@ -148,7 +153,3 @@
 - Trisha Gee - Top 15 IntelliJ IDEA Shortcuts (https://www.youtube.com/watch?v=QYO5_riePOQ) - DONE
 - Trisha Gee - Be More Productive with IntelliJ (https://www.youtube.com/watch?v=CmPJzEqFS4s) - DONE
 - What’s new for Java Developer 2020.3 (https://www.youtube.com/watch?v=KffXqIZ0tYg&feature=youtu.be)
-
-```
-
-```
