@@ -2,6 +2,8 @@
 
 ## Turn Noise Off
 
+Remove distractions by going to **Main Menu | View | Appearance** and uncheck toolbar, tool window bar, navigation bar. What’s left are tabs. Please get rid of them by right-click into the tab and choose **Configure Editor Tabs…** and on the appearance section, set tab placement to None.
+
 - `Cmd + Shift + P` (or A) => Breadcrumbs (Off)
 - `Cmd + Shift + P` (or A) => Navigation (Off)
 - `Cmd + Shift + P` (or A) => Editor Preferences | Tabs Placement (None)
@@ -90,21 +92,25 @@
 
 - `Alt + C` => Build the selected file...
 - `Cmd + Shift + I` (as in alphabet i) => Reload Gradle Project... ✅
+- `Ctrl + Ctrl` => Run anything from anywhere...
 
 ## Keyboard Shortcuts: SCM Interactions
 
+- `Alt + 1` => Bring up the Branches Window
 - `Alt + Cmd + H` => Share on GitHub ❗
 - `Ctrl + V` => Add Project to Git
 - `Cmd + K` => Commit (Also brings up the Commit Window) ✅
 - `Alt + Cmd + K` => Commit & Push ✅
-- `Alt + 1` => Bring up the Branches Window
 - `Cmd + Enter` => Submit Changes across the Git Experience ✅
 
 ## Keyboard Shortcuts: Refactoring
 
 - `Ctrl + T` => Refactoring Menu showing all options. Use number next to the option to navigate quickly ❗
-- `Alt + Cmd + V` => Create/Refactor contextually…
 - `Alt + R` => Rename
+- `Alt + Cmd + M` => Introduce Method
+- `Alt + Cmd + V` => Introduce Variable
+- `Alt + Cmd + C` => Introduce Constant
+- `Alt + Cmd + P` => Introduce Parameter
 
 ## Keyboard Shortcuts: Finding
 
@@ -114,20 +120,24 @@
 - `Alt + Cmd + F` => Replace ✅
 - `Cmd + E` => Recent Files ✅
 - `Shift + Cmd + P` => Find Actions (Sublime Text and/or VS Code) ✅
+
+## Keyboard Shortcuts: Navigating Around
+
+- [IntelliJ Docs: Source code navigation](https://www.jetbrains.com/help/idea/navigating-through-the-source-code.html)
 - `Cmd + P` => Navigate to File ✅
 - `Cmd + O` => Navigate to Types
 - `Alt + Cmd + O` => Navigate to Symbol
 - `Ctrl + `` => Terminal ✅
 - `Cmd + 1` => Project Window ✅
+- `Cmd + 2` => Favorites Window
 - `Alt + _` => Hide Tool Window ✅
 - `Cmd + ,` => Open Preferences ✅
 - `Cmd + ;` => Open Project Settings ✅
-
-## Keyboard Shortcuts: Navigating Around
-
+- `Cmd + [` => Navigating backwards between files
+- `Cmd + ]` => Navigating forward between files
 - `Cmd + Shift + T`  => Navigate between the Test and the thing you are Testing. Or, to switch back from test method to actual method in the Class being - tested
-- `Alt + Cmd + B` => Navigate between Function and Testing
-- `Cmd + B` => Go to Declarations or Usages
+- `Cmd + B` => Go to Declarations. For example, pressing this on a field will take the cursor to the field declaration. Pressing it on a class name will take us to the class file.
+- `Alt + Cmd + B` => Navigate to the implementation (of a function, for example)
 
 ## Keyboard Shortcuts: Select for Copy/Paste
 
@@ -146,10 +156,3 @@
 - `iter`, `itar`
 - `sysout` => Eclipse shortcut for sout
 - `giti` => Git Ignore
-
-## Sources of Learning
-
-- Scratch Files and Buffers (https://www.youtube.com/watch?v=vVcPEcbRiNI) - DONE
-- Trisha Gee - Top 15 IntelliJ IDEA Shortcuts (https://www.youtube.com/watch?v=QYO5_riePOQ) - DONE
-- Trisha Gee - Be More Productive with IntelliJ (https://www.youtube.com/watch?v=CmPJzEqFS4s) - DONE
-- What’s new for Java Developer 2020.3 (https://www.youtube.com/watch?v=KffXqIZ0tYg&feature=youtu.be)
