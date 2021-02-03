@@ -7,11 +7,11 @@
 ```bash
 sudo wget https://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
-sudo vim /etc/apt/sources.list.d/nginx.list 
+sudo vim /etc/apt/sources.list.d/nginx.list
 
 #Add the following lines to nginx.list:
-deb [arch=amd64] http://nginx.org/packages/mainline/ubuntu/ bionic nginx
-deb-src http://nginx.org/packages/mainline/ubuntu/ bionic nginx
+deb [arch=amd64] http://nginx.org/packages/mainline/ubuntu/ focal nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ focal nginx
 
 sudo apt-get update
 sudo apt-get remove nginx nginx-common nginx-full nginx-core #Remove existing Nginx install (if any)
@@ -86,7 +86,7 @@ stream {
     upstream httpproxy {
       server 64.102.179.238:8080 max_fails=3 fail_timeout=10s;
     }
- 
+
     server {
       listen 80;
       proxy_pass httpproxy;
@@ -111,6 +111,7 @@ server {
   return 301 https://$server_name$request_uri;
 }
 ```
+
 2. Create a new file (say, `jenkins-code`) for the new domain in the same folder
 
 ```bash
@@ -141,6 +142,7 @@ server {
 #include /etc/nginx/conf.d/*.conf;
 include /etc/nginx/sites-enabled/*;
 ```
+
 4. sudo nginx -t
 5. sudo systemctl stop nginx
 6. sudo systemctl start nginx
@@ -196,4 +198,3 @@ server {
   }
 }
 ```
-

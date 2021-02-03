@@ -1,5 +1,9 @@
 # intellij idea
 
+## Critical Mac Shortcuts
+
+- `Cmd + Shift + .` => See hidden files
+
 ## Turn Noise Off
 
 Remove distractions by going to **Main Menu | View | Appearance** and uncheck toolbar, tool window bar, navigation bar. What’s left are tabs. Please get rid of them by right-click into the tab and choose **Configure Editor Tabs…** and on the appearance section, set tab placement to None.
@@ -108,6 +112,7 @@ Remove distractions by going to **Main Menu | View | Appearance** and uncheck to
 - `Ctrl + T` => Refactoring Menu showing all options. Use number next to the option to navigate quickly ❗
 - `Alt + R` => Rename
 - `Alt + Cmd + M` => Introduce Method
+- `Alt + Cmd + N` => Inline expression
 - `Alt + Cmd + V` => Introduce Variable
 - `Alt + Cmd + C` => Introduce Constant
 - `Alt + Cmd + P` => Introduce Parameter
