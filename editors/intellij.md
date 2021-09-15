@@ -161,3 +161,7 @@ Remove distractions by going to **Main Menu | View | Appearance** and uncheck to
 - `iter`, `itar`
 - `sysout` => Eclipse shortcut for sout
 - `giti` => Git Ignore
+
+## Others
+
+- Click on a package. Right click. Select `Diagrams`. And then select `Java Classes`
