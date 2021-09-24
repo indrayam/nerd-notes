@@ -1,6 +1,7 @@
 # CLI Tools
 
 ## AWS
+
 - aws2
 - aws-cdk
 - ecs
@@ -9,33 +10,41 @@
 - eksctl
 
 ## GCP
+
 - gcloud
 - gsutil
 
 ## OpenStack
+
 - openstack-cli
 
 ## Digital Ocean
+
 - doctl
 
 ## Azure
+
 - az
 
 ## Netlify
+
 - netlify-cli
 
 ## PaaS
+
 - dokku
 - piku
 
 ## Virtual Machine
+
 - multipass
 - vagrant
 - Weave Ignite
 - Firecracker
 - gVisor
 
-## Containers 
+## Containers
+
 - docker
 - docker-compose
 - kaniko
@@ -48,7 +57,8 @@
 - dive
 - https://cloudberry.engineering/article/dockerfile-security-best-practices/
 
-## Kubernetes 
+## Kubernetes
+
 - kubectl
 - krew
 - kubectx
@@ -68,39 +78,47 @@
 - k8slens.dev
 
 ## Configuration Management Tools
+
 - terraform
 - ansible
 
 ## Java
+
 - intellij
-- javac, java, 
+- javac, java,
 - javap
 - maven
 - gradle
 
 ## Kotlin
+
 - kotlinc-jvm
 
 ## Go
+
 - go
 - tinygo
 
 ## Python
+
 - python3
 - pip3
 - pipdeptree
 
 ## Microservices
+
 - spring
 - dapr
 
-## Editors 
+## Editors
+
 - code
 - subl
 - vim
 - ox (rust-based)
 
 ## Source Code
+
 - git
 - git-extras
 - diff-so-fancy
@@ -109,12 +127,14 @@
 - bit (https://github.com/chriswalz/bit)
 
 ## CI/CD
+
 - jenkins
 - sonarqube
 - spinnaker
 - theonedev (gitlab clone)
 
 ## Text Wrangling
+
 - ag
 - ack
 - sed
@@ -136,10 +156,11 @@
 - xsv
 - shyaml
 - highlight (to use colors in output of LESS)
-- ncdu (better du) 
+- ncdu (better du)
 - exa (better ls)
 
 ## Terminal
+
 - iterm2
 - oh-my-zsh
 - z.lua
@@ -154,6 +175,7 @@
 - duf
 
 ## HTTP
+
 - curl
 - wget
 - httpie
@@ -167,6 +189,7 @@
 - newman
 
 ## HTTPS/Security
+
 - openssl
 - iptables
 - certbot
@@ -178,8 +201,10 @@
 - age/rage (https://github.com/FiloSottile/age)
 - keys (keybase, keys.pub)
 - Conftest (https://conftest.dev/)
+- step-cli
 
 ## Video/Docs/JAMStack
+
 - markdown
 - codimd
 - hugo
@@ -189,6 +214,7 @@
 - svg-term
 
 ## OS Package Managers
+
 - brew
 - apt
 - dpkg
@@ -196,6 +222,7 @@
 - rpm
 
 ## Process Monitoring
+
 - ps
 - top
 - htop
@@ -203,6 +230,7 @@
 - lsof
 
 ## Network
+
 - ngrok
 - wireshark
 - tcpdump
@@ -213,6 +241,7 @@
 - dog (Rust based dig clone)
 
 ## Data Streams
+
 - rclone
 - etcdctl
 - redis-cli
