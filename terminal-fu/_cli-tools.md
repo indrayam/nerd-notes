@@ -173,6 +173,7 @@
 - tmux
 - pigz (parallel gzip)
 - duf
+- tv (tidy-viewer)
 
 ## HTTP
 
