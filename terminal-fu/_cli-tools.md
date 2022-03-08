@@ -165,6 +165,7 @@
 - oh-my-zsh
 - z.lua
 - time
+- hyperfine
 - watch
 - tee
 - fzf/fzy
@@ -174,6 +175,9 @@
 - pigz (parallel gzip)
 - duf
 - tv (tidy-viewer)
+- espeak
+- figlet
+- pv
 
 ## HTTP
 
@@ -188,6 +192,7 @@
 - evans
 - postman
 - newman
+- roapi (an API server for static sets)
 
 ## HTTPS/Security
 
