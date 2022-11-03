@@ -226,6 +226,14 @@ If you start getting the error `error gpg failed to sign the data`, run `killall
 
 If this test is successful (no error/output includes PGP signature), you have successfully resolved your issue. You should now be able to use git signing again!
 
+Note: If a `git` command fails, run the command by appending `GIT_TRACE=1` in front of the command like the following:
+
+```
+GIT_TRACE=1 git commit -m "Add page that always requires a logged-in user"
+```
+
+Source: [gpg failed to sign the data fatal: failed to write commit object](https://stackoverflow.com/a/47561300/520901)
+
 ## Prints the GPG key ID, in ASCII armor format
 
 gpg --armor --export A190E97F52B7DBAC
