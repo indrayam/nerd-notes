@@ -222,6 +222,10 @@ fi
 - Restart shell
 - Login once from command-line. Enter Keyphrase. After that, it should be cached.
 
+If you start getting the error `error gpg failed to sign the data`, run `killall gpg-agent`. Kill the terminal session. Log in again and run the following command to make sure things are ok: `echo "test" | gpg --clearsign`
+
+If this test is successful (no error/output includes PGP signature), you have successfully resolved your issue. You should now be able to use git signing again!
+
 ## Prints the GPG key ID, in ASCII armor format
 
 gpg --armor --export A190E97F52B7DBAC
