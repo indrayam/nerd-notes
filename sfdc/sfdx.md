@@ -42,21 +42,36 @@ sfdx force:org:list
 sfdx force:org:list --clean --noprompt --all
 ```
 
-### Connect to a Developer/Sandbox Org as Dev Hub
+### Log into a Developer/Sandbox Org as Dev Hub
 
+Notice the use of `-d` or `--defaultdevhubuser`
 ```bash
 sfdx auth:web:login --setdefaultdevhubuser --setalias <org-alias>
-# OR
+# 
 sfdx auth:web:login -d --setalias <org-alias>
 ```
 
-You can make an existing org a default user or a default Dev Hub user by running:
+You can make an existing org a default Dev Hub user by running:
+
+```bash
+sfdx config:set defaultdevhubusername=<org-alias>
+```
+
+### Log into a Developer/Sandbox Org 
+
+Notice the use of `-s`. It's the most flexible way to authenticate to an existing org.
+
+```bash
+sfdx auth:web:login -s
+```
+
+Another way to achieve the same thing would be to set the `--defaultusername` config for the project
 
 ```bash
 sfdx config:set defaultusername=<org-alias>
-# OR
-sfdx config:set defaultdevhubusername=<org-alias>
 ```
+
+After running either of these two commands shown above, running the `sfdx force:org:list` will show a `(U)` next to the Org alias that is being used as the "default user".
 
 ### Logout from a connected Org
 
@@ -100,10 +115,14 @@ sfdx force:org:open
 
 ```bash
 sfdx force:user:password:generate
+# aqjr!0fUwuhcn
+# 
 ```
 
 ### Display User Info
 
 ```bash
 sfdx force:user:display -u <scratch-alias>
+# OR
+# sfdx force:user:display -u test-mizjbqfau4o6@example.com
 ```

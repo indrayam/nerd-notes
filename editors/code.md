@@ -1,4 +1,12 @@
-# code
+# VS Code
+
+## Hacks
+
+1. Jump between open terminal and editor: `ctrl + backtick` takes you to the terminal, `ctrl + 1` takes you to the cursor in the open editor
+
+2. `ctrl + backtick` is a toggle. It will toggle terminal **on** (with cursor in the terminal) and **off** (with cursor in the editor)
+
+## Keyboard shortcuts
 
 `Cmd + P`
 Search files in the current project
@@ -17,9 +25,6 @@ Cut line
 
 `Cmd + K, Cmd + K`
 Delete to the end of the line
-
-`Cmd + K, Cmd + Backspace`
-Delete to the start of the line
 
 `Cmd + Enter`
 Insert line after
@@ -78,14 +83,17 @@ Multiple cursor on every instance of the word under the cursor
 `Shift + Alt + Select Column using Mouse`
 Vertical Cursor 
 
-`Ctrl + Cmd + P``
+`Ctrl + Cmd + P`
 List All Projects
 
 `Ctrl + Backtick`
 Integrated (or External) Terminal
 
-`Cmd B`
+`Cmd K, Cmd B`
 Toggle “Explore” View
+
+`Cmd + B`
+Toggle Side Bar
 
 `Cmd + \`
 Split the Editor into 2 with the same file
@@ -103,7 +111,7 @@ Open Color Scheme Chooser
 Keyboard Shortcuts
 
 `Cmd K, Z`
-Zen Mode (Editor)
+Zen Mode (Editor) toggle
 
 `Cmd + Shift + X`
 Extensions
@@ -111,17 +119,8 @@ Extensions
 `Cmd + Shift + D`
 Debug Window
 
-`Cmd + Shift + A`
-Toggle Activity Bar
-
 `Cmd + Shift + O`
 Open Symbol
-
-`Cmd + B`
-Toggle Side Bar
-
-`Cmd + J`
-Toggle Panel
 
 `Cmd + Shift + E`
 Show File Explorer
