@@ -234,6 +234,10 @@ GIT_TRACE=1 git commit -m "Add page that always requires a logged-in user"
 
 Source: [gpg failed to sign the data fatal: failed to write commit object](https://stackoverflow.com/a/47561300/520901)
 
+One more thing. Sometimes, these issues may occur because the GPG key itself has expired. If so, refer to this thread to extend the expiration.
+
+Source: [Git error - gpg failed to sign data](https://stackoverflow.com/a/43728576/520901)
+
 ## Prints the GPG key ID, in ASCII armor format
 
 gpg --armor --export A190E97F52B7DBAC
