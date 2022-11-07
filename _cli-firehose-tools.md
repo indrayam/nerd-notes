@@ -117,6 +117,11 @@
 - next
 - react
 
+## Fortran
+
+- fpm
+- fortls
+
 ## Microservices
 
 - spring
