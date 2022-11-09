@@ -22,12 +22,13 @@
 - code
 - git
 - gh (github cli)
-- ag
-- ripgrep
-- find
-- fd
-- grep
+- exa (in place of `ls`)
+- ripgrep (`rg`, in place of `ag`)
+- fd (in place of `find` and `grep`)
+- sd (in `place` of sed and `awk`)
 - jq
+- du
+- dust (in place of `du`)
 - iterm2
 - starship (PROMPT in Rust)
 - oh-my-zsh
@@ -53,10 +54,10 @@
 - keys (keybase, keys.pub)
 - step-cli
 - brew
-- ps
-- top
-- htop
+- procs (in place of `ps`)
+- btm (in place of `top` and `htop`)
 - lsof
+- topgrade
 - mongo
 - redis-cli
 - pgcli
