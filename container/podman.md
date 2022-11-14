@@ -34,3 +34,13 @@ following command in your terminal session:
 
 Machine "podman-machine-default" started successfully
 ```
+
+## Uninstall podman
+
+```
+brew uninstall podman
+rm -rf ~/.config/containers/
+rm -rf ~/.local/share/containers
+rm -rf $TMPDIR/podman
+rm -f ~/.ssh/podman*
+```
