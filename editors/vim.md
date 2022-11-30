@@ -1,5 +1,14 @@
 # vim
 
+## Setup Vim after setting up the dotfiles
+
+```bash
+git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim
+```
+
+After opening `vim`, run `:PluginInstall`. This should install all the plugins configured in the `.vimrc` file. Run `:qall` to quit vim. Open `vim` again to confirm that it all works.
+
 ## How to use "sudo vim" correctly?
 
 ```bash

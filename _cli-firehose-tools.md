@@ -214,6 +214,8 @@
 - httpx (python)
 - wrk
 - wrk2
+- autocannon
+- oha
 - fortio
 - siege
 - grpcurl

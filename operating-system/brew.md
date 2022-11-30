@@ -1,24 +1,47 @@
 # homebrew, brew
 
-`brew help
+## brew commands
 
-`brew update` Update my homebrew installation
+```bash
+# Dumps a `Brewfile` in the local directory
+brew bundle dump 
 
-`brew upgrade` Upgrade Everything
+# Installs all the formulas in the Brewfile
+brew bundle install --file <folder-path>/Brewfile
 
-`brew upgrade` Upgrade formula_name
+# Help
+brew help
 
-`brew outdated` Find out what's outdated
+# Update my homebrew installation
+brew update
 
-`brew search` To get a list of all formulas
+# Upgrade Everything
+brew upgrade
 
-`brew list` (List of installed packages on your machine)
+# Upgrade formula_name
+brew upgrade
 
-`brew link --overwrite formula_name`
+# Find out what's outdated
+brew outdated
 
-**To list all files that would be deleted:**
-`brew link --overwrite --dry-run formula_name`
+# To get a list of all formulas
+brew search
 
-`brew search <formula-name>`
+# List of installed packages on your machine
+brew list
 
-`brew uninstall <formula-name>`
+# List of installed packages on your machine
+brew list --versions
+
+# Update the links
+brew link --overwrite formula_name
+
+# To list all files that would be deleted
+brew link --overwrite --dry-run formula_name
+
+# Search for formula
+brew search <formula-name>
+
+# Uninstall
+brew uninstall <formula-name>
+```

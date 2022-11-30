@@ -9,6 +9,15 @@
 - step-cli
 - cosign
 - httpx
+- oha
+- onefetch
+- aws finch
+- bazel
+- libsodium sealed box (Github Actions uses it)
+- buildbuddy
+- keypassxc
+- cdebug (https://iximiuz.ck.page/posts/container-tools-tips-and-tricks-issue-2)
+- kalk (amazing cli based calculator: https://kalk.dev/doc/user/)
 
 ## Online Services
 
