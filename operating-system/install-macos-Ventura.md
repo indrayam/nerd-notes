@@ -144,6 +144,23 @@ xcode-select -p
     # write the loaded history to HISTFILE
     builtin fc -W "$HISTFILE"
   ```
+- `sfdx` CLI had to be installed manually using `Pkg` file from their [site](https://developer.salesforce.com/tools/sfdxcli)
+  -`sfdx` plugin for Copado is also manually installed using `sfdx plugins:install @copado/copado-cli`
+  - Authenticate to all the orgs..
+    + `sfdx auth:web:login -a cop -r https://ciscodeploy.my.salesforce.com`
+    + `sfdx auth:web:login -a cop-stg -r https://ciscodeploy--stage.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a cop-upgpoc -r https://ciscodeploy--upgradepoc.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a cop-upgqa -r https://ciscodeploy--upgradeqa.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a cop-upgstg -r https://ciscodeploy--upgradestg.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a cpdev -r https://ciscodeploy--cpdev.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a cpqa -r https://ciscodeploy--cpqa.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a cpprd -r https://ciscodeploy--cpprd.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a rc-devpro01rc -r https://ciscorevenuecloud--devpro01rc.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a rc-dv1rc -r https://ciscorevenuecloud--dv1rc.sandbox.my.salesforce.com`
+    + `sfdx auth:web:login -a seaz`
+    + `sfdx auth:web:login -a seaz1`
+    + `sfdx auth:web:login -a seaz2`
+    + `sfdx auth:web:login -a sm-sandbox -r https://ciscosales--anasharm.sandbox.my.salesforce.com`
 - `rustup` had to be installed manually using shell script listed on the [site](https://www.rust-lang.org/tools/install)
 ```bash 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
