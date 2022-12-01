@@ -58,7 +58,7 @@ xcode-select -p
   + macos-plugin.zsh
   + gpg-agent.conf
 - `brew`
-  + Use `Brewfile` stored in `~/Dropbox/workspace/cloud-configurations/brew/Brewfile`. The file was created using `brew bundle dump` followed by `brew bundle install --file <path-to-Brewfile>`
+  + Use `Brewfile` stored in `~/Dropbox/workspace/cloud-configurations/brew/Brewfile`. The file was created using `brew bundle dump` followed by `brew bundle install --file <path-to-Brewfile>` (Source: [Using Homebrew on M1 Mac](https://earthly.dev/blog/homebrew-on-m1/))
 
 ## Cisco Software
 
@@ -136,14 +136,25 @@ xcode-select -p
   - `.wrangler` -> `/Users/anasharm/Dropbox/workspace/cloud-configurations/wrangler`
   - `.zshrc -> /Users/anasharm/.dotfiles/zsh/zshrc`
   - `.zsh_history`
-    + Merge history from old to new using these commands [Source](https://gist.github.com/calexandre/63547c8dd0e08bf693d298c503e20aab)
-  ```bash
-    builtin fc -R -I "$hist_file"
-    builtin fc -R -I "$another_hist_file"
+    + Merge history from old to new using these commands [Source: Gist showing how to merge two zsh history files](https://gist.github.com/calexandre/63547c8dd0e08bf693d298c503e20aab) **Note:** The version below actually keeps the timelines in order. The `builtin` approach talked about in the link does not.
 
-    # write the loaded history to HISTFILE
-    builtin fc -W "$HISTFILE"
-  ```
+```bash
+#!/bin/bash
+# Inspired on https://david-kerwick.github.io/2017-01-04-combining-zsh-history-files/
+set -e
+history1=$1
+history2=$2
+merged=$3
+
+echo "Merging history files: $history1 + $history2"
+
+test ! -f $history1 && echo "File $history1 not found" && exit 1
+test ! -f $history2 && echo "File $history2 not found" && exit 1
+
+cat $history1 $history2 | awk -v date="WILL_NOT_APPEAR$(date +"%s")" '{if (sub(/\\$/,date)) printf "%s", $0; else print $0}' | LC_ALL=C sort -u | awk -v date="WILL_NOT_APPEAR$(date +"%s")" '{gsub('date',"\\\n"); print $0}' > $merged
+
+echo "Merged to: $merged"
+```
 - `sfdx` CLI had to be installed manually using `Pkg` file from their [site](https://developer.salesforce.com/tools/sfdxcli)
   -`sfdx` plugin for Copado is also manually installed using `sfdx plugins:install @copado/copado-cli`
   - Authenticate to all the orgs..
@@ -211,3 +222,28 @@ p -m pip freeze > ~/Dropbox/workspace/cloud-configurations/python-modules.txt
 p -m pip install -r ~/Dropbox/workspace/cloud-configurations/python-modules.txt -U
 ```
 - `go` modules were installed manually
+- `krew` was installed manually as documented [here](https://krew.sigs.k8s.io/docs/user-guide/setup/install/). Run `kubectl krew` to make sure the installation is correct
+```bash
+(
+  set -x; cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  KREW="krew-${OS}_${ARCH}" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+  tar zxvf "${KREW}.tar.gz" &&
+  ./"${KREW}" install krew
+)
+```
+  + Install `kubectx` and `kubens` using `k krew install ctx` and `k krew install ns`
+
+## Keeping things backed up 
+- Changes to `~/.dotfiles`
+- Changes to `~/.dotkube`
+- Changes to `brew` modules by using `brew bundle dump && mv Brewfile ~/workspace/cloud-configurations/brew`
+- Changes to `pip` modules by using `p -m pip freeze > ~/Dropbox/workspace/cloud-configurations/python-modules.txt`
+- Changes to `cargo` installs
+- Changes to `npm i -g` installs
+- Changes to `krew` installs
+
+## Aspirational Goal
+- To create a document like [MacOS Setup Guide](https://sourabhbajaj.com/mac-setup/)
