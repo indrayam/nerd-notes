@@ -94,6 +94,8 @@ xcode-select -p
   - [Sync your iTerm2 Settings and Configs between devices](https://shyr.io/blog/sync-iterm2-configs)
 - VS Code
   - Settings got synced once I logged into GitHub, but projects did not
+  - Install `code` by selecting `Shell Command: Install code command in Path` in Command pallete (`Cmd+Shift+P`)
+  - Select Python interpreter to be used
 - Sublime Text
   - Sublime Text had to be configured manually
     + `sudo ln -s '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' subl`
@@ -105,7 +107,7 @@ xcode-select -p
 - neovim
   + Read the `nvim` documentation. Steps are captured in details
 
-## Grunt Work
+## Grunt Work after mostly automated installs
 - All softlinks listed below had to be setup manually on the new laptop
   - `.aws -> /Users/anasharm/Dropbox/workspace/cloud-configurations/aws`
   - `.azure -> /Users/anasharm/Dropbox/workspace/cloud-configurations/azure`
@@ -235,6 +237,11 @@ p -m pip install -r ~/Dropbox/workspace/cloud-configurations/python-modules.txt 
 )
 ```
   + Install `kubectx` and `kubens` using `k krew install ctx` and `k krew install ns`
+- Chrome Onetab configuration
+  - Export/Import your OneTab list from `~/Dropbox/workspace/cloud-configurations/ontab/bookmarks.txt`
+  - Update Ontab settings to match your preferences
+    + On Clicking 'restore all' or restoring a single tab: check `Keep them in your OneTab list`
+- Download OpenShift client `oc` from [RunOn](https://runon.cisco.com/c/r/runon/Services/CAE/howto/cae_access_container.html#cae-user-interface-instructions:~:text=https%3A//mirror.openshift.com/pub/openshift%2Dv4/clients/ocp/latest/openshift%2Dclient%2Dmac.tar.gz)
 
 ## Keeping things backed up 
 - Changes to `~/.dotfiles`
@@ -244,6 +251,7 @@ p -m pip install -r ~/Dropbox/workspace/cloud-configurations/python-modules.txt 
 - Changes to `cargo` installs
 - Changes to `npm i -g` installs
 - Changes to `krew` installs
+- Changes to `OneTab` bookmarks
 
 ## Aspirational Goal
 - To create a document like [MacOS Setup Guide](https://sourabhbajaj.com/mac-setup/)
