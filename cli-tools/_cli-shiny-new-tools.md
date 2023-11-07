@@ -16,8 +16,14 @@
 - libsodium sealed box (Github Actions uses it)
 - buildbuddy
 - keypassxc
-- cdebug (https://iximiuz.ck.page/posts/container-tools-tips-and-tricks-issue-2)
-- kalk (amazing cli based calculator: https://kalk.dev/doc/user/)
+- [cdebug](https://iximiuz.ck.page/posts/container-tools-tips-and-tricks-issue-2)
+- [kalk](amazing cli based calculator: https://kalk.dev/doc/user/)
+- [lnav](https://lnav.org/downloads)
+- [rustscan](https://github.com/RustScan/RustScan)
+- [just](https://github.com/casey/just)
+- [dasel](https://github.com/TomWright/dasel)
+- [marp.app](https://github.com/marp-team/marp)
+- [warp.dev](https://github.com/warpdotdev/Warp)
 
 ## Online Services
 

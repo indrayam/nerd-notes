@@ -242,6 +242,7 @@ p -m pip install -r ~/Dropbox/workspace/cloud-configurations/python-modules.txt 
   - Update Ontab settings to match your preferences
     + On Clicking 'restore all' or restoring a single tab: check `Keep them in your OneTab list`
 - Download OpenShift client `oc` from [RunOn](https://runon.cisco.com/c/r/runon/Services/CAE/howto/cae_access_container.html#cae-user-interface-instructions:~:text=https%3A//mirror.openshift.com/pub/openshift%2Dv4/clients/ocp/latest/openshift%2Dclient%2Dmac.tar.gz)
+- Update MS Outlook Signature. Use Dropbox/zz_miscellaneous/images/cisco-signature-small.png as your signature. How? Open Outlook Preferences. Select "Email > Signatures". Select "Standard", click "Edit" and then copy-paste the image into the text box.
 
 ## Keeping things backed up 
 - Changes to `~/.dotfiles`
