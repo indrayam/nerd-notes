@@ -1,24 +1,103 @@
 # VS Code
 
-## Hacks
-
-1. Jump between open terminal and editor: `ctrl + backtick` takes you to the terminal, `ctrl + 1` takes you to the cursor in the open editor
-
-2. `ctrl + backtick` is a toggle. It will toggle terminal **on** (with cursor in the terminal) and **off** (with cursor in the editor)
-
 ## Keyboard shortcuts
+
+### VSCode Global/Workspace Navigation
+
+`Cmd + Shift + N`
+New VSCode Window
+
+`Cmd + ,`
+VSCode Preferences
+
+`Cmd K, M`
+Change Language Mode
+
+`Cmd K, Cmd T`
+Open Color Scheme Chooser
+
+`Cmd K, Cmd S`
+Keyboard Shortcuts
+
+`Shift + Cmd + P`
+Open Configuration Dialog
+
+`Ctrl + Cmd + P`
+List All Projects
+
+`Ctrl + Backtick`
+Integrated (or External) Terminal
+
+`Cmd + B` or `Cmd + K, Cmd + B`
+Toggle Side Bar
+
+`Alt + Click on filename` OR
+`Ctrl + Enter` when seeing files in Quick Open (Cmd+P) panel
+Split the Editor and open the file on the side
+
+`Cmd K, Z`
+Zen Mode (Editor) toggle
+
+`Cmd + Shift + X`
+Extensions
+
+`Cmd + Shift + D`
+Debug Window
+
+`Cmd + Shift + E`
+Show File Explorer
+
+`Cmd + =`
+Zoom in
+
+`Cmd + -`
+Zoom out
+
+`Cmd + N`
+New File
+
+`Cmd + O`
+Open File
+
+`Cmd + Shift + T`
+Reopen Closed Editor
+
+`Cmd + W`
+Close Tab
+
+`Cmd + Shift + W`
+Close Window
+
+`Cmd K, W`
+Close All Tabs
+
+`Ctrl + 1`
+Get focus back to the first Editor if it moves to some other panel (like Explorer)
+
+### Shortcuts for Navigating Across Files
+
+`Cmd + Shift + [` OR `Option + Cmd + <-`
+Cycle through Tabs (Going left)
+
+`Cmd + Shift + ]` OR `Option + Cmd + ->`
+Cycle through Tabs (Going right)
+
+`Cmd + Shift + F`
+Find
+
+`Cmd + Shift + H`
+Find and Replace
 
 `Cmd + P`
 Search files in the current project
+
+### Shortcuts during Editing File(s)
 
 `Cmd + C`
 Copy
 
 `Cmd + V`
 Paste
-
-`Cmd + Shift + V`
-Paste and indent correctly
 
 `Cmd + X`
 Cut line
@@ -32,17 +111,14 @@ Insert line after
 `Shift + Cmd + Enter`
 Insert line before
 
-`Cmd + L`
+`Cmd + L, Cmd + L`
 Select line
 
-`Cmd + Shift + D`
+`Alt + Shift + Down Arrow` OR `Alt + Shift + Up Arrow`
 Duplicate a line
 
-`Cmd + Ctrl + Down Arrow`
+`Alt + Down Arrow` OR `Alt + Up Arrow`
 Move line/selection down
-
-`Cmd + Ctrl + Up Arrow`
-Move line/selection up
 
 `Cmd + J`
 Join Selected Lines
@@ -56,16 +132,10 @@ Un-indent current line(s)
 `Cmd + D`
 Select word
 
-`Cmd + Shift + [`
-Cycle through Tabs (Going left)
-
-`Cmd + Shift + ]`
-Cycle through Tabs (Going right)
-
 `Cmd + /`
 Comment/Uncomment line(s)
 
-`Option + Mouse Left Click`
+`Option + Select Column using Mouse`
 Column Selection
 
 `Cmd + Up Arrow`
@@ -74,53 +144,46 @@ Go to beginning of the file
 `Cmd + Down Arrow`
 Go to end of the file
 
-`Cmd + Shift + F`
-Show Search
+`Cmd + F`
+Find in the current file
 
-`Cmd + Shift + L`
-Multiple cursor on every instance of the word under the cursor
-
-`Shift + Alt + Select Column using Mouse`
-Vertical Cursor 
-
-`Ctrl + Cmd + P`
-List All Projects
-
-`Ctrl + Backtick`
-Integrated (or External) Terminal
-
-`Cmd K, Cmd B`
-Toggle “Explore” View
-
-`Cmd + B`
-Toggle Side Bar
+`Option + Cmd + F`
+Replace in the current file
 
 `Cmd + \`
 Split the Editor into 2 with the same file
 
-`Cmd + Click (on the name of the file)`
-Create file
+`Cmd K, Cmd + [`
+Fold (Collapse) Region
 
-`Cmd K, M`
-Change Language Mode
+`Cmd K, Cmd + 9`
+Fold (Collapse) All
 
-`Cmd K, Cmd T`
-Open Color Scheme Chooser
+`Cmd K, Cmd + ]`
+Unfold (uncollapse) Region
 
-`Cmd K, Cmd S`
-Keyboard Shortcuts
+`Cmd K, Cmd + 0`
+Unfold (uncollapse) All
 
-`Cmd K, Z`
-Zen Mode (Editor) toggle
+`Shift + Ctrl + >`
+Expand selection
 
-`Cmd + Shift + X`
-Extensions
+`Shift + Ctrl + <`
+Shrink selection
 
-`Cmd + Shift + D`
-Debug Window
+`Shift + Cmd + \`
+Jump to the matching bracket
 
-`Cmd + Shift + O`
-Open Symbol
+`Cmd K, R`
+Open file in Explorer/Finder
 
-`Cmd + Shift + E`
-Show File Explorer
+### Shortcuts while using Integrated Terminal
+
+`Cmd + Shift + J`
+Shift focus to Left Terminal Pane
+
+`Cmd + Shift + K`
+Shift focus to Right Terminal Pane
+
+`Cmd + Shift + M`
+Toggle Problems View

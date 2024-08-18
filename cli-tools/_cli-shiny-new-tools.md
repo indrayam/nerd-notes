@@ -24,6 +24,14 @@
 - [dasel](https://github.com/TomWright/dasel)
 - [marp.app](https://github.com/marp-team/marp)
 - [warp.dev](https://github.com/warpdotdev/Warp)
+- [lima](https://github.com/lima-vm/lima)
+- [colima](https://github.com/abiosoft/colima)
+    - [nerdctl](https://github.com/containerd/nerdctl)
+- [orbstack](https://orbstack.dev/)
+
+## MacOS Utilities
+- [Amazing Free Mac Apps You Aren't Using](https://www.youtube.com/playlist?list=PLYGGViEsFProoQZLwPBythpXwRjKns8br0
+
 
 ## Online Services
 

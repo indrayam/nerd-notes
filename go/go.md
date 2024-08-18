@@ -1,3 +1,0 @@
-# go
-
-Coming soon...
