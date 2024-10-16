@@ -4,6 +4,10 @@
 - [How to use GPG on the command line](http://blog.ghostinthemachines.com/2015/03/01/how-to-use-gpg-command-line/)
 - [Generating a new GPG key](https://help.github.com/en/articles/generating-a-new-gpg-key)
 - [GPG Cheat Sheet](http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/)
+- [Fedora - Creating GPG Keys](https://docs.fedoraproject.org/en-US/quick-docs/create-gpg-keys/#:~:text=To%20find%20your%20GPG%20key,key%20ID%2C%20as%20in%200x6789ABCD%20.)
+- [How to gpg sign a file without encryption](https://access.redhat.com/solutions/1541303)
+- [Setup GPG on macOS](https://dev.to/zemse/setup-gpg-on-macos-2iib)
+- [Migrate you GPG keys from One Machine to Another](https://blog.ridaeh.com/migrate-you-gpg-keys-from-one-machine-to-another-3341e980dfac)
 
 GPG version 2 may be on your system with the executable name gpg2 . Either executable can be used for these demonstrations. Both are very compatible with each other. (If you want to know a million different opinions on which you should be using, do a web search.) Version 1 is more tested, and is usually a single monolithic executable. Version 2 is compiled with crypto libraries like libgcrypt externally linked, and is designed to work better with external password entry tools. That is, gpg2 is designed for graphical environments, while gpg works better for automated and command-line use. From the command-line, I use version 1.
 
@@ -45,7 +49,7 @@ gpg --import anasharm_publickey.asc
 ## Using GPG
 
 ```bash
-Command to list GPG keys for which you have both a public and private key. A private key is required for signing commits or tags:
+# Command to list GPG keys for which you have both a public and private key. A private key is required for signing commits or tags:
 gpg --list-keys --keyid-format LONG
 gpg --list-keys A190E97F52B7DBAC
 gpg -k
@@ -293,3 +297,4 @@ gpg -r "anand.sharma@gmail.com" --armor --encrypt <file-name> (generates an ASCI
 
 gpg --decrypt <file-name.gpg> > filename OR
 gpg --decrypt <file-name.asc> > filename
+

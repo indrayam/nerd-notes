@@ -28,7 +28,7 @@ List All Projects
 `Ctrl + Backtick`
 Integrated (or External) Terminal
 
-`Cmd + B` or `Cmd + K, Cmd + B`
+`Cmd + B`
 Toggle Side Bar
 
 `Alt + Click on filename` OR

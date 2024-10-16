@@ -30,8 +30,16 @@ brew search
 # List of installed packages on your machine
 brew list
 
+# List all files installed by a formula
+brew list formula_name
+
 # List of installed packages on your machine
 brew list --versions
+
+# Remove all links created by a formula
+You may want to use these commands if `brew upgrade` you upgrades the formula to a new version
+brew unlink formula_name
+brew link formula_name
 
 # Update the links
 brew link --overwrite formula_name

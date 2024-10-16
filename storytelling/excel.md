@@ -6,7 +6,7 @@
 Ignoring all 3D varieties of visualizations that are available in 2D
 
 - Pie Charts
-  - 2D Pie Chart
+  - Pie Chart
   - Pie of Pie
   - Bar of Pie
   - Doughnut Chart
@@ -17,6 +17,14 @@ Ignoring all 3D varieties of visualizations that are available in 2D
   - Clustered Bar
   - Stacked Bar
   - 100% Stacked Bar
+- Line Chart
+  - Line Chart (w or w/o markers)
+  - Stacked Line (w or w/o markers)
+  - 100% Stacked Line (w or w/o markers)
+- Scatter Chart
+  - Scatter
+  - Scatter with Smooth Lines (w or w/o markers)
+  - Scatter with Straight Lines (w or w/o markers)
 
 ## Advanced Functions
 
