@@ -1,5 +1,9 @@
 # Setting up Ubuntu 24.04
 
+### iTerm2
+
+Make sure that my iTerm2 was actually using a Powerline Font like *Hack Nerd Mono Font* as Non-ASCII Font
+
 ### Create a temporary SSH config in ~/.ssh/config
 
 ```bash
@@ -23,10 +27,10 @@ sudo apt update
 sudo apt upgrade
 # Install upgrades that might have been held back
 sudo unattended-upgrades
-# This is a command to check if which softwares that are ready for an upgrade
+# This is a command to check which softwares that are ready for an upgrade
 # sudo apt list --upgradable
 # libyaml-dev and libffi-dev were installed for compiling Ruby
-sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh  libevent-dev libncurses5-dev zip pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format libgit2-1.7 libhttp-parser2.9 libssh2-1t64 libyaml-dev libffi-dev -y
+sudo apt install build-essential autoconf libcurl4-gnutls-dev libexpat1-dev gettext zlib1g-dev libssl-dev zsh  libevent-dev libncurses-dev zip pkg-config libpcre3 libpcre3-dev liblzma-dev clang-format libgit2-1.7 libhttp-parser2.9 libssh2-1t64 libyaml-dev libffi-dev -y
 ```
 ### Add a user
 
@@ -42,12 +46,44 @@ vim authorized_keys
 ### Add user to sudo
 
 ```bash
+# Approach 1
+sudo visudo
+# Add this line below the configuration for the root user
+#<userid>    ALL=(ALL:ALL) NOPASSWD:ALL
+
+# Approach 2
 cd /etc
 chmod 640 sudoers
-Open sudoers and add the following entry:
-<userid>    ALL=(ALL:ALL) NOPASSWD:ALL
+# Add this line below the configuration for the root user
+#<userid>    ALL=(ALL:ALL) NOPASSWD:ALL
 chmod 440 sudoers
 ```
+
+### SSH configuration for <userid>
+
+```bash
+su - <userid>
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+cd ~/.ssh
+vim authorized_keys
+# On your local Mac, run
+# cat ~/.ssh/id_rsa.pub | pbcopy
+# Paste the content to the authorized_keys and save the file on the server
+# Do the same for play credentials
+vim config
+# Copy-n-paste this
+# Host play1
+#   Hostname play1.anandsharma.dev
+#   IdentityFile ~/.ssh/id_ed25519
+#   User anand
+
+# Host play2
+#   Hostname play2.anandsharma.dev
+#   IdentityFile ~/.ssh/id_ed25519
+#   User anand
+```
+
 ### SSH login using RSA authentication
 
 ```bash
@@ -58,7 +94,7 @@ Host x
     User anand
     IdentityFile ~/.ssh/id_rsa
 ```
-In client SSH `~/.ssh/config`:
+On the server, update the SSH configuration file `~/.ssh/config`:
 
 ```bash
 Host *
@@ -66,11 +102,13 @@ Host *
    ServerAliveCountMax 100
 ```
 
-In server SSHD `/etc/ssh/sshd_config`:
+On the server, update the SSHD configuration file `/etc/ssh/sshd_config`:
 
 ```bash
-ClientAliveInterval 60
-ClientAliveCountMax 10000
+sudo vim /etc/ssh/sshd_config
+# Add the two lines shown below to the end of the file:
+# ClientAliveInterval 60
+# ClientAliveCountMax 10000
 ```
 Restart the SSHD daemon
 
@@ -104,10 +142,35 @@ git --version
 
 ### Install oh-my-zsh and dotfiles.git repo from GitHub
 
+Upload the `play` VM certs to the new server
+
+```bash
+cd ~/.ssh
+sftp <playN>
+cd .ssh
+mput play_id*
+```
+
 ```bash
 ssh -T git@github.com #Check to make sure you can clone repos from Git
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 cd
+
+# Installing Zsh plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# Installing starship cli prompt
+cd ~
+curl -sS https://starship.rs/install.sh | sh
+
+# The steps below should not be necessary. Adding here for completeness sake...
+# eval "$(starship init zsh)"
+# mkdir -p ~/.config
+# cd ~/.config
+# ln -s ~/.dotfiles/starship/starship.toml starship.toml
+
+# Installing configurations
 git clone git@github.com:indrayam/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ./setup-symlinks-linux.sh
@@ -116,31 +179,6 @@ ssh <play>
 # Install Vundle by running the following command:
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
-```
-
-```bash
-cd ~/
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-Enable plugins:
-- z
-- zsh-autosuggestions
-- zsh-syntax-highlighting
-
-### Install starship CLI
-
-```bash
-cd ~
-curl -sS https://starship.rs/install.sh | sh
-
-# Update zshrc
-# eval "$(starship init zsh)"
-
-mkdir -p ~/.config
-cd ~/.config
-ln -s ~/.dotfiles/starship/starship.toml starship.toml
 ```
 
 ### Install awesome cli tools
@@ -152,7 +190,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # Install bat
 sudo apt install bat
-sudo ln -s /usr/bin/batcat bat
+sudo ln -s /usr/bin/batcat /usr/local/bin/bat
 
 # Install fd
 sudo apt install fd-find
@@ -177,9 +215,11 @@ sudo apt install httpie
 http --version
 
 # Install diff-so-fancy
+cd ~/src
+git clone git@github.com:so-fancy/diff-so-fancy.git
+sudo mv diff-so-fancy /usr/local
 cd /usr/local/bin
-sudo curl -O https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
-sudo chmod 755 diff-so-fancy
+sudo ln -s ../diff-so-fancy/diff-so-fancy diff-so-fancy
 
 # Check version
 diff-so-fancy -v
@@ -202,14 +242,30 @@ cp .tmux/.tmux.conf.local .
 ### Install GPG
 
 ```bash
-cd ~/src
-curl -O https://storage.googleapis.com/us-east-4-anand-files/misc-files/dotgnupg.tar.gz
-tar -xvzf dotgnupg.tar.gz
-mv ~/.gnupg ~/.gnupg.bk
-mv dotgnupg ~/.gnupg
 
-# Check version
+# GPG should already be installed
 gpg --version
+
+# Run the command below to initialize GPG or it should just return nothing
+gpg --list-keys
+# If the .gnupg folder does not exist, you should see something like...
+# gpg: directory '/Users/<userid>/.gnupg' created
+# gpg: /Users/<userid>/.gnupg/trustdb.gpg: trustdb created
+
+# Download your exported keys
+cd ~/src
+curl -O -L https://storage.googleapis.com/us-east-4-anand-files/misc-files/dotgnupg.tar.gz
+tar -xf dotgnupg.tar.gz
+
+# Import your keys on the Linux VM
+# It will (re)prompt for the passphrase(s) of the private keys
+cd gnupg
+gpg --import myprivatekeys.asc
+gpg --import mypubkeys.asc
+gpg -K
+gpg -k
+# Optionally import the trustdb file
+gpg --import-ownertrust otrust.txt
 
 # Check if the key got setup correctly
 gpg --list-keys --keyid-format LONG
@@ -217,11 +273,11 @@ gpg --list-keys --keyid-format LONG
 
 ### Install fonts-powerline
 
+SKIP
+
 ```bash
 sudo apt-get install fonts-powerline
 ```
-
-Also made sure that my iTerm2 was actually using a Powerline Font like *Hack Nerd Mono Font* as Non-ASCII Font
 
 ### Install nvim
 
@@ -233,10 +289,24 @@ sudo apt-get update
 sudo apt-get install neovim
 ```
 
-I followed this two part tutorial to get neovim configured:
-- [How to Install and Set Up Neovim for Code Editing](https://mattermost.com/blog/how-to-install-and-set-up-neovim-for-code-editing/)
-- [Turning Neovim into a Full-Fledged Code Editor with Lua](https://mattermost.com/blog/turning-neovim-into-a-full-fledged-code-editor-with-lua/)
+Install [LazyVim](https://www.lazyvim.org/)
 
+```bash
+# required
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+
+# install lazyvim
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+
+# Run nvim to install all plugins
+nvim
+```
 
 ### Install Python
 

@@ -62,14 +62,14 @@ gpg -k
 1. Generate the private/public key pair with the following command, which will
    spawn a series of questions:
 
-```
+```bash
 gpg --full-gen-key
 ```
 
 2. The first question is which algorithm can be used. Select the kind you want
    or press `Enter` to choose the default (RSA and RSA):
 
-```
+```bash
 Please select what kind of key you want:
    (1) RSA and RSA (default)
    (2) DSA and Elgamal
@@ -80,7 +80,7 @@ Your selection? 1
 
 3. The next question is key length. We recommend you choose **4096**:
 
-```
+```bash
 RSA keys may be between 1024 and 4096 bits long.
 What keysize do you want? (2048) 4096
 Requested keysize is 4096 bits
@@ -89,7 +89,7 @@ Requested keysize is 4096 bits
 4. Specify the validity period of your key. This is something
    subjective, and you can use the default value, which is to never expire:
 
-```
+```bash
 Please specify how long the key should be valid.
          0 = key does not expire
       <n>  = key expires in n days
@@ -102,7 +102,7 @@ Key does not expire at all
 
 5. Confirm that the answers you gave were correct by typing **y**:
 
-```
+```bash
 Is this correct? (y/N) y
 ```
 
@@ -110,7 +110,7 @@ Is this correct? (y/N) y
    (should match a verified email address you use in GitLab) and an optional
    comment (press `Enter` to skip):
 
-```
+```bash
 GnuPG needs to construct a user ID to identify your key.
 
 Real name: Anand Sharma
@@ -126,7 +126,7 @@ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 
 8. Use the following command to list the private GPG key you just created:
 
-```
+```bash
 gpg --list-secret-keys --keyid-format LONG --fingerprint anand.sharma@gmail.com
 ```
 
@@ -135,7 +135,7 @@ Replace <your_email> with the email address you entered above.
 9. Copy the GPG key ID that starts with sec. In the following example, that's
    `30F2B65B9246B6CA`:
 
-```
+```bash
 sec   rsa4096/30F2B65B9246B6CA 2017-08-18 [SC]
       D5E4F29F3275DC0CDA8FFC8730F2B65B9246B6CA
 uid                   [ultimate] Anand Sharma <anasharm@cisco.com>
@@ -144,7 +144,7 @@ ssb   rsa4096/B7ABC0813E4028C0 2017-08-18 [E]
 
 10. Export the public key of that ID (replace your key ID from the previous step):
 
-```
+```bash
 gpg --armor --export 30F2B65B9246B6CA
 ```
 
@@ -152,7 +152,7 @@ gpg --armor --export 30F2B65B9246B6CA
 
 1. Use the following command to list the private GPG key you just created:
 
-```
+```bash
 gpg --list-secret-keys --keyid-format LONG --fingerprint anasharm@cisco.com
 ```
 
@@ -160,7 +160,7 @@ Replace <your_email> with the email address you entered above.
 
 2. Copy the GPG key ID that starts with `sec`. In the following example, that's `30F2B65B9246B6CA`:
 
-```
+```bash
 sec   rsa4096/30F2B65B9246B6CA 2017-08-18 [SC]
       D5E4F29F3275DC0CDA8FFC8730F2B65B9246B6CA
 uid                   [ultimate] Mr. Robot <your_email>
@@ -169,7 +169,7 @@ ssb   rsa4096/B7ABC0813E4028C0 2017-08-18 [E]
 
 3. Tell Git to use that key to sign the commits:
 
-```
+```bash
 git config --global user.signingkey 30F2B65B9246B6CA
 ```
 
@@ -179,7 +179,7 @@ Replace `30F2B65B9246B6CA` with your GPG key ID.
    or gpg: signing failed: secret key not available, run the following command to
    change to gpg2:
 
-```
+```bash
 git config --global gpg.program gpg2
 ```
 
@@ -189,24 +189,24 @@ git config --global gpg.program gpg2
 
 - Create `~/.gnupg/gpg.conf` with the following content:
 
-```
+```bash
 # Uncomment within config (or add this line)
 use-agent
 ```
 
 - Create `~/.gnupg/gpg-agent.conf` with the following content:
 
-```
+```bash
 # Connects gpg-agent to the OSX keychain via the brew-installed
 # pinentry program from GPGtools. This is the OSX 'magic sauce',
 # allowing the gpg key's passphrase to be stored in the login
 # keychain, enabling automatic key signing.
-pinentry-program /usr/local/bin/pinentry-mac
+pinentry-program /opt/homebrew/bin/pinentry-mac
 ```
 
 - Change your Zsh shell script by adding the following excerpt
 
-```
+```bash
 ## GPG
 # Source: https://gist.github.com/bmhatfield/cc21ec0a3a2df963bffa3c1f884b676b
 # Add the following to your shell init to set up gpg-agent automatically for every shell
@@ -232,7 +232,7 @@ If this test is successful (no error/output includes PGP signature), you have su
 
 Note: If a `git` command fails, run the command by appending `GIT_TRACE=1` in front of the command like the following:
 
-```
+```bash
 GIT_TRACE=1 git commit -m "Add page that always requires a logged-in user"
 ```
 
@@ -244,18 +244,20 @@ Source: [Git error - gpg failed to sign data](https://stackoverflow.com/a/437285
 
 ## Prints the GPG key ID, in ASCII armor format
 
+```bash
 gpg --armor --export A190E97F52B7DBAC
 
 Copy your GPG key
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 ...
 -----END PGP PUBLIC KEY BLOCK-----
+```
 
 ## Edit a GPG Key (https://coderwall.com/p/tx_1-g/gpg-change-email-for-key-in-pgp-key-servers)
 
 You cannot delete keys nor modify UIDs for keys uploaded to PGP key servers. To change your email, you must add a new UID.
 
-```
+```bash
 $ gpg --edit-key <keyID>
 gpg> adduid
 Real name: <name>
@@ -286,15 +288,26 @@ $ gpg --keyserver hkp://pgp.mit.edu --send-keys <keyID>
 
 ## Send GPG Key to MIT Key Server
 
-$ gpg --keyserver hkp://pgp.mit.edu --send-keys <keyID>
+`gpg --keyserver hkp://pgp.mit.edu --send-keys <keyID>`
 
 ## Encrypt files using private GPG key
 
-gpg -r "anand.sharma@gmail.com” --encrypt <file-name> (generates a binary file with “.gpg” extension)
-gpg -r "anand.sharma@gmail.com" --armor --encrypt <file-name> (generates an ASCII file with “.asc” extension)
+```bash
+gpg -r "anand.sharma@gmail.com" --encrypt <file-name> # (generates a binary file with .gpg extension)
+gpg -r "anand.sharma@gmail.com" --armor --encrypt <file-name> # (generates an ASCII file with .asc extension)
+```
 
 ## Decrypt files using private GPG key
 
+```bash
 gpg --decrypt <file-name.gpg> > filename OR
 gpg --decrypt <file-name.asc> > filename
+```
+
+## Kill gpg-agent
+
+```bash
+gpgconf --kill gpg-agent
+```
+
 
