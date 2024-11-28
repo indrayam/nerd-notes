@@ -1,5 +1,28 @@
 # ssh 
 
+### ssh add
+
+- [Source](https://unix.stackexchange.com/questions/58969/how-to-list-keys-added-to-ssh-agent-with-ssh-add)
+- [Source](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+If you add new SSH keys, you will have add the SSH key to the ssh-agent by running the following commands:
+
+```bash
+ssh-add ~/.ssh/id_rsa
+# To list all the keys added to the agent, run the following command
+ssh-add -l 
+# OR
+ssh-add -L
+```
+
+### ssh-keygen 
+
+```bash
+# To generate fingerprint from RSA public key
+ssh-keygen -lf /path/to/key.pub
+
+```
+
 ### Usage 1: Run multiple commands
 
 ```bash
@@ -103,4 +126,5 @@ ssh -o StrictHostKeyChecking=no -o ProxyCommand='ssh -W %h:%p -o IdentityFile=~/
 
 # Using ProxyJump
 ssh -o StrictHostKeyChecking=no -o IdentityFile=~/.ssh/codeon_rsa -J sdlcadm@codeon-deploy-alln.cisco.com oadrvprd@drvprd-admin-server.cisco.com 'ls -al’
+
 ```

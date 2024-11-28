@@ -20,3 +20,8 @@ keytool -keystore "$JAVA_HOME/jre/lib/security/cacerts" -storepass changeit -lis
 }
 
 ```
+Print a cert:
+
+```bash
+keytool -printcert -v -file global-bundle.pem
+```

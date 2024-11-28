@@ -1,3 +1,0 @@
-# performance scratchpad
-
-Coming soon...

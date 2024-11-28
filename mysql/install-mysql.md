@@ -1,5 +1,52 @@
 # mysql tools
 
+## MySQL 8 Password Reset
+
+[Source](https://stackoverflow.com/a/65695683/520901)
+
+1. update /etc/mysql/my.cnf and add lines:
+
+```bash
+ [mysqld]
+
+ skip-grant-tables
+```
+
+2. restart mysql and clear the authentication_string for a specific user:
+
+```bash
+sudo systemctl restart mysql
+sudo mysql
+mysql> UPDATE mysql.user SET authentication_string=null WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+```
+
+3. update /etc/mysql/my.cnf and remove the line skip-grant-tables
+
+4. restart mysql to get my.cnf changes:
+
+```bash
+sudo systemctl restart mysql
+```
+
+5. log in again and update the password (replace 'my password' with your password):
+
+```bash
+sudo mysql -u root
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'my password';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+```
+
+6. Finally, test
+
+```bash
+mysql -u root -p
+```
+
+
+
 ## Installation
 
 ```bash

@@ -3,7 +3,10 @@
 ### installing certbot on ubuntu
 
 ```bash
+# Newer
+sudo apt-get install certbot
 
+# Older
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt update
 sudo apt install python-certbot-nginx
@@ -30,7 +33,7 @@ location ^~ /.well-known/acme-challenge/ {
 Then, setup the folder as follows:
 
 ```bash
-mkdir -p /var/www/letsencrypt/.well-known/acme-challenge
+sudo mkdir -p /var/www/letsencrypt/.well-known/acme-challenge
 ```
 
 Restart nginx:

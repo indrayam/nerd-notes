@@ -73,3 +73,11 @@ GRANT ALL PRIVILEGES ON hr.* TO 'jpa'@'localhost' IDENTIFIED BY 'java';
 
 Note:
 MySQL JDBC driver had a [BUG](https://community.microstrategy.com/s/article/KB442386-The-server-time-zone-value-EDT-is-unrecognized-or-represents-more-than-one-time-zone-error-appears-with-MySQL-JDBC-Driver-in-MicroStrategy-10-4-x-and-above?language=en_US) which was also causing issues when running my Groovy code
+
+5.
+
+mysqldump
+
+```bash
+mysqldump --no-tablespaces -u wpuser -p wordpressdb > ./mybackup.sql
+```
