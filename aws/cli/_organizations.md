@@ -1,3 +1,0 @@
-# aws organizations
-
-Coming soon...

@@ -1,3 +1,0 @@
-# aws sqs
-
-Coming soon...

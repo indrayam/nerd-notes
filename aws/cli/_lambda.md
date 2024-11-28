@@ -1,3 +1,0 @@
-# aws lambda
-
-Coming soon...

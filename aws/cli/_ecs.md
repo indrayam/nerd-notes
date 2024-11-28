@@ -1,3 +1,0 @@
-# aws ecs
-
-Coming soon...
