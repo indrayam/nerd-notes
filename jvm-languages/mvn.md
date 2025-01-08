@@ -1,3 +1,0 @@
-# mvn 
-
-Coming soon...

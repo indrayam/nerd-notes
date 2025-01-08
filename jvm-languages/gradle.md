@@ -1,3 +1,0 @@
-# gradle
-
-Coming soon...

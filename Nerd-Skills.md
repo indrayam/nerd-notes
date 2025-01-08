@@ -1,0 +1,191 @@
+# Nerd Skills
+
+- AWS
+  - Security, Identity, and Compliance
+    - IAM
+    - IAM Identity Center
+    - Certificate Manger (ACM)
+    - GuardDuty
+    - Inspector
+    - WAF
+    - Shield
+    - Security Hub
+    - Secrets Manager
+    - Key Management Service (KMS)
+  - Networking & Content Delivery
+    - VPC
+    - Route53
+    - CloudFront
+    - API Gateway
+  - Compute
+    - EC2
+    - ELB
+    - Lambda
+  - Containers
+    - ECS
+    - EKS
+    - ECR
+    - App Runner
+  - Storage
+    - S3
+    - Glacier
+    - EBS
+    - EFS
+  - Database
+    - RDS
+    - DynamoDB
+    - ElastiCache
+    - MemoryDB for Redis
+  - Application Integration
+    - SQS
+    - SNS
+    - AWS EventBridge
+    - Step Functions
+    - AWS Organizations
+    - Control Tower
+    - Auto Scaling
+    - CloudWatch
+    - CloudTrail
+    - Systems Manager
+    - AWS Config
+    - Trusted Advisor
+    - Well-Architected Tool
+    - AWS Health Dashboard
+    - Resource Groups & Tag Editor
+    - Billing and Cost Management
+  - Analytics
+    - RedShift
+    - EMR
+    - Athena
+    - Glue
+    - Kinesis
+    - MSK
+  - Machine Learning/AI
+    - SageMaker AI
+    - Bedrock
+    - Lex
+    - Kendra
+    - Comprehend
+    - Transcribe
+    - Tranlate
+    - Polly
+    - Rekognition
+- AI
+  - Machine Learning
+    - Supervised Learning
+    - Unsupervised Learning
+    - Reinforcement Learning
+  - Deep Learning
+  - Large Language Models
+- Infrastructure
+  - Ubuntu
+  - Kubernetes, Containers
+  - CIDR, Networking Services (DNS)
+  - Terraform, Ansible
+  - GitHub, GitHub Actions
+- Software
+  - Python
+    - Data Analysis using Python
+    - AI Engineering using Python
+    - HTTP Services using Python
+    - CUDA Programming using Python
+  - Rust
+    - System Software using Rust
+    - CLI Utilities using Rust
+- Command-Line Tinkerer
+  - deep-dive into these...
+    - `aws`
+    - `jq` 
+    - `curl`, `http`
+    - `fzf`
+    - `rg`
+  - terminal hacks
+    - `warp` (or `iterm2`)
+    - `oh-my-zsh`
+      - starship.toml
+    - `ssh`
+      - `ssh-keygen -t rsa -b 4096 -C your@email.com -f id_myidentity` (Note: RSA is not the most secure and fast performing algorithm these days)
+    - `tmux`
+    - `gpg`
+      - Install public gpg key: `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
+      - Verify fingerprint: `gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint`
+  - package management
+    - `brew`
+    - `dpkg`
+      - `dpkg --print-architecture`
+    - `apt` or `apt-get`
+      - `apt-cache` (`apt-cache search` or `apt-cache show`)
+      - `/usr/share/keyrings` (contains pgp keys). So does /etc/apt/keyrings. Not sure when to use which. Docker use the latter, while Hashicorp Vault and Docker used the former
+      - `/etc/apt/sources.list.d` (contains apt repository details)
+    - `tar`
+      - `tar -xf...`
+    - `mktemp`
+  - system
+    - `sudo adduser`
+    - `sudo groupadd docker`
+    - `sudo usermod -aG docker $USER`
+      - `sudo exec -l $USER # for group membership to take effect immediately`
+    - `id $USER` (to find all groups a user belongs to)
+    - `sudo visudo`
+    - `cpuinfo`
+    - `free`
+    - `service`
+    - `systemctl`
+    - `lsb_release`
+      - `cat /etc/os-release`
+    - `uname`
+  - networking
+    - `ip`
+    - `dig`
+  - performance
+    - `iostat`
+    - `stress`
+    - `top`
+    - `trace`
+    - `wrk`
+  - security
+    - `vault`
+  - text wrangling
+    - `tee`
+    - `xargs`
+    - `fzf`
+    - `ripgrep`
+    - `fd-find`
+    - `batcat` (or `bat`)
+  - http wrangling
+    - `jq`
+    - `ijq` (interactive jq)
+    - `jp` (jmespath on cli)
+    - jsoncrack (web app)
+    - `curl`
+    - `http`
+  - devops
+    - `code`
+    - `neovim`
+      - iterm2 based copy-paste did not work
+      - set relativenumber number signcolumn=yes
+    - `git`
+      - git aliases for git-fu commands (sync, etc.)
+    - `gh`
+    - `jf`
+    - `make`
+  - services/platforms
+    - containers/container orchestrators
+      - `podman`
+      - `kubectl`
+      - `kubectx`
+      - `stern`
+      - `arkade` or `helm`
+      - `minikube` or `k3s` or `k3d`
+    - proxies
+      - apache
+      - nginx
+      - haproxy
+      - pingora (cloudflare)
+      - `caddy` (for https dev/test locally)
+        - `mkcert` (for https dev/test locally)
+    - static site
+      - `hugo`
+      - tailwindcss
+
+
