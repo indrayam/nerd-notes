@@ -4,5 +4,6 @@
 
 ```bash
 df -BG
+df -h --total
 ```
 
