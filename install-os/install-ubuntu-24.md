@@ -331,6 +331,7 @@ nvim
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. ~/.zshrc
 rustc --version
 ```
 
@@ -345,6 +346,7 @@ tv diamonds.csv
 
 ### Install Python
 
+SKIP
 ```bash
 curl -L -O https://www.python.org/ftp/python/3.13.0/Python-3.13.0.tgz
 tar -xvzf Python-3.13.0.tgz
@@ -370,7 +372,10 @@ Using Python Package and Project Manager...
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv python list
 uv python install 3.13.0
+```
 
+SKIP
+```bash
 # install conda
 # Install our public GPG key to trusted store
 curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor > conda.gpg
@@ -385,7 +390,6 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/conda-archive-keyring.gpg] htt
 # Install
 sudo apt-get update
 sudo apt-get install conda
-
 ```
 
 ### Install Java

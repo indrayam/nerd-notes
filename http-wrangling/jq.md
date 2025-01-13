@@ -35,3 +35,15 @@ curl -L -s https://api.github.com/repos/stedolan/jq/issues | jq '.[] | { id: .id
 # One more hack. Most single outputs of type string are output with double-quotes. If you want the raw output, just put a -r
 curl -L -s https://api.github.com/repos/stedolan/jq/issues | jq -r '.[0].title'
 ```
+
+### Map/Select
+
+```bash
+# map is a function that takes an array and applies a function to each element of the array
+# Let's say I want to find out the number of issues each user has created
+# I will group by the user.login, count the number of issues and sort by the count
+curl -L -s https://api.github.com/repos/stedolan/jq/issues | jq 'group_by(.user.login) | map({login: .[0].user.login, count: length}) | sort_by(-.count)'
+
+# In the example below, I have selected the top 3 submitters of issues
+curl -s https://api.github.com/repos/simonw/datasette/issues | jq 'group_by(.user.login) | map({login: .[0].user.login, count: length}) | sort_by(-.count) | .[:3]'
+```
