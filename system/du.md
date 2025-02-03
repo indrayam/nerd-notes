@@ -13,6 +13,8 @@ ls -lh
 du -ch --max-depth=1 .
 
 # Nicely display folder sizes
-du -d 1 -h 
+du -d 1 -h
+# OR
+du -h --max-depth=1 | sort -h
 ```
 
