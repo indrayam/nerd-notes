@@ -82,7 +82,15 @@ Attention(Q, K, V) = Softmax( (Q^T K) / sqrt(d_k) ) * V
 - Run the following command to generate formatted PDF:
 
 ```bash
+# Source: Markdown file
 pandoc aie.md -o aie.pdf --from markdown \
+--template eisvogel.latex \
+--listings -V colorlinks=true -V linkcolor=blue \
+-V urlcolor=blue -V toccolor=gray -V toc=true \
+-V toc-own-page=true
+
+# Source: LaTeX template
+pandoc test.tex -o test.pdf --from latex \
 --template eisvogel.latex \
 --listings -V colorlinks=true -V linkcolor=blue \
 -V urlcolor=blue -V toccolor=gray -V toc=true \
