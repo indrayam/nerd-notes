@@ -6,6 +6,7 @@
 - [LaTeX/Mathematics](https://en.wikibooks.org/wiki/LaTeX/Mathematics)
 - [Markdown and LaTeX introduction](https://ashki23.github.io/markdown-latex.html))
 - [Use Markdown to display mathematical expressions on GitHub.](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)
+- [Adding mathematical typesetting to the blog](https://www.gilesthomas.com/2025/02/adding-maths-to-the-blog)
 
 ## Math Typesetting Libraries
 - [MathJax](https://www.mathjax.org/)
