@@ -1,5 +1,20 @@
 # git
 
+## SSH Config for GitHub EMU
+
+```bash
+# Define this function in your .zshrc
+function emu-git
+    set -x GIT_SSH_COMMAND "ssh -i $HOME/.ssh/id_gh_emu"
+    git $argv
+end
+
+# Clone the repo
+emu-git clone git@github.com:your-username/your-repo.git
+```
+
+After cloning a repo, `cd` into the repo and run `git config --local core.sshCommand 'ssh -i $HOME/.ssh/anasharm-emu_key'`. From that point on, you can use `git push` and `git pull` without having to use the `emu-git` function.
+
 ## Credential Helper
 If you're cloning GitHub repositories using HTTPS, you can use a credential helper to tell Git to remember your GitHub username and password every time it talks to GitHub.
 
